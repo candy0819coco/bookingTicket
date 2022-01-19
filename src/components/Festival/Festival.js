@@ -12,7 +12,7 @@ const Festival = () => {
     <div className="navbarArea">
       <div className="containerBox">
         <div className="mainLogoArea">
-          <div className="mainLogo">123</div>
+          <div className="mainLogo">456</div>
         </div>
         <div className="containerText">
           <div className="navAbout">About</div>
