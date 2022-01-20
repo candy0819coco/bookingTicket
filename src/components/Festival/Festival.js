@@ -8,23 +8,37 @@ import React, {
 import "./Festival.scss";
 
 const Festival = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
   return (
-    <div className="navbarArea">
-      <div className="containerBox">
-        <div className="mainLogoArea">
-          <div className="mainLogo">456</div>
+    <div className="navbar_container">
+      <div className={`navbar_inner ${isDarkMode ? "navbar_inner_dark" : ""}`}>
+        <div className="main_logo_area">
+          <div
+            className={`main_logo ${isDarkMode ? "main_logo_dark" : ""}`}
+          ></div>
         </div>
-        <div className="containerText">
-          <div className="navAbout">About</div>
-          <div className="navLineUp">Line up</div>
-          <div className="navTicket">Ticket</div>
-          <div className="navMap">Map</div>
-          <div className="navShop">Shop</div>
+        <div className={`menu_item_area ${isDarkMode ? "menu_item_dark" : ""}`}>
+          <div className="nav_item">About</div>
+          <div className="nav_item">Line up</div>
+          <div className="nav_item">Ticket</div>
+          <div className="nav_item">Map</div>
+          <div className="nav_item">Shop</div>
         </div>
-        <div className="iconArea">
-          <div className="icon toggleBtn"></div>
-          <div className="icon cartIcon"></div>
-          <div className="icon userIcon"></div>
+        <div className="func_area">
+          <div
+            className="switch_toggle"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+          >
+            <div
+              className={`switch_toggle_inner ${
+                isDarkMode ? "switch_toggle_inner_dark" : ""
+              }`}
+            >
+              <div className={`round ${isDarkMode ? "round_dark" : ""}`}></div>
+            </div>
+          </div>
+          <div className="icon icon_cart"></div>
+          <div className="icon icon_user"></div>
         </div>
       </div>
     </div>
