@@ -11,7 +11,7 @@ import React, {
     return (
       <div className="footerArea">
         <div className="copyRightArea">
-            <div className="copyRightTextA">Copyright 2022 Love&Peace Rock Festival. All rights reserved.
+            <div className="copyRightTextA">Copyright&nbsp;&nbsp;2022&nbsp;&nbsp;Love&Peace&nbsp;&nbsp;Rock&nbsp;&nbsp;Festival. All rights reserved.
             </div>
             <div className="copyRightTextB">The website is developed and designed by me, powered by react.js
             </div>
