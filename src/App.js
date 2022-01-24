@@ -7,18 +7,12 @@ import React, {
 } from "react";
 import "./App.scss";
 // import Navbar from "./components/Navbar/Navbar";
-import Festival from "./components/Festival/Festival";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Provider } from "./components/context";
-const App = () => {
-  const contextValue = {
+import MusicFestivalIndex from "./MusicFestivalIndex";
 
-  }
+const App = () => {
   return (
     <div className="App">
-    <Provider value={contextValue}>
-      <Festival/>
-    </Provider>
+      <MusicFestivalIndex />
     </div>
   );
 };

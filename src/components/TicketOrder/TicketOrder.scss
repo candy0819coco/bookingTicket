@@ -1,0 +1,121 @@
+.ticket_order_container {
+  max-width: 1920px;
+  height: 1080px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  .ticket_order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .ticket_order_title {
+    }
+    .ticket_type_area {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 45%;
+      height: 480px;
+      margin: 160px 0 0 0;
+      // position: relative;
+      .ticket_box {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        transition: 0.3s;
+        &.add_blank {
+          transform: translateX(-200px);
+        }
+        .ticket_image {
+          width: 200px;
+          min-width: 200px;
+          height: 400px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          transform: perspective(200px) rotateY(3deg);
+          transition: 0.3s;
+          z-index: 1;
+          cursor: pointer;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+
+          &.ticket_one_day {
+            background-image: url("./../../image/N_ticket_1day.svg");
+          }
+          &.ticket_two_day {
+            background-image: url("./../../image/N_ticket_2days.svg");
+          }
+          &.ticket_camp {
+            background-image: url("./../../image/N_ticket_2days_plus.svg");
+          }
+          &:hover {
+            transform: perspective(200px) rotateY(3deg) translateY(-20px);
+          }
+          .order_button {
+            width: 100px;
+            height: 50px;
+            background-color: #333;
+            color: #fff;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px 65px 0;
+            transition: 0.3s;
+            transform: translateY(30px);
+            opacity: 0;
+            z-index: 2;
+            &.order_button_show {
+              transform: translateY(0);
+              opacity: 1;
+            }
+            &:hover {
+              background-color: #555;
+            }
+          }
+        }
+        .ticket_info_area {
+          width: 200px;
+          height: 400px;
+          background-color: #eee;
+          position: absolute;
+          right: 280px;
+          top: 20px;
+          transition: 0.5s;
+          transform-origin: right;
+          transform: perspective(200px) rotateY(3deg) scaleX(0);
+          // position: relative;
+          z-index: 0;
+          &.area_show {
+            transform: perspective(200px) rotateY(3deg) scaleX(1);
+          }
+          .info_content {
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #eee;
+            transition: 0.3s;
+            overflow: hidden;
+            transform-origin: top right;
+            transform: scaleX(0);
+            box-sizing: border-box;
+            padding: 10px 15px;
+            &.info_show {
+              transform: scaleX(1);
+            }
+            .content {
+              width: 100%;
+              height: 100%;
+              white-space: pre-wrap;
+              // white-space: break-all;
+            }
+          }
+        }
+      }
+    }
+  }
+}
