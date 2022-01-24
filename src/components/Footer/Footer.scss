@@ -1,35 +1,56 @@
-.footerArea{                                   
-    width:100%;
-    height:218px;
-    background-color:#7f7f7f;
-    position: absolute;
+.footer_container{
+  width: 100%;
+  height: 218px;
+  display: flex;
+  align-items: center;
+  position: absolute;
     bottom: 0px;
+  font-family: "Noto Sans TC", sans-serif;
+  .footer_area {
+    width: 100%;
+    height: 218px;
+    background-color: #7f7f7f;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    font-family: "Noto Sans TC", sans-serif;
-    .copyRightArea{
-        .copyRightTextA,.copyRightTextB{
-            font-size: 14px;
-            color:white;
-            display: flex;
-            justify-content: center;
-        }
-        .iconArea{
-            
-            .icon{
-                width: 31px;
-                height: 31px;
-                background-repeat: no-repeat;
-                background-size:cover;
-
-            }
-            &.igIcon{
-                background-image: url('../../../image/instgram_white.svg');
-            }
-            &.fbIcon{
-                background-image: url('../../../image/fb_white.svg');
-            }
-        }
+    transition: 0.3s;
+    &.footer_area_dark{
+      transition: 0.3s;
+      background-color: #343535;
     }
+    .copy_right_area {
+      .copy_right_text_a,
+      .copy_right_text_b {
+        font-size: 12px;
+        color: white;
+        letter-spacing: 3px;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .icon_area {
+      width: 82px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      right: 150px;
+      position: relative;
+      
 }
+      .icon {
+        width: 28px;
+        height: 28px;
+        background-repeat: no-repeat;
+        background-size: cover;
+     
+
+        &.ig_icon {
+          margin-right: 15px;
+          background-image: url("./../../image/instagram_white.svg");
+        }
+        &.fb_icon {
+          background-image: url("./../../image/fb_white.svg");
+        }
+      }
+    }
+  }
