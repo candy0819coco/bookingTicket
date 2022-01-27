@@ -18,7 +18,7 @@ import LineUp from "./components/LineUp/LineUp";
 import Map from "./components/Map/Map";
 const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const contextValue = { pathName, setPathName, isDarkMode, setIsDarkMode };
   return (
     <Router>
@@ -27,7 +27,7 @@ const MusicFestivalIndex = () => {
           <Fragment>
               <Navbar />
             <Routes>
-              <Route exact path="/home" element={<Home />} />
+              <Route exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/lineUp" element={<LineUp />} />
               <Route exact path="/ticketOrder" element={<TicketOrder />} />

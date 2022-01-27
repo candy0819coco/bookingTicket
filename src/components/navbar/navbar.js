@@ -31,7 +31,7 @@ const Navbar = () => {
               className={`main_logo ${isDarkMode ? "main_logo_dark" : ""}`}
               id="nav_link"
               tabIndex="0"
-              to="/home"
+              to="/"
               onClick={() => setPathName("home")}
             ></Link>
           </div>
