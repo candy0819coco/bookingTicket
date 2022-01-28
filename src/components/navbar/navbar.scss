@@ -108,7 +108,8 @@ $color1: #767676;
                 background-image: url("./../../image/membership_white.svg");
               }
           }
-        }     
+        }
+       .switch_toggle{    
         .toggle_btn {
           width: 70px;
           height: 34px;
@@ -124,6 +125,7 @@ $color1: #767676;
             background-image: url("./../../image/button_night.svg");
           }
         }
+      }  
       }
     }
   }

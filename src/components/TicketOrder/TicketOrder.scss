@@ -1,0 +1,77 @@
+.ticket_order_container{
+    .ticket_order{
+        .ticket_order_title{}
+        .ticket_type_area{
+            .ticket_box{
+
+            }
+            .ticket_image{
+                width: 200px;
+                min-width: 200px;
+                height: 400px;
+
+            }
+                &.ticket_one_day{
+                    background-image: url("./../../image/N_ticket_1day_new.png");
+
+                }
+                &.ticket_two_day{
+                    background-image: url(./../../image/N_ticket_2days_new.png);
+
+                }
+                &.ticket_camp{
+                    background-image: url(./../../image/N_ticket_2days_plus_new.png);
+
+                }
+                &:hover{
+
+                }
+                .order_button{
+
+                }
+            .ticket_info_area{
+                .info_content{
+
+                }
+                .content{
+
+                }
+            }
+
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
