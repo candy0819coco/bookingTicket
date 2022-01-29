@@ -35,7 +35,7 @@ const MusicFestivalIndex = () => {
               <Route exact path="/map" element={<Map />} />
               <Route exact path="/shop" element={<Shop />} />
           </Routes>
-            <Footer/>
+            {/* <Footer/> */}
           </Fragment>
         </Provider>
       </div>
