@@ -1,20 +1,21 @@
 import React, { useCallback, useState, useEffect, Fragment, useContext } from "react";
-import "./Test.scss";
+import "./MemberOrder.scss";
+import { Provider } from "../context";
 import * as R from "ramda";
-import context, { Provider } from "./../context";
+import context from "./../context";
 
-const Test = () => {
+const MemberOrder = () => {
     const contextValue = useContext(context);
     const { } = contextValue;
-    R.list(array)
+
     return (
-        <div className={`_container`}>
+        <div className={`member_order_container`}>
             <Provider value={contextValue}>
                 <div className="____">
-                        
+                MemberOrder Content
                 </div>
             </Provider>
         </div>
     );
 };
-export default Test;
+export default MemberOrder;

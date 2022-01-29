@@ -19,7 +19,7 @@ const TicketOrder = () => {
   return (
     <div
       className={`ticket_order_container ${
-        isDarkMode ? "ticket_order_contaner_dark" : ""
+        isDarkMode ? "ticket_order_container_dark" : ""
       }`}
     >
       <Provider value={contextValue}>
