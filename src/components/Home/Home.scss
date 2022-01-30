@@ -12,11 +12,11 @@
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
-    // background-image: url("./../../image/vs_morning.svg");
+    background-image: url("./../../image/vs_morning.svg");
     background-color: #fffbd0;
     transition: 0.3s;
     &.home_background_dark {
-      // background-image: url("./../../image/vs_night.svg");
+      background-image: url("./../../image/vs_night.svg");
       background-color: #4a4577;
     }
   }

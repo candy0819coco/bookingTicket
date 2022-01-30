@@ -1,7 +1,8 @@
 import React, { useCallback, useState, useEffect, Fragment, useContext } from "react";
 import "./Template.scss";
+import { Provider } from "../context";
 import * as R from "ramda";
-import context, { Provider } from "./../context";
+import context from "./../context";
 
 const Template = () => {
     const contextValue = useContext(context);

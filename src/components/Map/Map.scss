@@ -1,6 +1,6 @@
 .map_container {
   max-width: 1920px;
-
+  height: 1080px;
   box-sizing: border-box;
   padding: 100px;
   .map_background {
@@ -8,11 +8,11 @@
     height: 100%;
     background-repeat: no-repeat;
     background-size: contain;
-    // background-image: url("./../../image/daylight_map.jpg");
+    background-image: url("./../../image/daylight_map.jpg");
     background-position: center;
     transition: 0.3s;
     &.map_background_dark {
-      // background-image: url("./../../image/night_map.jpg");
+      background-image: url("./../../image/night_map.jpg");
     }
   }
 }

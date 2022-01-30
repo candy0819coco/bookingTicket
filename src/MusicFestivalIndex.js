@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./MusicFestivalIndex.scss";
-import { Provider } from "./components/context.js";
+import { Provider } from "./components/context";
 import Navbar from "./components/Navbar/Navbar";
 import ModalTool from "./components/ModalTool/ModalTool";
 import Home from "./components/Home/Home";
@@ -16,19 +16,16 @@ import TicketOrder from "./components/TicketOrder/TicketOrder";
 import Shop from "./components/Shop/Shop";
 import LineUp from "./components/LineUp/LineUp";
 import Map from "./components/Map/Map";
-import Footer from "./components/Footer/Footer"
-import User from "./components/User/User"
-import MemberOrder from "./components/MemberOrder/MemberOrder"
 const MusicFestivalIndex = () => {
-  const [pathName, setPathName] = useState("home");//依據不同pathName頁面，導覽列會不同
+  const [pathName, setPathName] = useState("home");
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const contextValue = { pathName, setPathName, isDarkMode, setIsDarkMode};//把會用到的值 裝在contextValue，傳給下面的組件使用
+  const contextValue = { pathName, setPathName, isDarkMode, setIsDarkMode };
   return (
     <Router>
-      <div className={`music_festival_container ${isDarkMode ? "music_festival_container_dark" : "" }`}>
+      <div className={`music_festival_container ${isDarkMode?"music_festival_container_dark":""}`}>
         <Provider value={contextValue}>
           <Fragment>
-              <Navbar/>
+              <Navbar />
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
@@ -36,14 +33,11 @@ const MusicFestivalIndex = () => {
               <Route exact path="/ticketOrder" element={<TicketOrder />} />
               <Route exact path="/map" element={<Map />} />
               <Route exact path="/shop" element={<Shop />} />
-              <Route exact path="/memberOrder" element={<MemberOrder />} />
-              <Route exact path="/user" element={<User />} />
-          </Routes>
-            <Footer/>
+            </Routes>
           </Fragment>
         </Provider>
       </div>
     </Router>
   );
 };
- export default MusicFestivalIndex;
+export default MusicFestivalIndex;
