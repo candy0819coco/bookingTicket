@@ -8,7 +8,7 @@ import React, {
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./MusicFestivalIndex.scss";
 import { Provider } from "./components/context.js";
-import Navbar from "./components/Navbar/Navbar";
+import Navigator from "./components/Navigator/Navigator";
 import ModalTool from "./components/ModalTool/ModalTool";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
@@ -28,7 +28,7 @@ const MusicFestivalIndex = () => {
       <div className={`music_festival_container ${isDarkMode ? "music_festival_container_dark" : "" }`}>
         <Provider value={contextValue}>
           <Fragment>
-              <Navbar/>
+              <Navigator/>
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />

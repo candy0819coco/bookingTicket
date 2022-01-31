@@ -5,11 +5,11 @@ import React, {
   Fragment,
   useContext,
 } from "react";
-import "./Navbar.scss";
+import "./Navigator.scss";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import context, { Provider } from "./../context";
 
-const Navbar = () => {
+const Navigator = () => {
   const contextValue = useContext(context);
   const { pathName, setPathName, isDarkMode, setIsDarkMode } = contextValue;
   return (
@@ -106,4 +106,4 @@ const Navbar = () => {
     </Provider>
   );
 };
-export default Navbar;
+export default Navigator;
