@@ -13,29 +13,29 @@
       align-items: flex-start;
   
       .ticket_order_title {
-        width: 280px;
-        height: 110px;
-        background-image: url("./../../image/ticket.png");
+        width: 235px;
+        height: 75px;
+        background-image: url("./../../image/ticket_title_black.svg");
         background-repeat: no-repeat;
         background-size: contain;
-        margin-top: 60px;
+        margin-top: 99px;
         &.ticket_order_title_dark {
-          background-image: url("./../../image/ticket.png");
+          background-image: url("./../../image/ticket_title_white.svg");
         }
       }
       .ticket_type_area {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        width: 60%;
+        width: 75%;//60%
         height: 480px;
-        margin: 200px 0 0 0;
+        margin: 165px 0 0 0;//200px
         // position: relative;
         .ticket_box {
           width: 100%;
           height: 100%;
           display: flex;
-          justify-content: space-evenly;
+          justify-content: center;//space evenly
           align-items: center;
           position: relative;
           transition: 0.3s;
@@ -93,10 +93,10 @@
           }
           .ticket_info_area {
             width: 280px;
-            height: 420px;
+            height: 430px;//420px
             // background-color: #eee;
             position: absolute;
-            right: 340px;
+            right: 360px;//340px;
             top: 20px;
             transition: 0.5s;
             transform-origin: right;
@@ -104,7 +104,7 @@
             // position: relative;
             z-index: 0;
             &.area_show {
-              transform: perspective(200px) rotateY(3deg) scaleX(1);
+              transform: perspective(205px) rotateY(0deg) scaleX(1);// transform: perspective(205px) rotateY(3deg) scaleX(1)
             }
             &.ticket_info_area_dark {
               // background-color: #eee;
@@ -134,11 +134,19 @@
                   color: #fff;
                 }
                 .main_rule {
-                  font-size: 5px;
+                  font-size: 14px;
                   line-height: 20px;
+                  .spanBlue{
+                    color:#587DDB;
+                    font-weight: bold;
+                  }
                 }
                 .sub_rule {
-                  font-size: 5px;
+                  font-size: 14px;
+                  .spanRed{
+                    color:red;
+                    font-weight: bold;
+                  }
                 }
                 > p {
                   font-size: 5px;
@@ -150,4 +158,3 @@
       }
     }
   }
-  
