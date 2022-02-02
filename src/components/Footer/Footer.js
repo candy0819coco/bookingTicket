@@ -6,15 +6,16 @@ import React, {
     useContext,
   } from "react";
   import "./Footer.scss";
+  import { Provider } from "../context";
+import * as R from "ramda";
+import context from "./../context";
   
-  const Footer = (props) => {
-    const { isDarkMode, setIsDarkMode } = props;
-    const handleDarkMode = () => {
-      setIsDarkMode(!isDarkMode);
-    };
+  const Footer = () => {
+    const contextValue = useContext(context);
+  const { isDarkMode } = contextValue;
     return (
     <div className="footer_container">
-      <div className={`footer_area ${isDarkMode?"footer_area_dark":""}`}>
+      <div className={`footer_area ${isDarkMode ? "footer_area_dark":""}`}>
         <div className="copy_right_area">
             <div className="copy_right_text_a">Copyright&nbsp;&nbsp;2022&nbsp;&nbsp;Love&Peace&nbsp;&nbsp;Rock&nbsp;&nbsp;Festival.&nbsp;&nbsp;All&nbsp;&nbsp;rights&nbsp;&nbsp;reserved.
             </div>

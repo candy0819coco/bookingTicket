@@ -19,9 +19,9 @@ const Navigator = () => {
           className={`navbar_inner ${isDarkMode ? "navbar_inner_dark" : ""}`}
         >
           <div className="main_logo_area">
-            <div
-              className={`main_logo ${isDarkMode ? "main_logo_dark" : ""}`}
-            ></div>
+            <Link
+              className={`main_logo ${isDarkMode ? "main_logo_dark" : ""}`} to="/" onClick={()=> setPathName("home")}
+            ></Link>
           </div>
           <div className="container_right">
             <div

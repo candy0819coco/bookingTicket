@@ -3,33 +3,39 @@
     height: 800px;
     overflow-x: hidden;
     overflow-y: hidden;
-    font-family: "Noto Sans";
-    &.ticket_order_contaner_dark {
-      background-color: #585858;
+    font-family: "Noto Sans TC", sans-serif;
+    &.ticket_order_container_dark {
+      background-color: #474747;
     }
     .ticket_order {
+      width: 84%;
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
-  
-      .ticket_order_title {
-        width: 235px;
-        height: 75px;
-        background-image: url("./../../image/ticket_title_black.svg");
-        background-repeat: no-repeat;
-        background-size: contain;
-        margin-top: 99px;
-        &.ticket_order_title_dark {
-          background-image: url("./../../image/ticket_title_white.svg");
+      justify-content:space-evenly;//center
+      // align-items: flex-start;
+      .title_container{
+        width:312px;
+        height:100px;
+        display: flex;
+        justify-content: flex-end;
+        .ticket_order_title {
+          width: 235px;
+          height: 75px;
+          background-image: url("./../../image/ticket_title_black.svg");
+          background-repeat: no-repeat;
+          background-size: contain;
+          margin-top: 90px;
+          &.ticket_order_title_dark {
+            background-image: url("./../../image/ticket_title_white.svg");
+          }
         }
       }
       .ticket_type_area {
         display: flex;
-        justify-content: space-evenly;
+        justify-items:self-start;//space-evenly
         align-items: center;
-        width: 75%;//60%
-        height: 480px;
-        margin: 165px 0 0 0;//200px
+        width: 80%;//60%
+        // height: 480px;
+        margin: 170px 0 0 0;//200px
         // position: relative;
         .ticket_box {
           width: 100%;
@@ -92,21 +98,22 @@
             }
           }
           .ticket_info_area {
-            width: 280px;
-            height: 430px;//420px
+            width: 272px;//280px
+            height: 435px;//420px
             // background-color: #eee;
             position: absolute;
-            right: 360px;//340px;
-            top: 20px;
+            right: 325px;//360px;
+            // top: 20px;
             transition: 0.5s;
             transform-origin: right;
             transform: perspective(200px) rotateY(3deg) scaleX(0);
             // position: relative;
             z-index: 0;
             &.area_show {
-              transform: perspective(205px) rotateY(0deg) scaleX(1);// transform: perspective(205px) rotateY(3deg) scaleX(1)
+              transform: perspective(205px) rotateY(1deg) scaleX(1);
             }
             &.ticket_info_area_dark {
+              color: white;
               // background-color: #eee;
             }
             .info_content {
@@ -122,6 +129,7 @@
               padding: 10px 15px;
               &.info_show {
                 transform: scaleX(1);
+                // background-color: #eee;
               }
               .content {
                 width: 100%;

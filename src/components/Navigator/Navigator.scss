@@ -8,6 +8,7 @@ $color1: #767676;
   .navbar_inner {
     width: 100%;
     height: 100px;
+    position: fixed;
     display: flex;
     align-items: center;
     background-color: #cbcaca;
@@ -73,11 +74,11 @@ $color1: #767676;
             color: #767676;
           }
           &:hover {
-            background-color: #fffdf0;
+            background-color: #ffffff;
             color: #777;
           }
           &.current {
-            background-color: #fffdf0;
+            background-color: #ffffff;
             color: #777;
           }
 
