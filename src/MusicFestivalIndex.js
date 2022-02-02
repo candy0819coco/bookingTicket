@@ -16,9 +16,12 @@ import TicketOrder from "./components/TicketOrder/TicketOrder";
 import Shop from "./components/Shop/Shop";
 import LineUp from "./components/LineUp/LineUp";
 import Map from "./components/Map/Map";
-import Footer from "./components/Footer/Footer"
-import User from "./components/User/User"
-import MemberOrder from "./components/MemberOrder/MemberOrder"
+import Footer from "./components/Footer/Footer";
+// import User from "./components/User/User";
+import MemberOrder from "./components/MemberOrder/MemberOrder";
+import SignIn from "./components/signIn/signIn";
+import Register from "./components/Register/Register";
+
 const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");//依據不同pathName頁面，導覽列會不同
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -37,7 +40,9 @@ const MusicFestivalIndex = () => {
               <Route exact path="/map" element={<Map />} />
               <Route exact path="/shop" element={<Shop />} />
               <Route exact path="/memberOrder" element={<MemberOrder />} />
-              <Route exact path="/user" element={<User />} />
+              {/* <Route exact path="/user" element={<User />} /> */}
+              <Route exact path="/signIn" element={<SignIn />} />
+              <Route exact path="/register" element={<Register />} />
           </Routes>
             <Footer/>
           </Fragment>

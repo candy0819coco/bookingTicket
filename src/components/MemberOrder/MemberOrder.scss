@@ -1,5 +1,128 @@
 .member_order_container {
-    max-width: 1920px;
+  max-width: 1920px;
+
+  #member_container {
+    background-image: url("../../image/vs_morning.svg");
+    background-repeat: no-repeat;
+    background-position: 0 40px;
+    display: flex;
+    height: 500px;
+    width: 100%;
+
+    .con_both {
+      flex: 1;
+      // /* border: 1px solid black; */
+      padding: 20px;
+
+      &.con_right {
+        flex-grow: 3;
+      }
+      &.con_left {
+        flex-grow: 1;
+        position: relative;
+
+        img {
+          width: 40%;
+        }
+        & #member_logout {
+          margin-top: 100px;
+          background-color: #474747;
+          width: 25%;
+          color: #ffffff;
+          padding: 5px;
+          // display: flex;
+          // justify-content: center;
+          position: absolute;
+          left: 20px;
+          bottom: 10px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        &
   
-    // background-color: #;
+              /* 左導覽列start */
+              #member_hi {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+
+          span span {
+            font-size: 2em;
+          }
+        }
+        & #member_list {
+          width: 90%;
+          text-align: center;
+          margin-top: 20px;
+
+          div {
+            margin: 0 auto;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+
+            &:hover {
+              background-color: #81c268;
+              border-right: 3px solid #2b9635;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+    /* 左導覽列end */
+
+    /* 現在位置start */
+    #now_location {
+      margin-top: 4%;
+      text-align: left;
+    }
+
+    #now_location span {
+      display: inline-block;
+      margin: 10px;
+    }
+
+    /* 現在位置end */
+
+    /* 訂單表格 start*/
+    #order_list {
+      width: 100%;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.95);
+      margin-top: 60px;
+    }
+
+    #order_list tbody tr:nth-of-type(even) {
+      background-color: lightgrey;
+    }
+
+    #order_list tbody {
+      display: block;
+      height: 220px;
+      overflow-y: scroll;
+    }
+
+    #order_list tr {
+      width: 100%;
+      height: 50px;
+      display: table;
+    }
+
+    #order_list td {
+      width: 20%;
+    }
+
+    #order_list thead {
+      width: 98%;
+      height: 50px;
+      display: block;
+    }
+
+    /* 訂單表格 end*/
   }
+}
