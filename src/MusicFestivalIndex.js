@@ -13,6 +13,7 @@ import ModalTool from "./components/ModalTool/ModalTool";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import TicketOrder from "./components/TicketOrder/TicketOrder";
+import Payment from "./components/Payment/Payment";
 import Shop from "./components/Shop/Shop";
 import LineUp from "./components/LineUp/LineUp";
 import Map from "./components/Map/Map";
@@ -30,7 +31,7 @@ const MusicFestivalIndex = () => {
           <Fragment>
               <Navigator/>
             <Routes>
-              <Route exact path="/" element={<Home />} />
+              <Route exact path="/" element={<Payment />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/lineUp" element={<LineUp />} />
               <Route exact path="/ticketOrder" element={<TicketOrder />} />
