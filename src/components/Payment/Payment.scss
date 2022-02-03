@@ -1,86 +1,92 @@
-.payment_container{
-    // width:70%;
-    height:100%;
-    .payment_title{
-        width: 235px;
-        height: 75px;
-        background-image: url("./../../image/ticket_title_black.svg");
-        background-repeat: no-repeat;
-        background-size: contain;
-        margin-top: 90px;
+.payment_container {
+  // width:70%;
+  width: 100%;
+  height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  .payment {
+    width: 90%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    margin: 0 5%;
+    .payment_title {
+      display: flex;
+      justify-content: center;
+      width: 30%;
+      height: 75px;
+      background-image: url("./../../image/ticket_title_black.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      //   margin-top: 90px;
     }
-    .payment_content_container{
-        width: 75%;
+    .payment_content_container {
+      width: 70%;
+      height: 80%;
+      display: flex;
+      justify-content: flex-start;
+      .payment_content_area {
+        width: 545px;
+        margin: 0 10%;
         display: flex;
-        justify-content: center;
-        .payment_content_area{
-            width: 545px;
-            .payment_type{
-                width: 115px;
-                height: 40px;
-                font-size: 25px;
-                margin-bottom:20px;
-                border: 2px solid #767676;
-                text-align: center;
-                line-height: 40px;
-                font-weight: bolder;
-                color:#767676;
-            }
-            .payment_info{
-                font-size: 20px;
-                width: 100%;
-                .info{
-                    margin-bottom: 5px;
-
-
-                }
-                .line{
-                    border-bottom: 1px solid #767676;
-                }
-                .order_info{
-                    display: flex;
-                    margin-top: 10px;
-                    .time{
-                        
-                    }
-                    .type_plus_count{
-
-                    }
-                }
-           
-
-            }
-            .price_box{
-                .price_title{
-                    margin-top: 10px;
-                }
-                .price_total{
-                    margin-top: 10px;
-                }
-            }
-            .convenience_store_area{
-                .icon{
-                    width: 210px;
-                    height: 56px;
-                    background-image: url(./../../image/store_icon.jpg);
-                    background-repeat: no-repeat;
-                    background-size: contain;
-                    margin-top: 10px;
-
-                    }
-                }
-            }
-            .text_area{
-                margin-top: 10px;
-            }
-            .submit_btn{
-                margin-top: 10px;
-                display: flex;
-                justify-content: center;
-            }
+        flex-direction: column;
+        justify-content: space-evenly;
+        .payment_type {
+          width: 115px;
+          height: 40px;
+          font-size: 25px;
+          //   margin-bottom: 20px;
+          border: 2px solid #767676;
+          text-align: center;
+          line-height: 40px;
+          font-weight: bolder;
+          color: #767676;
         }
-       
-
+        .payment_info {
+          font-size: 20px;
+          width: 100%;
+          .info {
+            margin-bottom: 5px;
+          }
+          .line {
+            border-bottom: 1px solid #767676;
+          }
+          .order_info {
+            display: flex;
+            // margin-top: 10px;
+            .time {
+            }
+            .type_plus_count {
+            }
+          }
         }
-
-   
+        .price_box {
+          .price_title {
+            margin-top: 10px;
+          }
+          .price_total {
+            margin-top: 10px;
+          }
+        }
+        .convenience_store_area {
+          .icon {
+            width: 210px;
+            height: 56px;
+            background-image: url(./../../image/store_icon.jpg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin-top: 10px;
+          }
+        }
+        .text_area {
+          margin-top: 10px;
+        }
+        .submit_btn {
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
