@@ -1,15 +1,7 @@
 .ticket_order_container {
-    max-width: 100%;
-    height: calc(100vh - 200px);
-    overflow-x: hidden;
-    overflow-y: hidden;
-    font-family: "Noto Sans TC", sans-serif;
-  >button {
-    position: fixed;
-    bottom: 150px;
-    left: 250px;
-    &:nth-child(2) {
-      left: 550px;
-    }
-  }
-  }
+  max-width: 100%;
+  height: calc(100vh - 200px);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-family: "Noto Sans TC", sans-serif;
+}

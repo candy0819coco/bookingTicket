@@ -13,6 +13,7 @@ import ModalTool from "./components/ModalTool/ModalTool";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import TicketOrder from "./components/TicketOrder/TicketOrder";
+import TicketOrderStepOne from "./components/TicketOrderStepOne/TicketOrderStepOne";
 import Payment from "./components/Payment/Payment";
 import Shop from "./components/Shop/Shop";
 import LineUp from "./components/LineUp/LineUp";
@@ -31,7 +32,7 @@ const MusicFestivalIndex = () => {
           <Fragment>
               <Navigator/>
             <Routes>
-              {/* <Route exact path="/" element={<Payment />} /> */}
+              <Route exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/lineUp" element={<LineUp />} />
               <Route exact path="/ticketOrder" element={<TicketOrder />} />  {/*為什麼跳轉過來的時候，不會只有那個下一步的按鈕*/}
