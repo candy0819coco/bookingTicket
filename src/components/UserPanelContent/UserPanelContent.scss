@@ -91,6 +91,12 @@
           }
         }
       }
+      &.item_logout {
+        cursor: initial;
+        &:hover {
+          background-color: #fff;
+        }
+      }
     }
   }
 }

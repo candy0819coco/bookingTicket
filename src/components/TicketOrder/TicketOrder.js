@@ -6,15 +6,38 @@ import React, {
   useContext,
 } from "react";
 import "./TicketOrder.scss";
-import { Provider } from "../context";
 import * as R from "ramda";
-import context from "./../context";
+import context, { Provider } from "./../context";
 
 const TicketOrder = () => {
   const [ticketOrderStep, setTicketOrderStep] = useState(0);
+  const [wsState, setWsState] = useState();
+  const [campSelectedList, setCampSelectedList] = useState([]);
   const [currentHoverTicketType, setCurrentHoverTicketType] = useState("");
   const contextValue = useContext(context);
   const { isDarkMode } = contextValue;
+
+  useEffect(() => {
+    let ws = new WebSocket("ws://localhost:3001");
+    // let ws = new WebSocket("ws://localhost:5400");
+    console.log('ws', ws)
+      setWsState(ws);
+      ws.onopen = () => {
+        console.log("open connection");
+      };
+  
+      ws.onclose = () => {
+        console.log("close connection");
+      };
+  
+      ws.onmessage = (event) => {
+        console.log("event", event);
+        console.log("event.data", JSON.parse(event.data));
+        setCampSelectedList(JSON.parse(event.data));
+      };
+
+  }, []);
+
 
   return (
     <div
@@ -22,7 +45,6 @@ const TicketOrder = () => {
         isDarkMode ? "ticket_order_contaner_dark" : ""
       }`}
     >
-      <Provider value={contextValue}>
         <div className="ticket_order">
           <div
             className={`ticket_order_title  ${
@@ -259,7 +281,6 @@ const TicketOrder = () => {
             </div>
           </div>
         </div>
-      </Provider>
     </div>
   );
 };

@@ -36,19 +36,15 @@
   }
 
   .background {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
-    width: 1366px;
-    height: 768px;
+    width: 100vw;
+    height: 100vh;
     // background-color: rgba(184, 185, 109, 0.3);
     background-color: rgba(0, 0, 0, 0.95);
     z-index: 10;
     cursor: initial;
-    &.full_screen_background {
-      width: 100vw;
-      height: 100vh;
-    }
   }
 
   /* width */

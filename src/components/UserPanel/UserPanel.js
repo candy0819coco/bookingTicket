@@ -1,8 +1,7 @@
 import React, { useCallback, useState, useEffect, Fragment, useContext } from "react";
 import "./UserPanel.scss";
-import { Provider } from "../context";
 import * as R from "ramda";
-import context from "../context";
+import context, { Provider } from "./../context";
 
 const UserPanel = (props) => {
 
@@ -17,13 +16,7 @@ const UserPanel = (props) => {
         modalInnerBackground
     } = props;
     
-    // const closeThis = (e) => {
-    //     console.log("clic k")
-    //     modalCloseFunction();
-    //     e.stopPropagation();
-    // }
     return (
-        <Provider value={contextValue}>
             <div className={`user_panel_container ${modalShow ? "component_show" : "component_hide"}`}>
                 <div className={`user_panel_inner ${modalShow ? "panel_show" : "panel_hide"}`} 
                     style={{width:modalWidth, height:modalHeight, background:modalInnerBackground}}
@@ -36,7 +29,6 @@ const UserPanel = (props) => {
                     onClick={modalCloseFunction}
                 ></div>
             </div>
-        </Provider>
 
     );
 };

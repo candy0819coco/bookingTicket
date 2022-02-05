@@ -1,8 +1,7 @@
 import React, { useCallback, useState, useEffect, Fragment, useContext } from "react";
 import "./Shop.scss";
-import { Provider } from "../context";
 import * as R from "ramda";
-import context from "./../context";
+import context, { Provider } from "./../context";
 
 const Shop = () => {
     const contextValue = useContext(context);
@@ -10,11 +9,9 @@ const Shop = () => {
 
     return (
         <div className={`shop_container`}>
-            <Provider value={contextValue}>
                 <div className="____">
                         Shop Content
                 </div>
-            </Provider>
         </div>
     );
 };

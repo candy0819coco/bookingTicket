@@ -5,23 +5,81 @@ import React, {
   Fragment,
   useContext,
 } from "react";
-import "./Navbar.scss";
+import "./Navigator.scss";
 import UserPanel from "./../UserPanel/UserPanel";
+import ModalTool from "./../ModalTool/ModalTool";
 import UserPanelContent from "./../UserPanelContent/UserPanelContent";
+import Login from "./../Login/Login";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import context, { Provider } from "./../context";
 
-const Navbar = () => {
+const Navigator = () => {
   const [userPanelShow, setUserPanelShow] = useState(false);
+  const [loginModalShow, setLoginModalShow] = useState(false);
   const contextValue = useContext(context);
-  const { pathName, setPathName, isDarkMode, setIsDarkMode } = contextValue;
+  const { pathName, setPathName, isDarkMode, setIsDarkMode, userInfo } =
+    contextValue;
   console.log("pathName", pathName);
+  const [avatarImage, setAvatarImage] = useState();
+
+  useEffect(() => {
+    if (userInfo) {
+      getAvatar();
+    }
+  }, [userInfo]);
   const handleCloseUserPanel = (e) => {
     setUserPanelShow(false);
     e.stopPropagation();
   };
+  const handleCloseLoginModal = (e) => {
+    console.log('e', e)
+    setLoginModalShow(false);
+    // e.stopPropagation();
+  };
+
+  const handleRenderUserPanel = () => {
+    return (
+      <UserPanel
+        modalShow={userPanelShow}
+        modalCloseFunction={handleCloseUserPanel}
+        modalWidth={200}
+        modalHeight={180}
+        backgroundOpacity={0.6}
+        modalInnerBackground={`#fff`}
+      >
+        <UserPanelContent closeModal={handleCloseUserPanel} />
+      </UserPanel>
+    );
+  };
+  console.log('loginModalShow', loginModalShow)
+
+  const handleRenderLoginModal = () => {
+    return (
+      <ModalTool
+        modalShow={loginModalShow}
+        modalCloseFunction={handleCloseLoginModal}
+        modalWidth={400}
+        modalHeight={320}
+        backgroundOpacity={0.6}
+        modalInnerBackground={`#fff`}
+      >
+        <Login closeModal={handleCloseLoginModal} setLoginModalShow={setLoginModalShow}/>
+      </ModalTool>
+    );
+  };
+  const getAvatar = async () => {
+    function toBase64(arrayBuffer) {
+      return btoa(
+        arrayBuffer.reduce((data, byte) => data + String.fromCharCode(byte), '')
+      );
+    }
+    let b64 = toBase64(userInfo.mPhotoBinary.data);
+    const mimeType = "image/jpg";
+    let avatarUrl = `data:${mimeType};base64,${b64}`;
+    setAvatarImage(avatarUrl);
+  };
+
   return (
-    <Provider value={contextValue}>
       <div className={`navbar_container`}>
         <div
           className={`navbar_inner ${isDarkMode ? "navbar_inner_dark" : ""}`}
@@ -104,26 +162,32 @@ const Navbar = () => {
             <div
               className={`icon icon_cart ${isDarkMode ? "icon_cart_dark" : ""}`}
             ></div>
-            <div
-              className={`icon icon_user ${isDarkMode ? "icon_user_dark" : ""}`}
-              id="iconUser"
-              onClick={() => setUserPanelShow(true)}
-            >
-              <UserPanel
-                modalShow={userPanelShow}
-                modalCloseFunction={handleCloseUserPanel}
-                modalWidth={200}
-                modalHeight={180}
-                backgroundOpacity={0.6}
-                modalInnerBackground={`#fff`}
+            {userInfo ? (
+              <div
+                className={`icon icon_user_is_logined ${
+                  isDarkMode ? "icon_user_dark" : ""
+                }`}
+                id="iconUser"
+                onClick={() => setUserPanelShow(true)}
+                style={{ backgroundImage: `url(${avatarImage})` }}
               >
-                <UserPanelContent closeModal={handleCloseUserPanel} />
-              </UserPanel>
-            </div>
+                {handleRenderUserPanel()}
+              </div>
+            ) : (
+              <div
+                className={`icon icon_user ${
+                  isDarkMode ? "icon_user_dark" : ""
+                }`}
+                id="iconUser"
+                onClick={() => setLoginModalShow(true)}
+              >
+                {handleRenderLoginModal()}
+              </div>
+            )}
+            <div></div>
           </div>
         </div>
       </div>
-    </Provider>
   );
 };
-export default Navbar;
+export default Navigator;
