@@ -31,10 +31,10 @@ const MusicFestivalIndex = () => {
           <Fragment>
               <Navigator/>
             <Routes>
-              <Route exact path="/" element={<Payment />} />
+              {/* <Route exact path="/" element={<Payment />} /> */}
               <Route exact path="/about" element={<About />} />
               <Route exact path="/lineUp" element={<LineUp />} />
-              <Route exact path="/ticketOrder" element={<TicketOrder />} />
+              <Route exact path="/ticketOrder" element={<TicketOrder />} />  {/*為什麼跳轉過來的時候，不會只有那個下一步的按鈕*/}
               <Route exact path="/map" element={<Map />} />
               <Route exact path="/shop" element={<Shop />} />
               <Route exact path="/memberOrder" element={<MemberOrder />} />
