@@ -73,7 +73,7 @@ const Navigator = () => {
         arrayBuffer.reduce((data, byte) => data + String.fromCharCode(byte), '')
       );
     }
-    let b64 = toBase64(userInfo.mPhotoBinary.data);
+    let b64 = toBase64(userInfo.mPhoto.data);
     const mimeType = "image/jpg";
     let avatarUrl = `data:${mimeType};base64,${b64}`;
     setAvatarImage(avatarUrl);

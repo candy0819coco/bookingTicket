@@ -141,7 +141,7 @@ app.get('/is_logined', function(req, res) {
 app.post('/user_login', (req, res) => {
   console.log('req.session', req.session);
   const checkAccountSQL = `SELECT * FROM member_info WHERE mAccount = "${req.body.account}"`;
-  const loginSQL = `SELECT mNo, mAccount, mName, mBirthday, mGender, mPhone, mMail, mAddress, mPhoto, mPhotoBinary FROM member_info WHERE mAccount = "${req.body.account}" and mPwd = "${req.body.password}"`;
+  const loginSQL = `SELECT mNo, mAccount, mName, mBirthday, mGender, mPhone, mMail, mAddress, mPhoto FROM member_info WHERE mAccount = "${req.body.account}" and mPwd = "${req.body.password}"`;
   connection.query(checkAccountSQL, (checkError, checkResult) => {
     console.log('checkAccountSQL_checkResult', checkResult);
     if(checkResult.length)  {
