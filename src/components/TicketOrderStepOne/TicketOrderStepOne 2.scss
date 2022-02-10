@@ -1,0 +1,168 @@
+.ticket_order_step_one_container {
+    max-width: 100%;
+    height: calc(100vh - 200px);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: "Noto Sans TC", sans-serif;
+    &.ticket_order_container_dark {
+      background-color: #474747;
+    }
+    .ticket_order {
+      width: 84%;
+      display: flex;
+      justify-content:space-evenly;//center
+      // align-items: flex-start;
+      .title_container{
+        width:312px;
+        height:100px;
+        display: flex;
+        justify-content: flex-end;
+        .ticket_order_title {
+          width: 235px;
+          height: 75px;
+          background-image: url("./../../image/ticket_title_black.svg");
+          background-repeat: no-repeat;
+          background-size: contain;
+          margin-top: 90px;
+          &.ticket_order_title_dark {
+            background-image: url("./../../image/ticket_title_white.svg");
+          }
+        }
+      }
+      .ticket_type_area {
+        display: flex;
+        justify-items:self-start;//space-evenly
+        align-items: center;
+        width: 80%;//60%
+        // height: 480px;
+        margin: 170px 0 0 0;//200px
+        // position: relative;
+        .ticket_box {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;//space evenly
+          align-items: center;
+          position: relative;
+          transition: 0.3s;
+          &.add_blank {
+            transform: translateX(-200px);
+          }
+          .ticket_image {
+            width: 240px;
+            min-width: 240px;
+            height: 440px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            transform: perspective(200px) rotateY(3deg);
+            transition: 0.3s;
+            z-index: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+  
+            &.ticket_one_day {
+              background-image: url("./../../image/N_ticket_1day_new.png");
+            }
+            &.ticket_two_day {
+              background-image: url("./../../image/N_ticket_2days_new.png");
+            }
+            &.ticket_camp {
+              background-image: url("./../../image/N_ticket_2days_plus_new.png");
+            }
+            &:hover {
+              transform: perspective(200px) rotateY(3deg) translateY(-20px);
+            }
+            .order_button {
+              width: 100px;
+              height: 50px;
+              background-color: #333;
+              color: #fff;
+              font-size: 24px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 0 10px 65px 0;
+              transition: 0.3s;
+              transform: translateY(20px);
+              opacity: 0;
+              z-index: 2;
+              &.order_button_show {
+                transform: translateY(0);
+                opacity: 1;
+              }
+              &:hover {
+                background-color: #555;
+              }
+            }
+          }
+          .ticket_info_area {
+            width: 272px;//280px
+            height: 435px;//420px
+            // background-color: #eee;
+            position: absolute;
+            right: 325px;//360px;
+            // top: 20px;
+            transition: 0.5s;
+            transform-origin: right;
+            transform: perspective(200px) rotateY(3deg) scaleX(0);
+            // position: relative;
+            z-index: 0;
+            &.area_show {
+              transform: perspective(205px) rotateY(1deg) scaleX(1);
+            }
+            &.ticket_info_area_dark {
+              color: white;
+              // background-color: #eee;
+            }
+            .info_content {
+              z-index: 0;
+              width: 100%;
+              height: 100%;
+              // background-color: #eee;
+              transition: 0.3s;
+              overflow: hidden;
+              transform-origin: top right;
+              transform: scaleX(0);
+              box-sizing: border-box;
+              padding: 10px 15px;
+              &.info_show {
+                transform: scaleX(1);
+                // background-color: #eee;
+              }
+              .content {
+                width: 100%;
+                height: 100%;
+                white-space: pre-wrap;
+                // white-space: break-all;
+                font-family: "Noto Sans";
+                color: #333;
+                &.content_dark {
+                  color: #fff;
+                }
+                .main_rule {
+                  font-size: 14px;
+                  line-height: 20px;
+                  .spanBlue{
+                    color:#587DDB;
+                    font-weight: bold;
+                  }
+                }
+                .sub_rule {
+                  font-size: 14px;
+                  .spanRed{
+                    color:red;
+                    font-weight: bold;
+                  }
+                }
+                > p {
+                  font-size: 5px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
