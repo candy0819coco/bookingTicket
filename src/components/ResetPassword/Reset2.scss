@@ -1,0 +1,99 @@
+$color: #81c268;
+$colorBack: rgba(255, 255, 255, 0.95);
+
+.reset2_container {
+    max-width: 1920px;
+    width: 100%;
+    height: 600px;
+    background-image: url("./../../image/vs_morning.svg");
+    background-position: 0 100px;
+    background-repeat: no-repeat;
+    padding-bottom: 40px;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .now_location {
+        margin-top: 30px;
+        text-align: center;
+
+        span {
+            display: inline-block;
+            margin: 10px;
+        }
+    }
+    .reset_all {
+        width: 350px;
+        height: 400px;
+        margin: 30px auto;
+        text-align: center;
+        padding: 20px;
+        background-color: $colorBack;
+        border-radius: 25px;
+        .reset_password {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            .reset_step {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+
+                .reset_circle {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    border: 1px solid #000000;
+                    margin: 10px;
+                    line-height: 30px;
+                }
+                & .reset_circle:nth-child(3) {
+                    background-color: $color;
+                }
+                .reset_line {
+                    width: 30px;
+                    height: 15px;
+                    border-bottom: 1px solid black;
+                    margin: 10px;
+                }
+            }
+
+            .reset_insert {
+                margin: 40px auto;
+                width: 280px;
+
+                .resert_text {
+                    width: 100%;
+                    text-align: left;
+                }
+
+                .reset_code {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 20px;
+
+                    input {
+                        border: none;
+                        border-bottom: 1px solid #000;
+                        outline: none;
+                        width: 30px;
+                        height: 30px;
+                        background-color: transparent;
+                        text-align: center;
+                    }
+                }
+
+                .okButton {
+                    margin-top: 40px;
+                    background-color: $color;
+                    color: #fff;
+                    height: 30px;
+                    line-height: 30px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

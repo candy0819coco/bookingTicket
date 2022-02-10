@@ -21,6 +21,9 @@ import Footer from "./components/Footer/Footer";
 import MemberOrder from "./components/MemberOrder/MemberOrder";
 import SignIn from "./components/signIn/signIn";
 import Register from "./components/Register/Register";
+import Reset1 from "./components/ResetPassword/Reset1";
+import Reset2 from "./components/ResetPassword/Reset2";
+import Reset3 from "./components/ResetPassword/Reset3";
 
 const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");//依據不同pathName頁面，導覽列會不同
@@ -43,6 +46,9 @@ const MusicFestivalIndex = () => {
               {/* <Route exact path="/user" element={<User />} /> */}
               <Route exact path="/signIn" element={<SignIn />} />
               <Route exact path="/register" element={<Register />} />
+              <Route exact path="/register/reset1" element={<Reset1 />} />
+              <Route exact path="/register/reset2" element={<Reset2 />} />
+              <Route exact path="/register/reset3" element={<Reset3 />} />
           </Routes>
             <Footer/>
           </Fragment>

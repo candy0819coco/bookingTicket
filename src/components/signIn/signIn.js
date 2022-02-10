@@ -6,38 +6,44 @@ import fb from '../../image/fb.svg';
 import google from '../../image/google.svg';
 import line from '../../image/line.svg';
 import Axios from 'axios';
+import { useNavigate } from "react-router-dom";//跳轉頁面
+
 
 const SignIn = () => {
     const contextValue = useContext(context);
     const { } = contextValue;
+    const navigate = useNavigate()
 
-    const [username, setUsername] = useState('');
+    const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
 
-    const goSignIn = () => {
+    const goSignIn = (e) => {
+        e.preventDefault();
+        if (account != "" && password != "") {
+            Axios.post("http://localhost:3001/signIn", {
+                account: account,
+                password: password
+            }).then(function (res) {
+                console.log(res);
 
-        // if (username != "" && password != "") {
-        //     Axios.post("http://localhost:3001/signIn", {
-        //         username: username,
-        //         password: password
-        //     })
-        //     // .then((response) => {
-        //     //     console.log(response);
-        //     // })
-        //     .then((res)=>{
-        //         alert("登入成功");
-        //     })
-        //     .catch((e)=>{
-        //         if(e){
-        //             console.log(e);
-        //         }
-        //     })
-        // }else if(username === ""){
-        //     alert("請輸入帳號");
-        // }else{
-        //     alert("請輸入密碼");
-        // }
+                alert(res.data.message);
+                if (res.data.token) {
+                    localStorage.setItem("user", JSON.stringify(res.data));
+                }
+                // console.log(res.data.message);//顯示登入成功
+                // navigate("/home");
+            }).catch(function (err) {
+                alert(err.response.data.message);
+                // console.log(err.response);
+            })
+        } else if (account == "") {
+            alert("請輸入帳號");
+        } else {
+            alert("請輸入密碼");
+        }
     }
+
+
 
     return (
         <div className={`User_container`}>
@@ -55,37 +61,37 @@ const SignIn = () => {
                     </div>
 
                     <div>
-                        <form>
+                        <div>
 
-                            <label htmlFor="memberAccount">帳號</label>
+                            <label htmlFor="member_account">帳號</label>
                             <input type="text"
-                                name="memberAccount"
-                                id="memberAccount"
+                                name="member_account"
+                                id="member_account"
                                 required
-                                onChange={(e) => { setUsername(e.target.value) }} />
+                                onChange={(e) => { setAccount(e.target.value) }} />
 
 
-                            <label htmlFor="memberPassword">密碼</label>
+                            <label htmlFor="member_password">密碼</label>
                             <input
                                 type="password"
-                                name="memberPassword"
-                                id="memberPassword"
+                                name="member_password"
+                                id="member_password"
                                 required
                                 onChange={(e) => { setPassword(e.target.value) }} />
 
 
                             <input
                                 type="submit"
-                                name="submitInfo"
-                                id="submitInfo"
+                                name="submit_info"
+                                id="submit_info"
                                 value="登入"
                                 onClick={goSignIn} />
-                        </form>
+                        </div>
                     </div>
                     <div id={`join_member`}>
-                        <p><a href="#">加入會員</a></p>
+                        <p><a href="/register">加入會員</a></p>
                         <p>|</p>
-                        <p><a href="#">忘記密碼</a></p>
+                        <p><a href="/register/reset1">忘記密碼</a></p>
                     </div>
 
 
@@ -94,6 +100,7 @@ const SignIn = () => {
                         <a href="#"><img src={google} /></a>
                         <a href="#"><img src={line} /></a>
                     </div>
+
                 </div>
 
             </Provider>
