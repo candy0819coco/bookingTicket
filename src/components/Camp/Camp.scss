@@ -1,0 +1,105 @@
+.camp_container {
+    
+    .camp_area_container{
+        display: flex;
+        justify-content: center;
+
+        .camp_map{
+        background-image: url(./../../image/campmap.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width:1200px;
+        height:700px;
+        z-index: 0;
+        position: relative;
+            .stage{
+                background-image: url(./../../image/show.png);
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 83px;
+                height: 89px;
+                position: absolute;
+                left: 481px;
+                top: 200px;
+                z-index: 3;
+
+            }
+            .camp{
+                width: 170px;
+                height: 128px;
+                z-index: 1;
+                position: absolute;
+                &.camp_A{
+                    background-image: url(./../../image/A_CAMP.png);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    left: 396px;
+                    top: 167px;
+            
+
+
+                }
+                &.camp_B{
+                    background-image: url(./../../image/B_CAMP.png);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    width: 200px;
+                    height: 132px;
+                    bottom: 153px;
+                    right: 295px;
+            
+
+                }
+                &.camp_C{
+                    background-image: url(./../../image/C_CAMP.png);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    right: 174px;
+                    bottom: 235px;
+                    width: 162px;
+                    height: 88px;
+                }  
+               
+            }
+            .tree_one{ 
+                background-image: url(./../../image/tree.png);
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 85px;
+                height: 107px;
+                position: absolute;
+                bottom: 207px;
+                right: 141px;
+                z-index: 3;
+
+
+            }
+            .tree_two{
+                background-image: url(./../../image/tree2.png);
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 23px;
+                height: 28px;
+                position: absolute;
+                bottom: 223px;
+                right: 221px;
+                z-index: 3;
+
+            }
+            .tree_three{
+
+                background-image: url(./../../image/tree3.png);
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 32px;
+                height: 40px;
+                position: absolute;
+                bottom: 277px;
+                right: 304px;
+                z-index: 3;
+
+
+            }
+        }
+    }
+}

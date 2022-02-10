@@ -23,7 +23,7 @@
           background-image: url("./../../image/ticket_title_black.svg");
           background-repeat: no-repeat;
           background-size: contain;
-          margin-top: 90px;
+          margin-top: 70px;
           &.ticket_order_title_dark {
             background-image: url("./../../image/ticket_title_white.svg");
           }
@@ -136,7 +136,7 @@
                 height: 100%;
                 white-space: pre-wrap;
                 // white-space: break-all;
-                font-family: "Noto Sans";
+                font-family: "Noto Sans TC", sans-serif;
                 color: #333;
                 &.content_dark {
                   color: #fff;

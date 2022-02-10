@@ -11,9 +11,10 @@ import context, { Provider } from "./../context";
 const Payment = (props) => {
   const contextValue = useContext(context);
   // convenientStore creditCard
-  const { payment, setTicketOrderStep, handleChangePayment } = props; //屬性由TicketOrder(25行)傳來的，在這支要補上這行程式碼
+  const { payment, setTicketOrderStep, handleChangePayment } = props; //屬性由TicketOrder傳來的props，在這支要補上這行程式碼
   const [creditMonth, setCreditMonth] = useState("");
   const [creditYear, setCreditYear] = useState("");
+  
 
   const monthList = [
     "01",
@@ -35,6 +36,8 @@ const Payment = (props) => {
     let creditValid = creditMonth + "-" + creditYear;
     console.log("creditValid", creditValid);
   }, [creditMonth, creditYear]);
+
+  const [myTicketOrderList, setMyTicketOrderList] = useState([]);
 
   return (
     <div className={`payment_container`}>
@@ -206,3 +209,5 @@ const Payment = (props) => {
   );
 };
 export default Payment;
+
+

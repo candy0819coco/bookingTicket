@@ -18,9 +18,12 @@ import Payment from "./components/Payment/Payment";
 import Shop from "./components/Shop/Shop";
 import LineUp from "./components/LineUp/LineUp";
 import Map from "./components/Map/Map";
-import Footer from "./components/Footer/Footer"
-import User from "./components/User/User"
-import MemberOrder from "./components/MemberOrder/MemberOrder"
+import Footer from "./components/Footer/Footer";
+import User from "./components/User/User";
+import MemberOrder from "./components/MemberOrder/MemberOrder";
+import MyTicketList from "./components/MyTicketList/MyTicketList";
+import Camp from "./components/Camp/Camp";
+
 const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");//依據不同pathName頁面，導覽列會不同
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -31,12 +34,13 @@ const MusicFestivalIndex = () => {
         <Provider value={contextValue}>
           <Fragment>
               <Navigator/>
+              {/* <MyTicketList/> */}
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/lineUp" element={<LineUp />} />
-              <Route exact path="/ticketOrder" element={<TicketOrder />} />  {/*為什麼跳轉過來的時候，不會只有那個下一步的按鈕*/}
-              <Route exact path="/map" element={<Map />} />
+              <Route exact path="/ticketOrder" element={<TicketOrder />} /> 
+              <Route exact path="/map" element={<Camp />} />
               <Route exact path="/shop" element={<Shop />} />
               <Route exact path="/memberOrder" element={<MemberOrder />} />
               <Route exact path="/user" element={<User />} />

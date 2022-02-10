@@ -6,12 +6,21 @@ import React, {
   useContext,
 } from "react";
 import "./Navigator.scss";
+import UserPanel from "./../UserPanel/UserPanel";
+import UserPanelContent from "./../UserPanelContent/UserPanelContent";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import context, { Provider } from "./../context";
 
 const Navigator = () => {
+  const [userPanelShow,setUserPanelShow] = useState('false');//一開始先隱藏面板
   const contextValue = useContext(context);
   const { pathName, setPathName, isDarkMode, setIsDarkMode } = contextValue;
+
+  const handleCloseUserPanel = (e) => {
+    setUserPanelShow(false);
+    e.stopPropagation();
+  };
+
   return (
     <Provider value={contextValue}>
       <div className="navbar_container">
@@ -93,12 +102,22 @@ const Navigator = () => {
                   isDarkMode ? "icon_cart_dark" : ""
                 }`}
               ></div>
-              <Link
-                className={`icon icon_user ${
+              <div onClick={()=>setUserPanelShow("true")}
+                 className={`icon icon_user ${
                   isDarkMode ? "icon_user_dark" : ""
                 }`}
-                to="/user"
-              ></Link>
+              ></div>
+              <UserPanel
+                modalShow={userPanelShow}
+                modalCloseFunction={handleCloseUserPanel}
+                modalWidth={290}
+                modalHeight={350}
+                backgroundOpacity={0.6}
+                modalInnerBackground={`#fff`}
+              >
+                {/* //為什麼寬高要定在這裡 */}
+                <UserPanelContent closeModal={handleCloseUserPanel} />
+              </UserPanel>
             </div>
           </div>
         </div>

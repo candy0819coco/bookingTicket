@@ -27,7 +27,7 @@ const TicketOrderDetail = (props) => {
     default:
       ticketTypeName = "???";
       break;
-  }
+  }//這邊想問清楚
   return (
     <div className={`ticket_order_detail_container`}>
       <div className={`ticket_order_detail`}>

@@ -4,6 +4,7 @@ import context, { Provider } from "./../context";
 import TicketOrderStepOne from "./../TicketOrderStepOne/TicketOrderStepOne";
 import Payment from "./../Payment/Payment";
 import TicketOrderDetail from "./../TicketOrderDetail/TicketOrderDetail";
+import axios from "axios";
 
 const TicketOrder = () => {
   const contextValue = useContext(context);
@@ -21,16 +22,66 @@ const TicketOrder = () => {
     }
   };
 
+  const handleGetTicketByPost = async (e) => {
+    console.log("post 取得付款明細");
+    let orderTime = new Date();
+    let mName = "琴酒";
+    let totalTickets = [
+      { ticketType: "one", campId: null, singleTicketDay:1 },
+      { ticketType: "two", campId: null, singleTicketDay:null },
+      { ticketType: "camp", campId: "A-01", singleTicketDay:null },
+      { ticketType: "camp", campId: "B-03", singleTicketDay:null }
+    ];
+    let result;
+    await axios({
+      method: "post",
+      url: `http://localhost:3400/create_ticket_order`,
+      data: { mNo: "000001", totalTickets: totalTickets, mName: mName, orderTime:orderTime },
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then(function (response) {
+        console.log("create_ticket_order_response", response);
+        result = response.data;
+
+      })
+      .catch((error) => {
+        console.log("create_ticket_order_error", error);
+        result = error;
+      });
+    return result;
+  };
+
   const handleRenderTicketOderStep = () => {
     if (ticketOrderStep === 0) {
-      return <TicketOrderStepOne setTicketOrderStep={setTicketOrderStep} setSelectedTicketType={setSelectedTicketType}/>;
+      return (
+        <TicketOrderStepOne
+          setTicketOrderStep={setTicketOrderStep}
+          setSelectedTicketType={setSelectedTicketType}
+        />
+      );
     } else if (ticketOrderStep === 1) {
-      return <Payment payment={payment} setTicketOrderStep={setTicketOrderStep} handleChangePayment={handleChangePayment} />;
+      return (
+        <Payment
+          payment={payment}
+          setTicketOrderStep={setTicketOrderStep}
+          handleChangePayment={handleChangePayment}
+        />
+      );
     } else if (ticketOrderStep === 2) {
-      return <TicketOrderDetail selectedTicketType={selectedTicketType} setTicketOrderStep={setTicketOrderStep}/>;
+      return (
+        <TicketOrderDetail
+          selectedTicketType={selectedTicketType}
+          setTicketOrderStep={setTicketOrderStep}
+        />
+      );
     } else {
     }
   };
+  //為什麼是傳setTicketOrderStep不是ticketOrderStep之類的 selectedTicketType setSelectedTicketType
 
   return (
     <div
@@ -38,6 +89,7 @@ const TicketOrder = () => {
         isDarkMode ? "ticket_order_container_dark" : ""
       }`}
     >
+      <button onClick={handleGetTicketByPost}>模擬下訂單</button>
       {handleRenderTicketOderStep()}
       {/* //為什麼這行要這樣寫?單獨放在{}裡面就能做function */}
       {/* <div className="btn_area">

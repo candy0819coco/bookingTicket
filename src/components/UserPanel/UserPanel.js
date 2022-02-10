@@ -41,3 +41,7 @@ const UserPanel = (props) => {
     );
 };
 export default UserPanel;
+
+//想問這一隻程式碼
+// component_show
+// panel_show指得是哪個部分

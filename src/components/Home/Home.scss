@@ -1,6 +1,6 @@
 .home_container {
   max-width: 1920px;
-  min-height: 1080px;
+  min-height: calc(100vh - 200px);
   transition: 0.5s;
   background-color: #fffbd0;
   &.home_container_dark {
