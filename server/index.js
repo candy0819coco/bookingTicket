@@ -32,7 +32,7 @@ const mysql = require('mysql')
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '123456',
   database: 'music_festival',
 })
 
@@ -51,7 +51,7 @@ var options = {
   host: 'localhost',
   port: 3306,
   user: 'root',
-  password: 'root',
+  password: '123456',
   database: 'music_festival',
 }
 
@@ -103,8 +103,9 @@ app.post('/ticket_order_post', (req, res) => {
 app.post('/create_ticket_order',(req,res)=>{
   const { mNo, totalTickets, mName, orderTime } = req.body;//把req.body解構出來，就是當初打AIXOS裡的data
   const sql = `INSERT INTO ticket_order (mNo,mAccount,mName,mPhone,mMail,orderTime,orderStatus,orderPrice,paymentStatus,paymentMethod)
-  VALUES('000001',"gin0513","${mName}","0987209687","gin0513@gmail.com",${null},${0},${3600},${0},"信用卡")`;
-    connection.query(sql,(error,results) => {
+  VALUES('${mNo}',"${mAccount}","${mName}","${mPhone}","${mPhone}",${null},${0},${3600},${0},"${paymentMethod}" )`;
+    
+  connection.query(sql,(error,results) => {
       console.log("error",error)
       if (error){
         // res.send(error);
@@ -114,66 +115,22 @@ app.post('/create_ticket_order',(req,res)=>{
         console.log('insert_ticket_order_results', results)
         console.log('results.insertId', results.insertId);
 
-        totalTickets.forEach((item, key)=>{
-          const ticketsSQL = `INSERT INTO tickets (orderNo,ticketType,singleTicketDay,campId) VALUES (${results.insertId},"${item.ticketType}",${item.singleTicketDay},${item.campId})`
+        totalTickets.forEach((item, key)=>{//為了不只買一張，這裡要寫迴圈
+          const ticketsSQL = `INSERT INTO tickets (orderNo,ticketType,singleTicketDay,campId) 
+          VALUES (${results.insertId},"${item.ticketType}",${item.singleTicketDay},${item.campId})`
           connection.query(ticketsSQL,(insertTicketsError,insertTicketsResults) =>{
             if(insertTicketsError) {
               console.log('insertTicketsError', insertTicketsError)
               // res.send(insertTicketsError);
-
             } else {
               console.log('results', insertTicketsResults)
               res.send(insertTicketsResults);
             }
           })
         })
-        
-        
-
       }
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// app.get('/payment',(req,res)=>{
-//   const sql = `SELECT * FROM `;
-//   VALUES()
-// })
-// app.get('/ticket_order', (req, res) => {
-//   const sql = `SELECT * FROM ticket_order`;//選票券訂單的資料庫
-//   connection.query(sql, (error, results) => {
-//     console.log('error', error)
-//     // console.log('results', results)
-//     if (error) {
-//       res.send(error);
-//     } else {
-//       res.json(results);
-//     }
-//   })
-// })
-
-
-
-
-
-
-
-
-
-
 //---------------------------------------------------------------------
 
 app.get('/is_logined', function(req, res) {

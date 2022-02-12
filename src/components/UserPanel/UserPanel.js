@@ -28,7 +28,7 @@ const UserPanel = (props) => {
                 <div className={`user_panel_inner ${modalShow ? "panel_show" : "panel_hide"}`} 
                     style={{width:modalWidth, height:modalHeight, background:modalInnerBackground}}
                 >
-                    {props.children}
+                    {props.children}//?
                 </div>
                 <div
                     className={`background`} 
@@ -42,6 +42,4 @@ const UserPanel = (props) => {
 };
 export default UserPanel;
 
-//想問這一隻程式碼
-// component_show
-// panel_show指得是哪個部分
+//想改成hover怎麼改

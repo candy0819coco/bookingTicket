@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import context, { Provider } from "./../context";
 
 const Navigator = () => {
-  const [userPanelShow,setUserPanelShow] = useState('false');//一開始先隱藏面板
+  const [userPanelShow,setUserPanelShow] = useState(false);//一開始先隱藏面板
   const contextValue = useContext(context);
   const { pathName, setPathName, isDarkMode, setIsDarkMode } = contextValue;
 
