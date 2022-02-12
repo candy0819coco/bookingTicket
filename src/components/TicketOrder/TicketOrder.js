@@ -8,11 +8,35 @@ import axios from "axios";
 
 const TicketOrder = () => {
   const contextValue = useContext(context);
+  const [wsState, setWsState] = useState();
+  const [campSelectedList, setCampSelectedList] = useState([]);
   const [ticketOrderStep, setTicketOrderStep] = useState(0); //購買票的步驟
   const [selectedTicketType, setSelectedTicketType] = useState("");
   const [payment, setPayment] = useState("convenientStore");
   const { isDarkMode } = contextValue; //上層已經宣告，就只要寫這行
   console.log("ticketOrderStep", ticketOrderStep);
+
+
+  useEffect(() => {
+    let ws = new WebSocket("ws://localhost:3400");
+    // let ws = new WebSocket("ws://localhost:5400");
+    console.log('ws', ws)
+      setWsState(ws);
+      ws.onopen = () => {
+        console.log("open connection");
+      };
+  
+      ws.onclose = () => {
+        console.log("close connection");
+      };
+  
+      ws.onmessage = (event) => {
+        console.log("event", event);
+        console.log("event.data", JSON.parse(event.data));
+        setCampSelectedList(JSON.parse(event.data));
+      };
+
+  }, []);
 
   const handleChangePayment = () => {
     if (payment === "convenientStore") {
@@ -24,13 +48,12 @@ const TicketOrder = () => {
 
   const handleGetTicketByPost = async (e) => {
     console.log("post 取得付款明細");
-    let orderTime = new Date();
+    let orderTime = new Date().toLocaleString('zh-Tw', { hour12: false});
+    console.log('orderTime', orderTime);
     let mName = "琴酒";
     let totalTickets = [
       { ticketType: "one", campId: null, singleTicketDay:1 },
-      { ticketType: "two", campId: null, singleTicketDay:null },
-      { ticketType: "camp", campId: "A-01", singleTicketDay:null },
-      { ticketType: "camp", campId: "B-03", singleTicketDay:null }
+      { ticketType: "camp", campId: "B03", singleTicketDay:null }
     ];
     let result;
     await axios({
@@ -92,32 +115,6 @@ const TicketOrder = () => {
       <button onClick={handleGetTicketByPost}>模擬下訂單</button>
       {handleRenderTicketOderStep()}
       {/* //為什麼這行要這樣寫?單獨放在{}裡面就能做function */}
-      {/* <div className="btn_area">
-        {ticketOrderStep === 0 ? (
-          <button className="next_step" onClick={() => setTicketOrderStep(1)}>
-            下一步
-          </button>
-        ) : ticketOrderStep === 1 ? (
-          <Fragment>
-            <button className="prev_step" onClick={() => setTicketOrderStep(0)}>
-              上一步
-            </button>
-            <button className="next_step" onClick={() => setTicketOrderStep(2)}>
-              下一步
-            </button>
-          </Fragment>
-        ) : (
-          <button className="prev_step" onClick={() => setTicketOrderStep(1)}>
-            上一步
-          </button>
-        )}
-        <button
-          className="temp_payment_switch_btn"
-          onClick={handleChangePayment}
-        >
-          現在是{payment}，切換付款方式
-        </button>
-      </div> */}
     </div>
   );
 };
