@@ -14,9 +14,9 @@ const Login = (props) => {
   const contextValue = useContext(context);
   const [userAccount, setUserAccount] = useState("");
   const [userPassword, setUserPassword] = useState("");
-  const { checkIsLogined } = contextValue;
+  const { checkIsLogined, setAccessToken } = contextValue;
   const { closeModal } = props;
-
+  
   const handleChangeAccount = (e) => {
     setUserAccount(e.target.value);
   };
@@ -25,30 +25,31 @@ const Login = (props) => {
   };
 
   const handleLogin = async () => {
-    let result;
-    await axios({
-      method: "post",
-      url: `http://localhost:3400/user_login`,
-      data: { account: userAccount, password: userPassword },
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then(function (response) {
-        console.log("login_response", response);
-        result = response.data;
-        console.log('login_response.sessionId', result.sessionId);
-        localStorage.setItem("festivalSessionId", result.sessionId);
-        checkIsLogined();
-        closeModal();
+    try {
+      await axios({
+        method: "post",
+        url: `http://localhost:3400/member/login`,
+        data: { account: userAccount, password: userPassword },
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+          "Access-Control-Allow-Origin": "*",
+        },
       })
-      .catch((error) => {
-        console.log("error", error);
-        result = error;
-      });
-    return result;
+        .then(function (response) {
+          console.log("login_response", response);
+          localStorage.setItem("accessToken", response.data.token);
+          checkIsLogined();
+          closeModal();
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    } catch (err) {
+      console.log('err', err)
+
+    }
+
   };
   return (
     <div className={`login_container`}>

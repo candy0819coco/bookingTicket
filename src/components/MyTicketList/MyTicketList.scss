@@ -1,0 +1,11 @@
+.my_ticket_list_container {
+    width: 480px;
+    height: 360px;
+    background-color: aquamarine;
+    .each_ticket_order {
+        width: 300px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}

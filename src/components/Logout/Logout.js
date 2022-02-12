@@ -7,35 +7,18 @@ import axios from "axios";
 const Logout = (props) => {
     const contextValue = useContext(context);
 
-    const { sessionId, checkIsLogined } = contextValue;
+    const { checkIsLogined, setAccessToken, setUserInfo } = contextValue;
     const {closeModal} = props;
 
       const handleLogout = async (e) => {
-        console.log('e', e)
+        console.log("按一次登出")
         e.stopPropagation();
-          let result;
-          await axios({
-            method: "post",
-            url: `http://localhost:3400/user_logout`,
-            data: {sessionId:sessionId},
-            credentials: 'same-origin',
-            headers: {
-              "Content-Type": "application/json;charset=UTF-8",
-              "Access-Control-Allow-Origin": "*",
-            },
-          })
-            .then(function (response) {
-              console.log("handleLogoutresponse", response);
-              result = response;
-              checkIsLogined();
+              
               closeModal();
-              localStorage.removeItem("festivalSessionId");
-            })
-            .catch((error) => {
-              console.log('handleLogouterror', error)
-              result = error
-            });
-            return result;
+              setUserInfo();
+              localStorage.removeItem("accessToken");
+              setAccessToken("");
+              // checkIsLogined();
       };
     return (
         <div className={`logout_container`}>

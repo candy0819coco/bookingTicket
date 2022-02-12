@@ -23,56 +23,49 @@ const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [userInfo, setUserInfo] = useState();
-  const [isLogined, setIsLogined] = useState(true);
-  const [sessionId, setSessionId] = useState("");
+  const [accessToken, setAccessToken] = useState("");
   console.log("userInfo", userInfo);
 
   const checkIsLogined = async () => {
-    let currentSessionId = localStorage.getItem("festivalSessionId") ? localStorage.getItem("festivalSessionId") : "";
-    console.log('currentSessionId', currentSessionId)
-
-    let result;
-    await axios({
-      method: "get",
-      url: `http://localhost:3400/is_logined?sessionId=${currentSessionId}`,
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then(function (response) {
-        console.log("response", response);
-        console.log("typeof response.data", typeof response.data);
-        if (typeof response.data === "object") {
-          result = JSON.parse(response.data.data);
-          console.log("result", result);
-          setUserInfo(result.userInfo);
-          if (result.isLogined) {
-            setIsLogined(result.isLogined);
-            setSessionId(result.sessionId);
-            localStorage.setItem("festivalSessionId", result.sessionId);
-          } else {
-            setIsLogined(false);
-            setSessionId("");
-          }
-        } else {
-          setUserInfo();
-          setIsLogined(false);
-          setSessionId("");
-          localStorage.removeItem("festivalSessionId");
-        }
+    let localAccessToken = localStorage.getItem("accessToken") ? localStorage.getItem("accessToken") : "";
+    if(localAccessToken) {
+      await axios({
+        method: "get",
+        url: `http://localhost:3400/member/check_login`,
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+          "Access-Control-Allow-Origin": "*",
+          "Authorization": localAccessToken
+        },
       })
-      .catch((error) => {
-        console.log("checkIsLogined_error", error);
-      });
-    return result;
+        .then(function (response) {
+            console.log("response", response);
+            console.log("check_login_result", response.data);
+            if(response.data.statusCode === 200) {
+              setUserInfo(response.data.userInfo);
+              setAccessToken(localAccessToken);
+            } else {
+              setUserInfo();
+              console.log("token失效 請重新登入");
+              setAccessToken("");
+            }
+        })
+        .catch((error) => {
+          console.log("check_login_error", error);
+        });
+    } else {
+      setUserInfo();
+      console.log("token失效 請重新登入");
+      setAccessToken("");
+    }
+
   };
 
   useEffect(() => {
     checkIsLogined();
   }, []);
-  console.log('isLogined', isLogined)
+
   const contextValue = {
     pathName,
     setPathName,
@@ -80,8 +73,9 @@ const MusicFestivalIndex = () => {
     setIsDarkMode,
     checkIsLogined,
     userInfo,
-    isLogined,
-    sessionId
+    accessToken,
+    setAccessToken,
+    setUserInfo
   };
 
   return (

@@ -12,6 +12,7 @@ import UserPanelContent from "./../UserPanelContent/UserPanelContent";
 import Login from "./../Login/Login";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import context, { Provider } from "./../context";
+import axios from "axios";
 
 const Navigator = () => {
   const [userPanelShow, setUserPanelShow] = useState(false);
@@ -19,22 +20,26 @@ const Navigator = () => {
   const contextValue = useContext(context);
   const { pathName, setPathName, isDarkMode, setIsDarkMode, userInfo } =
     contextValue;
-  console.log("pathName", pathName);
   const [avatarImage, setAvatarImage] = useState();
 
   useEffect(() => {
     if (userInfo) {
-      getAvatar();
+      habdleGetAvatar();
+    } else {
+      setAvatarImage()
     }
   }, [userInfo]);
   const handleCloseUserPanel = (e) => {
+    if(e && e.target.className === "background") {
+      e.stopPropagation();
+    }
     setUserPanelShow(false);
-    e.stopPropagation();
   };
   const handleCloseLoginModal = (e) => {
-    console.log('e', e)
+    if(e && e.target.className === "background") {
+      e.stopPropagation();
+    }
     setLoginModalShow(false);
-    // e.stopPropagation();
   };
 
   const handleRenderUserPanel = () => {
@@ -51,7 +56,6 @@ const Navigator = () => {
       </UserPanel>
     );
   };
-  console.log('loginModalShow', loginModalShow)
 
   const handleRenderLoginModal = () => {
     return (
@@ -67,13 +71,36 @@ const Navigator = () => {
       </ModalTool>
     );
   };
-  const getAvatar = async () => {
+  const habdleGetAvatar = async () => {
+
+        let avatarResult;
+        await axios({
+          method: "post",
+          url: `http://localhost:3400/member/get_avatar`,
+          data: {mNo : userInfo.mNo},
+          credentials: 'same-origin',
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
+          .then(function (response) {
+            console.log("avatar_response", response);
+            avatarResult = response.data[0].mPhoto.data;
+            // console.log('avatarResult', avatarResult)
+          })
+          .catch((error) => {
+            console.log('avatar_error', error)
+            avatarResult = error
+          });
+
+
     function toBase64(arrayBuffer) {
       return btoa(
         arrayBuffer.reduce((data, byte) => data + String.fromCharCode(byte), '')
       );
     }
-    let b64 = toBase64(userInfo.mPhoto.data);
+    let b64 = toBase64(avatarResult);
     const mimeType = "image/jpg";
     let avatarUrl = `data:${mimeType};base64,${b64}`;
     setAvatarImage(avatarUrl);

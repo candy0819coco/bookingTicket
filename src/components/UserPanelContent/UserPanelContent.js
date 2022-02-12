@@ -13,7 +13,7 @@ import Logout from "./../Logout/Logout";
 
 const UserPanelContent = (props) => {
   const contextValue = useContext(context);
-  const { isDarkMode, isLogined } = contextValue;
+  const { isDarkMode, userInfo } = contextValue;
   const { closeModal } = props;
 
   return (
@@ -48,7 +48,7 @@ const UserPanelContent = (props) => {
             ></div>
             <div className="text">票券訂單</div>
           </div>
-          {isLogined ? (
+          {userInfo ? (
             <div
               className={`panel_item item_logout ${
                 isDarkMode ? "panel_item_dark" : ""
