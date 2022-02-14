@@ -70,7 +70,7 @@ const Navigator = () => {
               </Link>
               <Link
                 className={`nav_item ${pathName === "shop" ? "current" : ""}`}
-                to="/shop"
+                to="/myTicketList"
                 onClick={() => setPathName("shop")}
               >
                 Shop

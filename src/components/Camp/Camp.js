@@ -14,12 +14,17 @@ const Camp = () => {
                     <div className="camp_map">                        
                     
                         <div className="camp camp_A"></div>
-                        <div className="stage"></div>
                         <div className="camp camp_B"></div>
                         <div className="camp camp_C"></div>
-                        <div className="tree_one"></div>
-                        <div className="tree_two"></div>
-                        <div className="tree_three"></div>
+                        <div className="item stage"></div>
+                        <div className="item tree_one"></div>
+                        <div className="item tree_two"></div>
+                        <div className="item tree_three"></div>
+                        <div className="item camp_title"></div>
+                        <div className="item line_and_circle line_one"></div>
+                        <div className="item line_and_circle line_two"></div>
+                        <div className="item line_and_circle line_three"></div>
+                        
                     </div>
 
                 </div>

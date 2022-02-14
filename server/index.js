@@ -96,18 +96,6 @@ app.use(
 );
 
 //--------------------------票券部分-------------------------------------------
-app.get("/ticket_order", (req, res) => {
-  const sql = `SELECT * FROM ticket_order`; //選票券訂單的資料庫
-  connection.query(sql, (error, results) => {
-    console.log("error", error);
-    // console.log('results', results)
-    if (error) {
-      res.send(error);
-    } else {
-      res.json(results);
-    }
-  });
-});
 app.post("/ticket_order_post", (req, res) => {
   console.log("req.body.mNo"); //req.body=data
   const { mNo, randos } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
@@ -121,6 +109,19 @@ app.post("/ticket_order_post", (req, res) => {
       res.json(results);
     }
   });
+});
+
+app.post("/ticket_details",(req,res) =>{
+  const {orderNo} =req.body;
+  const sql = `SELECT * FROM tickets WHERE orderNo = ${orderNo}`;
+  connection.query(sql,(error,results)=>{
+    console.log('error',error);
+    if (error){
+      res.send(error);
+    }else{
+      res.json(results);
+    }
+  })
 });
 
 //購買單日&雙日票 寫進ticket_order資料庫
@@ -177,23 +178,6 @@ app.post("/create_ticket_order", (req, res) => {
     }
   });
 });
-
-// app.get('/payment',(req,res)=>{
-//   const sql = `SELECT * FROM `;
-//   VALUES()
-// })
-// app.get('/ticket_order', (req, res) => {
-//   const sql = `SELECT * FROM ticket_order`;//選票券訂單的資料庫
-//   connection.query(sql, (error, results) => {
-//     console.log('error', error)
-//     // console.log('results', results)
-//     if (error) {
-//       res.send(error);
-//     } else {
-//       res.json(results);
-//     }
-//   })
-// })
 
 //---------------------------------------------------------------------
 

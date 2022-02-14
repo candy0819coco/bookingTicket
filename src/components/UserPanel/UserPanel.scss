@@ -13,6 +13,7 @@
     opacity: 1;
     pointer-events: initial;
     transition: 0.3s;
+
   }
   &.component_hide {
     opacity: 0;
@@ -27,9 +28,11 @@
     z-index: 11;
     border-radius: 15px;
 
+
     &.panel_show {
       opacity: 1;
       transition: 0.3s;
+
     }
     &.panel_hide {
       opacity: 0;
@@ -47,5 +50,6 @@
     background-color: rgba(0, 0, 0, 0.95);
     z-index: 10;
     cursor: initial;
+
   }
 }

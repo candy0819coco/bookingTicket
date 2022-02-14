@@ -18,7 +18,7 @@ const UserPanel = (props) => {
     } = props;
     
     // const closeThis = (e) => {
-    //     console.log("clic k")
+    //     console.log("click")
     //     modalCloseFunction();
     //     e.stopPropagation();
     // }
@@ -28,7 +28,8 @@ const UserPanel = (props) => {
                 <div className={`user_panel_inner ${modalShow ? "panel_show" : "panel_hide"}`} 
                     style={{width:modalWidth, height:modalHeight, background:modalInnerBackground}}
                 >
-                    {props.children}//?
+                    {props.children}
+                    {/* //? */}
                 </div>
                 <div
                     className={`background`} 

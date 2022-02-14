@@ -46,14 +46,15 @@ const TicketOrder = () => {
     }
   };
 
+
   const handleGetTicketByPost = async (e) => {
     console.log("post 取得付款明細");
     let orderTime = new Date().toLocaleString('zh-Tw', { hour12: false});
     console.log('orderTime', orderTime);
     let mName = "琴酒";
     let totalTickets = [
-      { ticketType: "one", campId: null, singleTicketDay:1 },
-      { ticketType: "camp", campId: "B03", singleTicketDay:null }
+      { ticketType: "單日票", campId: null, singleTicketDay:1 },
+      { ticketType: "雙日票(含露營)", campId: "B03", singleTicketDay:null }
     ];
     let result;
     await axios({
@@ -82,7 +83,7 @@ const TicketOrder = () => {
     if (ticketOrderStep === 0) {
       return (
         <TicketOrderStepOne
-          setTicketOrderStep={setTicketOrderStep}
+          setTicketOrderStep={setTicketOrderStep}//為什麼要寫在這裡
           setSelectedTicketType={setSelectedTicketType}
         />
       );
