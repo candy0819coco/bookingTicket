@@ -67,7 +67,7 @@ const Navigator = () => {
         backgroundOpacity={0.6}
         modalInnerBackground={`#fff`}
       >
-        <Login closeModal={handleCloseLoginModal} setLoginModalShow={setLoginModalShow}/>
+        <Login closeModal={handleCloseLoginModal}/>
       </ModalTool>
     );
   };

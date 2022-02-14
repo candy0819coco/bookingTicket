@@ -37,7 +37,7 @@ try {
 
       let bufferToString = data.toString("utf8");
 
-      console.log("bufferToString", bufferToString);
+      // console.log("bufferToString", bufferToString);
       // ws.send(data);
       let clients = wss.clients;
 
@@ -77,31 +77,8 @@ const SECRET = "thisismynewproject";
 
 //---------------------------------------------------------------------------------------------
 
-app.get("/member/check_login", function (req, res) {
-  // 從來自客戶端請求的 header 取得和擷取 JWT
-  //   const token = req.header('Authorization').replace('Bearer ', '');
-  const token = req.header("Authorization");
-  // console.log('token', token);
-  console.log("node_end_token", token);
-  // var tokenTemp = req.header("Authorization").split(" ")[1];
-  // console.log("tokenTemp", tokenTemp);
-  if (token) {
-    console.log("有token");
-    console.log("種類", typeof token);
-    try {
-      // 驗證 Token
-      const decoded = jwt.verify(token, SECRET);
-      console.log("decoded", decoded);
-      res.send({ msg: "已登入", statusCode: 200, userInfo: decoded.payload });
-    } catch (tokenErr) {
-      console.log("tokenErr", tokenErr);
-      res.send({ msg: tokenErr + " 請重新登入", statusCode: 401 });
-    }
-  } else {
-    console.log("localStorage沒有token，請重新登入");
-    res.send({ msg: "token失效 請重新登入", statusCode: 402 });
-  }
-});
+
+
 app.post("/member/get_avatar", (req, res) => {
   const getAvatarSQL = `SELECT mPhoto FROM member_info WHERE mNo = "${req.body.mNo}"`;
   connection.query(getAvatarSQL, (avatarError, avatarResult) => {
@@ -136,7 +113,7 @@ app.post("/member/login", (req, res) => {
           mAddress: loginResult[0].mAddress,
         };
         const token = jwt.sign(
-          { payload, exp: Math.floor(Date.now() / 1000) + 60 * 3 },
+          { payload, exp: Math.floor(Date.now() / 1000) + 60 * 30 },
           SECRET
         );
         console.log('token', token);
@@ -152,17 +129,84 @@ app.post("/member/login", (req, res) => {
 });
 //---------------------------------------------------------------------
 
-app.post("/ticket_order/get_order_list", (req, res) => {
-  console.log("req.body.mNo"); 
-  const { mNo } = req.body; 
-  const sql = `SELECT * FROM ticket_order WHERE mNo = ${req.body.mNo}`; 
-  connection.query(sql, (error, results) => {
+app.get("/member/check_login", function (req, res) {
+  const token = req.header("Authorization");
+  console.log("node_end_token", token);
+  if (token) {
+    console.log("有token");
+    console.log("種類", typeof token);
+    try {
+      // 驗證 Token
+      const decoded = jwt.verify(token, SECRET);
+      console.log("decoded", decoded);
+      res.send({ msg: "已登入", statusCode: 200, userInfo: decoded.payload });
+    } catch (tokenErr) {
+      console.log("tokenErr", tokenErr);
+      res.send({ msg: tokenErr + " 請重新登入", statusCode: 401 });
+    }
+  } else {
+    console.log("localStorage沒有token，請重新登入");
+    res.send({ msg: "token失效 請重新登入", statusCode: 402 });
+  }
+});
+
+app.post("/ticket_order/get_list", (req, res) => {
+  const { mNo } = req.body;
+  const getTicketOrderSQL = `SELECT * FROM ticket_order WHERE mNo = ${mNo}`;
+  connection.query(getTicketOrderSQL, (error, ticketOrderListResult) => {
     console.log("error", error);
-    // console.log('results', results)
     if (error) {
       res.send(error);
     } else {
-      res.json(results);
+      console.log('ticketOrderListResult', ticketOrderListResult);
+      let getTicketOrderResultList = [];
+      return new Promise((resolve, reject) => {
+        ticketOrderListResult.forEach((item, key) => {
+          const getTicketsSQL = `SELECT * FROM tickets WHERE orderNo = ${item.orderNo}`;
+          
+          connection.query(
+            getTicketsSQL,
+            (ticketsError, ticketsResults) => {
+              if (ticketsError) {
+                console.log("ticketsError", ticketsError);
+                reject(ticketsError);
+              } else {
+                console.log("ticketsResults", ticketsResults);
+                getTicketOrderResultList.push({...item, tickets: ticketsResults});
+                console.log('getTicketOrderResultList', getTicketOrderResultList)
+                if (key === ticketOrderListResult.length - 1) {
+                  resolve(getTicketOrderResultList);
+                }
+              }
+            }
+          );
+        });
+      })
+        .then((ticketsResponse) => {
+          console.log("ticketsResponse", ticketsResponse);
+          res.send({
+            data:ticketsResponse,
+            statusMsg: "票券訂單查詢成功",
+          });
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
+    }
+  });
+});
+
+app.get("/ticket_order/get_camp", function (req, res) {
+  const getCampSQL = `SELECT * FROM camp`; 
+  connection.query(getCampSQL, (getCampError, getCampResult) => {
+    if (getCampError) {
+      console.log("getCampError", getCampError);
+      res.status(getCampError.code).end();
+    } else {
+      console.log("getCampResult", getCampResult);
+      if (getCampResult) {
+        res.send(getCampResult);
+      }
     }
   });
 });
@@ -187,32 +231,32 @@ app.post("/ticket_order/add", (req, res) => {
       );
 
       return new Promise((resolve, reject) => {
+        let insertTicketResultList = [];
         totalTickets.forEach((item, key) => {
           const ticketsSQL = `INSERT INTO tickets (orderNo,ticketType,singleTicketDay,campId) VALUES (${insertTicketOrderResults.insertId},"${item.ticketType}",${item.singleTicketDay},"${item.campId}")`;
-          let inserTicketResultList = [];
           connection.query(
             ticketsSQL,
             (insertTicketsError, insertTicketsResults) => {
               if (insertTicketsError) {
                 console.log("insertTicketsError", insertTicketsError);
-                inserTicketResultList.push(insertTicketsError);
+                insertTicketResultList.push(insertTicketsError);
                 reject(insertTicketsError);
               } else {
                 console.log("insertTicketsResults", insertTicketsResults);
-                inserTicketResultList.push(insertTicketsResults);
+                insertTicketResultList.push(insertTicketsResults);
                 if (key === totalTickets.length - 1) {
-                  resolve(inserTicketResultList);
+                  resolve(insertTicketResultList);
                 }
               }
             }
           );
         });
       })
-        .then((inserTicketsResponse) => {
-          console.log("inserTicketsResponse", inserTicketsResponse);
+        .then((insertTicketsResponse) => {
+          console.log("insertTicketsResponse", insertTicketsResponse);
           res.send({
             insertTicketOrderResults,
-            inserTicketsResponse,
+            insertTicketsResponse,
             statusMsg: "票券訂單成立",
           });
         })

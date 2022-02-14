@@ -1,2 +1,379 @@
 .ticket_picker_container {
+  width: 100%;
+  height: calc(100% - 260px);
+  display: flex;
+  justify-content: center;
+  .ticket_picker {
+    width: 80%;
+    height: 100%;
+    // background-color: #c7c7c7;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    .ticket_shelf_area {
+      display: flex;
+      flex-direction: column;
+      &.scale_up {
+        .title {
+        }
+        .ticket_shelf {
+          margin-top: 30%;
+          transform: scale(2);
+        }
+      }
+      .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        background-color: #eee;
+        margin: 0 0 15px 0;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 20px;
+        color: #333;
+      }
+      .ticket_shelf {
+        display: flex;
+        width: 100%;
+        height: 200px;
+        align-items: center;
+        transition: 0.5s;
+        .ticket_image {
+          width: 160px;
+          min-width: 160px;
+          height: 160px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: center;
+          // transform: perspective(200px) rotateY(3deg);
+          transition: 0.3s;
+          z-index: 1;
+          cursor: pointer;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          &.ticket_one_day {
+            background-image: url("./../../image/N_ticket_1day.png");
+          }
+          &.ticket_two_day {
+            background-image: url("./../../image/N_ticket_2days.png");
+          }
+          &.ticket_camp {
+            background-image: url("./../../image/N_ticket_2days_plus.png");
+          }
+          &:hover {
+            transform: perspective(220px) rotateY(6deg) translateY(-20px);
+          }
+          &.disable {
+            opacity: 0.8;
+            cursor: initial;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+    .ticket_picked_list {
+      width: 480px;
+      // height: 360px;
+      display: flex;
+      flex-direction: column;
+      background-color: #eee;
+      border-radius: 5px;
+      overflow: hidden;
+      transform: scaleY(0);
+      transition: 0.5s;
+      &.show_list {
+        transform: scaleY(1);
+      }
+      .list_title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        background-color: #eee;
+        // margin: 0 0 15px 0;
+        font-weight: 600;
+        font-size: 20px;
+        color: #333;
+      }
+      .list_wrapper {
+        width: 480px;
+        height: 370px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        transition: 0.3s;
+        &.half_height {
+          height: 185px;
+        }
+        .each_ticket {
+          width: calc(50% - 30px);
+          height: 160px;
+          display: flex;
+          justify-content: space-between;
+          box-sizing: border-box;
+          padding: 15px;
+          box-shadow: 0 0 3px 3px #cdcdcd;
+          margin: 10px;
+          border-radius: 5px;
+          background-color: #fff;
+          &.must_bounce {
+            animation: ticketPulse 1.7s ease-in-out infinite;
+          }
+          .ticket {
+            width: 40%;
+            // height: 160px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            transition: 0.3s;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            &.ticket_one {
+              background-image: url("./../../image/N_ticket_1day.png");
+            }
+            &.ticket_two {
+              background-image: url("./../../image/N_ticket_2days.png");
+            }
+            &.ticket_camp {
+              background-image: url("./../../image/N_ticket_2days_plus.png");
+            }
+          }
+          .ticket_info {
+            width: 60%;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            &:hover {
+              .remove_icon {
+                transform: translateX(0);
+              }
+            }
+            .ticket_name {
+              font-size: 20px;
+              font-weight: 600;
+              height: 40%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .single_ticket_day {
+              width: 60px;
+              height: 30px;
+              display: flex;
+              box-shadow: 0 0 2px 2px #ddd;
+              border-radius: 15px;
+              font-size: 14px;
+              color: #999;
+              overflow: hidden;
+              .day_btn {
+                width: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: 0.3s;
+                cursor: pointer;
+                &:hover {
+                  background-color: #bdbdbd;
+                  color: #333;
+                }
+                &.day_one_btn {
+                  border-right: 1px solid #cdcdcd;
+                }
+                &.selected {
+                  background-color: #666;
+                  color: #fff;
+                }
+              }
+            }
+            .pick_camp {
+              width: 60px;
+              height: 30px;
+              display: flex;
+              box-shadow: 0 0 2px 2px #ddd;
+              border-radius: 15px;
+              font-size: 14px;
+              font-weight: 600;
+
+              color: #999;
+              overflow: hidden;
+              .pick_camp_btn {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: 0.3s;
+                cursor: pointer;
+                &:hover {
+                  background-color: #bdbdbd;
+                  color: #333;
+                }
+              }
+            }
+            .camp_site {
+              width: 60px;
+              height: 30px;
+              display: flex;
+              box-shadow: 0 0 2px 2px #ddd;
+              border-radius: 15px;
+              font-size: 14px;
+              font-weight: 600;
+              color: #999;
+              overflow: hidden;
+              .camp_site_name {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: 0.3s;
+                font-size: 15px;
+                color: #666;
+              }
+            }
+            .remove_icon {
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 24px;
+              height: 24px;
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-position: center;
+              background-image: url("./../../image/minus-circle.svg");
+              cursor: pointer;
+              transform: translateX(50px);
+              transition: 0.3s;
+              filter: invert(79%) sepia(0%) saturate(3245%) hue-rotate(135deg)
+                brightness(105%) contrast(75%);
+              &:hover {
+                filter: invert(88%) sepia(0%) saturate(0%) hue-rotate(141deg)
+                  brightness(96%) contrast(87%);
+              }
+            }
+          }
+        }
+      }
+    }
+    .step_btn_area {
+      width: 480px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-content: center;
+      align-items: center;
+      margin-top: 40px;
+      .select_camp_btn {
+        width: 25%;
+        height: 40px;
+        background-color: #ddd;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          background-color: #333;
+          color: #ddd;
+        }
+      }
+      .payment_select_area {
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 15px;
+        .payment_title {
+          display: flex;
+          align-items: center;
+          width: 25%;
+          justify-content: flex-start;
+        }
+        .payment_method {
+          width: 75%;
+          height: 30px;
+          display: flex;
+          box-shadow: 0 0 2px 2px #ddd;
+          border-radius: 15px;
+          font-size: 14px;
+          color: #999;
+          overflow: hidden;
+          .payment_btn {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+            cursor: pointer;
+            &:hover {
+              background-color: #bdbdbd;
+              color: #333;
+            }
+            &.credit_card {
+              border-right: 1px solid #cdcdcd;
+            }
+            &.selected {
+              background-color: #666;
+              color: #fff;
+            }
+          }
+        }
+      }
+      .next_btn_area {
+        display: flex;
+        justify-content: center;
+        height: 60px;
+        margin-top: 40px;
+        width: 100%;
+        .btn {
+          width: 25%;
+          height: 40px;
+          background-color: #ddd;
+          margin-right: 20px;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 16px;
+          cursor: pointer;
+          transition: 0.3s;
+          &:hover {
+            background-color: #333;
+            color: #ddd;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+  @keyframes ticketPulse {
+    0% {
+      // transform: translateY(5px);
+      transform: scale(1.02);
+    }
+    // 25% {
+    //   transform: translateY(0);
+    // }
+    50% {
+      // transform: translateY(-5px);
+      transform: scale(1.05);
+    }
+    // 75% {
+    //   transform: translateY(0);
+    // }
+    100% {
+      // transform: translateY(5px);
+      transform: scale(1.02);
+    }
+  }
 }

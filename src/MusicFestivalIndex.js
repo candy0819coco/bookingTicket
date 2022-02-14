@@ -10,15 +10,14 @@ import axios from "axios";
 import "./MusicFestivalIndex.scss";
 import { Provider } from "./components/context";
 import Navigator from "./components/Navigator/Navigator";
-import ModalTool from "./components/ModalTool/ModalTool";
-import Login from "./components/Login/Login";
-import Logout from "./components/Logout/Logout";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import TicketOrder from "./components/TicketOrder/TicketOrder";
 import Shop from "./components/Shop/Shop";
 import LineUp from "./components/LineUp/LineUp";
 import Map from "./components/Map/Map";
+import Footer from "./components/Footer/Footer";
+
 const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -96,6 +95,7 @@ const MusicFestivalIndex = () => {
               <Route exact path="/map" element={<Map />} />
               <Route exact path="/shop" element={<Shop />} />
             </Routes>
+            <Footer/>
           </Fragment>
         </Provider>
       </div>
