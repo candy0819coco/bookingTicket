@@ -74,6 +74,7 @@ const MusicFestivalIndex = () => {
               <Route exact path="/ticketOrder" element={<TicketOrder />} /> 
               <Route exact path="/map" element={<Camp />} />
               <Route exact path="/myTicketList" element={<MyTicketList />} />
+              <Route exact path="/shop" element={<Shop />} />
               <Route exact path="/memberOrder" element={<MemberOrder/>} />
               <Route exact path="/user" element={<User />} />
 

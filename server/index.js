@@ -96,17 +96,49 @@ app.use(
 );
 
 //--------------------------票券部分-------------------------------------------
-app.post("/ticket_order_post", (req, res) => {
+app.post("/ticket_order/get_list", (req, res) => {
   console.log("req.body.mNo"); //req.body=data
-  const { mNo, randos } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
-  const sql = `SELECT * FROM ticket_order WHERE mNo = ${req.body.mNo}`; //WHERE是給mNO條件，選票券訂單的資料庫
-  connection.query(sql, (error, results) => {
+  const { mNo } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
+  const getTicketOrderSQL = `SELECT * FROM ticket_order WHERE mNo = ${mNo}`; //WHERE是給mNO條件，選票券訂單的資料庫
+  connection.query(getTicketOrderSQL, (error, ticketOrderListResult) => {
     console.log("error", error);
-    // console.log('results', results)
     if (error) {
       res.send(error);
     } else {
-      res.json(results);
+      console.log('ticketOrderListResult', ticketOrderListResult);
+      let getTicketOrderResultList = [];
+      return new Promise((resolve, reject) => {
+        ticketOrderListResult.forEach((item, key) => {
+          const getTicketsSQL = `SELECT * FROM tickets WHERE orderNo = ${item.orderNo}`;
+          
+          connection.query(
+            getTicketsSQL,
+            (ticketsError, ticketsResults) => {
+              if (ticketsError) {
+                console.log("ticketsError", ticketsError);
+                reject(ticketsError);
+              } else {
+                console.log("ticketsResults", ticketsResults);
+                getTicketOrderResultList.push({...item, tickets: ticketsResults});
+                console.log('getTicketOrderResultList', getTicketOrderResultList)
+                if (key === ticketOrderListResult.length - 1) {
+                  resolve(getTicketOrderResultList);
+                }
+              }
+            }
+          );
+        });
+      })
+        .then((ticketsResponse) => {
+          console.log("ticketsResponse", ticketsResponse);
+          res.send({
+            data:ticketsResponse,
+            statusMsg: "票券訂單查詢成功",
+          });
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
     }
   });
 });
@@ -143,32 +175,32 @@ app.post("/create_ticket_order", (req, res) => {
       );
 
       return new Promise((resolve, reject) => {
+        let insertTicketResultList = [];
         totalTickets.forEach((item, key) => {
           const ticketsSQL = `INSERT INTO tickets (orderNo,ticketType,singleTicketDay,campId) VALUES (${insertTicketOrderResults.insertId},"${item.ticketType}",${item.singleTicketDay},"${item.campId}")`;
-          let inserTicketResultList = [];
           connection.query(
             ticketsSQL,
             (insertTicketsError, insertTicketsResults) => {
               if (insertTicketsError) {
                 console.log("insertTicketsError", insertTicketsError);
-                inserTicketResultList.push(insertTicketsError);
+                insertTicketResultList.push(insertTicketsError);
                 reject(insertTicketsError);
               } else {
                 console.log("insertTicketsResults", insertTicketsResults);
-                inserTicketResultList.push(insertTicketsResults);
+                insertTicketResultList.push(insertTicketsResults);
                 if (key === totalTickets.length - 1) {
-                  resolve(inserTicketResultList);
+                  resolve(insertTicketResultList);
                 }
               }
             }
           );
         });
       })
-        .then((inserTicketsResponse) => {
-          console.log("inserTicketsResponse", inserTicketsResponse);
+        .then((insertTicketsResponse) => {
+          console.log("insertTicketsResponse", insertTicketsResponse);
           res.send({
             insertTicketOrderResults,
-            inserTicketsResponse,
+            insertTicketsResponse,
             statusMsg: "票券訂單成立",
           });
         })

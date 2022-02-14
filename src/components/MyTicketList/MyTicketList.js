@@ -12,12 +12,12 @@ const MyTicketList = () => {
     const [currentHoverTicketType, setCurrentHoverTicketType] = useState("");
 
     
-    const handleGetTicketByPost = async (e) => {
+    const handleGetTicketOrderList = async (e) => {
         console.log('post 取得票券訂單');
-          let result;
+        let results;
           await axios({
             method: "post",
-            url: `http://localhost:3400/ticket_order_post`,
+            url: `http://localhost:3400/ticket_order/get_list`,
             data: { mNo:"000008" },
             credentials: 'same-origin',
             headers: {
@@ -26,15 +26,13 @@ const MyTicketList = () => {
             },
           })
             .then(function (response) {
-              console.log("ticket_order_response", response);
-              result = response.data;
-              setMyTicketOrderList(result)
+              console.log("ticket_order_response", response.data.data);
+              results = response.data.data;
+              setMyTicketOrderList(results)
             })
             .catch((error) => {
               console.log('ticket_order_error', error)
-              result = error
             });
-            return result;
       };
 
     return (
@@ -52,7 +50,7 @@ const MyTicketList = () => {
                             {/* <!-- 這裡看怎麼改 --> */}
 
                             <div id={"member_list01"}>我的行程</div>
-                            <div onClick={handleGetTicketByPost} id={"member_list02"}> 我的票券 
+                            <div onClick={handleGetTicketOrderList} id={"member_list02"}> 我的票券 
                             </div>
                             <div id={"member_list03"}>我的訂單</div>
                             <div id={"member_list04"}>帳號設定</div>
