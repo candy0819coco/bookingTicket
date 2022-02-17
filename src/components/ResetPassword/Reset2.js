@@ -2,11 +2,37 @@ import React, { useCallback, useState, useEffect, Fragment, useContext } from "r
 import * as R from "ramda";
 import context, { Provider } from "../context";
 import "./Reset2.scss";
+import  Axios  from "axios";
+import { useNavigate } from "react-router-dom";
 
+//把使用者輸入的密碼轉成字串，送到後端驗證
 const Reset2 = () => {
     const contextValue = useContext(context);
     const { } = contextValue;
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [code01, setCode01] = useState('');
+    const [code02, setCode02] = useState('');
+    const [code03, setCode03] = useState('');
+    const [code04, setCode04] = useState('');
+    const [code05, setCode05] = useState('');
+    const [code06, setCode06] = useState('');
+
+    const codeCheck = () => {
+        var code = [code01, code02, code03, code04, code05, code06];
+        code = code.join("");
+        const token = JSON.parse(localStorage.reset).token;
+        Axios.post("http://localhost:3001/register/reset2", { code: code, token,token})
+        .then((res)=>{
+            alert(res.data.message);
+            navigate("/register/reset3");
+            // console.log();
+        }).catch((err)=>{
+            alert("驗證失敗");
+            // console.log(err.response.data);
+        })
+
+
+    }
 
     return (
         <div className="reset2_container">
@@ -32,14 +58,14 @@ const Reset2 = () => {
                         <div className="reset_insert">
                             <div className="resert_text">請輸入驗證碼</div>
                             <div className="reset_code">
-                                <input type="text" className="inputItem1" maxlength="1" autoFocus/>
-                                <input type="text" className="inputItem2" maxlength="1"/>
-                                <input type="text" className="inputItem3" maxlength="1"/>
-                                <input type="text" className="inputItem4" maxlength="1"/>
-                                <input type="text" className="inputItem5" maxlength="1"/>
-                                <input type="text" className="inputItem6" maxlength="1"/>
+                                <input type="text" className="inputItem1" maxLength="1" autoFocus onChange={(e) => { setCode01(e.target.value) }} />
+                                <input type="text" className="inputItem2" maxLength="1" onChange={(e) => { setCode02(e.target.value) }} />
+                                <input type="text" className="inputItem3" maxLength="1" onChange={(e) => { setCode03(e.target.value) }} />
+                                <input type="text" className="inputItem4" maxLength="1" onChange={(e) => { setCode04(e.target.value) }} />
+                                <input type="text" className="inputItem5" maxLength="1" onChange={(e) => { setCode05(e.target.value) }} />
+                                <input type="text" className="inputItem6" maxLength="1" onChange={(e) => { setCode06(e.target.value) }} />
                             </div>
-                            <div className="okButton">確認</div>
+                            <div className="okButton" onClick={codeCheck}>確認</div>
                         </div>
 
 

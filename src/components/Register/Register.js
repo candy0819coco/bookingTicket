@@ -29,22 +29,22 @@ const Register = () => {
                 passwordReg: passwordReg,
                 passwordCheck: passwordCheck,
                 phoneNumber: phoneNumber,
-                birth:birth,
-                address:address
+                birth: birth,
+                address: address
             }).then((response) => {
                 alert("註冊成功，即將跳轉回登入頁面登入");
                 console.log(response.data.massage);
                 // console.log(response);
                 navigate("/signIn");
-            }).catch(function (err) {
-                alert('註冊失敗:'+ err.response.data.errors[0].msg);
+            }).catch((err) => {
+                alert('註冊失敗:' + err.response.data.errors[0].msg);
                 // console.log(err.response);
             })
 
-        } else{
+        } else {
             alert("*為必填項目!!請填完後再按送出")
         }
-            
+
 
     }
 

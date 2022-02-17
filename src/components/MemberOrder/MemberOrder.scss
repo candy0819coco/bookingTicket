@@ -1,10 +1,11 @@
 .member_order_container {
   max-width: 1920px;
+  min-height: calc(100vh - 200px);
 
   #member_container {
     background-image: url("../../image/vs_morning.svg");
     background-repeat: no-repeat;
-    background-position: 0 40px;
+    // background-position: 0 40px;
     display: flex;
     height: 500px;
     width: 100%;

@@ -24,17 +24,21 @@ import Register from "./components/Register/Register";
 import Reset1 from "./components/ResetPassword/Reset1";
 import Reset2 from "./components/ResetPassword/Reset2";
 import Reset3 from "./components/ResetPassword/Reset3";
+import Jump from "./components/Jump/Jump";
 
 const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");//依據不同pathName頁面，導覽列會不同
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const contextValue = { pathName, setPathName, isDarkMode, setIsDarkMode};//把會用到的值 裝在contextValue，傳給下面的組件使用
+  // const [currentUser, setCurrentUser] = useState("");
+  const contextValue = { pathName, setPathName, isDarkMode, setIsDarkMode };//把會用到的值 裝在contextValue，傳給下面的組件使用
+
+
   return (
     <Router>
-      <div className={`music_festival_container ${isDarkMode ? "music_festival_container_dark" : "" }`}>
+      <div className={`music_festival_container ${isDarkMode ? "music_festival_container_dark" : ""}`}>
         <Provider value={contextValue}>
           <Fragment>
-              <Navbar/>
+            <Navbar />
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
@@ -49,12 +53,14 @@ const MusicFestivalIndex = () => {
               <Route exact path="/register/reset1" element={<Reset1 />} />
               <Route exact path="/register/reset2" element={<Reset2 />} />
               <Route exact path="/register/reset3" element={<Reset3 />} />
-          </Routes>
-            <Footer/>
+              <Route path="/register/active/:mMail" element={<Jump />} />
+              {/* <Route path="/signIn/:token" element={<Home />} /> */}
+            </Routes>
+            <Footer />
           </Fragment>
         </Provider>
       </div>
     </Router>
   );
 };
- export default MusicFestivalIndex;
+export default MusicFestivalIndex;

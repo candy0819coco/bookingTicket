@@ -2,11 +2,33 @@ import React, { useCallback, useState, useEffect, Fragment, useContext } from "r
 import * as R from "ramda";
 import context, { Provider } from "../context";
 import "./Reset1.scss";
+import  Axios  from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Reset1 = () => {
     const contextValue = useContext(context);
     const { } = contextValue;
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const [account, setAccount] = useState('');
+    // console.log(account);
+
+    const sendEmail = () => {
+        if (account != "") {
+            Axios.post("http://localhost:3001/register/reset1", { account: account })
+            .then((res)=>{
+                // console.log(res);
+                alert(res.data.message);
+                if(res.data.token){
+                    localStorage.setItem("reset",JSON.stringify(res.data));//把驗證碼存在token裡面
+                }
+                navigate("/register/reset2");
+            }).catch((err)=>{
+                alert(err.response.data.message);
+            })
+        }
+    }
+
 
     return (
         <div className="reset1_container">
@@ -32,9 +54,9 @@ const Reset1 = () => {
 
                         <div className="reset_insert">
                             <div>Email</div>
-                            <input type="text" name="" id="" />
+                            <input type="text" onChange={(e) => { setAccount(e.target.value) }} />
                             {/* <input type="button" value="Send Verification Code" /> */}
-                            <button>寄送驗證碼</button>
+                            <button onClick={sendEmail}>寄送驗證碼</button>
                         </div>
 
                     </div>

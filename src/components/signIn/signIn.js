@@ -7,6 +7,7 @@ import google from '../../image/google.svg';
 import line from '../../image/line.svg';
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";//跳轉頁面
+import authService from '../../service/auth';
 
 
 const SignIn = () => {
@@ -16,6 +17,15 @@ const SignIn = () => {
 
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
+    const [currentUser, setCurrentUser] = useState("");
+
+    useEffect(() => {
+        setCurrentUser(authService.getCurrentUser())
+    }, []);//需要的引入
+
+    const goGoogle = () => {
+        window.open("http://localhost:3001/auth/google", "_self");
+    }
 
     const goSignIn = (e) => {
         e.preventDefault();
@@ -25,6 +35,7 @@ const SignIn = () => {
                 password: password
             }).then(function (res) {
                 console.log(res);
+                window.location = "http://localhost:3000/";
 
                 alert(res.data.message);
                 if (res.data.token) {
@@ -41,69 +52,73 @@ const SignIn = () => {
         } else {
             alert("請輸入密碼");
         }
+
     }
 
 
 
     return (
         <div className={`User_container`}>
-            <Provider value={contextValue}>
-                <div id={`now_location`}>
-                    <span>首頁</span>
-                    <span>/</span>
-                    <span>會員</span>
-                    <span>/</span>
-                    <span>登入</span>
-                </div>
-                <div id={`sign_info`}>
-                    <div>
-                        <h1>會員登入</h1>
+            {currentUser && ""}
+            {!currentUser &&
+                <Provider value={contextValue}>
+                    <div id={`now_location`}>
+                        <span>首頁</span>
+                        <span>/</span>
+                        <span>會員</span>
+                        <span>/</span>
+                        <span>登入</span>
                     </div>
-
-                    <div>
+                    <div id={`sign_info`}>
                         <div>
-
-                            <label htmlFor="member_account">帳號</label>
-                            <input type="text"
-                                name="member_account"
-                                id="member_account"
-                                required
-                                onChange={(e) => { setAccount(e.target.value) }} />
-
-
-                            <label htmlFor="member_password">密碼</label>
-                            <input
-                                type="password"
-                                name="member_password"
-                                id="member_password"
-                                required
-                                onChange={(e) => { setPassword(e.target.value) }} />
-
-
-                            <input
-                                type="submit"
-                                name="submit_info"
-                                id="submit_info"
-                                value="登入"
-                                onClick={goSignIn} />
+                            <h1>會員登入</h1>
                         </div>
+
+                        <div>
+                            <div>
+
+                                <label htmlFor="member_account">帳號</label>
+                                <input type="text"
+                                    name="member_account"
+                                    id="member_account"
+                                    required
+                                    onChange={(e) => { setAccount(e.target.value) }} />
+
+
+                                <label htmlFor="member_password">密碼</label>
+                                <input
+                                    type="password"
+                                    name="member_password"
+                                    id="member_password"
+                                    required
+                                    onChange={(e) => { setPassword(e.target.value) }} />
+
+
+                                <input
+                                    type="submit"
+                                    name="submit_info"
+                                    id="submit_info"
+                                    value="登入"
+                                    onClick={goSignIn} />
+                            </div>
+                        </div>
+                        <div id={`join_member`}>
+                            <p><a href="/register">加入會員</a></p>
+                            <p>|</p>
+                            <p><a href="/register/reset1">忘記密碼</a></p>
+                        </div>
+
+
+                        <div id="another_login">
+                            <div><img src={fb} /></div>
+                            <div onClick={goGoogle}><img src={google} /></div>
+                            <div><img src={line} /></div>
+                        </div>
+
                     </div>
-                    <div id={`join_member`}>
-                        <p><a href="/register">加入會員</a></p>
-                        <p>|</p>
-                        <p><a href="/register/reset1">忘記密碼</a></p>
-                    </div>
 
-
-                    <div id="another_login">
-                        <a href="#"><img src={fb} /></a>
-                        <a href="#"><img src={google} /></a>
-                        <a href="#"><img src={line} /></a>
-                    </div>
-
-                </div>
-
-            </Provider>
+                </Provider>
+            }
         </div>
     );
 };
