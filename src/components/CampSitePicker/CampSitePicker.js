@@ -10,7 +10,7 @@ import * as R from "ramda";
 import context, { Provider } from "../context";
 import axios from "axios";
 
-const Camp = (props) => {
+const CampSitePicker = (props) => {
   const contextValue = useContext(context);
   const {} = contextValue;
   const {
@@ -20,6 +20,7 @@ const Camp = (props) => {
     setCampSelectedList,
     wsState,
     toDoSelectCamp,
+    closeModal
   } = props;
   console.log("pickedTicket", pickedTicket);
   console.log("campSelectedList", campSelectedList);
@@ -94,7 +95,7 @@ const Camp = (props) => {
       <div className="camp_site_picker">
         <div className="camp_map_wrapper">
           <div className="to_be_select">
-            <div className="select_title">待選位</div>
+            <div className="select_title">營位選擇清單</div>
             <div className="select_list">
               {pickedTicket.map((item, index) => {
                 if (item.ticketType === "camp") {
@@ -112,6 +113,7 @@ const Camp = (props) => {
                 }
               })}
             </div>
+            <div className="confirm_btn" onClick={closeModal}>確認</div>
           </div>
           <div
             className={`camp_bg_map 
@@ -302,4 +304,4 @@ const Camp = (props) => {
     </div>
   );
 };
-export default Camp;
+export default CampSitePicker;

@@ -4,13 +4,17 @@
   overflow-x: hidden;
   overflow-y: hidden;
   font-family: "Noto Sans TC", sans-serif;
+  position: relative;
   .ticket_order_title {
-    width: 280px;
-    height: 100px;
+    width: 200px;
+    height: 70px;
     background-image: url("./../../image/ticket.png");
     background-repeat: no-repeat;
     background-size: contain;
-    margin: 60px 0 0 60px;
+    // margin: 30px 0 0 60px;
+    position: absolute;
+    top: 30px;
+    left: 60px;
     &.ticket_order_title_dark {
       background-image: url("./../../image/ticket_white.png");
     }

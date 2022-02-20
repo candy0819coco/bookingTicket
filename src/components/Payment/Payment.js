@@ -7,15 +7,22 @@ import React, {
 } from "react";
 import "./Payment.scss";
 import context, { Provider } from "./../context";
-
+import * as R from "ramda";
 const Payment = (props) => {
   const contextValue = useContext(context);
-  // convenientStore creditCard
-  const { payment, setTicketOrderStep, handleChangePayment, handleOrderTicket } = props; //屬性由TicketOrder傳來的props，在這支要補上這行程式碼
+  const {
+    paymentMethod,
+    setTicketOrderStep,
+    pickedTicket,
+    handleOrderTicket,
+    orderPrice,
+    setOrderPrice,
+    handleResetTicketOrder
+  } = props;
   const [creditMonth, setCreditMonth] = useState("");
   const [creditYear, setCreditYear] = useState("");
-  
 
+  console.log("pickedTicket", pickedTicket);
   const monthList = [
     "01",
     "02",
@@ -32,6 +39,18 @@ const Payment = (props) => {
   ];
   const yearList = ["2022", "2023", "2024", "2025", "2026", "2027", "2028"];
 
+  const handleCalcTotalPrice = () => {
+    let priceList = pickedTicket.map((item, index) => {
+      return item.price;
+    });
+    let tempPrice = R.sum(priceList);
+    setOrderPrice(tempPrice);
+  };
+
+  useEffect(() => {
+    handleCalcTotalPrice();
+  }, []);
+
   useEffect(() => {
     let creditValid = creditMonth + "-" + creditYear;
     console.log("creditValid", creditValid);
@@ -39,12 +58,16 @@ const Payment = (props) => {
 
   const [myTicketOrderList, setMyTicketOrderList] = useState([]);
 
+  const handleConform = async() => {
+    await handleOrderTicket();
+    await setTicketOrderStep(3);
+    await handleResetTicketOrder();
+  };
   return (
     <div className={`payment_container`}>
       <div className={`payment`}>
-
         <div className={`payment_content_container`}>
-          {payment === "convenientStore" ? (
+          {paymentMethod === "convenientStore" ? (
             <div className={`payment_content_area`}>
               <div className={`payment_type`}>超商繳費</div>
               <div className={`payment_info`}>
@@ -59,7 +82,7 @@ const Payment = (props) => {
               </div>
               <div className={`price_box`}>
                 <div className={`price_title`}>總金額</div>
-                <div className={`price_total`}>{`TWD 1500元`}</div>
+                <div className={`price_total`}>{orderPrice}</div>
               </div>
               <div className={`convenience_store_area`}>
                 <div className={`icon icon`}></div>
@@ -89,14 +112,18 @@ const Payment = (props) => {
                 </div>
                 <div className={`order_info`}>
                   <div className={`time`}>2022/02/04 14:03</div>
-                  <div
-                    className={`type_plus_count`}
-                  >{`Love & Peace Rock Music Festival 單日票 X 1張`}</div>
+                  <div className={`type_plus_count`}>
+                    {pickedTicket.map((item, index) => {
+                      return (
+                        <div className="each_ticket" key={index}>{item.ticketName}</div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div className={`price_box`}>
                   <div className={`price_title`}>總金額</div>
-                  <div className={`price_total`}>{`TWD 1500元`}</div>
+                  <div className={`price_total`}>{orderPrice}</div>
                 </div>
                 <div className={`convenience_store_area`}>
                   <div className={`credit_icon visa_icon`}></div>
@@ -106,26 +133,26 @@ const Payment = (props) => {
                 <div className={`input_area`}>
                   <div className={`input_credit_card_icon`}></div>
                   <div className={`credit_card_account`}>
-                      <input placeholder="" size="4" maxLength="4"></input>
-                      <input
-                        className={`account`}
-                        placeholder=""
-                        size="4"
-                        maxLength="4"
-                      ></input>
-                      <input
-                        className={`account`}
-                        className={`account`}
-                        placeholder=""
-                        size="4"
-                        maxLength="4"
-                      ></input>
-                      <input
-                        className={`account`}
-                        placeholder=""
-                        size="4"
-                        maxLength="4"
-                      ></input>
+                    <input placeholder="" size="4" maxLength="4"></input>
+                    <input
+                      className={`account`}
+                      placeholder=""
+                      size="4"
+                      maxLength="4"
+                    ></input>
+                    <input
+                      className={`account`}
+                      className={`account`}
+                      placeholder=""
+                      size="4"
+                      maxLength="4"
+                    ></input>
+                    <input
+                      className={`account`}
+                      placeholder=""
+                      size="4"
+                      maxLength="4"
+                    ></input>
                   </div>
                 </div>
                 <div className={`credit_card_time_code`}>
@@ -188,12 +215,12 @@ const Payment = (props) => {
             <button className="next_step" onClick={() => setTicketOrderStep(3)}>
               確認
             </button>
-            <button
+            {/* <button
               className="temp_payment_switch_btn"
               onClick={handleChangePayment}
             >
-              現在是{payment}，切換付款方式
-            </button>
+              現在是{paymentMethod}，切換付款方式
+            </button> */}
           </div>
         </div>
       </div>
@@ -201,5 +228,3 @@ const Payment = (props) => {
   );
 };
 export default Payment;
-
-

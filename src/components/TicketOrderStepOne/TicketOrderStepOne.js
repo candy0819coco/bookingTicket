@@ -23,6 +23,23 @@ const TicketOrderStepOne = (props) => {
     setTicketOrderStep(1);
   };
 
+  const reportWindowSize = () => {
+    var containerEle = document.querySelector('.ticket_order_step_one_container');  
+    var ticketOrderEle = document.querySelector('.ticket_order');  
+    let heightInner = ticketOrderEle.getBoundingClientRect().height;
+    let heightOuter = containerEle.getBoundingClientRect().height;
+    let ratio = heightInner/heightOuter;
+    if(heightInner > heightOuter) {
+      let relativeRatio = heightOuter/heightInner; 
+      console.log('relativeRatio', relativeRatio)
+      containerEle.style.setProperty('--ratio', relativeRatio);
+    } 
+    console.log('ratio', ratio)
+  }
+  useEffect(() => {
+    reportWindowSize();
+  }, []);
+  
   const handleBuyTicket = () => {
     setTicketOrderStep(1);
   };

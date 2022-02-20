@@ -52,7 +52,8 @@ const TicketOrder = () => {
 
 
   const handleResetTicketOrder = () => {
-    setTicketOrderStep(0)
+    setTicketOrderStep(0);
+    setPickedTicket([]);
   };
 
 
@@ -100,16 +101,10 @@ const TicketOrder = () => {
   };
 
   const handleRenderTicketOderStep = () => {
-    if (ticketOrderStep === 0) {
-      return (
-        <TicketOrderStepOne
-          setTicketOrderStep={setTicketOrderStep}
-          setSelectedTicketType={setSelectedTicketType}
-        />
-      );
-    } else if (ticketOrderStep === 1) {
+    if (ticketOrderStep === 0 || ticketOrderStep === 1) {
       return (
         <TicketPicker
+        ticketOrderStep={ticketOrderStep}
           setTicketOrderStep={setTicketOrderStep}
           paymentMethod={paymentMethod}
           setPaymentMethod={setPaymentMethod}
@@ -129,6 +124,10 @@ const TicketOrder = () => {
           paymentMethod={paymentMethod}
           setTicketOrderStep={setTicketOrderStep}
           handleOrderTicket={handleOrderTicket}
+          pickedTicket={pickedTicket}
+          orderPrice={orderPrice}
+          setOrderPrice={setOrderPrice}
+          handleResetTicketOrder={handleResetTicketOrder}
         />
       );
     } else if (ticketOrderStep === 3) {
@@ -147,8 +146,8 @@ const TicketOrder = () => {
       <ModalTool
         modalShow={campSitePickerShow}
         modalCloseFunction={() => setCampSitePickerShow(false)}
-        modalWidth={"80%"}
-        modalHeight={"80%"}
+        modalWidth={1200}
+        modalHeight={700}
         backgroundOpacity={0.6}
         modalInnerBackground={`#fff`}
       >

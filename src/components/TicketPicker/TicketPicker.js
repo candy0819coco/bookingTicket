@@ -13,6 +13,7 @@ const TicketPicker = (props) => {
   const contextValue = useContext(context);
   const {} = contextValue;
   const {
+    ticketOrderStep,
     setTicketOrderStep,
     paymentMethod,
     setPaymentMethod,
@@ -22,24 +23,67 @@ const TicketPicker = (props) => {
     handleResetTicketOrder,
     campSelectedList,
     toDoSelectCamp,
-    setCampSelectedList
+    setCampSelectedList,
   } = props;
+  console.log('ticketOrderStep', ticketOrderStep)
 
+  const [responseFit, setResponseFit] = useState(false);
   const [validatorNoticeShow, setValidatorNoticeShow] = useState(false);
   console.log("pickedTicket", pickedTicket);
+
+  const reportWindowSize = () => {
+    var containerEle = document.querySelector(".ticket_picker_container");
+    var ticketOrderEle = document.querySelector(".ticket_picker");
+    let heightInner = ticketOrderEle.getBoundingClientRect().height;
+    let heightOuter = containerEle.getBoundingClientRect().height;
+    let ratio = heightInner / heightOuter;
+    if (heightInner > heightOuter) {
+      let relativeRatio = heightOuter / heightInner;
+      console.log("relativeRatio", relativeRatio);
+      containerEle.style.setProperty("--ratio", relativeRatio);
+      setResponseFit(true);
+    } else {
+      setResponseFit(false);
+    }
+    console.log("ratio", ratio);
+  };
+  useEffect(() => {
+    reportWindowSize();
+  }, []);
+
+  // const reportWindowSize = () => {
+  //   let containerEle = document.querySelector(".ticket_picker_container");
+  //   let ticketPickerEle = document.querySelector(".ticket_picker");
+  //   let ticketShelfEle = document.querySelector(".ticket_shelf_area");
+  //   let heightOuter = containerEle.getBoundingClientRect().height;
+  //   console.log("heightOuter", heightOuter);
+  //   let heightInner = ticketShelfEle.getBoundingClientRect().height;
+  //   console.log("heightInner", heightInner);
+  //   let ratio = heightInner / heightOuter;
+  //   if (heightInner > heightOuter) {
+  //     let relativeRatio = heightOuter / heightInner;
+  //     console.log("relativeRatio", relativeRatio);
+  //     containerEle.style.setProperty("--ratio", relativeRatio);
+  //   } else {
+  //     containerEle.style.setProperty("--ratio", 0.9);
+  //   }
+  //   console.log("ratio", ratio);
+  // };
+  // useEffect(() => {
+  //   reportWindowSize();
+  // }, []);
 
   useEffect(() => {
     // if (campSelectedList.length === toDoSelectCamp.length) {
     if (campSelectedList.length) {
-
       const mergeArrayObjects = (arr1, arr2) => {
-        let arr3 = arr1.filter((item=> item.ticketType === "camp"))
-        console.log('arr1', arr1)
-        console.log('arr3', arr3)
-        console.log('arr2', arr2)
+        let arr3 = arr1.filter((item) => item.ticketType === "camp");
+        console.log("arr1", arr1);
+        console.log("arr3", arr3);
+        console.log("arr2", arr2);
         let index = 0;
         while (index < arr3.length) {
-          if(arr2[index]) {
+          if (arr2[index]) {
             arr3[index]["campId"] = arr2[index]["campId"];
           } else {
             arr3[index]["campId"] = null;
@@ -48,10 +92,8 @@ const TicketPicker = (props) => {
         }
       };
       mergeArrayObjects(pickedTicket, campSelectedList);
-
-    } 
+    }
   }, [campSelectedList]);
-
 
   const handlePickTicket = (ticketType) => {
     console.log("ticketType", ticketType);
@@ -63,6 +105,7 @@ const TicketPicker = (props) => {
           ticketName: "單日票",
           campId: null,
           singleTicketDay: null,
+          price:700
         };
         break;
       case "two":
@@ -71,6 +114,7 @@ const TicketPicker = (props) => {
           ticketName: "雙日票",
           campId: null,
           singleTicketDay: null,
+          price:1300
         };
         break;
       case "camp":
@@ -79,6 +123,7 @@ const TicketPicker = (props) => {
           ticketName: "露營票",
           campId: null,
           singleTicketDay: null,
+          price:2500
         };
         break;
       default:
@@ -97,17 +142,16 @@ const TicketPicker = (props) => {
     setPickedTicket(tempList);
   };
   const handleCancelTicket = (ticketItem) => {
-    console.log('____ticketItem', ticketItem)
+    console.log("____ticketItem", ticketItem);
     let tempTicketList = pickedTicket.filter((item) => {
       return item !== ticketItem;
     });
-    let tempCampSelectedList = campSelectedList.filter((item)=>{
-      return item.campId !== ticketItem.campId
-    })
-    console.log('tempCampSelectedList____', tempCampSelectedList)
+    let tempCampSelectedList = campSelectedList.filter((item) => {
+      return item.campId !== ticketItem.campId;
+    });
+    console.log("tempCampSelectedList____", tempCampSelectedList);
 
     setCampSelectedList(tempCampSelectedList);
-    
 
     console.log("tempTicketList", tempTicketList);
     setPickedTicket(tempTicketList);
@@ -120,45 +164,30 @@ const TicketPicker = (props) => {
     setValidatorNoticeShow(false);
   };
 
-  const handleRenderNextButton = () => {
-    // let campTicket = pickedTicket.filter((item) => {
-    //   return item.ticketType === "camp";
-    // });
-    // if (campTicket.length) {
-      return (
-        <Fragment>
-          <div className="payment_select_area">
-            <div className="payment_title">選擇付款方式</div>
-            <div className="payment_method">
-              <div
-                className={`payment_btn credit_card ${
-                  paymentMethod === "creditCard" ? "selected" : ""
-                }`}
-                onClick={() => setPaymentMethod("creditCard")}
-              >
-                信用卡
-              </div>
-              <div
-                className={`payment_btn convenient_store ${
-                  paymentMethod === "convenientStore" ? "selected" : ""
-                }`}
-                onClick={() => setPaymentMethod("convenientStore")}
-              >
-                超商繳費
-              </div>
-            </div>
+  const handleRenderPaymentButton = () => {
+    return (
+      <div className="payment_select_area">
+        <div className="payment_title">選擇付款方式</div>
+        <div className="payment_method">
+          <div
+            className={`payment_btn credit_card ${
+              paymentMethod === "creditCard" ? "selected" : ""
+            }`}
+            onClick={() => setPaymentMethod("creditCard")}
+          >
+            信用卡
           </div>
-          <div className="next_btn_area">
-            <div className="btn cancel_btn" onClick={handleResetTicketOrder}>
-              取消
-            </div>
-            <div className="btn next_btn" onClick={handleRequiredFieldValidate}>
-              進入付款流程
-            </div>
+          <div
+            className={`payment_btn convenient_store ${
+              paymentMethod === "convenientStore" ? "selected" : ""
+            }`}
+            onClick={() => setPaymentMethod("convenientStore")}
+          >
+            超商繳費
           </div>
-        </Fragment>
-      );
-    // }
+        </div>
+      </div>
+    );
   };
 
   const handleRequiredFieldValidate = () => {
@@ -169,36 +198,71 @@ const TicketPicker = (props) => {
     if (oneDayTicketPickNotYet.length) {
       setValidatorNoticeShow(true);
     }
+
+    let campTicketPickNotYet = pickedTicket.filter((item) => {
+      return item.ticketType === "camp" && !item.campId;
+    });
+    console.log("campTicketPickNotYet", campTicketPickNotYet);
+    if (campTicketPickNotYet.length) {
+      setValidatorNoticeShow(true);
+    }
+  };
+
+  const handleBuyTicket = () => {
+    setTicketOrderStep(1);
   };
 
   return (
-    <div className={`ticket_picker_container`}>
-      <div className="ticket_picker">
-        <div
-          className={`ticket_shelf_area ${
-            pickedTicket.length === 0 ? "scale_up" : ""
-          }`}
-        >
-          <div className="title">請點選票種加入清單</div>
-          <div className="ticket_shelf">
-            <div
-              className={`ticket_image ticket_one_day ${
-                pickedTicket.length === 4 ? "disable" : ""
-              }`}
-              onClick={() => handlePickTicket("one")}
-            ></div>
-            <div
-              className={`ticket_image ticket_two_day ${
-                pickedTicket.length === 4 ? "disable" : ""
-              }`}
-              onClick={() => handlePickTicket("two")}
-            ></div>
-            <div
-              className={`ticket_image ticket_camp ${
-                pickedTicket.length === 4 ? "disable" : ""
-              }`}
-              onClick={() => handlePickTicket("camp")}
-            ></div>
+    <div
+      className={`ticket_picker_container ${
+        responseFit ? "response_show" : ""
+      }`}
+    >
+      <div
+        className={`ticket_picker ${pickedTicket.length ? "scale_down" : ""}`}
+      >
+        <div className="ticket_shelf">
+          {ticketOrderStep === 1 ? (
+            <div className="title">請點選票種加入清單</div>
+          ) : null}
+          <div className={`ticket_type_area`}>
+            <div className={`ticket_box`}>
+              <div
+                className={`ticket_image ticket_one_day ${
+                  pickedTicket.length === 4 ? "disable" : ""
+                }`}
+                onClick={() => ticketOrderStep === 1 ? handlePickTicket("one"):null}
+              ></div>
+              <div className="ticket_desc">
+                <div>單日票</div>
+                <div>暢玩 1 日</div>
+              </div>
+            </div>
+            <div className={`ticket_box`}>
+              <div
+                className={`ticket_image ticket_two_day ${
+                  pickedTicket.length === 4 ? "disable" : ""
+                }`}
+                onClick={() => ticketOrderStep === 1 ? handlePickTicket("two") : null}
+              ></div>
+              <div className="ticket_desc">
+                <div>雙日票</div>
+                <div>暢玩 2 日</div>
+              </div>
+            </div>
+            <div className="ticket_box">
+              <div
+                className={`ticket_image ticket_camp ${
+                  pickedTicket.length === 4 ? "disable" : ""
+                }`}
+                onClick={() => ticketOrderStep === 1 ? handlePickTicket("camp"): null}
+              ></div>
+              <div className="ticket_desc">
+                <div>露營票</div>
+                <div>暢玩 2 日</div>
+                <div>露營營位</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -232,6 +296,11 @@ const TicketPicker = (props) => {
                   <div className={`ticket ticket_${item.ticketType}`}></div>
                   <div className="ticket_info">
                     <div className="ticket_name">{item.ticketName}</div>
+                    {item.ticketType === "one" && !item.singleTicketDay ? (
+                      <div className="validator_notice">尚未選擇日期</div>
+                    ) : item.ticketType === "camp" && !item.campId ? (
+                      <div className="validator_notice">尚未選擇營位</div>
+                    ) : null}
                     {item.ticketType === "one" ? (
                       <div className="single_ticket_day">
                         <div
@@ -253,23 +322,18 @@ const TicketPicker = (props) => {
                       </div>
                     ) : item.ticketType === "camp" ? (
                       item.campId === null ? (
-                      <div className="pick_camp">
-                        <div
-                          className="pick_camp_btn"
-                          onClick={() => setCampSitePickerShow(true)}
-                        >
-                          選位
+                        <div className="pick_camp">
+                          <div
+                            className="pick_camp_btn"
+                            onClick={() => setCampSitePickerShow(true)}
+                          >
+                            選位
+                          </div>
                         </div>
-                      </div>
-
                       ) : (
                         <div className="camp_site">
-                          <div
-                            className="camp_site_name"
-                          >
-                            {item.campId}
-                          </div>
-                      </div>
+                          <div className="camp_site_name">{item.campId}</div>
+                        </div>
                       )
                     ) : null}
 
@@ -283,13 +347,34 @@ const TicketPicker = (props) => {
             })}
           </div>
         </div>
+        {ticketOrderStep === 0 ? (
+          <div className={`order_button`} onClick={() => handleBuyTicket()}>
+            開始訂票
+          </div>
+        ) : null}
+      <div className={`step_btn_area`}>
+        {/* {validatorNoticeShow ? (
+          <div className="validator_notice">單日票尚未選擇日期</div>
+        ) : null} */}
 
-        <div className="step_btn_area">
-          {validatorNoticeShow ? (
-            <div className="validator_notice">單日票尚未選擇日期</div>
-          ) : null}
-          {handleRenderNextButton()}
-        </div>
+        {pickedTicket.length ? handleRenderPaymentButton() : null}
+        {ticketOrderStep === 1 ? (
+          <div className="next_btn_area">
+            <div className="btn cancel_btn" onClick={handleResetTicketOrder}>
+              取消訂票
+            </div>
+            {/* <div className="btn next_btn" onClick={handleRequiredFieldValidate}> */}
+            {pickedTicket.length ? (
+              <div
+                className="btn next_btn"
+                onClick={() => setTicketOrderStep(2)}
+              >
+                進入付款流程
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
       </div>
     </div>
   );
