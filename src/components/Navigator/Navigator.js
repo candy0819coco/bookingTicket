@@ -6,19 +6,16 @@ import React, {
   useContext,
 } from "react";
 import "./Navigator.scss";
-import UserPanel from "./../UserPanel/UserPanel";
-import ModalTool from "./../ModalTool/ModalTool";
-import UserPanelContent from "./../UserPanelContent/UserPanelContent";
-import Login from "./../Login/Login";
+
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import context, { Provider } from "./../context";
 import axios from "axios";
 
 const Navigator = () => {
-  const [userPanelShow, setUserPanelShow] = useState(false);
-  const [loginModalShow, setLoginModalShow] = useState(false);
+
+
   const contextValue = useContext(context);
-  const { pathName, setPathName, isDarkMode, setIsDarkMode, userInfo } =
+  const { pathName, setPathName, isDarkMode, setIsDarkMode, userInfo, setUserPanelShow, setLoginModalShow } =
     contextValue;
   const [avatarImage, setAvatarImage] = useState();
 
@@ -29,48 +26,8 @@ const Navigator = () => {
       setAvatarImage()
     }
   }, [userInfo]);
-  const handleCloseUserPanel = (e) => {
-    if(e && e.target.className === "background") {
-      e.stopPropagation();
-    }
-    setUserPanelShow(false);
-  };
-  const handleCloseLoginModal = (e) => {
-    if(e && e.target.className === "background") {
-      e.stopPropagation();
-    }
-    setLoginModalShow(false);
-  };
 
-  const handleRenderUserPanel = () => {
-    return (
-      <UserPanel
-        modalShow={userPanelShow}
-        modalCloseFunction={handleCloseUserPanel}
-        modalWidth={200}
-        modalHeight={180}
-        backgroundOpacity={0.6}
-        modalInnerBackground={`#fff`}
-      >
-        <UserPanelContent closeModal={handleCloseUserPanel} />
-      </UserPanel>
-    );
-  };
 
-  const handleRenderLoginModal = () => {
-    return (
-      <ModalTool
-        modalShow={loginModalShow}
-        modalCloseFunction={handleCloseLoginModal}
-        modalWidth={400}
-        modalHeight={320}
-        backgroundOpacity={0.6}
-        modalInnerBackground={`#fff`}
-      >
-        <Login closeModal={handleCloseLoginModal}/>
-      </ModalTool>
-    );
-  };
   const habdleGetAvatar = async () => {
 
         let avatarResult;
@@ -198,7 +155,7 @@ const Navigator = () => {
                 onClick={() => setUserPanelShow(true)}
                 style={{ backgroundImage: `url(${avatarImage})` }}
               >
-                {handleRenderUserPanel()}
+                
               </div>
             ) : (
               <div
@@ -208,7 +165,7 @@ const Navigator = () => {
                 id="iconUser"
                 onClick={() => setLoginModalShow(true)}
               >
-                {handleRenderLoginModal()}
+                
               </div>
             )}
             <div></div>

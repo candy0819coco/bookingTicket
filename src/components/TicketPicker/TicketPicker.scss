@@ -106,13 +106,13 @@
             justify-content: center;
 
             &.ticket_one_day {
-              background-image: url("./../../image/N_ticket_1day.png");
+              background-image: url("./../../image/single_day_ticket.svg");
             }
             &.ticket_two_day {
-              background-image: url("./../../image/N_ticket_2days.png");
+              background-image: url("./../../image/two_days_ticket.svg");
             }
             &.ticket_camp {
-              background-image: url("./../../image/N_ticket_2days_plus.png");
+              background-image: url("./../../image/two_days_plus_camp_ticket.svg");
             }
             &.disable {
               opacity: 0.8;
@@ -216,13 +216,13 @@
             align-items: flex-end;
             justify-content: center;
             &.ticket_one {
-              background-image: url("./../../image/N_ticket_1day.png");
+              background-image: url("./../../image/single_day_ticket.svg");
             }
             &.ticket_two {
-              background-image: url("./../../image/N_ticket_2days.png");
+              background-image: url("./../../image/two_days_ticket.svg");
             }
             &.ticket_camp {
-              background-image: url("./../../image/N_ticket_2days_plus.png");
+              background-image: url("./../../image/two_days_plus_camp_ticket.svg");
             }
           }
           .ticket_info {
@@ -250,10 +250,10 @@
               font-size: 12px;
               background-color: #ff7676;
               border-radius: 10px;
-              height: 20px;
+              height: 16px;
               color: #fff;
-              padding: 0 5px;
-              line-height: 20px;
+              padding: 0 3px;
+              line-height: 16px;
             }
             .single_ticket_day {
               width: 60px;
