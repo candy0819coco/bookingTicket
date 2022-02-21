@@ -1,5 +1,5 @@
 module.exports = {
-    sendMail: (who) => {
+    sendMail: (who,who64) => {
         const nodemailer = require("nodemailer");
         var transporter = nodemailer.createTransport({
             service: "gmail",
@@ -14,7 +14,7 @@ module.exports = {
             to: who, // lab 3.3
             subject: "信箱驗證_Love&Peace",  // lab 3.5
             html: `<h3>請點擊下方連結開通帳號</h3>
-            <a href='http://localhost:3000/register/active/${who}'>請點擊此連結前往認證</a>`
+            <a href='http://localhost:3000/register/active/${who64}'>請點擊此連結前往認證</a>`
         };
 
         transporter.sendMail(mailOptions, function (error, info) {

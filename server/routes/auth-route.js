@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
-const config = require("../config/token");
 const cookieSession = require("cookie-session");
+require('dotenv').config();
 
 
 
@@ -30,12 +30,13 @@ router.get("/success", function (req, res) {
         mMail: req.user.emails[0].value,
         googleId: req.user.id
     };
-    const token = jwt.sign(payload, config.jwtKey, { expiresIn: '24h' });
-
+    
+    const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '24h' });
+    res.redirect(`http://localhost:3000/signIn`);
     // localStorage.setItem("user",token);
-    res.cookie("user", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });//存到cookies 
-    // return res.send({ message: "登入成功", "token": token, payload });
-    res.redirect(`http://localhost:3000/`);
+    // res.cookie("user", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });//存到cookies 
+    return res.send({ message: "登入成功", "token": token, payload });
+
     // res.redirect(`http://localhost:3000/signIn/${token}`);
 
 

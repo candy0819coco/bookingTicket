@@ -2,26 +2,26 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const mysql = require('mysql');
-// const db = require("./config/db");
 const cors = require('cors');//解決跨域問題
-const { body, validationResult, cookie } = require("express-validator");
-const bcrypt = require("bcrypt");
+const { body, validationResult, cookie } = require("express-validator");//驗證各輸入資料
+const bcrypt = require("bcrypt");//加密(單向)
 const jwt = require("jsonwebtoken");
-const config = require("./config/token");
-const nodemailer = require("nodemailer");
 const mail = require("./mail");
 const { Navigate } = require("react-router-dom");
 const authRoute = require("./routes/auth-route");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-const passportSetup = require("./config/passport");
-
-// const passport = require('passport');
+require('dotenv').config();
+// const passportSetup = require("./config/passport");
+// const db = require("./config/db");
+// const config = require("./config/token");
+// const nodemailer = require("nodemailer");
 // const passportSetup = require("./passport");
 // const { min } = require("ramda");
 
 app.use(cookieSession({
-    keys:["process.env.COOKIE_SECRET"]
+
+    keys: ["process.env.COOKIE_SECRET"]
 }))//研究一下
 
 app.use(express.json());
@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/auth",authRoute);
+app.use("/auth", authRoute);
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -69,14 +69,19 @@ const authController = (req, res) => {
             // return res.send(data);//裡面有包含密碼到時候加密後要看會不會有機密問題
         }
     )
-    mail.sendMail(accountReg);//發送信件
+
+    const buff = Buffer.from(accountReg, 'utf-8');
+    const account64 = buff.toString('base64');
+    // console.log("測試base64",account64);
+    mail.sendMail(accountReg, account64);//發送信件
 }
 
 //重置密碼驗證
 const authControllerReset = (req, res) => {
     const { passwordReset, passwordCheck, token } = req.body;
     const validationResults = validationResult(req);
-    const decode = jwt.verify(token, config.jwtKey);
+    // const decode = jwt.verify(token, config.jwtKey);
+    const decode = jwt.verify(token, process.env.JWT_KEY);
     console.log(decode);
 
     if (validationResults.errors.length > 0) {
@@ -138,11 +143,17 @@ app.post("/signIn", function (req, res) {
             const payload = {
                 id: result[0].id,
                 mMail: result[0].mMail,
-                mName: result[0].mName
+                mName: result[0].mName,
+                mPhone: result[0].mPhone,
+                mBirthday: result[0].mBirthday,
+                mAddress: result[0].mAddress
             };
 
-            const token = jwt.sign(payload, config.jwtKey, { expiresIn: '24h' });
-            return res.send({ message: "登入成功", "token": token, payload });
+            const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '24h' });
+            // const token = jwt.sign(payload, config.jwtKey, { expiresIn: '24h' });
+            // return res.send({ message: "登入成功", "token": token, payload });
+
+            return res.send({ message: "登入成功", token });
 
         }
     )
@@ -154,8 +165,12 @@ app.post("/signIn", function (req, res) {
 //開通帳號
 app.put("/register/active/:mMail", function (req, res) {
 
+    // console.log(req.params.mMail);
+    const buff = Buffer.from(req.params.mMail, 'base64');
+    const mMail = buff.toString('utf-8');
+    // console.log(mMail);
     db.query("update test01 set mActive=1 where mMail = ?"
-        , [req.params.mMail]
+        , [mMail]
         , function (err, result) {
             if (err) {
                 console.log(err);
@@ -189,20 +204,27 @@ app.post("/register/reset1", function (req, res) {
             if (result.length === 0) {
                 return res.status(500).send({ message: "查無帳號請再試一次" });
             } else {
+
                 db.query("update test01 set mCode=? where mMail = ?"
                     , [code, account]
                     , function (err, result) {
                         if (err) {
                             console.log(err);
                         } else {
+
+
                             mail.codeMail(account, code);
+                            // const passConfirm = bcrypt.compareSync(oldPass, result[0].mPwd);
+                            // const passwordRegA = bcrypt.hashSync(passwordReg, 10);
+
 
                             const payload = {
                                 account: account,
                                 code: code,
                             };
 
-                            const token = jwt.sign(payload, config.jwtKey, { expiresIn: '30m' });
+                            // const token = jwt.sign(payload, config.jwtKey, { expiresIn: '30m' });
+                            const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '30m' });
                             return res.send({ message: "已發送驗證碼至郵件", "token": token });
 
                             // console.log(result);
@@ -219,7 +241,7 @@ app.post("/register/reset1", function (req, res) {
 //把前端送過來的資料跟存在資料庫的密碼做比對，如果輸入正確跳轉到第三頁
 app.post("/register/reset2", function (req, res) {
     const { code, token } = req.body;
-    const decode = jwt.verify(token, config.jwtKey);
+    const decode = jwt.verify(token, process.env.JWT_KEY);
     if (code === decode.code) {
         return res.send({ message: "輸入正確" });
     } else if (code !== decode.code) {
@@ -235,7 +257,86 @@ app.post("/register/reset3", [
     body('passwordCheck', '密碼確認與第一次輸入的密碼不符，請確認後再試一次').trim().custom((value, { req }) => value === req.body.passwordReset),
 ], authControllerReset)
 
+//確認是否登入
 
+app.get("/check/signin", function (req, res) {
+    const token = req.header("Authorization");
+    console.log("我是token:", token);
+    if (token) {
+        try {
+            // const decodeCheck = jwt.verify(token, config.jwtKey);
+            const decodeCheck = jwt.verify(token, process.env.JWT_KEY);
+            console.log("decodeCheck:", decodeCheck);
+            res.send({ message: '確認登入', statusCode: 200, currentUser: decodeCheck })
+        } catch (TokenError) {
+            console.log("token err:", TokenError);
+            res.send({ message: TokenError + '請重新登入', statusCode: 401 })
+        }
+    } else {
+        console.log("找不到token");
+        res.send({ message: "token失效 請重新登入", statusCode: 402 })
+    }
+
+})
+
+//帳號設定，修改密碼
+app.post("/member/setting/change", (req, res) => {
+    const { currentUser, oldPass, newPass, chkPass } = req.body;
+
+    if (oldPass != "" && newPass != "" && chkPass != "") {
+        db.query("select * from test01 where mMail=?"
+            , [currentUser]
+            , (err, result) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(result);
+                    const passConfirm = bcrypt.compareSync(oldPass, result[0].mPwd);
+                    if (!passConfirm) {
+                        return res.status(500).send({ message: "密碼錯誤請再試一次" });
+                    } else {
+                        const rules = /^(?=.*[A-Za-z]).{6,}$/;
+                        if (rules.test(newPass) !== true) {
+                            return res.status(422).send({ message: "密碼格式不符請再試一次" });
+                        };
+                        if (newPass !== chkPass) {
+                            return res.status(500).send({ message: "兩次密碼輸入不同，請確認後再試" })
+                        } else {
+                            const newPassA = bcrypt.hashSync(newPass, 10);
+                            const chkPassA = bcrypt.hashSync(chkPass, 10);
+                            db.query("update test01 set mPwd=? , mPwd_check=? where mMail = ?"
+                                , [newPassA, chkPassA, currentUser],
+                                (err, result) => {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        console.log(result);
+                                    }
+                                })
+                            return res.status(200).send({ message: "密碼已更新" });
+                        }
+
+
+                    }
+                }
+
+            })
+
+    } else {
+        res.status().send({ message: "請勿留空!!" })
+    }
+})
+
+
+//拿取使用者資料
+app.post("/user/data", function (req, res) {
+
+
+    // const { currentUser } = req.body;
+    // console.log("測試:", req.body, "測試");
+
+    // db.query("select * from test01 where id=?")
+})
 //存localstorage
 // app.get("/signIn/:token",function(req,res){
 //     console.log(req.params);
@@ -272,6 +373,6 @@ app.listen(3001, function (err) {
     if (err) {
         console.log(err);
     } else {
-        console.log("ok");
+        console.log("server is running");
     }
 });

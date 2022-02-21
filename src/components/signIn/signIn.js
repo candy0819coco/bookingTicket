@@ -12,19 +12,24 @@ import authService from '../../service/auth';
 
 const SignIn = () => {
     const contextValue = useContext(context);
-    const { } = contextValue;
+    const { currentUser } = contextValue;
     const navigate = useNavigate()
 
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
-    const [currentUser, setCurrentUser] = useState("");
+    // const [currentUserw, setCurrentUserw] = useState("");
 
-    useEffect(() => {
-        setCurrentUser(authService.getCurrentUser())
-    }, []);//需要的引入
+    // useEffect(() => {
+    //     setCurrentUserw(authService.getCurrentUserw())
+    // }, []);//需要的引入
 
-    const goGoogle = () => {
-        window.open("http://localhost:3001/auth/google", "_self");
+    const goGoogle = async () => {
+        await window.open("http://localhost:3001/auth/google", "_self");
+        Axios.get("/auth/success")
+            .then(function (res) {
+                console.log(res);
+            }
+            )
     }
 
     const goSignIn = (e) => {
@@ -35,17 +40,21 @@ const SignIn = () => {
                 password: password
             }).then(function (res) {
                 console.log(res);
-                window.location = "http://localhost:3000/";
 
-                alert(res.data.message);
+
+                // alert(res.data.message);
+                alert('登入成功');
                 if (res.data.token) {
-                    localStorage.setItem("user", JSON.stringify(res.data));
+                    // localStorage.setItem("user", JSON.stringify(res.data.token));
+                    localStorage.setItem("user", res.data.token);
                 }
                 // console.log(res.data.message);//顯示登入成功
                 // navigate("/home");
+                window.location = "http://localhost:3000/";
             }).catch(function (err) {
-                alert(err.response.data.message);
-                // console.log(err.response);
+                alert("登入失敗");
+                // alert(err.response.data.message);
+                console.log(err.response);
             })
         } else if (account == "") {
             alert("請輸入帳號");

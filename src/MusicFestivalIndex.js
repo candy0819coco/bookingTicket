@@ -5,6 +5,7 @@ import React, {
   Fragment,
   useContext,
 } from "react";
+import Axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./MusicFestivalIndex.scss";
 import { Provider } from "./components/context.js";
@@ -25,12 +26,64 @@ import Reset1 from "./components/ResetPassword/Reset1";
 import Reset2 from "./components/ResetPassword/Reset2";
 import Reset3 from "./components/ResetPassword/Reset3";
 import Jump from "./components/Jump/Jump";
+import MemberSchedule from "./components/MemberSchedule/MemberSchedule";
+import MemberSetting from "./components/MemberSetting/MemberSetting";
 
 const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");//依據不同pathName頁面，導覽列會不同
   const [isDarkMode, setIsDarkMode] = useState(false);
-  // const [currentUser, setCurrentUser] = useState("");
-  const contextValue = { pathName, setPathName, isDarkMode, setIsDarkMode };//把會用到的值 裝在contextValue，傳給下面的組件使用
+  const [currentUser, setCurrentUser] = useState({});
+  const [userToken, setUserToken] = useState("");
+  const contextValue = {
+    pathName,
+    setPathName,
+    isDarkMode,
+    setIsDarkMode,
+    currentUser,
+    setCurrentUser,
+    userToken,
+    setUserToken
+  };//把會用到的值 裝在contextValue，傳給下面的組件使用
+
+
+  const IsLogin = async () => {
+    var userToken = localStorage.getItem("user") ? localStorage.getItem("user") : "";
+    if (userToken) {
+      await Axios.get("http://localhost:3001/check/signin", {
+        headers: {
+          "Authorization": userToken
+        }
+      })
+        .then(function (res) {
+          console.log(res);
+          if (res.data.statusCode === 200) {
+            setCurrentUser(res.data.currentUser);
+            setUserToken(userToken);
+          } else {
+            setCurrentUser();
+            setUserToken("");
+            console.log("token失效 請重新登入");
+          }
+
+          // console.log(currentUser);
+        })
+        .catch(function (err) {
+          console.log(err);
+        })
+    } else {
+      setCurrentUser();
+      console.log("token失效 請重新登入");
+      setUserToken("");
+    }
+  }
+
+  useEffect(() => {
+    IsLogin();
+  }, [])
+
+
+
+
 
 
   return (
@@ -46,7 +99,9 @@ const MusicFestivalIndex = () => {
               <Route exact path="/ticketOrder" element={<TicketOrder />} />
               <Route exact path="/map" element={<Map />} />
               <Route exact path="/shop" element={<Shop />} />
-              <Route exact path="/memberOrder" element={<MemberOrder />} />
+              <Route exact path="/member/order" element={<MemberOrder />} />
+              <Route exact path="/member/schedule" element={<MemberSchedule />} />
+              <Route exact path="/member/setting" element={<MemberSetting />} />
               {/* <Route exact path="/user" element={<User />} /> */}
               <Route exact path="/signIn" element={<SignIn />} />
               <Route exact path="/register" element={<Register />} />

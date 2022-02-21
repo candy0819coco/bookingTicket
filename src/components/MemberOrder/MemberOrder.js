@@ -8,7 +8,7 @@ import authService from '../../service/auth';//需要的引入
 
 const MemberOrder = () => {
     const contextValue = useContext(context);
-    const {} = contextValue;
+    const { } = contextValue;
     const [currentUser, setCurrentUser] = useState("");
     useEffect(() => {
         setCurrentUser(authService.getCurrentUser())
@@ -43,7 +43,10 @@ const MemberOrder = () => {
 
                             </div>
 
-                            <button id={"member_logout"} onClick={logOut}>登出</button>
+                            <div id={"member_logout"}>
+                                <div onClick={logOut}>登出</div>
+                            </div>
+                            
                         </div>
 
                         <div className={"con_both con_right"}>

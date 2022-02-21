@@ -1,5 +1,5 @@
 module.exports = {
-    getCurrentUser:()=>{
+    getCurrentUserw:()=>{
         return JSON.parse(localStorage.getItem("user"));
         // if(localStorage.getItem("user")){
         //     return JSON.parse(localStorage.getItem("user"));
