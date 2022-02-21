@@ -110,8 +110,8 @@ const Navigator = () => {
               <UserPanel
                 modalShow={userPanelShow}
                 modalCloseFunction={handleCloseUserPanel}
-                modalWidth={290}
-                modalHeight={350}
+                modalWidth={260}
+                modalHeight={230}
                 backgroundOpacity={0.6}
                 modalInnerBackground={`#fff`}
               >

@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   .payment {
-    width: 90%;
+    width: 75%;
     height: 80%;
     display: flex;
     justify-content: center;
@@ -22,8 +22,8 @@
     }
     .payment_content_container {
       width: 70%;
-      height: 80%;
-      margin: 4% 0px;
+      height: 90%;
+      margin: 2% 0px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -40,8 +40,8 @@
           height: 35px;
           font-size: 20px;
           //   margin-bottom: 20px;
-          border: 1px solid #000000;
-          text-align: center;
+          // border: 1px solid #000000;
+          text-align: left;
           line-height: 35px;
           //   font-weight: bolder;
           color: #000000;
@@ -149,13 +149,35 @@
       }
       .btn_area {
         display: flex;
-        justify-content: flex-start;
-        .next_step {
-          margin-right: 20px;
-        }
         .prev_step {
+          padding: 0;
+          border: none 0;
+          font: inherit;
+          color: inherit;
+          cursor: pointer;
+          width: 126px;
+          height: 28px;
+          line-height: 28px;
+          // background-color:#9ACE86 ;
           margin-right: 20px;
+          // color:#ffffff;
+          margin-right: 287px;
         }
+        .next_step{
+          padding: 0;
+          border: none 0;
+          font: inherit;
+          color: inherit;
+          cursor: pointer;
+          width: 126px;
+          height: 28px;
+          line-height: 28px;
+          // background-color:#9ACE86 ;
+          
+          // color:#ffffff;
+
+          }
+      
         .temp_payment_switch_btn {
         }
       }

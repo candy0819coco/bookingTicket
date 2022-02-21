@@ -1,115 +1,280 @@
-import React, { useCallback, useState, useEffect, Fragment, useContext } from "react";
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  Fragment,
+  useContext,
+} from "react";
 import "./MyTicketList.scss";
 import * as R from "ramda";
 import context, { Provider } from "../context";
 import axios from "axios";
-import face from '../../image/membership_black.svg';
+import face from "../../image/membership_black.svg";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import TicketQrcode from "../TicketQrcode/TicketQrcode";
+import TicketQrcodeContent from "../TicketQrcodeContent/TicketQrcodeContent";
+import QRCode from "react-qr-code";
 
 const MyTicketList = () => {
-    const contextValue = useContext(context);
-    const { handleGetTicketDetails,myTicketListDetailsShow } = contextValue;
-    const [myTicketOrderList, setMyTicketOrderList] = useState([]);
-    const [currentHoverTicketType, setCurrentHoverTicketType] = useState("");
+  const contextValue = useContext(context);
+  const {
+    handleGetTicketDetails,
+    ticketOrderListDetails,
+    setTicketOrderListDetails,
+  } = contextValue;
+  const [myTicketOrderList, setMyTicketOrderList] = useState([]);
+  const [myTicketListDetailsShow, setMyTicketListDetailsShow] = useState(false);
+  const [ticketQrCodeShow, setTicketQrCodeShow] = useState(false); //預設不顯示
+  const [ticketQrCodeIndex, setTicketQrCodeIndex] = useState(0);
+  const [currentTicketItem, setCurrentTicketItem] = useState();
+  const [ticketsOfCurrentOrder, setTicketsOfCurrentOrder] = useState([]);
+  const [userPathName,setUserPathName] = useState("memberOrder");
 
-    
-    const handleGetTicketByPost = async (e) => {
-        console.log('post 取得票券訂單');
-          let result;
-          await axios({
-            method: "post",
-            url: `http://localhost:3400/ticket_order_post`,
-            data: { mNo:"000008" },
-            credentials: 'same-origin',
-            headers: {
-              "Content-Type": "application/json;charset=UTF-8",
-              "Access-Control-Allow-Origin": "*",
-            },
-          })
-            .then(function (response) {
-              console.log("ticket_order_response", response);
-              result = response.data;
-              setMyTicketOrderList(result)
-            })
-            .catch((error) => {
-              console.log('ticket_order_error', error)
-              result = error
-            });
-            return result;
-      };
+  const handleCloseTicketQrCode = (e) => {
+    setTicketQrCodeShow(false);
+    e.stopPropagation();
+    setCurrentTicketItem();
+    setTicketsOfCurrentOrder([]);
+  };
+  const handleGetTicketOrderList = async (e) => {
+    console.log("post 取得票券訂單");
+    let results;
+    await axios({
+      method: "post",
+      url: `http://localhost:3400/ticket_order/get_list`,
+      data: { mNo: "000008" },
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then(function (response) {
+        console.log("ticket_order_response", response.data.data); //?
+        results = response.data.data;
+        setMyTicketOrderList(results);
+      })
+      .catch((error) => {
+        console.log("ticket_order_error", error);
+      });
+  };
 
-    return (
-        <div className={`member_order_container`}>
-            <Provider value={contextValue}>
-                <div id={"member_container"}>
+  const handleGetTicketQrcode = async (e) => {
+    console.log("get 取得票券QRcode");
+    let results;
+    console.log('currentTicketItem', currentTicketItem)
+    console.log('currentTicketItem.ticketNo', currentTicketItem.ticketNo)
 
-                    <div className={"con_both con_left"}>
-                        <div id={"member_hi"}>
-                            <span>歡迎<br /><span>Guest</span></span>
-                            <img src={face} />
-                        </div>
+    await axios({
+      method: "get",
+      url: `http://192.168.96.108:3400/ticket_order/get_qrcode?ticketNo=${currentTicketItem.ticketNo}`,
+      // data: { mNo:"000008" }, get方法沒有這個東西
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then(function (response) {
+        console.log('ticket_qrcode_response', response)
+      })
+      .catch((error) => {
+        console.log("ticket_qrcode_error", error);
+      });
+  };
 
-                        <div id={"member_list"}>
-                            {/* <!-- 這裡看怎麼改 --> */}
+  const handleOpenQrcode = (indexResult, ticketsItem, allTickets) => {
+    setTicketQrCodeShow(true);
+    setTicketQrCodeIndex(indexResult);
+    console.log(indexResult);
+    setCurrentTicketItem(ticketsItem);
+    setTicketsOfCurrentOrder(allTickets);
+  };
 
-                            <div id={"member_list01"}>我的行程</div>
-                            <div onClick={handleGetTicketByPost} id={"member_list02"}> 我的票券 
-                            </div>
-                            <div id={"member_list03"}>我的訂單</div>
-                            <div id={"member_list04"}>帳號設定</div>
+  useEffect(() => {
+    handleGetTicketOrderList();
+  }, []);
+  
+  const handleUserPathName =(props)=>{
+    setUserPathName(props);
+    // return <props/>
+  }
 
-                        </div>
 
-                        <button id={"member_logout"}>登出</button>
-                    </div>
 
-                    <div className={"con_both con_right"}>
-                        <div id={"now_location"}>
-                            <span>首頁</span>
-                            <span>/</span>
-                            <span>會員</span>
-                            <span>/</span>
-                            <span>登入</span>
-                        </div>
 
-                        <table id={"order_list"}>
-                            <thead>
-                                <tr>
-                                    <th>訂單日期</th>
-                                    <th>訂單編號</th>
-                                    <th>訂單狀態</th>
-                                    <th>訂單金額</th>
-                                    <th>付款方式</th>
-                                    <th>付款狀態</th>
-                                    <th>訂單明細</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {myTicketOrderList.map((item, key)=>{
-                             console.log('item', item);
-                                return (
-                                    <tr key={key}>
-                                        <td>{item.orderTime}</td>
-                                        <td>{item.orderNo}</td>
-                                        <td>{item.orderStatus}</td>    
-                                        <td>{item.orderPrice}</td>    
-                                        <td>{item.paymentMethod}</td>
-                                        <td>{item.paymentStatus}</td>
-                                        <td>
-                                        <div className ="btn_position">
-                                          <div onClick={()=>handleGetTicketDetails(item.orderNo)} className="order_details_btn">+</div>
-                                        </div>
-                                      </td>
-                                      </tr>               
-                                )
-                            })}
-                            <div className={`${myTicketListDetailsShow ? "gray_square_show":""}`}></div>
-                            </tbody>
-                        </table>
-                    </div>
+
+  return (
+    <div className={`member_order_container`}>
+      <Provider value={contextValue}>
+        <div id={"member_container"}>
+          <div className={"con_both con_left"}>
+            <div id={"member_hi"}>
+              <span>
+                歡迎
+                <br />
+                <span>Guest</span>
+              </span>
+              <img src={face} />
+            </div>
+            
+            <div id={"member_list"}>
+              {/* <!-- 這裡看怎麼改 --> */}
+
+              <div id={"member_list01"}>我的行程</div>
+              <div>
+              <Link id={`member_list02 ${userPathName === "MyTicketList" ? "current" : ""}`} to="/member/ticketOrder" onClick={()=>handleUserPathName("MyTicketList")}>我的票券</Link>
+              </div>
+              <div>
+              <Link id={`member_list03 ${userPathName === "memberOrder" ? "current" : ""}`} to="/member/productOrder" onClick={()=>handleUserPathName('memberOrder')}>我的訂單</Link>
+              </div>
+              
+              <div id={"member_list04"}>帳號設定</div>
+            </div>
+
+            <button id={"member_logout"}>登出</button>
+          </div>
+
+          <div className={"con_both con_right"}>
+            <div id={"now_location"}>
+              <span>首頁</span>
+              <span>/</span>
+              <span>會員</span>
+              <span>/</span>
+              <span>登入</span>
+            </div>
+            <div className={`order_list`}>
+              <div className={`thead_area`}>
+                <div className={`tr_area`}>
+                  <div className="th_area">訂單日期</div>
+                  <div className="th_area">訂單編號</div>
+                  {/* <div className="th_area">訂單狀態</div> */}
+                  <div className="th_area">訂單金額</div>
+                  <div className="th_area">付款方式</div>
+                  <div className="th_area">付款狀態</div>
+                  <div className="th_area">訂單明細</div>
                 </div>
-            </Provider>
+              </div>
+              {myTicketOrderList.map((item, key) => {
+                // console.log("item", item);
+                return (
+                  <Fragment key={item.orderNo}>
+                    <div className={`thead_second_area`}>
+                      <div className="tr_second_area">
+                        <div className="tb_area">{item.orderTime}</div>
+                        <div className="tb_area">{item.orderNo}</div>
+                        {/* <div className="tb_area">{item.orderStatus === 1 ? "訂單成立":"尚未成立"}</div> */}
+                        <div className="tb_area">{item.orderPrice}</div>
+                        <div className="tb_area">{item.paymentMethod}</div>
+                        <div className="tb_area">
+                          {item.paymentStatus === 1 ? "付款完成" : "未付款"}
+                        </div>
+                        <div className="tb_area">
+                          <div className="btn_position">
+                            <div
+                              onClick={() =>
+                                setMyTicketListDetailsShow(
+                                  !myTicketListDetailsShow
+                                )
+                              }
+                              className="order_details_btn "
+                            >
+                              +{/* handleGetTicketDetails(item.orderNo) */}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className={`gray_square_hide ${
+                        myTicketListDetailsShow ? "gray_square_show" : ""
+                      }`}
+                    >
+                      <div className="gray_square_content">
+                        <div className="gray_square_title_area">
+                          <div className="gray_square_title">{`票券號碼`}</div>
+                          <div className="gray_square_title">{`活動日期`}</div>
+                          <div className="gray_square_title">{`票券種類`}</div>
+                          <div className="gray_square_title">{`票券金額`}</div>
+                          <div className="gray_square_title e_vocher">{`電子票券憑證`}</div>
+                        </div>
+                        {item.tickets.map((ticketsItem, key) => {
+                          return (
+                            <div className="map_area" key={key}>
+                              <div className="gray_square_details_area">
+                                <div className="type_color_area">
+                                  <div
+                                    className={`blank ${
+                                      ticketsItem.ticketType == "雙日票"
+                                        ? "two_days_color"
+                                        : ticketsItem.ticketType == "單日票"
+                                        ? "single_color"
+                                        : "camp_color"
+                                    }`}
+                                  ></div>
+                                  <div className={`gray_square_details_one`}>
+                                    {ticketsItem.ticketNo}
+                                  </div>
+                                </div>
+                                <div className={`gray_square_details`}>
+                                  {ticketsItem.ticketType === "單日票"
+                                    ? ticketsItem.singleTicketDay === 1
+                                      ? "20220813"
+                                      : "20220814"
+                                    : "20220813\n20220814"}
+                                </div>
+                                <div className={`gray_square_details`}>
+                                  {ticketsItem.ticketType}
+                                  {/* <div className={`active_day`}>8/13</div> */}
+                                </div>
+                                <div className={`gray_square_details`}>
+                                  {ticketsItem.ticketPrice}
+                                </div>
+                                <div className={`gray_square_details e_vocher`}>
+                                  <div
+                                    onClick={() =>
+                                      handleOpenQrcode(key, ticketsItem, item.tickets)
+                                    }
+                                    className="view_area"
+                                  >
+                                    查看
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="detail_line"></div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </Fragment>
+                );
+              })}
+              {currentTicketItem ? (
+                <TicketQrcode
+                  modalShow={ticketQrCodeShow}
+                  modalCloseFunction={handleCloseTicketQrCode}
+                  modalWidth={406}
+                  modalHeight={880}
+                  backgroundOpacity={0.9}
+                  modalInnerBackground={`#fff`}
+                >
+                  <TicketQrcodeContent
+                    closeModal={handleCloseTicketQrCode}
+                    ticketQrCodeIndex={ticketQrCodeIndex}
+                    currentTicketItem={currentTicketItem}
+                    ticketsOfCurrentOrder={ticketsOfCurrentOrder}
+                    setCurrentTicketItem={setCurrentTicketItem}
+                    setTicketQrCodeIndex={setTicketQrCodeIndex}
+                    handleGetTicketQrcode={handleGetTicketQrcode}
+                  />
+                </TicketQrcode>
+              ) : null}
+            </div>
+          </div>
         </div>
-    );
+      </Provider>
+    </div>
+  );
 };
 export default MyTicketList;
-

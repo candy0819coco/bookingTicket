@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   .ticket_order_detail {
-    width: 90%;
+    width: 75%;//90%
     height: 80%;
     display: flex;
     justify-content: center;
@@ -48,6 +48,7 @@
         .ticket_order_detail_info {
           width: 100%;
           .info {
+            font-size: 20px;
             margin-bottom: 5px;
           }
           .line {
@@ -148,6 +149,18 @@
           display: flex;
           justify-content: flex-start;
           .prev_step {
+            padding: 0;
+            border: none 0;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+            width: 126px;
+            height: 28px;
+            line-height: 28px;
+            background-color:#9ACE86 ;
+            margin-right: 20px;
+            color:#ffffff;
+            margin-right: 287px;
             margin-right: 20px;
           }
         }

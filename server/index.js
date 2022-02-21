@@ -21,6 +21,7 @@ app.use(cors(corsOptions));
 // const server = express().listen(PORT, () =>
 //   console.log(`Listening on ${PORT}`)
 // );
+// const qrcode = require('qrcode')
 
 const server = app.listen(3400, () => {
   console.log("Server Listening on port 3400");
@@ -96,21 +97,53 @@ app.use(
 );
 
 //--------------------------票券部分-------------------------------------------
-app.post("/ticket_order_post", (req, res) => {
+app.post("/ticket_order/get_list", (req, res) => {
   console.log("req.body.mNo"); //req.body=data
-  const { mNo, randos } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
-  const sql = `SELECT * FROM ticket_order WHERE mNo = ${req.body.mNo}`; //WHERE是給mNO條件，選票券訂單的資料庫
-  connection.query(sql, (error, results) => {
+  const { mNo } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
+  const getTicketOrderSQL = `SELECT * FROM ticket_order WHERE mNo = ${mNo}`; //WHERE是給mNO條件，選票券訂單的資料庫
+  connection.query(getTicketOrderSQL, (error, ticketOrderListResult) => {
     console.log("error", error);
-    // console.log('results', results)
     if (error) {
       res.send(error);
     } else {
-      res.json(results);
+      console.log('ticketOrderListResult', ticketOrderListResult);
+      let getTicketOrderResultList = [];//這個[]裡面要放這支API最後欲得到的資料結構
+      return new Promise((resolve, reject) => {
+        ticketOrderListResult.forEach((item, key) => {
+          const getTicketsSQL = `SELECT * FROM tickets WHERE orderNo = ${item.orderNo}`;
+          
+          connection.query(
+            getTicketsSQL,
+            (ticketsError, ticketsResults) => {
+              if (ticketsError) {
+                console.log("ticketsError", ticketsError);
+                reject(ticketsError);
+              } else {
+                console.log("ticketsResults", ticketsResults);
+                getTicketOrderResultList.push({...item, tickets: ticketsResults});
+                console.log('getTicketOrderResultList', getTicketOrderResultList)
+                if (key === ticketOrderListResult.length - 1) {
+                  resolve(getTicketOrderResultList);
+                }
+              }
+            }
+          );
+        });
+      })
+        .then((ticketsResponse) => {
+          console.log("ticketsResponse", ticketsResponse);
+          res.send({
+            data:ticketsResponse,
+            statusMsg: "票券訂單查詢成功",
+          });
+        })
+        .catch((err) => {
+          console.log("err", err);
+        });
     }
   });
 });
-
+//end
 app.post("/ticket_details",(req,res) =>{
   const {orderNo} =req.body;
   const sql = `SELECT * FROM tickets WHERE orderNo = ${orderNo}`;
@@ -143,32 +176,32 @@ app.post("/create_ticket_order", (req, res) => {
       );
 
       return new Promise((resolve, reject) => {
+        let insertTicketResultList = [];
         totalTickets.forEach((item, key) => {
           const ticketsSQL = `INSERT INTO tickets (orderNo,ticketType,singleTicketDay,campId) VALUES (${insertTicketOrderResults.insertId},"${item.ticketType}",${item.singleTicketDay},"${item.campId}")`;
-          let inserTicketResultList = [];
           connection.query(
             ticketsSQL,
             (insertTicketsError, insertTicketsResults) => {
               if (insertTicketsError) {
                 console.log("insertTicketsError", insertTicketsError);
-                inserTicketResultList.push(insertTicketsError);
+                insertTicketResultList.push(insertTicketsError);
                 reject(insertTicketsError);
               } else {
                 console.log("insertTicketsResults", insertTicketsResults);
-                inserTicketResultList.push(insertTicketsResults);
+                insertTicketResultList.push(insertTicketsResults);
                 if (key === totalTickets.length - 1) {
-                  resolve(inserTicketResultList);
+                  resolve(insertTicketResultList);
                 }
               }
             }
           );
         });
       })
-        .then((inserTicketsResponse) => {
-          console.log("inserTicketsResponse", inserTicketsResponse);
+        .then((insertTicketsResponse) => {
+          console.log("insertTicketsResponse", insertTicketsResponse);
           res.send({
             insertTicketOrderResults,
-            inserTicketsResponse,
+            insertTicketsResponse,
             statusMsg: "票券訂單成立",
           });
         })
@@ -179,7 +212,72 @@ app.post("/create_ticket_order", (req, res) => {
   });
 });
 
-//---------------------------------------------------------------------
+//營位
+app.get("/ticket_order/get_camp", function (req, res) {
+  const getCampSQL = `SELECT * FROM camp`; 
+  connection.query(getCampSQL, (getCampError, getCampResult) => {
+    if (getCampError) {
+      console.log("getCampError", getCampError);
+      res.status(getCampError.code).end();
+    } else {
+      console.log("getCampResult", getCampResult);
+      if (getCampResult) {
+        res.send(getCampResult);
+      }
+    }
+  });
+});
+
+
+
+
+
+
+//QRcode開始
+
+app.get(`/ticket_order/get_qrcode`,(req,res) =>{
+
+  const {ticketNo} =req.query;
+  const sql = `SELECT * FROM tickets WHERE ticketNo = ${ticketNo}`;
+  
+  connection.query(sql,(error,results)=>{
+    console.log('error',error);
+    if (error){
+      res.send(error);
+      console.log("票券失效(流水號查詢不到)")
+    }else{
+      console.log("流水號有效")
+      console.log('results[0]', results[0])
+      let toJson = JSON.stringify(results[0]);
+      console.log('toJson', toJson)
+      let toParse = JSON.parse(toJson);
+      
+      console.log('toParse', toParse)
+      console.log('typeof toParse.isActive', typeof toParse.isActive)
+      if(toParse.isActive === 0) {
+        console.log("歡迎入場");
+        const enterTime = new Date().toLocaleString('zh-Tw', { hour12: false});
+        const activateTicketSQL = `UPDATE tickets SET isActive = 1, enterTime = "${enterTime}" WHERE ticketNo = ${ticketNo}`;
+        connection.query(activateTicketSQL,(updateError,updateResult)=>{ 
+          if (updateError){ 
+            console.log('updateError', updateError)
+
+          } else {
+            
+            console.log('updateResult', updateResult)
+            res.send(updateResult);
+          }
+        })
+      } else {
+        console.log("已有入場紀錄")
+      }
+      // res.send(results);
+    }
+  })
+});
+
+
+//--------------------------票券部分結束-------------------------------------------
 
 app.get("/is_logined", function (req, res) {
   const { sessionId } = req.query;

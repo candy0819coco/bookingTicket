@@ -4,16 +4,15 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  margin: 80px 76px 0 0;//margin: 50px 0 0 0
+  margin: 50px 0 0 0;
   z-index: 10;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 29px;
+  right: 71px;
   &.component_show {
     opacity: 1;
     pointer-events: initial;
     transition: 0.3s;
-
   }
   &.component_hide {
     opacity: 0;
@@ -21,18 +20,17 @@
     transition: 0.3s;
   }
   .user_panel_inner {
-    width:290px;
     display: flex;
     justify-content: center;
     align-content: center;
     z-index: 11;
-    border-radius: 15px;
-
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 5px 5px -5px #333;
 
     &.panel_show {
       opacity: 1;
       transition: 0.3s;
-
     }
     &.panel_hide {
       opacity: 0;
@@ -46,10 +44,8 @@
     top: 0;
     width: 100vw;
     height: 100vh;
-    // background-color: rgba(184, 185, 109, 0.3);
-    background-color: rgba(0, 0, 0, 0.95);
+    // background-color: rgba(0, 0, 0, 0.95);
     z-index: 10;
     cursor: initial;
-
   }
 }

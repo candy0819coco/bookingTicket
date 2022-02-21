@@ -23,21 +23,24 @@ import User from "./components/User/User";
 import MemberOrder from "./components/MemberOrder/MemberOrder";
 import MyTicketList from "./components/MyTicketList/MyTicketList";
 import Camp from "./components/Camp/Camp";
+import TicketQrcode from "./components/TicketQrcode/TicketQrcode";
+import TicketQrcodeContent from "./components/TicketQrcodeContent/TicketQrcodeContent";
+import TicketPicker from "./components/TicketPicker/TicketPicker";
+
 import axios from "axios";
 
 const MusicFestivalIndex = () => {
   const [pathName, setPathName] = useState("home");//依據不同pathName頁面，去判斷導覽列current在哪裡
   const [isDarkMode, setIsDarkMode] = useState(false); //預設值是白天
-  const [myTicketListDetailsShow,setMyTicketListDetailsShow] = useState([]); 
-  
+  const [ticketOrderListDetails,setTicketOrderListDetails] = useState([]);
+
   const handleGetTicketDetails = async (orderNo) =>{
-    console.log('handleGetTicketDetails_orderNo', orderNo)
-   
+    console.log('handleGetTicketDetails_orderNo', orderNo)   
     let results;
     await axios({
       method:"post",
       url:`http://localhost:3400/ticket_details`,
-      data:{orderNo:Number(orderNo)},//為什麼這樣寫
+      data:{orderNo:Number(orderNo)},//為什麼這樣寫  //依據orderNo去找到票券訂單細節
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -47,18 +50,16 @@ const MusicFestivalIndex = () => {
       .then(function (response) {
         console.log("ticket_details_response", response);
         results = response.data;
-        console.log('ticket_details_results', results)
-  
+        console.log('ticket_details_results', results);
+        setTicketOrderListDetails(results);
       })
       .catch((error) => {
         console.log("ticket_details_error", error);
         results = error;
       });
-      setMyTicketListDetailsShow([]);
-
-  };
-
-
+  }
+      
+  
   const contextValue = { pathName, setPathName, isDarkMode, setIsDarkMode, handleGetTicketDetails};//把會用到的值 裝在contextValue，傳給下面的組件使用
 
   return (
@@ -73,9 +74,11 @@ const MusicFestivalIndex = () => {
               <Route exact path="/lineUp" element={<LineUp />} />
               <Route exact path="/ticketOrder" element={<TicketOrder />} /> 
               <Route exact path="/map" element={<Camp />} />
-              <Route exact path="/myTicketList" element={<MyTicketList />} />
-              <Route exact path="/memberOrder" element={<MemberOrder/>} />
+              {/* <Route exact path="/myTicketList" element={<MyTicketList />} /> */}
+              <Route exact path="/member/ticketOrder" element={<MyTicketList/>} />
+              <Route exact path="/member/productOrder" element={<MemberOrder/>} />
               <Route exact path="/user" element={<User />} />
+             
 
           </Routes>
             <Footer/>
@@ -85,4 +88,4 @@ const MusicFestivalIndex = () => {
     </Router>
   );
 };
- export default MusicFestivalIndex;
+export default MusicFestivalIndex;

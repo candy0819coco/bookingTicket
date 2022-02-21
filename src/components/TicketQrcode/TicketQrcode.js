@@ -1,9 +1,9 @@
 import React, { useCallback, useState, useEffect, Fragment, useContext } from "react";
-import "./ModalTool.scss";
+import "./TicketQrcode.scss";
 import * as R from "ramda";
 import context, { Provider } from "./../context";
 
-const ModalTool = (props) => {
+const TicketQrcode = (props) => {
 
     const contextValue = useContext(context);
     const {  } = contextValue;
@@ -26,9 +26,9 @@ const ModalTool = (props) => {
                 <div
                     className={`background`} 
                     style={{opacity:backgroundOpacity}}
-                    onClick={modalCloseFunction}
+                    // onClick={modalCloseFunction}
                 ></div>
             </div>
     );
 };
-export default ModalTool;
+export default TicketQrcode;

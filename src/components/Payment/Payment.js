@@ -11,7 +11,7 @@ import context, { Provider } from "./../context";
 const Payment = (props) => {
   const contextValue = useContext(context);
   // convenientStore creditCard
-  const { payment, setTicketOrderStep, handleChangePayment } = props; //屬性由TicketOrder傳來的props，在這支要補上這行程式碼
+  const { paymentMethod, setTicketOrderStep, handleChangePayment } = props; //屬性由TicketOrder傳來的props，在這支要補上這行程式碼
   const [creditMonth, setCreditMonth] = useState("");
   const [creditYear, setCreditYear] = useState("");
   
@@ -45,7 +45,7 @@ const Payment = (props) => {
         <div className={`payment_title`}></div>
 
         <div className={`payment_content_container`}>
-          {payment === "convenientStore" ? (
+          {paymentMethod === "convenientStore" ? (
             <div className={`payment_content_area`}>
               <div className={`payment_type`}>超商繳費</div>
               <div className={`payment_info`}>
@@ -196,12 +196,12 @@ const Payment = (props) => {
             <button className="next_step" onClick={() => setTicketOrderStep(2)}>
               確認
             </button>
-            <button
+            {/* <button
               className="temp_payment_switch_btn"
               onClick={handleChangePayment}
             >
               現在是{payment}，切換付款方式
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

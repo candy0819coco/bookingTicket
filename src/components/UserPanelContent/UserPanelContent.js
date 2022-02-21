@@ -1,49 +1,63 @@
-import React, { useCallback, useState, useEffect, Fragment, useContext } from "react";
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  Fragment,
+  useContext,
+  Suspense,
+} from "react";
 import "./UserPanelContent.scss";
 import * as R from "ramda";
 import context, { Provider } from "./../context";
+import Logout from "./../Logout/Logout";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const UserPanelContent = (props) => {
-    const contextValue = useContext(context);
-    const { isDarkMode} = contextValue;
-    const {
-        closeModal,
-        modalShow,
-        modalCloseFunction,
-        modalWidth,
-        modalHeight,
-        backgroundOpacity,
-        modalInnerBackground} = props;
+  const contextValue = useContext(context);
+  const { isDarkMode, userInfo } = contextValue;
+  const { closeModal } = props;
 
-    return (
-        <div className={`user_panel_content_container`}>
-            <Provider value={contextValue}>
-                <div className={`user_panel_content`}>
-                    <div className={`panel_item`}>
-                        <div className={`icon_text_area`}>
-                        <div className={`icon icon_member`}>
-                        </div>
-                        <div className="text">我的會員</div>
-                        <div className="arrow"></div>
-                    </div>
-                </div>
-                <div className={`panel_item`}>
-                    <div className={`icon_text_area`}>
-                        <div className={`icon icon_order`}>
-                        </div>
-                        <div className="text">我的訂單</div>
-                        <div className="arrow"></div>
-                    </div>
-                </div>
-
-                <div className={`panel_item`}>
-                    <div className={`icon icon_ticket`}>
-                    </div>
-                    <div className="count"></div>
-                </div>
+  return (
+    <div className={`user_panel_content_container`}>
+        <div
+          className={`user_panel_content ${
+            isDarkMode ? "user_panel_content_dark" : ""
+          }`}
+        >
+          {/* <div className="close_btn" onClick={closeModal}></div> */}
+          <div className={`panel_item ${isDarkMode ? "panel_item_dark" : ""}`}>
+            <div className="text">我的行程</div>
+          </div>
+            <div className={`panel_item ${isDarkMode ? "panel_item_dark" : ""}`}>
+              <Link to="/member/ticketOrder">            
+                <div className="text">我的票券</div>
+              </Link>
             </div>
-            </Provider>
+          
+          <div className={`panel_item ${isDarkMode ? "panel_item_dark" : ""}`}>
+            <div className="text">我的訂單</div>
+          </div>
+          <div
+              className={`panel_item panel_item_padding ${
+                isDarkMode ? "panel_item_dark" : ""
+              }`}
+            >
+              <div className="item_logout">登出</div>
+          </div>
+          {/* 之後要拿來判斷登入登出的狀態 */}
+          {/* {userInfo ? (
+            <div
+              className={`panel_item item_logout ${
+                isDarkMode ? "panel_item_dark" : ""
+              }`}
+            >
+              
+              
+              <Logout closeModal={closeModal} />
+            </div>
+          ) : null} */}
         </div>
-    );
+    </div>
+  );
 };
 export default UserPanelContent;
