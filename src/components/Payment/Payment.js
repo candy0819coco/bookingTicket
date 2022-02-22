@@ -3,6 +3,7 @@ import React, {
   useState,
   useEffect,
   Fragment,
+  useRef,
   useContext,
 } from "react";
 import "./Payment.scss";
@@ -37,8 +38,58 @@ const Payment = (props) => {
     console.log("creditValid", creditValid);
   }, [creditMonth, creditYear]);
 
+  const firstRef = useRef();
+  const SecondRef = useRef();
+  const thirdRef = useRef();
+  const fourthRef = useRef();
   const [myTicketOrderList, setMyTicketOrderList] = useState([]);
+  const [creditNoFirst, setCreditNoFirst] = useState("");
+  const [creditNoSecond, setCreditNoSecond] = useState("");
+  const [creditNoThird, setCreditNoThird] = useState("");
+  const [creditNoFourth, setCreditNoFourth] = useState("");
+  const [creditNumber, setCreditNumber] = useState("")
+  console.log('creditNumber', creditNumber) // 送去API
 
+  const handleChangeCreditNumber = (inputValue, currentIndex) => {
+    switch (currentIndex) {
+      case 0:
+        setCreditNoFirst(inputValue);
+        if(inputValue.length === 4) SecondRef.current.focus();
+        break;
+      case 1:
+        setCreditNoSecond(inputValue);
+        if(inputValue.length === 4) thirdRef.current.focus();
+        break;
+      case 2:
+        setCreditNoThird(inputValue);
+        if(inputValue.length === 4) fourthRef.current.focus();
+        break;
+      case 3:
+        setCreditNoFourth(inputValue);
+        break;
+      default:
+        break;
+    }
+  }
+
+  useEffect(() => {
+    let tempNumberArray = [];
+    if(creditNoFirst.length === 4) {
+      tempNumberArray[0] = creditNoFirst;
+    } 
+    if(creditNoSecond.length ===4) {
+      tempNumberArray[1] = creditNoSecond;
+    } 
+    if(creditNoThird.length === 4) {
+      tempNumberArray[2] = creditNoThird
+    } 
+    if(creditNoFourth.length === 4) {
+      tempNumberArray[3] = creditNoFourth;
+    } 
+    console.log('tempNumberArray', tempNumberArray)
+    setCreditNumber(tempNumberArray.join(""));
+    
+  }, [creditNoFirst, creditNoSecond, creditNoThird, creditNoFourth]);
   return (
     <div className={`payment_container`}>
       <div className={`payment`}>
@@ -106,31 +157,46 @@ const Payment = (props) => {
                 </div>
                 <div className={`input_area`}>
                   <div className={`input_credit_card_icon`}></div>
-                  <div className={`credit_card_account`}>
-                    <form name="input" action="" method="post">
-                      <input placeholder="" size="4" maxLength="4"></input>
+                  <div className={`credit_card_number`}>
                       <input
-                        className={`account`}
-                        placeholder=""
+                        className={`number_input ${creditNoFirst.length && creditNoFirst.length!==4?"notice":""}`}
+                        placeholder="4155"
                         size="4"
+                        type="number"
                         maxLength="4"
+                        ref={firstRef}
+                        onChange={(e)=>handleChangeCreditNumber(e.target.value, 0)}
                       ></input>
                       <input
-                        className={`account`}
-                        className={`account`}
-                        placeholder=""
+                        className={`number_input ${creditNoSecond.length && creditNoSecond.length!==4?"notice":""}`}
+                        placeholder="6352"
                         size="4"
+                        type="number"
                         maxLength="4"
+                        ref={SecondRef}
+                        onChange={(e)=>handleChangeCreditNumber(e.target.value, 1)}
                       ></input>
                       <input
-                        className={`account`}
-                        placeholder=""
+                        className={`number_input ${creditNoThird.length && creditNoThird.length!==4?"notice":""}`}
+                        placeholder="0652"
                         size="4"
+                        type="number"
                         maxLength="4"
+                        ref={thirdRef}
+                        onChange={(e)=>handleChangeCreditNumber(e.target.value, 2)}
+                      ></input>
+                      <input
+                        className={`number_input ${creditNoFourth.length && creditNoFourth.length!==4?"notice":""}`}
+                        placeholder="4523"
+                        size="4"
+                        type="number"
+                        maxLength="4"
+                        ref={fourthRef}
+                        onChange={(e)=>handleChangeCreditNumber(e.target.value, 3)}
                       ></input>
                       {/* //四個框框 ,自動跳*/}
                       {/* 首先 input 上都要給 maxLength，然後偵測輸入的長度等於 maxLength 就自動跳下一個*/}
-                    </form>
+
                   </div>
                 </div>
                 <div className={`credit_card_time_code`}>

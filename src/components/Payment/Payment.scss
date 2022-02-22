@@ -101,7 +101,7 @@
         .input_area {
           width: 346px;
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-start;
           align-items: end;
           .input_credit_card_icon {
             width: 25px;
@@ -110,9 +110,26 @@
             background-repeat: no-repeat;
             background-size: cover;
           }
-          .credit_card_account {
-            .account {
+          .credit_card_number {
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+            .number_input {
+              border: 1px solid #333;
+              height: 20px;
+              width: 40px;
+              text-align: center;
+              line-height: 20px;
+              padding: 0 3px;
+              border-radius: 3px;
               margin-left: 15px;
+              outline: none;
+
+              &.notice {
+                border-color: red;
+              }
               //    border-radius: 10px;
             }
           }
@@ -163,7 +180,7 @@
           // color:#ffffff;
           margin-right: 287px;
         }
-        .next_step{
+        .next_step {
           padding: 0;
           border: none 0;
           font: inherit;
@@ -173,11 +190,10 @@
           height: 28px;
           line-height: 28px;
           // background-color:#9ACE86 ;
-          
-          // color:#ffffff;
 
-          }
-      
+          // color:#ffffff;
+        }
+
         .temp_payment_switch_btn {
         }
       }
