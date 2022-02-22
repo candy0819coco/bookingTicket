@@ -1,0 +1,215 @@
+$color: #747474;
+$colorGrey01: #cac6c6;
+$colorGrey02: #555151;
+$colorGreen: #81c268;
+
+.member_setting_container {
+    max-width: 1920px;
+    min-height: calc(100vh - 200px);
+
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: $colorGrey02;
+        border-radius: 2px;
+    }
+    .member_container {
+        background-image: url("../../image/vs_morning.svg");
+        background-repeat: no-repeat;
+        // background-position: 0 40px;
+        display: flex;
+        height: 500px;
+        width: 100%;
+
+        .con_both {
+            flex: 1;
+            // /* border: 1px solid black; */
+            padding-top: 20px;
+
+            &.con_left {
+                flex-grow: 1;
+
+                .my_img {
+                    width: 40%;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    :hover {
+                        opacity: 0.7;
+                    }
+                }
+
+                /* 左導覽列start */
+                .member_hi {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+
+                    span span {
+                        font-size: 2em;
+                    }
+                }
+                .member_list {
+                    background-color: #fff;
+                    width: 60%;
+                    text-align: center;
+                    margin: 30px auto;
+
+                    :nth-child(4) {
+                        background-color: #81c268;
+                        border-right: 3px solid #2b9635;
+                    }
+                    a {
+                        color: #000;
+                        text-decoration: none;
+
+                    }
+                    div {
+                        margin: 0 auto;
+                        width: 100%;
+                        height: 50px;
+                        line-height: 50px;
+
+                        &:hover {
+                            background-color: #81c268;
+                            border-right: 3px solid #2b9635;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                .member_logout {
+                    width: 60%;
+                    margin: 70px auto;
+
+                    div {
+                        width: 35%;
+                        padding: 5px;
+                        float: left;
+                        text-align: center;
+                        background-color: #555151;
+                        color: #fff;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+                }
+            } /* 左導覽列end */
+
+            &.con_right {
+                flex-grow: 3;
+                margin-left: 20px;
+                /* 現在位置start */
+                .now_location {
+                    margin-top: 4%;
+                    text-align: left;
+
+                    span {
+                        display: inline-block;
+                        margin: 10px;
+                    }
+                }
+                /* 現在位置end */
+
+                .my_settings {
+                    width: 80%;
+                    height: 70%;
+                    background-color: rgba(255, 255, 255, 0.95);
+                    margin-left: 30px;
+                    margin-top: 30px;
+                    box-shadow: 5px 5px 10px $colorGrey01;
+
+                    .my_content {
+                        display: flex;
+                        height: 50px;
+
+                        .my_title {
+                            margin-top: 30px;
+                            width: 20%;
+                            text-align: right;
+                            margin-right: 20px;
+                        }
+                        .my_data {
+                            margin-top: 30px;
+                            width: 30%;
+                            text-align: left;
+                        }
+
+                        .change_password {
+                            margin-top: 30px;
+                            width: 30%;
+                            text-align: right;
+                            cursor: pointer;
+                            color: rgb(93, 139, 224);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .change_window {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(128, 128, 128, 0.596);
+        top: 0;
+        padding-top: 100px;
+        display: none;
+        .change_content {
+            width: 40%;
+            height: 50%;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin: auto;
+
+            .insert_password {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .pass_title {
+                    width: 30%;
+
+                    label {
+                        display: inline-block;
+                        height: 30px;
+                        margin-top: 10px;
+                    }
+                }
+
+                .pass_data {
+                    width: 50%;
+                    input {
+                        height: 24px;
+                        width: 250px;
+                        margin-top: 10px;
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            .change_chk {
+                width: 15%;
+                background-color: $colorGreen;
+                margin: 50px auto 10px auto;
+                height: 30px;
+                color: #fff;
+                line-height: 30px;
+                text-align: center;
+                border-radius: 5px;
+                cursor: pointer;
+                padding: 5px;
+            }
+            .leave {
+                width: 100%;
+                text-align: right;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,86 @@
+.reset1_container {
+    max-width: 1920px;
+    min-height: calc(100vh - 200px);
+    width: 100%;
+    height: 600px;
+    background-image: url("./../../image/vs_morning.svg");
+    background-position: 0 100px;
+    background-repeat: no-repeat;
+    padding-bottom: 40px;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .now_location {
+        margin-top: 30px;
+        text-align: center;
+
+        span {
+            display: inline-block;
+            margin: 10px;
+        }
+    }
+    .reset_all {
+        width: 350px;
+        height: 400px;
+        margin: 30px auto;
+        text-align: center;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 25px;
+        .reset_password {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            .reset_step {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+
+                .reset_circle {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    border: 1px solid #000000;
+                    margin: 10px;
+                    line-height: 30px;
+                }
+                & .reset_circle:first-child {
+                    background-color: #81c268;
+                }
+                .reset_line {
+                    width: 30px;
+                    height: 15px;
+                    border-bottom: 1px solid black;
+                    margin: 10px;
+                }
+            }
+
+            .reset_insert {
+                width: 280px;
+                display: flex;
+                flex-direction: column;
+                margin: 40px auto;
+
+                div {
+                    margin-left: 10px;
+                    text-align: left;
+                }
+                input {
+                    margin: 10px;
+                    height: 20px;
+                }
+                button {
+                    color: #fff;
+                    background-color: #81c268;
+                    border: none;
+                    margin: 10px;
+                    height: 30px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
