@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express().use("*", cors());
 const SocketServer = require("ws").Server;
 const mysql = require("mysql");
-const wss = new SocketServer({ server });
+
 const { body, validationResult, cookie } = require("express-validator");//驗證各輸入資料
 const bcrypt = require("bcrypt");//加密(單向)
 const jwt = require("jsonwebtoken");
@@ -19,6 +19,12 @@ require('dotenv').config();
 // const nodemailer = require("nodemailer");
 // const passportSetup = require("./passport");
 // const { min } = require("ramda");
+
+const server = app.listen(3400, () => {
+  console.log("Server Listening on port 3400");
+});
+const wss = new SocketServer({ server });
+
 app.use(cookieSession({
 
   keys: ["process.env.COOKIE_SECRET"]
@@ -31,12 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use("/auth", authRoute);
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'testwen'
-});
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -554,7 +554,5 @@ app.get(`/ticket_order/get_qrcode`,(req,res) =>{
 //--------------------------票券部分-------------------------------------------
 
 
-const server = app.listen(3400, () => {
-  console.log("Server Listening on port 3400");
-});
+
 module.exports = app;
