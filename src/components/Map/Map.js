@@ -16,13 +16,11 @@ const Map = () => {
 
   return (
     <div className={`map_container`}>
-      <Provider value={contextValue}>
         <div
           className={`map_background ${
             isDarkMode ? "map_background_dark" : ""
           }`}
         ></div>
-      </Provider>
     </div>
   );
 };

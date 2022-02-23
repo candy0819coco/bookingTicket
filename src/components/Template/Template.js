@@ -9,11 +9,9 @@ const Template = () => {
 
     return (
         <div className={`_container`}>
-            <Provider value={contextValue}>
                 <div className="____">
 
                 </div>
-            </Provider>
         </div>
     );
 };

@@ -10,11 +10,9 @@ const LineUp = () => {
 
     return (
         <div className={`line_up_container`}>
-            <Provider value={contextValue}>
                 <div className="____">
                         LineUp Content
                 </div>
-            </Provider>
         </div>
     );
 };

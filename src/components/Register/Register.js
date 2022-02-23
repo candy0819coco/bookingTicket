@@ -50,7 +50,6 @@ const Register = () => {
 
     return (
         <div className="register_container">
-            <Provider value={contextValue}>
                 <div id={`register_info`}>
                     <div id={`now_location`}>
                         <span>首頁</span>
@@ -127,7 +126,6 @@ const Register = () => {
 
                     </div>
                 </div>
-            </Provider>
         </div>
 
     );

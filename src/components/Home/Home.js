@@ -10,10 +10,8 @@ const Home = () => {
 
     return (
         <div className={`home_container ${isDarkMode ? "home_container_dark":"" }`}>
-            <Provider value={contextValue}>
                 <div className={`home_background ${isDarkMode ? "home_background_dark":"" }`}>
                 </div>
-            </Provider>
         </div>
     );
 };

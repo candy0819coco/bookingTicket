@@ -22,7 +22,6 @@ const Navigator = () => {
   };
 
   return (
-    <Provider value={contextValue}>
       <div className="navbar_container">
         <div
           className={`navbar_inner ${isDarkMode ? "navbar_inner_dark" : ""}`}
@@ -123,7 +122,6 @@ const Navigator = () => {
           </div>
         </div>
       </div>
-    </Provider>
   );
 };
 export default Navigator;

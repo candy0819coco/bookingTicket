@@ -106,7 +106,6 @@ const MyTicketList = () => {
 
   return (
     <div className={`member_order_container`}>
-      <Provider value={contextValue}>
         <div id={"member_container"}>
           <div className={"con_both con_left"}>
             <div id={"member_hi"}>
@@ -273,7 +272,6 @@ const MyTicketList = () => {
             </div>
           </div>
         </div>
-      </Provider>
     </div>
   );
 };

@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const UserPanelContent = (props) => {
   const contextValue = useContext(context);
-  const { isDarkMode, userInfo } = contextValue;
+  const { isDarkMode, currentUser } = contextValue;
   const { closeModal } = props;
 
   return (
@@ -45,7 +45,7 @@ const UserPanelContent = (props) => {
               <div className="item_logout">登出</div>
           </div>
           {/* 之後要拿來判斷登入登出的狀態 */}
-          {/* {userInfo ? (
+          {/* {currentUser ? (
             <div
               className={`panel_item item_logout ${
                 isDarkMode ? "panel_item_dark" : ""

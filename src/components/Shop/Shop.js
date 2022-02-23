@@ -10,11 +10,9 @@ const Shop = () => {
 
     return (
         <div className={`shop_container`}>
-            <Provider value={contextValue}>
                 <div className="____">
                         Shop Content
                 </div>
-            </Provider>
         </div>
     );
 };

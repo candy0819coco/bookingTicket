@@ -93,7 +93,7 @@ const MemberSetting = () => {
 
                                 <a href="/member/schedule"><div className={"member_list01"}>我的行程</div></a>
                                 <div className={"member_list02"}>我的票券</div>
-                                <a href="/member/order"><div className={"member_list03"}>我的訂單</div></a>
+                                <a href="/member/productOrder"><div className={"member_list03"}>我的訂單</div></a>
                                 <div className={"member_list04"}>帳號設定</div>
 
                             </div>

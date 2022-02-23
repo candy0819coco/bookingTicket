@@ -16,7 +16,7 @@ import MyTicketList from "../MyTicketList/MyTicketList";
 
 const TicketQrcodeContent = (props) => {
   const contextValue = useContext(context);
-  const { isDarkMode, userInfo, myTicketOrderList } = contextValue;
+  const { isDarkMode, currentUser, myTicketOrderList } = contextValue;
   const {
     closeModal,
     ticketQrCodeIndex,

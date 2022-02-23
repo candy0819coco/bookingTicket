@@ -8,13 +8,11 @@ import React, {
 import "./TicketOrder.scss";
 import * as R from "ramda";
 import context, { Provider } from "./../context";
-import TicketOrderStepOne from "./../TicketOrderStepOne/TicketOrderStepOne";
 import Payment from "./../Payment/Payment";
 import TicketPicker from "./../TicketPicker/TicketPicker";
 import TicketOrderDetail from "./../TicketOrderDetail/TicketOrderDetail";
 import CampSitePicker from "./../CampSitePicker/CampSitePicker";
 import ModalTool from "./../ModalTool/ModalTool";
-import MyTicketList from "../MyTicketList/MyTicketList";
 import axios from "axios";
 
 const TicketOrder = () => {
@@ -30,7 +28,7 @@ const TicketOrder = () => {
   const [pickedTicket, setPickedTicket] = useState([]);
   const [toDoSelectCamp, setToDoSelectCamp] = useState([]);
   const contextValue = useContext(context);
-  const { isDarkMode, userInfo } = contextValue;
+  const { isDarkMode, currentUser } = contextValue;
 
   useEffect(() => {
     let ws = new WebSocket("ws://localhost:3400");

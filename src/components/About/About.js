@@ -10,11 +10,9 @@ const About = () => {
 
     return (
         <div className={`about_container`}>
-            <Provider value={contextValue}>
                 <div className="____">
                         About Content
                 </div>
-            </Provider>
         </div>
     );
 };
