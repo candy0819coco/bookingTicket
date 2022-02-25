@@ -21,7 +21,7 @@ const MemberSetting = () => {
 
     const checkChange = async () => {
         if (oldPass != "" && newPass != "" && chkPass != "") {
-            await Axios.post("http://localhost:3001/member/setting/change", {
+            await Axios.post("http://localhost:3400/member/setting/change", {
                 currentUser: currentUser.mMail,
                 oldPass: oldPass,
                 newPass: newPass,
@@ -40,7 +40,7 @@ const MemberSetting = () => {
 
     // const getUserInfo = async () => {
     //     if (currentUser) {
-    //         await Axios.post("http://localhost:3001/user/data", { currentUser: currentUser })
+    //         await Axios.post("http://localhost:3400/user/data", { currentUser: currentUser })
     //             .then(function (res) {
     //                 // console.log(res);
 

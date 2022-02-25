@@ -15,7 +15,7 @@ const Reset1 = () => {
 
     const sendEmail = () => {
         if (account != "") {
-            Axios.post("http://localhost:3001/register/reset1", { account: account })
+            Axios.post("http://localhost:3400/register/reset1", { account: account })
             .then((res)=>{
                 // console.log(res);
                 alert(res.data.message);

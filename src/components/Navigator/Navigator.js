@@ -14,7 +14,7 @@ import context, { Provider } from "./../context";
 const Navigator = () => {
   const [userPanelShow,setUserPanelShow] = useState(false);//一開始先隱藏面板
   const contextValue = useContext(context);
-  const { pathName, setPathName, isDarkMode, setIsDarkMode } = contextValue;
+  const { pathName, setPathName, isDarkMode, setIsDarkMode} = contextValue;
 
   const handleCloseUserPanel = (e) => {
     setUserPanelShow(false);
@@ -74,15 +74,24 @@ const Navigator = () => {
               >
                 Shop
               </Link>
+              <div
+                className={`nav_item nav_others`}
+              >
+                Others
+                <div className="navbar_list">
+                  <Link className={`nav_list_text ${pathName === "rental" ? "current" : ""}`}
+                to="/rental"
+                onClick={() => setPathName("rental")}>Market rental
+                </Link>
+                <Link className={`nav_list_text ${pathName === "messageBoard" ? "current" : ""}`}
+                to="/messageBoard"
+                onClick={() => setPathName("messageBoard")}>Message board
+                </Link>
+                </div>
+              </div>
 
             </div>
             <div className="func_area">
-              <Link
-                className={`sign_in ${isDarkMode ? "sign_in_dark" : ""}`}
-                to="/signIn"
-              >
-                Sign in
-              </Link>
               <div
                 className="switch_toggle"
                 onClick={() => setIsDarkMode(!isDarkMode)}

@@ -1,6 +1,6 @@
 .home_container {
   max-width: 1920px;
-  min-height: calc(100vh - 200px);
+  // min-height: calc(100vh - 100px);
   transition: 0.5s;
   background-color: #fffbd0;
   &.home_container_dark {
@@ -8,16 +8,200 @@
   }
   .home_background {
     width: 100%;
-    height: 1080px;
+    // height: 1080px;
+    height: 800px;
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: center;
+    // background-image: url("./../../image/vs_morning.svg");
+    background-color: #fffbd0;
+    z-index: 1;
+    top: 15px;
+    transition: 0.3s;
+    position: relative;
+    &.home_background_dark {
+      // background-image: url("./../../image/vs_night.svg");
+      background-color: #4a4577;
+    }
+    .grass {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      &.grass_1 {
+        background-image: url(./../../image/grass_1.svg);
+        width: 40%;
+        height: 34%;
+        position: absolute;
+        bottom: 90px;
+      }
+      &.grass_2 {
+        background-image: url(./../../image/grass_2.svg);
+        width: 50%;
+        height: 41%;
+        position: absolute;
+        bottom: 90px;
+        left: 350px;
+      }
+      &.grass_3 {
+        background-image: url(./../../image/grass_3.svg);
+        width: 42%;
+        height: 28%;
+        position: absolute;
+        bottom: 105px;
+        left: 790px;
+      }
+    }
+    .logo {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/logo_background.svg);
+      width: 37%;
+      height: 32%;
+      position: absolute;
+      bottom: 505px;
+      left: 810px;
+    }
+    .effect {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/effect.svg);
+      width: 62%;
+      height: 40%;
+      position: absolute;
+      bottom: 300px;
+      left: 16.5%;
+    }
+    .showTheme {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/vs_morning.svg);
+      width: 60%;
+      height: 80%;
+      position: absolute;
+      bottom: 5px;
+      left: 20%;
+    }
+    .hand {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      &.hand_1 {
+        background-image: url(./../../image/hand_left.svg);
+        width: 20%;
+        height: 30%;
+        position: absolute;
+        bottom: -90px;
+        left: 50px;
+      }
+      &.hand_2 {
+        background-image: url(./../../image/hand_right.svg);
+        width: 20%;
+        height: 30%;
+        position: absolute;
+        bottom: -90px;
+        right: 100px;
+      }
+    }
+    .solidIndex {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/solid_index.svg);
+      width: 140%;
+      height: 120%;
+      position: absolute;
+      // bottom: -20px;
+      left: -100px;
+    }
+  }
+
+  .home_background2 {
+    width: 100%;
+    position: relative;
+    top: 10px;
+    z-index: 3;
+    height: 210px;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-position: center;
-    background-image: url("./../../image/vs_morning.svg");
-    background-color: #fffbd0;
-    transition: 0.3s;
-    &.home_background_dark {
-      background-image: url("./../../image/vs_night.svg");
-      background-color: #4a4577;
+    background-color: #ffeea4;
+    &.home_background_dark2 {
+      background-color: #b4bff4;
+    }
+    .home_background_box{
+      
+    
+      .solidButton {
+        background-color: #555555;
+        color: #fff;
+        width: 350px;
+        height: 50px;
+        // border:#555555;
+      }
+      .c19 {
+        position: relative;
+        left: 658px;//原527px
+        top: 50px;
+      }
+    }
+  }
+  .home_background3 {
+    width: 100%;
+    height: 750px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: #f7f7f7;
+    z-index: 0;
+    position: relative;
+    &.home_background_dark3 {
+      background-color: #474747;
+    }
+    .newsImage {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/News.png);
+      width: 9%;
+      height: 100%;
+      position: absolute;
+      bottom: 260px;
+      left: 90px;
+    }
+
+    .camp {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/camp.svg);
+      width: 22%;
+      height: 100%;
+      position: absolute;
+      bottom: -30px;
+      right: 90px;
+    }
+    .fire {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/fire.svg);
+      width: 25%;
+      height: 100%;
+      position: absolute;
+      bottom: 240px;
+      right: 90px;
+    }
+    .news {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/news1.png);
+      width: 44%;
+      height: 100%;
+      position: absolute;
+      bottom: 30px;
+      left: 155px;
     }
   }
 }

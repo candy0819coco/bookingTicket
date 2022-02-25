@@ -9,7 +9,7 @@
   padding-top: 40px;
   &.response_show {
     .ticket_picker {
-      transform: scale(calc(var(--ratio) - 0.05));
+      // transform: scale(calc(var(--ratio) - 0.05));
       transform-origin: top;
       .ticket_type_area {
         width: 100%;
@@ -92,9 +92,9 @@
             transform: perspective(220px) rotateY(6deg) translateY(-20px);
           }
           .ticket_image {
-            width: 240px;
+            width: 270px;//240px
             min-width: 240px;
-            height: 440px;
+            height: 472px;//440px
             background-repeat: no-repeat;
             background-size: contain;
             // transform: perspective(200px) rotateY(3deg);
@@ -136,7 +136,7 @@
     .order_button,
     .cancel_button {
       width: 120px;
-      height: 60px;
+      height: 35px;
       background-color: #333;
       color: #fff;
       font-size: 20px;
@@ -144,7 +144,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 50px 0 0 0;
+      margin: 3px 0 0 0;
       transition: 0.3s;
       // opacity: 0;
       cursor: pointer;
@@ -362,9 +362,9 @@
       align-content: center;
       align-items: center;
       transition: 0.3s;
-      margin-top: 30px;
+      margin-top: 20px;//30px
       .select_camp_btn {
-        width: 25%;
+        width: 26%;
         height: 40px;
         background-color: #ddd;
         border-radius: 5px;
@@ -424,10 +424,10 @@
         display: flex;
         justify-content: center;
         height: 60px;
-        margin-top: 40px;
+        margin-top: 9px;//40px
         width: 100%;
         .btn {
-          width: 25%;
+          width: 26%;
           height: 40px;
           background-color: #ddd;
           margin-right: 20px;

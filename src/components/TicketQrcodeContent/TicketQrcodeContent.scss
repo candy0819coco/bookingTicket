@@ -71,13 +71,54 @@
           align-items: center;
           position: relative;
           &.ticket_one {
-            background-image: url(./../../image/single_day_ticket.svg);
+            background-image: url(./../../image/1dayticket_NN.png);
           }
           &.ticket_two {
-            background-image: url(./../../image/two_days_ticket.svg);
+            background-image: url(./../../image/2dayticket_NN.png);
           }
           &.ticket_camp {
-            background-image: url(./../../image/two_days_plus_camp_ticket.svg);
+            background-image: url(./../../image/campticket_NN.png);
+          }
+          .ticket_number_normal{
+            color:white;
+            position: absolute;
+            font-weight: 600;
+            bottom: 69px;
+            left: 175px;
+            font-size: 17px;
+            letter-spacing: 2px;
+            &.ticket_days_number_normal{
+              color:black;
+            }
+          }
+          .ticket_number_reverse{
+            color: #404068;
+            writing-mode: vertical-lr;
+            // font-family: Ailerons-Regular;
+            position: absolute;
+            font-weight: 600;
+            left: 86px;
+            bottom: 125px;
+            letter-spacing: 2px;
+            font-size: 17px;
+            &.ticket_days_number_reverse{
+              color: black;
+
+            }
+          }
+          .ticket_number_stalic{
+            color:#404068;
+            position: absolute;
+            right: 60px;
+            bottom: 59px;
+            letter-spacing: 2px;
+            font-weight: 600;
+            transform: rotateZ(-45deg);
+            font-size: 13px;
+            &.ticket_days_number_stalic{
+              color:white;
+            }
+
           }
           .left_arrow{
             background-image: url("./../../image/lightbox_arrow_left_solid.svg");

@@ -1,5 +1,7 @@
-.member_order_container {
+.ticket_order_container {
     max-width: 1920px;
+    font-family: "Noto Sans";
+
   
     #member_container {
       background-image: url("../../image/vs_morning.svg");
@@ -57,6 +59,11 @@
             text-align: center;
             margin-top: 20px;
             text-decoration: none;
+            :nth-child(2) {
+              background-color: #81c268;
+              border-right: 3px solid #2b9635;
+            }
+
             
             
             div {
@@ -160,11 +167,13 @@
         }
         .gray_square_hide{
           width: 100%;
-          height: 270px;
+          height: 160px;
           transform: scaleY(0);
           background-color: #F7F7F7;
+          display: none;
           &.gray_square_show{
             transform: scaleY(1);
+            display: block;
           }
           .gray_square_content{
             .gray_square_title_area{
@@ -240,16 +249,32 @@
                   text-decoration: underline;
                   cursor: pointer;
                   }
-                
-                .active_day{
-                  width: 50px;
-                  height: 14px;
-                  font-size: 10px;
-                  line-height: 14px;
-                  border-radius: 6px;
-                  /* text-align: center; */
-                  background-color: #CBCACA;
-                }
+                  .camp_site{
+                    width: 30px;
+                    height: 16px;
+                    display: flex;
+                    // box-shadow: 0 0 2px 2px #ddd;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #999;
+                    overflow: hidden;
+                    margin-left: 5px;                  
+                    .camp_site_name{
+                      width: 100%;
+                      height: 100%;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      transition: 0.3s;
+                      font-size: 12px;
+                      color: #666;
+                      background-color:#9ACE86;
+                      font-family: "Open Sans";
+  
+                    }
+                  }
+    
               }
             }
             .detail_line{

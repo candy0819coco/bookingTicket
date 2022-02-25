@@ -1,8 +1,10 @@
+const bodyParser = require("body-parser");//wen---
 const express = require("express");
 const cors = require("cors");
 const app = express().use("*", cors());
 const SocketServer = require("ws").Server;
 const mysql = require("mysql");
+
 
 const { body, validationResult, cookie } = require("express-validator");//驗證各輸入資料
 const bcrypt = require("bcrypt");//加密(單向)
@@ -90,7 +92,7 @@ const authController = (req, res) => {
   const passwordRegA = bcrypt.hashSync(passwordReg, 10);
   const passwordCheckA = bcrypt.hashSync(passwordCheck, 10);
 
-  db.query("insert into test01 (mName,mMail,mPwd,mPwd_check,mPhone,mBirthday,mAddress,mActive,mCode) values(?,?,?,?,?,?,?,0,'')"
+  db.query("insert into member_info (mName,mMail,mPwd,mPwd_check,mPhone,mBirthday,mAddress,mActive,mCode,mPhoto) values(?,?,?,?,?,?,?,0,'',0)"
       , [usernameReg, accountReg, passwordRegA, passwordCheckA, phoneNumber, birth, address]
       , function (err, result) {
           //如果失敗，有error，result為undefined
@@ -131,7 +133,7 @@ const authControllerReset = (req, res) => {
   const passwordResetA = bcrypt.hashSync(passwordReset, 10);
   const passwordCheckA = bcrypt.hashSync(passwordCheck, 10);
 
-  db.query("update test01 set mPwd=? , mPwd_check=? where mMail = ?"
+  db.query("update member_info set mPwd=? , mPwd_check=? where mMail = ?"
       , [passwordResetA, passwordCheckA, decode.account]
       , function (err, result) {
           if (err) {
@@ -161,7 +163,7 @@ app.post("/register", [
 app.post("/signIn", function (req, res) {
   const { account, password } = req.body;
 
-  db.query("select * from test01 where mMail=?"
+  db.query("select * from member_info where mMail=?"
       , [account]
       , function (err, result) {
           if (err) throw err;
@@ -179,7 +181,7 @@ app.post("/signIn", function (req, res) {
           }
 
           const payload = {
-              id: result[0].id,
+              mNo: result[0].mNo,
               mMail: result[0].mMail,
               mName: result[0].mName,
               mPhone: result[0].mPhone,
@@ -207,7 +209,7 @@ app.put("/register/active/:mMail", function (req, res) {
   const buff = Buffer.from(req.params.mMail, 'base64');
   const mMail = buff.toString('utf-8');
   // console.log(mMail);
-  db.query("update test01 set mActive=1 where mMail = ?"
+  db.query("update member_info set mActive=1 where mMail = ?"
       , [mMail]
       , function (err, result) {
           if (err) {
@@ -233,7 +235,7 @@ app.post("/register/reset1", function (req, res) {
   }
   var code = createRandomNum();
 
-  db.query("select * from test01 where mMail = ?"
+  db.query("select * from member_info where mMail = ?"
       , [account]
       , function (err, result) {
           if (err) {
@@ -243,7 +245,7 @@ app.post("/register/reset1", function (req, res) {
               return res.status(500).send({ message: "查無帳號請再試一次" });
           } else {
 
-              db.query("update test01 set mCode=? where mMail = ?"
+              db.query("update member_info set mCode=? where mMail = ?"
                   , [code, account]
                   , function (err, result) {
                       if (err) {
@@ -322,7 +324,7 @@ app.post("/member/setting/change", (req, res) => {
   const { currentUser, oldPass, newPass, chkPass } = req.body;
 
   if (oldPass != "" && newPass != "" && chkPass != "") {
-      db.query("select * from test01 where mMail=?"
+      db.query("select * from member_info where mMail=?"
           , [currentUser]
           , (err, result) => {
               if (err) {
@@ -342,7 +344,7 @@ app.post("/member/setting/change", (req, res) => {
                       } else {
                           const newPassA = bcrypt.hashSync(newPass, 10);
                           const chkPassA = bcrypt.hashSync(chkPass, 10);
-                          db.query("update test01 set mPwd=? , mPwd_check=? where mMail = ?"
+                          db.query("update member_info set mPwd=? , mPwd_check=? where mMail = ?"
                               , [newPassA, chkPassA, currentUser],
                               (err, result) => {
                                   if (err) {
@@ -373,7 +375,7 @@ app.post("/user/data", function (req, res) {
   // const { currentUser } = req.body;
   // console.log("測試:", req.body, "測試");
 
-  // db.query("select * from test01 where id=?")
+  // db.query("select * from member_info where id=?")
 })
 //存localstorage
 // app.get("/signIn/:token",function(req,res){
@@ -397,9 +399,9 @@ app.post("/user/data", function (req, res) {
 
 //--------------------------票券部分-------------------------------------------
 app.post("/ticket_order/get_list", (req, res) => {
-  console.log("req.body.mNo"); //req.body=data
-  const { mNo } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
-  const getTicketOrderSQL = `SELECT * FROM ticket_order WHERE mNo = ${mNo}`; //WHERE是給mNO條件，選票券訂單的資料庫
+  console.log(req.body.mNo); //req.body=data
+  const {mNo} = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
+  const getTicketOrderSQL = `SELECT * FROM ticket_order WHERE mNo=${mNo}`; //WHERE是給mNO條件，選票券訂單的資料庫
   db.query(getTicketOrderSQL, (error, ticketOrderListResult) => {
     console.log("error", error);
     if (error) {
@@ -445,8 +447,8 @@ app.post("/ticket_order/get_list", (req, res) => {
 //購買單日&雙日票 寫進ticket_order資料庫
 app.post("/create_ticket_order", (req, res) => {
   const { mNo, totalTickets, mName, orderTime } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
-  const sql = `INSERT INTO ticket_order (mNo,mAccount,mName,mPhone,mMail,orderTime,orderStatus,orderPrice,paymentStatus,paymentMethod)
-  VALUES('000001',"gin0513","${mName}","0987209687","gin0513@gmail.com","${orderTime}",${0},${3600},${0},"信用卡")`;
+  const sql = `INSERT INTO ticket_order (mNo,mName,mPhone,mMail,orderTime,orderStatus,orderPrice,paymentStatus,paymentMethod)
+  VALUES('${currentUser.mNo}',"${currentUser.mName}","${currentUser.mPhone}","${currentUser.mMail}","${currentUser.orderTime}",${currentUser.orderStatus},${currentUser.orderPrice},${currentUser.paymentStatus},"${currentUser.paymentMethod}")`;
   db.query(sql, (insertTicketOrderError, insertTicketOrderResults) => {
     console.log("insertTicketOrderError", insertTicketOrderError);
     if (insertTicketOrderError) {

@@ -235,7 +235,7 @@ const TicketPicker = (props) => {
               ></div>
               <div className="ticket_desc">
                 <div>單日票</div>
-                <div>入場音樂祭 1 日</div>
+                <div>音樂祭任 1 日活動</div>
               </div>
             </div>
             <div className={`ticket_box`}>
@@ -247,7 +247,7 @@ const TicketPicker = (props) => {
               ></div>
               <div className="ticket_desc">
                 <div>雙日票</div>
-                <div>入場音樂祭 2 日</div>
+                <div>音樂祭 2 日活動</div>
               </div>
             </div>
             <div className="ticket_box">
@@ -259,7 +259,7 @@ const TicketPicker = (props) => {
               ></div>
               <div className="ticket_desc">
                 <div>露營票</div>
-                <div>入場音樂祭 2 日</div>
+                <div>音樂祭 2 日活動</div>
                 <div>露營營位</div>
               </div>
             </div>

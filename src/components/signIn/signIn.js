@@ -24,7 +24,7 @@ const SignIn = () => {
     // }, []);//需要的引入
 
     const goGoogle = async () => {
-        await window.open("http://localhost:3001/auth/google", "_self");
+        await window.open("http://localhost:3400/auth/google", "_self");
         Axios.get("/auth/success")
             .then(function (res) {
                 console.log(res);
@@ -35,7 +35,7 @@ const SignIn = () => {
     const goSignIn = (e) => {
         e.preventDefault();
         if (account != "" && password != "") {
-            Axios.post("http://localhost:3001/signIn", {
+            Axios.post("http://localhost:3400/signIn", {
                 account: account,
                 password: password
             }).then(function (res) {

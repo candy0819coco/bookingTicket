@@ -19,7 +19,7 @@ const Jump = () => {
             const mMail = window.location.href.substring(38);
             // console.log(mMail);
             //拿到網址列的信箱資料
-            Axios.put(`http://localhost:3001/register/active/${mMail}`)//把拿到的信箱放到網址裡往後端丟過去
+            Axios.put(`http://localhost:3400/register/active/${mMail}`)//把拿到的信箱放到網址裡往後端丟過去
                 .then((response) => {
                     alert("信箱驗證無誤，即將跳轉回登入頁面登入");
                     // console.log(response.data.massage);

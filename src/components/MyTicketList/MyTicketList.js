@@ -20,14 +20,18 @@ const MyTicketList = () => {
   const {
     handleGetTicketDetails,
     ticketOrderListDetails,
-    setTicketOrderListDetails,
+      currentUser,
+      setTicketOrderListDetails,
   } = contextValue;
   const [myTicketOrderList, setMyTicketOrderList] = useState([]);
   const [myTicketListDetailsShow, setMyTicketListDetailsShow] = useState(false);
   const [ticketQrCodeShow, setTicketQrCodeShow] = useState(false); //預設不顯示
   const [ticketQrCodeIndex, setTicketQrCodeIndex] = useState(0);
+  const [ticketOrderIndex, setTicketOrderIndex] = useState(0);
   const [currentTicketItem, setCurrentTicketItem] = useState();
+  const [currentTicketOrderItem, setCurrentTicketOrderItem] = useState();
   const [ticketsOfCurrentOrder, setTicketsOfCurrentOrder] = useState([]);
+  const [currentTicketOrder, setCurrentTicketOrder] = useState([]);
   const [userPathName,setUserPathName] = useState("memberOrder");
 
   const handleCloseTicketQrCode = (e) => {
@@ -42,7 +46,7 @@ const MyTicketList = () => {
     await axios({
       method: "post",
       url: `http://localhost:3400/ticket_order/get_list`,
-      data: { mNo: "000008" },
+      data: {mNo:currentUser.mNo},
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -50,6 +54,7 @@ const MyTicketList = () => {
       },
     })
       .then(function (response) {
+        console.log('responsewhat',response.data)
         console.log("ticket_order_response", response.data.data); //?
         results = response.data.data;
         setMyTicketOrderList(results);
@@ -90,6 +95,10 @@ const MyTicketList = () => {
     setCurrentTicketItem(ticketsItem);
     setTicketsOfCurrentOrder(allTickets);
   };
+//   const handOpenTicketList=(e)=>{
+//       setMyTicketListDetailsShow(!myTicketListDetailsShow);
+
+//  }
 
   useEffect(() => {
     handleGetTicketOrderList();
@@ -105,7 +114,10 @@ const MyTicketList = () => {
 
 
   return (
-    <div className={`member_order_container`}>
+    <div className={`ticket_order_container`}>
+      {!currentUser && ""}
+      {currentUser &&
+
         <div id={"member_container"}>
           <div className={"con_both con_left"}>
             <div id={"member_hi"}>
@@ -154,28 +166,24 @@ const MyTicketList = () => {
                   <div className="th_area">訂單明細</div>
                 </div>
               </div>
-              {myTicketOrderList.map((item, key) => {
+              {myTicketOrderList.map((item, itemOrderNo) => {
                 // console.log("item", item);
                 return (
-                  <Fragment key={item.orderNo}>
+                  <Fragment key={itemOrderNo}>
                     <div className={`thead_second_area`}>
                       <div className="tr_second_area">
-                        <div className="tb_area">{item.orderTime}</div>
-                        <div className="tb_area">{item.orderNo}</div>
+                        <div className={`tb_area `}>{item.orderTime}</div>
+                        <div className={`tb_area`}>{item.orderNo}</div>
                         {/* <div className="tb_area">{item.orderStatus === 1 ? "訂單成立":"尚未成立"}</div> */}
-                        <div className="tb_area">{item.orderPrice}</div>
-                        <div className="tb_area">{item.paymentMethod}</div>
-                        <div className="tb_area">
+                        <div className={`tb_area `}>{item.orderPrice}</div>
+                        <div className={`tb_area`}>{item.paymentMethod}</div>
+                        <div className={`tb_area `}>
                           {item.paymentStatus === 1 ? "付款完成" : "未付款"}
                         </div>
                         <div className="tb_area">
                           <div className="btn_position">
                             <div
-                              onClick={() =>
-                                setMyTicketListDetailsShow(
-                                  !myTicketListDetailsShow
-                                )
-                              }
+                              onClick={()=>setMyTicketListDetailsShow(!myTicketListDetailsShow)}
                               className="order_details_btn "
                             >
                               +{/* handleGetTicketDetails(item.orderNo) */}
@@ -201,12 +209,12 @@ const MyTicketList = () => {
                           return (
                             <div className="map_area" key={key}>
                               <div className="gray_square_details_area">
-                                <div className="type_color_area">
+                              <div className="type_color_area">
                                   <div
                                     className={`blank ${
-                                      ticketsItem.ticketType == "雙日票"
+                                      ticketsItem.ticketType == "two"
                                         ? "two_days_color"
-                                        : ticketsItem.ticketType == "單日票"
+                                        : ticketsItem.ticketType == "one"
                                         ? "single_color"
                                         : "camp_color"
                                     }`}
@@ -216,14 +224,21 @@ const MyTicketList = () => {
                                   </div>
                                 </div>
                                 <div className={`gray_square_details`}>
-                                  {ticketsItem.ticketType === "單日票"
+                                  {ticketsItem.ticketType === "one"
                                     ? ticketsItem.singleTicketDay === 1
                                       ? "20220813"
                                       : "20220814"
                                     : "20220813\n20220814"}
                                 </div>
                                 <div className={`gray_square_details`}>
-                                  {ticketsItem.ticketType}
+                                  {ticketsItem.ticketName}
+                                  {ticketsItem.ticketName==='露營票'
+                                  ?
+                                  (<div className={`camp_site`}>
+                                    <div className={`camp_site_name`}>{ticketsItem.campId}</div>
+                                  </div>
+                                  ):""}
+
                                   {/* <div className={`active_day`}>8/13</div> */}
                                 </div>
                                 <div className={`gray_square_details`}>
@@ -272,6 +287,7 @@ const MyTicketList = () => {
             </div>
           </div>
         </div>
+      }
     </div>
   );
 };

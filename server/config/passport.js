@@ -12,12 +12,12 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_ClIENT_ID,
     clientSecret: process.env.GOOGLE_ClIENT_PASSWORD,
-    callbackURL: "http://localhost:3001/auth/google/callback"
+    callbackURL: "http://localhost:3400/auth/google/callback"
 },
     function (accessToken, refreshToken, profile, done) {
 
         if(profile){
-            db.query("insert into test01 (mName,mMail,googleId) values(?,?,?)"
+            db.query("insert into member_info (mName,mMail,googleId) values(?,?,?)"
             ,[profile.displayName,profile.emails[0].value,profile.id]
             ,function(err,result)
             {
@@ -28,7 +28,7 @@ passport.use(new GoogleStrategy({
                 }
             })
         }
-        // db.query("select * from test01 where mMail = ?"
+        // db.query("select * from member_info where mMail = ?"
         //     , [profile.emails[0].value]
         //     , (err, result) => {
         //         if (err) {//若有錯誤，返回
@@ -40,13 +40,13 @@ passport.use(new GoogleStrategy({
         //             return done(null, result);
         //         }
         //         else {
-        //             db.query("insert into test01 set mName= ?, mMail = ?, googleId = ?"
+        //             db.query("insert into member_info set mName= ?, mMail = ?, googleId = ?"
         //                 , [profile.displayName, profile.emails[0].value, profile.id]
         //                 , function (err, cb) {
         //                     if (err) {
         //                         return done(err, cb)
         //                     } else {
-        //                         db.query("select * from test01 where mMail=?"
+        //                         db.query("select * from member_info where mMail=?"
         //                             , [profile.emails[0]]
         //                             , (err, user) => {
         //                                 console.log("登入成功");

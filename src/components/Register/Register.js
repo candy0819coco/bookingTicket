@@ -23,7 +23,7 @@ const Register = () => {
     const goRegister = () => {
 
         if (accountReg !== "" && passwordReg !== "" && passwordCheck !== "" && phoneNumber !== "" && usernameReg !== "") {
-            Axios.post("http://localhost:3001/register", {
+            Axios.post("http://localhost:3400/register", {
                 usernameReg: usernameReg,
                 accountReg: accountReg,
                 passwordReg: passwordReg,

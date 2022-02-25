@@ -88,15 +88,19 @@ const TicketQrcodeContent = (props) => {
             <div className="ticket_container">
               <div className="lightbox_change">
                
-                <div
+              <div
                   className={`ticket ${
-                    currentTicketItem.ticketType == "單日票"
+                    currentTicketItem.ticketType == "one"
                       ? "ticket_one"
-                      : currentTicketItem.ticketType == "雙日票"
+                      : currentTicketItem.ticketType == "two"
                       ? "ticket_two"
                       : "ticket_camp"
                   }`}
                 >
+                  <div className={`ticket_number_normal ${currentTicketItem.ticketType !=="camp"? "ticket_days_number_normal":""}`}>{currentTicketItem.ticketNo}</div>
+                  <div className={`ticket_number_reverse ${currentTicketItem.ticketType !=="camp"? "ticket_days_number_normal":""}`}>{currentTicketItem.ticketNo}</div> 
+                  <div className={`ticket_number_stalic ${currentTicketItem.ticketType !=="camp"? "ticket_days_number_stalic":""}`}>{currentTicketItem.ticketNo}</div>
+
                    {handleRenderOthersTicketsBtn()}
                 </div>
 

@@ -19,7 +19,7 @@ const Reset3 = () => {
         
         const token = JSON.parse(localStorage.reset).token;
         if (passwordReset !== "" && passwordCheck !== "") {
-            await Axios.post("http://localhost:3001/register/reset3", {
+            await Axios.post("http://localhost:3400/register/reset3", {
                 passwordReset: passwordReset,
                 passwordCheck: passwordCheck,
                 token:token,

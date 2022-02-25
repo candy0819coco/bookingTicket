@@ -21,7 +21,7 @@ const Reset2 = () => {
         var code = [code01, code02, code03, code04, code05, code06];
         code = code.join("");
         const token = JSON.parse(localStorage.reset).token;
-        Axios.post("http://localhost:3001/register/reset2", { code: code, token: token })
+        Axios.post("http://localhost:3400/register/reset2", { code: code, token: token })
             .then((res) => {
                 alert(res.data.message);
                 navigate("/register/reset3");
