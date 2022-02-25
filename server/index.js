@@ -448,7 +448,7 @@ app.post("/ticket_order/get_list", (req, res) => {
 app.post("/create_ticket_order", (req, res) => {
   const { mNo, totalTickets, mName, orderTime } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
   const sql = `INSERT INTO ticket_order (mNo,mName,mPhone,mMail,orderTime,orderStatus,orderPrice,paymentStatus,paymentMethod)
-  VALUES('${currentUser.mNo}',"${currentUser.mName}","${currentUser.mPhone}","${currentUser.mMail}","${currentUser.orderTime}",${currentUser.orderStatus},${currentUser.orderPrice},${currentUser.paymentStatus},"${currentUser.paymentMethod}")`;
+  VALUES('000001',"${mName}","0987209687","gin0513@gmail.com","${orderTime}",${0},${3600},${0},"信用卡")`;
   db.query(sql, (insertTicketOrderError, insertTicketOrderResults) => {
     console.log("insertTicketOrderError", insertTicketOrderError);
     if (insertTicketOrderError) {

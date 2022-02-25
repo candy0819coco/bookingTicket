@@ -33,6 +33,7 @@ const MyTicketList = () => {
   const [ticketsOfCurrentOrder, setTicketsOfCurrentOrder] = useState([]);
   const [currentTicketOrder, setCurrentTicketOrder] = useState([]);
   const [userPathName,setUserPathName] = useState("memberOrder");
+  const [showDetailList, setShowDetailList] = useState([]);
 
   const handleCloseTicketQrCode = (e) => {
     setTicketQrCodeShow(false);
@@ -46,7 +47,8 @@ const MyTicketList = () => {
     await axios({
       method: "post",
       url: `http://localhost:3400/ticket_order/get_list`,
-      data: {mNo:currentUser.mNo},
+      data: {mNo:"000001"},//  data: {mNo:currentUser.mNo},
+
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -109,14 +111,33 @@ const MyTicketList = () => {
     // return <props/>
   }
 
+  const handleShowDetail = (orderNo) => {
+    console.log('orderNo', orderNo)
+    let tempList = [...showDetailList];
+    console.log('0_tempList', tempList)
+    // let targetDetail = document.getElementById(orderNo);
+    // console.log('targetDetail', targetDetail);
+    // targetDetail.style.height = "160px";
+    if(R.includes(orderNo, showDetailList)) {
+      tempList = R.without([orderNo], showDetailList);
+      console.log('1_tempList', tempList)
+      setShowDetailList(tempList);
+    } else {
+      tempList = [...showDetailList];
+      tempList.push(orderNo);
+      console.log('2_tempList', tempList)
+      setShowDetailList(tempList);
 
+    }
+
+  }
 
 
 
   return (
     <div className={`ticket_order_container`}>
-      {!currentUser && ""}
-      {currentUser &&
+      {/* {!currentUser && ""} */}
+      {/* {currentUser && */}
 
         <div id={"member_container"}>
           <div className={"con_both con_left"}>
@@ -167,11 +188,11 @@ const MyTicketList = () => {
                 </div>
               </div>
               {myTicketOrderList.map((item, itemOrderNo) => {
-                // console.log("item", item);
+                console.log("item", item);
                 return (
                   <Fragment key={itemOrderNo}>
                     <div className={`thead_second_area`}>
-                      <div className="tr_second_area">
+                      <div className={`tr_second_area ${itemOrderNo%2===0 ? "odd_row":"even_row"}`}>
                         <div className={`tb_area `}>{item.orderTime}</div>
                         <div className={`tb_area`}>{item.orderNo}</div>
                         {/* <div className="tb_area">{item.orderStatus === 1 ? "訂單成立":"尚未成立"}</div> */}
@@ -183,18 +204,19 @@ const MyTicketList = () => {
                         <div className="tb_area">
                           <div className="btn_position">
                             <div
-                              onClick={()=>setMyTicketListDetailsShow(!myTicketListDetailsShow)}
+                              // onClick={()=>setMyTicketListDetailsShow(!myTicketListDetailsShow)}
+                              onClick={()=>handleShowDetail(item.orderNo)}
                               className="order_details_btn "
                             >
-                              +{/* handleGetTicketDetails(item.orderNo) */}
+                              {R.includes(item.orderNo, showDetailList) ? "+":"-"}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div
-                      className={`gray_square_hide ${
-                        myTicketListDetailsShow ? "gray_square_show" : ""
+                      className={`gray_square ${
+                        !R.includes(item.orderNo, showDetailList) ? "gray_square_show" : ""
                       }`}
                     >
                       <div className="gray_square_content">
@@ -287,7 +309,7 @@ const MyTicketList = () => {
             </div>
           </div>
         </div>
-      }
+      
     </div>
   );
 };

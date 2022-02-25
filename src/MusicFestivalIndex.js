@@ -94,7 +94,7 @@ const MusicFestivalIndex = () => {
     userToken,
     setUserToken,
   }; //把會用到的值 裝在contextValue，傳給下面的組件使用
-
+  console.log(currentUser,'currentUser')
   return (
     <Router>
       <div

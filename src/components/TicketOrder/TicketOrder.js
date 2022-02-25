@@ -59,6 +59,7 @@ const TicketOrder = () => {
   useEffect(() => {
     let toDoSelectCampTicket = pickedTicket.filter((item)=> {return item.ticketType === "camp"})
     console.log('toDoSelectCampTicket', toDoSelectCampTicket);
+
     setToDoSelectCamp(toDoSelectCampTicket);
   }, [pickedTicket]);
 
@@ -77,7 +78,7 @@ const TicketOrder = () => {
     await axios({
       method: "post",
       url: `http://localhost:3400/create_ticket_order`,
-      data: { mNo: "000001", totalTickets: totalTickets, mName: mName, orderTime:orderTime },
+      data: { mNo:'000001', totalTickets: totalTickets, mName: mName, orderTime:orderTime },
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
