@@ -11,7 +11,7 @@ $color1: #767676;
     position: fixed;
     display: flex;
     align-items: center;
-    background-color: #F8F8F8;
+    background-color: #f8f8f8;
     color: $color1;
     top: 0px;
 
@@ -30,17 +30,18 @@ $color1: #767676;
         width: 200px;
         height: 55px;
         position: relative;
-        background-image: url('./../../image/logo_black.svg');
+        background-image: url("./../../image/logo_black.svg");
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center center;
         transition: 0.3s;
         &.main_logo_dark {
           transition: 0.3s;
-          background-image:url('./../../image/logo_white.svg');
-      }}
+          background-image: url("./../../image/logo_white.svg");
+        }
+      }
     }
-    .container_right{
+    .container_right {
       width: 84%;
       height: 100%;
       display: flex;
@@ -59,8 +60,7 @@ $color1: #767676;
             color: #c7c7c7;
           }
         }
-       
-        
+
         .nav_item {
           width: auto;
           width: 100px;
@@ -84,41 +84,40 @@ $color1: #767676;
             background-color: #ffffff;
             color: #777;
           }
-          &.nav_others{
+          &.nav_others {
             position: relative;
-            .navbar_list{
-              display: none;            }
-            &:hover{
-
-            .navbar_list{
-              display: flex;
-              flex-direction: column;
-              /* flex-direction: row; */
-              font-size: 15px;
-              position: absolute;
-              top: 39px;
-              left: 21px;
-              width: 109px;
-              height: 71px;
-                .nav_list_text{
-                margin-bottom: 5px;
-                margin-bottom: 10px;
-                color: #8b8b8b;
-                font-weight: 100;
-                text-decoration: none;
+            .navbar_list {
+              display: none;
+            }
+            &:hover {
+              .navbar_list {
+                display: flex;
+                flex-direction: column;
+                /* flex-direction: row; */
+                font-size: 15px;
+                position: absolute;
+                top: 39px;
+                left: 21px;
+                width: 109px;
+                height: 71px;
+                .nav_list_text {
+                  margin-bottom: 5px;
+                  margin-bottom: 10px;
+                  color: #8b8b8b;
+                  font-weight: 100;
+                  text-decoration: none;
+                }
               }
             }
-
+          }
         }
-      }
-      }
       }
       .func_area {
         display: flex;
         width: 30%;
         justify-content: right;
         align-items: center;
-        .sign_in{
+        .sign_in {
           font-size: 20px;
           font-weight: bold;
           align-items: center;
@@ -128,11 +127,10 @@ $color1: #767676;
           white-space: nowrap;
           margin-right: 20px;
           font-size: 20px;
-          &.sign_in_dark{
+          &.sign_in_dark {
             transition: 0.3s;
             color: white;
           }
-
         }
         .icon {
           background-repeat: no-repeat;
@@ -148,7 +146,7 @@ $color1: #767676;
             margin-left: 15px;
             transition: 0.3s;
             background-image: url("./../../image/cart_black.svg");
-            &.icon_cart_dark{
+            &.icon_cart_dark {
               transition: 0.3s;
               background-image: url("./../../image/cart_white.svg");
             }
@@ -160,11 +158,22 @@ $color1: #767676;
             margin-left: 15px;
             margin-right: 70px;
             background-image: url("./../../image/membership_black.svg");
-            transition: 0.3s;  
-              &.icon_user_dark{
-                transition: 0.3s;
-                background-image: url("./../../image/membership_white.svg");
-              }
+            transition: 0.3s;
+            &.icon_user_dark {
+              transition: 0.3s;
+              background-image: url("./../../image/membership_white.svg");
+            }
+            .nav_item {
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+              transition: 0.3s;
+              text-decoration: none;
+              color: #767676;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
           }
         }
         .switch_toggle {
@@ -204,8 +213,7 @@ $color1: #767676;
             }
           }
         }
-        }
-      }  
       }
     }
-
+  }
+}

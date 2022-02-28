@@ -44,6 +44,7 @@ const db = mysql.createConnection({
   user: "root",
   password: "123456",
   database: "music_festival",
+  // database: "music_festival_merged",
   // password: 'root',
   // database: 'testwen'
 });

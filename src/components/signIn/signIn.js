@@ -69,7 +69,7 @@ const SignIn = () => {
 
   return (
     <div className={`User_container`}>
-      {currentUser ? (
+      {currentUser ? null :(
         <Provider value={contextValue}>
           <div id={`now_location`}>
             <span>首頁</span>
@@ -139,7 +139,7 @@ const SignIn = () => {
             </div>
           </div>
         </Provider>
-      ) : null}
+      ) }
       {/* } */}
     </div>
   );

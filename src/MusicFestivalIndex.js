@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./MusicFestivalIndex.scss";
 import { Provider } from "./components/context.js";
 import Navigator from "./components/Navigator/Navigator";
-import ModalTool from "./components/ModalTool/ModalTool";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import TicketOrder from "./components/TicketOrder/TicketOrder";
@@ -43,6 +42,7 @@ const MusicFestivalIndex = () => {
   const [userToken, setUserToken] = useState("");
   const [pathName, setPathName] = useState("home"); //依據不同pathName頁面，去判斷導覽列current在哪裡
   const [isDarkMode, setIsDarkMode] = useState(false); //預設值是白天
+  const [userPanelShow, setUserPanelShow] = useState(false);
 
   const isLogin = async () => {
     var userToken = localStorage.getItem("user")
@@ -84,6 +84,30 @@ const MusicFestivalIndex = () => {
     isLogin();
   }, []);
 
+  const handleRenderUserPanel = () => {
+    return (
+      <UserPanel
+        modalShow={userPanelShow}
+        modalCloseFunction={handleCloseUserPanel}
+        modalWidth={200}
+        modalHeight={180}
+        backgroundOpacity={0.6}
+        modalInnerBackground={`#fff`}
+      >
+        <UserPanelContent closeModal={handleCloseUserPanel} />
+      </UserPanel>
+    );
+  };
+
+
+  const handleCloseUserPanel = (e) => {
+    if (e && e.target.className === "background") {
+      e.stopPropagation();
+    }
+    setUserPanelShow(false);
+  };
+
+
   const contextValue = {
     pathName,
     setPathName,
@@ -93,6 +117,7 @@ const MusicFestivalIndex = () => {
     setCurrentUser,
     userToken,
     setUserToken,
+    userPanelShow, setUserPanelShow
   }; //把會用到的值 裝在contextValue，傳給下面的組件使用
   console.log('currentUser', currentUser)
   return (
@@ -137,6 +162,7 @@ const MusicFestivalIndex = () => {
               {/* <Route path="/signIn/:token" element={<Home />} /> */}
             </Routes>
             <Footer />
+            {currentUser ? handleRenderUserPanel() : null}
           </Fragment>
         </Provider>
       </div>

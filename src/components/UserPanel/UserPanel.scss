@@ -5,10 +5,10 @@
   justify-content: flex-end;
   align-items: flex-start;
   margin: 50px 0 0 0;
-  z-index: 10;
-  position: absolute;
-  top: 29px;
-  right: 71px;
+  z-index: 100;
+  position: fixed;
+  right: 40px;
+  top: 40px;
   &.component_show {
     opacity: 1;
     pointer-events: initial;
@@ -23,7 +23,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    z-index: 11;
+    z-index: 110;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 0 5px 5px -5px #333;
@@ -45,7 +45,7 @@
     width: 100vw;
     height: 100vh;
     // background-color: rgba(0, 0, 0, 0.95);
-    z-index: 10;
+    z-index: 100;
     cursor: initial;
   }
 }
