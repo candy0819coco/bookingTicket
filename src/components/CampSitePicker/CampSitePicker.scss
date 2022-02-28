@@ -53,10 +53,11 @@
           box-sizing: border-box;
           padding: 10px 0;
           .each_camp_ticket {
-            height: 20px;
+            height: 30px;
             width: 100%;
+            // padding: 5px 15px;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: flex-start;
             align-items: center;
             .camp_name {
               height: 20px;
@@ -64,6 +65,7 @@
               align-items: center;
               font-size: 16px;
               color: #666;
+              padding: 5px;
             }
             .camp_site {
               height: 20px;
@@ -71,6 +73,7 @@
               align-items: center;
               font-size: 16px;
               color: #666;
+              padding: 5px;
             }
             .check_icon {
               width: 16px;
@@ -78,6 +81,7 @@
               background-image: url("./../../image/check.svg");
               background-repeat: no-repeat;
               background-size: 100%;
+              padding: 5px;
               filter: invert(86%) sepia(35%) saturate(6287%) hue-rotate(68deg)
                 brightness(93%) contrast(84%);
               //   opacity: 0;
@@ -90,21 +94,6 @@
                 // transform: scaleX(1);
               }
             }
-          }
-        }
-        .confirm_btn {
-          height: 30px;
-          width: 80px;
-          display: flex;
-          justify-content: center;
-          background-color: #333;
-          color: #fff;
-          border-radius: 5px;
-          align-items: center;
-          cursor: pointer;
-          transition: 0.3s;
-          &:hover {
-            background-color: #555;
           }
         }
       }
@@ -401,14 +390,14 @@
                 }
                 .camp_id {
                   // width: 10%;
-                  height: 10%;
+                  // height: 10%;
                   // padding: 10px;
                   line-height: 10%;
-                  position: absolute;
+                  // position: absolute;
                   // background-color: rgb(243, 243, 243);
-                  top: 10px;
-                  left: 10px;
-                  font-size: 10px;
+                  // top: 10px;
+                  // left: 10px;
+                  // font-size: 10px;
                   display: flex;
                   align-items: center;
                   justify-content: center;
@@ -452,6 +441,40 @@
           }
         }
       }
+      .confirm_btn_area {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        bottom: 120px;
+        width: 100%;
+        transform: translateY(100vh);
+        transition: 0.5s;
+        z-index: 15;
+        &.finished {
+          transform: translateY(0);
+          transition: 0.5s;
+          .confirm_btn {
+            animation: btnPulse 1.7s ease-in-out infinite;
+          }
+        }
+        .confirm_btn {
+          height: 40px;
+          width: 100px;
+          display: flex;
+          justify-content: center;
+          background-color: #333;
+          color: #fff;
+          border-radius: 5px;
+          align-items: center;
+          cursor: pointer;
+          transition: 0.3s;
+          font-size: 20px;
+          cursor: pointer;
+          &:hover {
+            background-color: #555;
+          }
+        }
+      }
     }
   }
 
@@ -459,6 +482,18 @@
     &.camp_site_picker_container {
       transform: scale(calc(var(--main-width) / 1920));
       transform-origin: top;
+    }
+  }
+
+  @keyframes btnPulse {
+    0% {
+      transform: scale(1.02) translateY(0);
+    }
+    50% {
+      transform: scale(1.08) translateY(0);
+    }
+    100% {
+      transform: scale(1.02) translateY(0);
     }
   }
 }

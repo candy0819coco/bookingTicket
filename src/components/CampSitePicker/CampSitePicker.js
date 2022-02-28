@@ -20,7 +20,7 @@ const CampSitePicker = (props) => {
     setCampSelectedList,
     wsState,
     toDoSelectCamp,
-    closeModal
+    closeModal,
   } = props;
   console.log("pickedTicket", pickedTicket);
   console.log("campSelectedList", campSelectedList);
@@ -29,9 +29,9 @@ const CampSitePicker = (props) => {
   const [currentCampArea, setCurrentCampArea] = useState("");
 
   const reportWindowSize = () => {
-    var root = document.querySelector('.camp_site_picker_container');  
-    root.style.setProperty('--main-width', window.innerWidth);
-  }
+    var root = document.querySelector(".camp_site_picker_container");
+    root.style.setProperty("--main-width", window.innerWidth);
+  };
   window.addEventListener("resize", reportWindowSize);
 
   const pickCamp = (campItem) => {
@@ -113,7 +113,6 @@ const CampSitePicker = (props) => {
                 }
               })}
             </div>
-            <div className="confirm_btn" onClick={closeModal}>確認</div>
           </div>
           <div
             className={`camp_bg_map 
@@ -277,19 +276,19 @@ const CampSitePicker = (props) => {
                             onClick={() => pickCamp(campItem)}
                           >
                             <div className="camp_id">{campItem.campId}</div>
-                            <div
+                            {/* <div
                               className={`camp_type ${
                                 campItem.campType === "budget"
                                   ? "budget"
                                   : "fancy"
                               }`}
-                            ></div>
-                            <div className="camp_capacity">
+                            ></div> */}
+                            {/* <div className="camp_capacity">
                               {campItem.campCapacity}人
                             </div>
                             <div className="camp_price">
                               {campItem.campPrice}元
-                            </div>
+                            </div> */}
                           </div>
                         );
                       })}
@@ -298,6 +297,24 @@ const CampSitePicker = (props) => {
                 </div>
               );
             })}
+            </div>
+            <div
+              className={`confirm_btn_area ${
+                campSelectedList.length === toDoSelectCamp.length
+                  ? "finished"
+                  : ""
+              }`}
+            >
+              <div
+                className={`confirm_btn ${
+                  campSelectedList.length === toDoSelectCamp.length
+                    ? "finished"
+                    : ""
+                }`}
+                onClick={closeModal}
+              >
+                確認
+              </div>
           </div>
         </div>
       </div>

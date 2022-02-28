@@ -12,6 +12,7 @@ const { Navigate } = require("react-router-dom");
 const authRoute = require("./routes/auth-route");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
+const moment = require("moment");
 require("dotenv").config();
 // const passportSetup = require("./config/passport");
 // const db = require("./config/db");
@@ -43,8 +44,8 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "123456",
-  database: "music_festival",
-  // database: "music_festival_merged",
+  // database: "music_festival",
+  database: "music_festival_merged",
   // password: 'root',
   // database: 'testwen'
 });
@@ -426,7 +427,7 @@ app.post("/user/data", function (req, res) {
 app.post("/ticket_order/get_list", (req, res) => {
   console.log(req.body.mNo); //req.body=data
   const { mNo } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
-  const getTicketOrderSQL = `SELECT * FROM ticket_order WHERE mNo=${mNo}`; //WHERE是給mNO條件，選票券訂單的資料庫
+  const getTicketOrderSQL = `SELECT * FROM ticket_order WHERE mNo=${mNo} ORDER BY orderTime DESC`; //WHERE是給mNO條件，選票券訂單的資料庫
   db.query(getTicketOrderSQL, (error, ticketOrderListResult) => {
     console.log("error", error);
     if (error) {
@@ -484,7 +485,7 @@ app.post("/ticket_order/add", (req, res) => {
   } = req.body;
   const { mNo, mName, mPhone, mMail } = userInfo;
 
-  console.log("cardVerification", cardVerification); //印出來會死嗎
+  console.log("cardVerification", cardVerification);
   const addTicketOrderSQL = `INSERT INTO ticket_order (mNo,mName,mPhone,mMail,orderTime,orderStatus,orderPrice,paymentStatus,paymentMethod,cardVerification)
   VALUES("${mNo}","${mName}","${mPhone}","${mMail}","${orderTime}",${orderStatus},${orderPrice},${paymentStatus},"${paymentMethod}",${cardVerification})`;
   console.log("addTicketOrderSQL", addTicketOrderSQL);
@@ -515,6 +516,16 @@ app.post("/ticket_order/add", (req, res) => {
               } else {
                 console.log("insertTicketsResults", insertTicketsResults);
                 insertTicketResultList.push(insertTicketsResults);
+                if(item.ticketType === "camp") {
+                  const campUpdateSQL = `UPDATE camp SET campStatus=${0} WHERE campId="${item.campId}"`;
+                  db.query(campUpdateSQL, (updateCampError, updateCampResults) => { 
+                    if (updateCampError) { 
+                      console.log('updateCampError', updateCampError)
+                    } else {
+                      console.log('updateCampResults', updateCampResults)
+                    }
+                  })
+                }
                 if (key === totalTickets.length - 1) {
                   resolve(insertTicketResultList);
                 }
@@ -528,6 +539,7 @@ app.post("/ticket_order/add", (req, res) => {
               insertTicketOrderResults,
               insertTicketsResponse,
               statusMsg: "票券訂單成立",
+              orderTime:orderTime
             });
           })
           .catch((err) => {
@@ -574,7 +586,9 @@ app.get(`/ticket_order/get_qrcode`, (req, res) => {
       console.log("typeof toParse.isActive", typeof toParse.isActive);
       if (toParse.isActive === 0) {
         console.log("歡迎入場");
-        const enterTime = new Date().toLocaleString("zh-Tw", { hour12: false });
+        let enterTime = moment(new Date().getTime()).locale("zh-tw").format(
+          "YYYY-MM-DD HH:mm:ss"
+          )
         const activateTicketSQL = `UPDATE tickets SET isActive = 1, enterTime = "${enterTime}" WHERE ticketNo = ${ticketNo}`;
         db.query(activateTicketSQL, (updateError, updateResult) => {
           if (updateError) {

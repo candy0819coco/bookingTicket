@@ -1,12 +1,13 @@
 .ticket_picker_container {
   width: 100%;
-  height: calc(100% - 100px);
+  height: calc(100%);
   display: flex;
   justify-content: flex-start;
   align-items: center;
   align-content: center;
   flex-direction: column;
-  padding-top: 40px;
+  position: absolute;
+  top: calc(75px + 10%);
   &.response_show {
     .ticket_picker {
       // transform: scale(calc(var(--ratio) - 0.05));
@@ -92,9 +93,9 @@
             transform: perspective(220px) rotateY(6deg) translateY(-20px);
           }
           .ticket_image {
-            width: 270px;//240px
+            width: 270px; //240px
             min-width: 240px;
-            height: 472px;//440px
+            height: 472px; //440px
             background-repeat: no-repeat;
             background-size: contain;
             // transform: perspective(200px) rotateY(3deg);
@@ -136,15 +137,16 @@
     .order_button,
     .cancel_button {
       width: 120px;
-      height: 35px;
+      height: 40px;
       background-color: #333;
       color: #fff;
+      border-radius: 5px;
       font-size: 20px;
       font-weight: 500;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 3px 0 0 0;
+      margin: 10px 0 0 0;
       transition: 0.3s;
       // opacity: 0;
       cursor: pointer;
@@ -162,7 +164,10 @@
       // overflow: hidden;
       transform: scaleY(0);
       display: none;
-      transition: 0.5s;
+      transition: 0.3s;
+      &.three_tickets {
+        width: 630px;
+      }
       &.half_width {
         width: 420px;
       }
@@ -189,6 +194,12 @@
         flex-wrap: wrap;
         justify-content: space-evenly;
         transition: 0.3s;
+        &.three_tickets {
+          width: 630px;
+          .each_ticket {
+            width: calc(33% - 30px);
+          }
+        }
         &.half_width {
           width: 420px;
           .each_ticket {
@@ -196,8 +207,7 @@
           }
         }
         .each_ticket {
-          
-          width: calc(20%);
+          width: calc(25% - 30px);
           // height: 160px;
           display: flex;
           justify-content: space-between;
@@ -369,7 +379,7 @@
       align-content: center;
       align-items: center;
       transition: 0.3s;
-      margin-top: 30px;//30px
+      margin-top: 30px; //30px
       .select_camp_btn {
         width: 26%;
         height: 40px;

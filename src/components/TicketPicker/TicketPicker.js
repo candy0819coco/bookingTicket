@@ -281,13 +281,21 @@ const TicketPicker = (props) => {
           }
           ${
             pickedTicket.length <= 2 ? "half_width" : ""
-          }`}
+          }
+          ${
+            pickedTicket.length === 3 ? "three_tickets" : ""
+          }
+          `}
         >
           <div className="list_title">票券訂購清單</div>
           <div
             className={`list_wrapper ${
               pickedTicket.length <= 2 ? "half_width" : ""
-            }`}
+            }
+            ${
+            pickedTicket.length === 3 ? "three_tickets" : ""
+          }
+            `}
           >
             {pickedTicket.map((item, index) => {
               return (
@@ -309,9 +317,9 @@ const TicketPicker = (props) => {
                   <div className="ticket_info">
                     <div className="ticket_name">{item.ticketName}</div>
                     {item.ticketType === "one" && !item.singleTicketDay ? (
-                      <div className="validator_notice">尚未選擇日期</div>
+                      <div className="validator_notice">未選擇日期</div>
                     ) : item.ticketType === "camp" && !item.campId ? (
-                      <div className="validator_notice">尚未選擇營位</div>
+                      <div className="validator_notice">未選擇營位</div>
                     ) : null}
                     {item.ticketType === "one" ? (
                       <div className="single_ticket_day">

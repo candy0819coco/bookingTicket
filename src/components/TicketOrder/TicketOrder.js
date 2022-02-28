@@ -11,7 +11,7 @@ import context, { Provider } from "./../context";
 import Payment from "./../Payment/Payment";
 import TicketPicker from "./../TicketPicker/TicketPicker";
 import TicketOrderDetail from "./../TicketOrderDetail/TicketOrderDetail";
-import CreditCardVerification from '../CreditCardVerification/CreditCardVerification';
+import CreditCardVerification from "../CreditCardVerification/CreditCardVerification";
 import CampSitePicker from "./../CampSitePicker/CampSitePicker";
 import ModalTool from "./../ModalTool/ModalTool";
 import axios from "axios";
@@ -24,13 +24,16 @@ const TicketOrder = () => {
   const [selectedTicketType, setSelectedTicketType] = useState("");
   const [orderStatus, setOrderStatus] = useState(0);
   const [orderPrice, setOrderPrice] = useState(0);
-  const [currentOrderNo,setCurrentOrderNo] =useState("");
+  const [currentOrderNo, setCurrentOrderNo] = useState("");
+  const [orderTimeFromResponse, setOrderTimeFromResponse] = useState();
+  const [transactionTime, setTransactionTime] = useState();
   const [paymentStatus, setPaymentStatus] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("creditCard");
   const [campSitePickerShow, setCampSitePickerShow] = useState(false);
   const [pickedTicket, setPickedTicket] = useState([]);
   const [toDoSelectCamp, setToDoSelectCamp] = useState([]);
-  const [testVerifyCode, setTestVerifyCode] = useState("");
+  const [verifyCode, setVerifyCode] = useState("");
+  const [creditNumber, setCreditNumber] = useState("");
 
   const contextValue = useContext(context);
   const { isDarkMode, currentUser } = contextValue;
@@ -60,33 +63,50 @@ const TicketOrder = () => {
     setPickedTicket([]);
   };
 
-
   useEffect(() => {
-    let toDoSelectCampTicket = pickedTicket.filter((item)=> {return item.ticketType === "camp"})
-    console.log('toDoSelectCampTicket', toDoSelectCampTicket);
+    let toDoSelectCampTicket = pickedTicket.filter((item) => {
+      return item.ticketType === "camp";
+    });
+    console.log("toDoSelectCampTicket", toDoSelectCampTicket);
 
     setToDoSelectCamp(toDoSelectCampTicket);
   }, [pickedTicket]);
 
-  let orderTimeTest = moment(new Date().getTime()).locale("zh-tw").format(
-    "YYYY-MM-DD HH:mm:ss"
-    )
-    console.log('orderTimeTest', orderTimeTest)
+  // let orderTimeTest = moment(new Date().getTime()).locale("zh-tw").format(
+  //   "YYYY-MM-DD HH:mm:ss"
+  //   )
+  //   console.log('orderTimeTest', orderTimeTest)
 
   const handleOrderTicket = async () => {
     // let orderTime = new Date().toLocaleString("zh-Tw", { hour12: false });
-    let orderTime = moment(new Date().getTime()).locale("zh-tw").format(
-      "YYYY-MM-DD HH:mm:ss"
-    )
+    let orderTime = moment(new Date().getTime())
+      .locale("zh-tw")
+      .format("YYYY-MM-DD HH:mm:ss");
     console.log("orderTime", orderTime);
     let totalTickets = [
-      { ticketType: "one", ticketName:"單日票",  campId: null, singleTicketDay: 1, ticketPrice: 1500, isActive:0, enterTime:null },
-      { ticketType: "camp",ticketName:"露營票", campId: "B03", singleTicketDay: null, ticketPrice: 2500, isActive:0, enterTime:null },
+      {
+        ticketType: "one",
+        ticketName: "單日票",
+        campId: null,
+        singleTicketDay: 1,
+        ticketPrice: 1500,
+        isActive: 0,
+        enterTime: null,
+      },
+      {
+        ticketType: "camp",
+        ticketName: "露營票",
+        campId: "B03",
+        singleTicketDay: null,
+        ticketPrice: 2500,
+        isActive: 0,
+        enterTime: null,
+      },
     ];
     let result;
     let cardVerification = null;
-    console.log('cardVerification', cardVerification)
-    
+    console.log("cardVerification", cardVerification);
+
     await axios({
       method: "post",
       url: `http://localhost:3400/ticket_order/add`,
@@ -98,7 +118,7 @@ const TicketOrder = () => {
         orderPrice,
         paymentStatus,
         paymentMethod,
-        cardVerification
+        cardVerification,
       },
       credentials: "same-origin",
       headers: {
@@ -110,6 +130,7 @@ const TicketOrder = () => {
         console.log("create_ticket_order_response", response);
         result = response.data;
         setCurrentOrderNo(result.insertTicketOrderResults.insertId);
+        setOrderTimeFromResponse(result.insertTicketOrderResults.orderTime);
       })
       .catch((error) => {
         console.log("create_ticket_order_error", error);
@@ -118,14 +139,13 @@ const TicketOrder = () => {
     return result;
   };
 
-
-  const handleVisaCodeSend = async () => {
+  const handleSendCode = async () => {
     let result;
     await axios({
       method: "post",
       url: `http://localhost:3400/ticketOrder/credit_card/send_code`,
       // data: {orderNo:currentOrderNo, currentUser:currentUser},
-      data: {orderNo:"37", currentUser:currentUser},
+      data: { orderNo: currentOrderNo, currentUser: currentUser },
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -143,13 +163,13 @@ const TicketOrder = () => {
     return result;
   };
 
-  const handleVerifyVisaCode = async () => {
+  const handleVerifyCode = async () => {
     let result;
     await axios({
       method: "post",
       url: `http://localhost:3400/ticketOrder/credit_card/check_code`,
       // data: {orderNo:currentOrderNo},
-      data: {orderNo:"37",creditVerifyCode:testVerifyCode},
+      data: { orderNo: currentOrderNo, creditVerifyCode: verifyCode },
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -159,7 +179,13 @@ const TicketOrder = () => {
       .then(function (response) {
         console.log("verify_visa_code_response", response);
         result = response.data;
-        console.log('result', result)
+        console.log("result", result);
+        if (result.statusCode === 200) {
+          alert("交易完成，將為您跳轉至訂單內容");
+          setTimeout(() => {
+            window.location.href = "/member/ticketOrder";
+          }, 3000);
+        }
       })
       .catch((error) => {
         console.log("verify_visa_code__error", error);
@@ -171,7 +197,7 @@ const TicketOrder = () => {
     if (ticketOrderStep === 0 || ticketOrderStep === 1) {
       return (
         <TicketPicker
-        ticketOrderStep={ticketOrderStep}
+          ticketOrderStep={ticketOrderStep}
           setTicketOrderStep={setTicketOrderStep}
           paymentMethod={paymentMethod}
           setPaymentMethod={setPaymentMethod}
@@ -182,7 +208,6 @@ const TicketOrder = () => {
           campSelectedList={campSelectedList}
           toDoSelectCamp={toDoSelectCamp}
           setCampSelectedList={setCampSelectedList}
-          
         />
       );
     } else if (ticketOrderStep === 2) {
@@ -196,6 +221,10 @@ const TicketOrder = () => {
           setOrderPrice={setOrderPrice}
           handleResetTicketOrder={handleResetTicketOrder}
           currentOrderNo={currentOrderNo}
+          orderTimeFromResponse={orderTimeFromResponse}
+          creditNumber={creditNumber}
+          setCreditNumber={setCreditNumber}
+          setTransactionTime={setTransactionTime}
         />
       );
     } else if (ticketOrderStep === 3) {
@@ -204,7 +233,13 @@ const TicketOrder = () => {
           selectedTicketType={selectedTicketType}
           setTicketOrderStep={setTicketOrderStep}
           currentOrderNo={currentOrderNo}
-          handleVisaCodeSend={handleVisaCodeSend}
+          handleSendCode={handleSendCode}
+          verifyCode={verifyCode}
+          setVerifyCode={setVerifyCode}
+          handleVerifyCode={handleVerifyCode}
+          orderPrice={orderPrice}
+          transactionTime={transactionTime}
+          creditNumber={creditNumber}
         />
         // <TicketOrderDetail
         //   selectedTicketType={selectedTicketType}
@@ -248,10 +283,18 @@ const TicketOrder = () => {
           isDarkMode ? "ticket_order_title_dark" : ""
         }`}
       ></div>
-      <button onClick={handleOrderTicket}>模擬下訂單</button>
-      <button onClick={handleVisaCodeSend}>模擬寄驗證</button>
-      <button onClick={handleVerifyVisaCode}>模擬驗證交易碼</button>
-      <input type="number" onChange={(e)=>setTestVerifyCode(e.target.value.toString())}></input>
+      {/* <button onClick={handleOrderTicket}>模擬下訂單</button> */}
+      {/* <button onClick={handleSendCode}>模擬寄驗證</button> */}
+      {/* <button onClick={handleVerifyCode}>模擬驗證交易碼</button> */}
+      {/* <input type="number" onChange={(e)=>setVerifyCode(e.target.value.toString())}></input> */}
+      {/* <div className="test_area">
+      測試此orderNo的交易驗證
+      <input
+        type="number"
+        onChange={(e) => setCurrentOrderNo(e.target.value.toString())}
+      ></input>
+
+      </div> */}
       {handleRenderTicketOderStep()}
       {campSitePickerShow ? handleRenderCampSitePicker() : null}
     </div>
