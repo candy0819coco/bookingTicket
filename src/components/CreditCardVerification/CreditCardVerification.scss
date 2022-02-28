@@ -1,0 +1,191 @@
+.credit_card_verification_container {
+    // width:70%;
+    width: 100%;
+    height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    .credit_card_verification {
+      width: 75%;
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      margin: 0 5%;
+      .verification_title {
+        display: flex;
+        justify-content: center;
+        width: 30%;
+        height: 75px;
+        background-image: url("./../../image/ticket_title_black.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        //   margin-top: 90px;
+      }
+      .verification_content_container {
+        width: 70%;
+        height: 90%;
+        margin: 2% 0px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        .verification_content_top{
+          width: 100%;
+          height: 30%;
+          display: flex;
+          align-items: center;
+          .visa_logo{
+            background-image: url(./../../image/visa_logo.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 130px;
+            height: 80px;
+
+          }
+          .bank_logo{
+            background-image: url(./../../image/taishin_bank.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            width: 207px;
+            height: 80px;
+            background-position-y: center;
+          }
+        }
+        .verification_content_middle {
+          width: 545px;
+          height: 80%;
+          /* margin: 0 10%; */
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          .shop_name_box{
+            .shop_name_title{
+
+            }
+            .shop_name {
+              width: 302px;
+              height: 35px;
+              font-size: 18px;
+              text-align: left;
+              line-height: 35px;
+              color: #000000;
+              margin-bottom: 5px;
+            }
+          }
+          .price_info {
+            width: 100%;
+            .price_info_title{
+
+              .price {
+                margin-bottom: 5px;
+              }
+            }
+
+          }
+          .order_info {
+            .buy_date{
+
+            }
+            .time {
+              margin-bottom: 5px;
+
+            }
+          }
+          .autho_code {
+            width: 217px;
+            justify-content: center;            
+            display: flex;
+            padding: 0;
+            border: none;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+  
+          }
+        }
+          .verification_content_last{
+            .input_area {
+              width: 346px;
+              .credit_card_number_title{
+
+              }
+              .credit_card_number {
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                  -webkit-appearance: none;
+                  margin: 0;
+                }
+                .number_input {
+                  border: 1px solid #333;
+                  height: 20px;
+                  width: 40px;
+                  text-align: center;
+                  line-height: 20px;
+                  padding: 0 3px;
+                  border-radius: 3px;
+                  margin-left: 15px;
+                  outline: none;
+    
+                  &.notice {
+                    border-color: red;
+                  }
+                  //    border-radius: 10px;
+                }
+              }
+            }
+            
+            display: flex;
+            .text_area {
+              margin-top: 10px;
+              font-size: 13px;
+              color: red;
+              font-weight: 600;
+            }
+          }
+          .submit_btn {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            .submit_content {
+              width: 60px;
+              border: 1px solid;
+              justify-content: center;
+              display: flex;
+            }
+          }
+        .btn_area {
+          display: flex;
+          .prev_step {
+            padding: 0;
+            border: none 0;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+            width: 126px;
+            height: 28px;
+            line-height: 28px;
+            // background-color:#9ACE86 ;
+            margin-right: 20px;
+            // color:#ffffff;
+            margin-right: 287px;
+          }
+          .next_step {
+            padding: 0;
+            border: none 0;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+            width: 126px;
+            height: 28px;
+            line-height: 28px;
+            // background-color:#9ACE86 ;
+  
+            // color:#ffffff;
+          }
+  
+          .temp_payment_switch_btn {
+          }
+        }
+      
+    }
+  }
+}

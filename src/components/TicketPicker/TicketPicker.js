@@ -11,7 +11,7 @@ import context, { Provider } from "./../context";
 
 const TicketPicker = (props) => {
   const contextValue = useContext(context);
-  const {} = contextValue;
+  const {myOrderNo} = contextValue;
   const {
     ticketOrderStep,
     setTicketOrderStep,
@@ -105,7 +105,9 @@ const TicketPicker = (props) => {
           ticketName: "單日票",
           campId: null,
           singleTicketDay: null,
-          price:700
+          ticketPrice:1500,
+          isActive:0, 
+          enterTime:null
         };
         break;
       case "two":
@@ -114,7 +116,9 @@ const TicketPicker = (props) => {
           ticketName: "雙日票",
           campId: null,
           singleTicketDay: null,
-          price:1300
+          ticketPrice:2500,
+          isActive:0, 
+          enterTime:null
         };
         break;
       case "camp":
@@ -123,7 +127,9 @@ const TicketPicker = (props) => {
           ticketName: "露營票",
           campId: null,
           singleTicketDay: null,
-          price:2500
+          ticketPrice:4500,
+          isActive:0, 
+          enterTime:null
         };
         break;
       default:
@@ -132,6 +138,9 @@ const TicketPicker = (props) => {
           ticketName: "",
           campId: null,
           singleTicketDay: null,
+          ticketPrice:0,
+          isActive:0, 
+          enterTime:null
         };
         break;
     }
@@ -269,12 +278,15 @@ const TicketPicker = (props) => {
         <div
           className={`ticket_picked_list ${
             pickedTicket.length ? "show_list" : ""
+          }
+          ${
+            pickedTicket.length <= 2 ? "half_width" : ""
           }`}
         >
           <div className="list_title">票券訂購清單</div>
           <div
             className={`list_wrapper ${
-              pickedTicket.length <= 2 ? "half_height" : ""
+              pickedTicket.length <= 2 ? "half_width" : ""
             }`}
           >
             {pickedTicket.map((item, index) => {

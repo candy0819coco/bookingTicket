@@ -8,15 +8,28 @@ import React, {
 } from "react";
 import "./Payment.scss";
 import context, { Provider } from "./../context";
+import * as R from "ramda";
+
 
 const Payment = (props) => {
   const contextValue = useContext(context);
   // convenientStore creditCard
-  const { paymentMethod, setTicketOrderStep, handleChangePayment } = props; //屬性由TicketOrder傳來的props，在這支要補上這行程式碼
+  const {
+    paymentMethod,
+    setTicketOrderStep,
+    pickedTicket,
+    handleOrderTicket,
+    orderPrice,
+    setOrderPrice,
+    handleResetTicketOrder,
+    currentOrderNo
+  } = props;
   const [creditMonth, setCreditMonth] = useState("");
   const [creditYear, setCreditYear] = useState("");
-  
+  const {myOrderNo} = contextValue;
 
+  
+  console.log("pickedTicket", pickedTicket);
   const monthList = [
     "01",
     "02",
@@ -32,6 +45,20 @@ const Payment = (props) => {
     "12",
   ];
   const yearList = ["2022", "2023", "2024", "2025", "2026", "2027", "2028"];
+  
+  const handleCalcTotalPrice = () => {
+    let priceList = pickedTicket.map((item, index) => {
+      return item.ticketPrice;
+    });
+    let tempPrice = R.sum(priceList);
+    console.log('tempPrice', tempPrice)
+    setOrderPrice(tempPrice);
+  };
+
+  useEffect(() => {
+    handleCalcTotalPrice();
+  }, []);
+
 
   useEffect(() => {
     let creditValid = creditMonth + "-" + creditYear;
@@ -90,6 +117,17 @@ const Payment = (props) => {
     setCreditNumber(tempNumberArray.join(""));
     
   }, [creditNoFirst, creditNoSecond, creditNoThird, creditNoFourth]);
+
+
+  const handleConform = async() => {
+    await handleOrderTicket();
+    await setTicketOrderStep(3);
+    await handleResetTicketOrder();
+  };
+
+
+
+
   return (
     <div className={`payment_container`}>
       <div className={`payment`}>
@@ -256,10 +294,10 @@ const Payment = (props) => {
             </div>
           )}
           <div className={`btn_area`}>
-            <button className="prev_step" onClick={() => setTicketOrderStep(0)}>
+            <button className="prev_step" onClick={() => setTicketOrderStep(1)}>
               上一步
             </button>
-            <button className="next_step" onClick={() => setTicketOrderStep(2)}>
+            <button className="next_step" onClick={() => setTicketOrderStep(3)}>
               確認
             </button>
             {/* <button

@@ -39,7 +39,7 @@ import UserPanelContent from "./components/UserPanelContent/UserPanelContent";
 import axios from "axios";
 
 const MusicFestivalIndex = () => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState();
   const [userToken, setUserToken] = useState("");
   const [pathName, setPathName] = useState("home"); //依據不同pathName頁面，去判斷導覽列current在哪裡
   const [isDarkMode, setIsDarkMode] = useState(false); //預設值是白天
@@ -94,7 +94,7 @@ const MusicFestivalIndex = () => {
     userToken,
     setUserToken,
   }; //把會用到的值 裝在contextValue，傳給下面的組件使用
-  console.log(currentUser,'currentUser')
+  console.log('currentUser', currentUser)
   return (
     <Router>
       <div
@@ -124,11 +124,6 @@ const MusicFestivalIndex = () => {
                 exact
                 path="/member/productOrder"
                 element={<MemberOrder />}
-              />
-              <Route
-                exact
-                path="/member/schedule"
-                element={<MemberSchedule />}
               />
               <Route exact path="/member/setting" element={<MemberSetting />} />
               <Route exact path="/signIn" element={<SignIn />} />

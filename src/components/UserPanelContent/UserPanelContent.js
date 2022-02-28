@@ -26,7 +26,9 @@ const UserPanelContent = (props) => {
         >
           {/* <div className="close_btn" onClick={closeModal}></div> */}
           <div className={`panel_item ${isDarkMode ? "panel_item_dark" : ""}`}>
-            <div className="text">我的行程</div>
+            <Link to='/member/setting'>
+              <div className="text">帳號設定</div>
+            </Link>
           </div>
             <div className={`panel_item ${isDarkMode ? "panel_item_dark" : ""}`}>
               <Link to="/member/ticketOrder">            
@@ -35,7 +37,9 @@ const UserPanelContent = (props) => {
             </div>
           
           <div className={`panel_item ${isDarkMode ? "panel_item_dark" : ""}`}>
+            <Link to="/member/productOrder">
             <div className="text">我的訂單</div>
+            </Link>
           </div>
           <div
               className={`panel_item panel_item_padding ${

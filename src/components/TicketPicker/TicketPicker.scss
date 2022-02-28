@@ -153,7 +153,7 @@
       }
     }
     .ticket_picked_list {
-      width: 420px;
+      width: 840px;
       // min-height: 50%;
       display: flex;
       flex-direction: column;
@@ -163,6 +163,9 @@
       transform: scaleY(0);
       display: none;
       transition: 0.5s;
+      &.half_width {
+        width: 420px;
+      }
       &.show_list {
         transform: scaleY(1);
         display: flex;
@@ -180,17 +183,21 @@
         color: #333;
       }
       .list_wrapper {
-        width: 420px;
-        height: 320px;
+        width: 840px;
+        height: 185px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
         transition: 0.3s;
-        &.half_height {
-          height: 185px;
+        &.half_width {
+          width: 420px;
+          .each_ticket {
+            width: calc(50% - 30px);
+          }
         }
         .each_ticket {
-          width: calc(50% - 30px);
+          
+          width: calc(20%);
           // height: 160px;
           display: flex;
           justify-content: space-between;
@@ -362,7 +369,7 @@
       align-content: center;
       align-items: center;
       transition: 0.3s;
-      margin-top: 20px;//30px
+      margin-top: 30px;//30px
       .select_camp_btn {
         width: 26%;
         height: 40px;
@@ -423,8 +430,9 @@
       .next_btn_area {
         display: flex;
         justify-content: center;
+        align-items: flex-end;
         height: 60px;
-        margin-top: 9px;//40px
+        margin-top: 24px;
         width: 100%;
         .btn {
           width: 26%;
