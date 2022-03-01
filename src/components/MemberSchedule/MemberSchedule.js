@@ -32,8 +32,8 @@ const MemberSchedule = () => {
 
                             <div id={"member_list01"}>我的行程</div>
                             <div id={"member_list02"}>我的票券</div>
-                            <div id={"member_list03"}>我的訂單</div>
-                            <div id={"member_list04"}>帳號設定</div>
+                            <a href="/member/order"><div id={"member_list03"}>我的訂單</div></a>
+                            <a href="/member/setting"><div id={"member_list04"}>帳號設定</div></a>
 
                         </div>
                         <div id={"member_logout"}>

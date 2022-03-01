@@ -5,9 +5,12 @@ import * as R from "ramda";
 import Axios from 'axios';
 import context from "../context";
 import face from '../../image/membership_black.svg';
-// import { faX } from "@fortawesome/free-solid-svg-icons";
+import icon01 from '../../image/icon01.png';
+import icon02 from '../../image/icon02.png';
+import icon03 from '../../image/icon03.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import $ from 'jquery';
 
 
@@ -17,7 +20,24 @@ const MemberSetting = () => {
     const [oldPass, setOldPass] = useState("");
     const [newPass, setNewPass] = useState("");
     const [chkPass, setChkPass] = useState("");
-    // console.log(currentUser);
+    const [photo, setPhoto] = useState((localStorage.getItem("mPhoto")) || (currentUser.mPhoto));
+
+    const whichPhoto = () => {      
+        if (photo == "1") {
+            $(".my_img img").attr("src", icon01);
+        } else if (photo == "2") {
+            $(".my_img img").attr("src", icon02);
+        } else if (photo == "3") {
+            $(".my_img img").attr("src", icon03);
+        } else {
+            $(".my_img img").attr("src", face);
+        }
+
+    }
+    useEffect(() => {
+        whichPhoto();
+    }, [])
+
 
     const checkChange = async () => {
         if (oldPass != "" && newPass != "" && chkPass != "") {
@@ -31,35 +51,21 @@ const MemberSetting = () => {
                 closeWindow();
             }).catch((err) => {
                 alert(err.response.data.message);
-                
+
             })
-        }else{
+        } else {
             alert("請確實填入各項資料!");
         }
     }
 
-    // const getUserInfo = async () => {
-    //     if (currentUser) {
-    //         await Axios.post("http://localhost:3001/user/data", { currentUser: currentUser })
-    //             .then(function (res) {
-    //                 // console.log(res);
-
-    //             })
-    //             .catch(function (err) { console.log(err) })
-    //     }
-    // };
-    // useEffect(() => {
-    //     getUserInfo();
-    // }, [currentUser]);
-
-    // console.log(currentUser);
-
 
     const logOut = () => {
         localStorage.removeItem("user");
+        localStorage.removeItem("mPhoto");
         window.location = "/";
     }
 
+    //更改密碼視窗
     const openWindow = () => {
         $('.change_window').css("display", "block");
         // console.log(currentUser);
@@ -71,11 +77,97 @@ const MemberSetting = () => {
         setChkPass("");
     }
 
+    //更改密碼視窗
+
+    //hover顯示相機更改圖片
+    const addOn = () => {
+        $(".wrap_img").css("display", "flex");
+    }
+
+    const getOfCamera = () => {
+        $(".wrap_img").css("display", "none");
+    }
+    //hover顯示相機更改圖片
+
+
+    //更改大頭照
+    const openImg = () => {
+        $(".change_img").css("display", "block");
+        if (photo == "1") {
+            $("#icon01").css("border", "solid #81c268");
+        }
+        if (photo == "2") {
+            $("#icon02").css("border", "solid #81c268");
+        }
+    }
+
+    const closeImgWindow = () => {
+        $(".change_img").css("display", "none");
+    }
+
+    const changeIcon01 = () => {
+        setPhoto("1");
+        $("#icon01").css("border", "solid #81c268");
+        $("#icon02").css("border", "transparent ");
+        $("#icon03").css("border", "transparent ");
+
+    }
+
+    const changeIcon02 = () => {
+        // photo = 2;
+        setPhoto("2");
+        $("#icon02").css("border", "solid #81c268");
+        $("#icon01").css("border", "transparent");
+        $("#icon03").css("border", "transparent");
+
+    }
+
+    const changeIcon03 = () => {
+        // photo = 2;
+        setPhoto("3");
+        $("#icon03").css("border", "solid #81c268");
+        $("#icon01").css("border", "transparent");
+        $("#icon02").css("border", "transparent");
+
+    }
+
+
+    const iconCheck = () => {
+
+        Axios.put("http://localhost:3001/member/setting/photo", {
+            mPhoto: photo,
+            mMail: currentUser.mMail
+        }).then((res) => {
+            $(".change_img").css("display", "none");
+            localStorage.setItem("mPhoto", photo);
+            if (photo == "1") {
+                $(".my_img img").attr("src", icon01);
+            } else if (photo == "2") {
+                $(".my_img img").attr("src", icon02);
+            } else if (photo == "3") {
+                $(".my_img img").attr("src", icon03);
+            }
+            else {
+                $(".my_img img").attr("src", face);
+            }
+            // console.log(res);
+        }).catch((err) => {
+            alert("更新失敗，請稍後再試");
+            console.log(err);
+        })
+
+    }
+    //更改大頭照
+
     return (
 
         <div className={`member_setting_container`}>
+            {/* {!currentUser || !photo && ""} */}
             {!currentUser && ""}
-            {currentUser &&
+            {/* {!photo && ""} */}
+            {currentUser && 
+            // {currentUser && (photo || currentUser.mPhoto) &&
+
 
                 <Provider value={contextValue}>
 
@@ -85,13 +177,24 @@ const MemberSetting = () => {
                         <div className={"con_both con_left"}>
                             <div className={"member_hi"}>
                                 <span>歡迎<br /><span>{currentUser.mName}</span></span>
-                                <div className={"my_img"}><img src={face} /></div>
+                                <div className={"my_img"}
+                                    onMouseOver={addOn}
+                                    onMouseLeave={getOfCamera}
+                                    onClick={openImg}>
+                                    <img src={face} />
+                                    {/* <img src={`icon0${currentUser.mPhoto}`} /> */}
+                                    <div className={"wrap_img"}>
+                                        <FontAwesomeIcon icon={faCamera} />
+                                    </div>
+
+                                </div>
                             </div>
+
 
                             <div className={"member_list"}>
                                 {/* <!-- 這裡看怎麼改 --> */}
 
-                                <a href="/member/schedule"><div className={"member_list01"}>我的行程</div></a>
+                                {/* <a href="/member/schedule"><div className={"member_list01"}>我的行程</div></a> */}
                                 <div className={"member_list02"}>我的票券</div>
                                 <a href="/member/order"><div className={"member_list03"}>我的訂單</div></a>
                                 <div className={"member_list04"}>帳號設定</div>
@@ -145,13 +248,11 @@ const MemberSetting = () => {
                     </div>
 
 
-
-
-
+                    {/* 更改密碼視窗開始 */}
                     <div className={"change_window"}>
                         <div className={"change_content"}>
-                            <div className={"leave"} onClick={closeWindow}>
-                                <FontAwesomeIcon icon={faX} />
+                            <div className={"leave"} >
+                                <FontAwesomeIcon icon={faX} onClick={closeWindow} />
                             </div>
                             <div className={"insert_password"}>
 
@@ -163,11 +264,11 @@ const MemberSetting = () => {
 
                                 <div className="pass_data">
                                     <input type="password" id="old_pass"
-                                        onChange={(e) => { setOldPass(e.target.value) }} value={oldPass}/><br />
+                                        onChange={(e) => { setOldPass(e.target.value) }} value={oldPass} /><br />
                                     <input type="password" id="new_pass"
-                                        onChange={(e) => { setNewPass(e.target.value) }} value={newPass}/><br />
+                                        onChange={(e) => { setNewPass(e.target.value) }} value={newPass} /><br />
                                     <input type="password" id="chk_pass"
-                                        onChange={(e) => { setChkPass(e.target.value) }} value={chkPass}/>
+                                        onChange={(e) => { setChkPass(e.target.value) }} value={chkPass} />
                                 </div>
 
 
@@ -175,7 +276,28 @@ const MemberSetting = () => {
                             <div className={"change_chk"} onClick={checkChange}>確認更改</div>
                         </div>
                     </div>
+                    {/* 更改密碼視窗結束 */}
 
+
+                    {/* 更改圖片視窗開始 */}
+                    <div className={"change_img"}>
+                        <div className={"change_img_content"}>
+                            <div className={"close_change_img"}>
+                                <FontAwesomeIcon icon={faX} onClick={closeImgWindow} />
+                            </div>
+                            <div className={"icon_imgs"}>
+                                <img id="icon01" src={icon01} onClick={changeIcon01} />
+                                <img id="icon02" src={icon02} onClick={changeIcon02} />
+                                <img id="icon03" src={icon03} onClick={changeIcon03} />
+
+                            </div>
+                            <div>
+                                <div className={"icon_check"} onClick={iconCheck}>確定變更</div>
+                            </div>
+                        </div>
+
+                    </div>
+                    {/* 更改圖片視窗結束 */}
                 </Provider>
             }
         </div>

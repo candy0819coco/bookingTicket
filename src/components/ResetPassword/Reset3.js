@@ -15,29 +15,30 @@ const Reset3 = () => {
     const [passwordReset, setPasswordReset] = useState('');
     const [passwordCheck, setPasswordCheck] = useState('');
 
-    const sendNewPassword = async() => {
-        
+    const sendNewPassword = async () => {
+
         const token = JSON.parse(localStorage.reset).token;
         if (passwordReset !== "" && passwordCheck !== "") {
             await Axios.post("http://localhost:3001/register/reset3", {
                 passwordReset: passwordReset,
                 passwordCheck: passwordCheck,
-                token:token,
+                token: token,
             }).then((res) => {
                 alert("密碼修改成功，請重新登入");
+                localStorage.removeItem("reset");
+                navigate("/signIn");
             }).catch((err) => {
                 console.log(err);
                 alert(err.response.data.errors[0].msg);
             })
-            localStorage.removeItem("reset");
-            navigate("/signIn");
+
 
         } else if (passwordReset == "") {
             alert("請輸入密碼");
         } else {
             alert("請輸入確認密碼");
         }
-        
+
     }
 
     return (
@@ -53,7 +54,7 @@ const Reset3 = () => {
                 <div className="reset_all">
 
                     <div className={"reset_password"}>
-                        <h1>重置密碼</h1>
+                        <h2>重置密碼</h2>
                         <div className="reset_step">
                             <div className="reset_circle">1</div>
                             <div className="reset_line"></div>

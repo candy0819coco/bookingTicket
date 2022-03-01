@@ -1,76 +1,144 @@
+.User_container {
+  max-width: 1920px;
+  min-height: calc(100vh - 200px);
+  width: 100%;
+  height: 500px;
+  background-image: url("./../../image/vs_morning.svg");
+  background-repeat: no-repeat;
 
-  .User_container {
-    max-width: 1920px;
-    min-height: calc(100vh - 200px);
-    width: 100%;
-    height: 500px;
-    background-image: url("./../../image/vs_morning.svg");
-    background-repeat: no-repeat;
-    // background-position: 0 80px;
+  #now_location {
+    margin-top: 30px;
+    text-align: center;
 
-    #now_location {
-      margin-top: 30px;
-      text-align: center;
-
-      span {
-        display: inline-block;
-        margin: 10px;
-      }
-    }
-
-    #sign_info {
-      width: 400px;
-      // height: 400px;
-      margin: auto;
-      text-align: center;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.95);
-      border-radius: 25px;
-
-      div {
-        width: 200px;
-        margin: auto;
-      }
-
-      label {
-        display: inline-block;
-        width: 200px;
-        text-align: left;
-        margin-top: 10px;
-      }
-
-      input[type="text"] {
-        width: 200px;
-        height: 20px;
-        text-align: left;
-      }
-      
-      input[type="password"] {
-        width: 200px;
-        height: 20px;
-        text-align: left;
-      }
-
-      input[type="submit"] {
-        display: block;
-        width: 70px;
-        height: 30px;
-        margin: 30px auto;
-      }
-
-      #join_member {
-        width: 40%;
-        display: flex;
-        justify-content: space-around;
-      }
-
-      #another_login div {
-        display: inline-block;
-        width: 35px;
-        height: 35px;
-        margin: 10px;
-        cursor: pointer;
-      }
+    span {
+      display: inline-block;
+      margin: 10px;
     }
   }
 
+  #sign_info {
+    width: 400px;
+    // height: 400px;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+
+    div {
+      width: 200px;
+      margin: auto;
+    }
+
+    .signin_label {
+      display: inline-block;
+      width: 200px;
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    .password_box {
+      position: relative;
+      text-align: right;
+
+      .faEye_box {
+        position: absolute;
+        top: 1px;
+        right: 7px;
+        width: 10%;
+        cursor: pointer;
+      }
+    }
+    // label {
+    //   display: inline-block;
+    //   width: 200px;
+    //   text-align: left;
+    //   margin-top: 10px;
+    // }
+
+    #member_account {
+      width: 200px;
+      height: 25px;
+      text-align: left;
+    }
+
+    #member_password {
+      width: 200px;
+      height: 25px;
+      text-align: left;
+    }
+    // input[type="text"] {
+    //   width: 200px;
+    //   height: 20px;
+    //   text-align: left;
+    // }
+
+    // input[type="password"] {
+    //   width: 200px;
+    //   height: 20px;
+    //   text-align: left;
+    // }
+
+    #submit_info {
+      display: block;
+      width: 70px;
+      height: 30px;
+      margin: 30px auto;
+    }
+    // input[type="submit"] {
+    //   display: block;
+    //   width: 70px;
+    //   height: 30px;
+    //   margin: 30px auto;
+    // }
+
+    #join_member {
+      width: 40%;
+      display: flex;
+      justify-content: space-around;
+
+      a {
+        color: #000;
+      }
+    }
+
+    // #another_login div {
+    //   display: inline-block;
+    //   width: 35px;
+    //   height: 35px;
+    //   margin: 10px;
+    //   cursor: pointer;
+    // }
+    #another_login {
+      margin-top: 10px;
+      width: 180px;
+      height: 30px;
+      display: flex;
+      // justify-content: space-around;
+      // border-radius: 10px;
+      background-color: #ff4a4a;
+      color: #fff;
+      flex-grow: 1;
+      padding-left: 20px;
+      padding-right: 20px;
+      cursor: pointer;
+      
+      
+
+      .my_google {
+        width: 30px;
+        height: 30px;
+        flex-grow: 1;
+        align-items: center;
+       
+      }
+
+      .my_sign{
+        flex-grow: 4;
+        line-height: 30px;
+        margin-left: 5px;
+      }
+    }
+  }
+}
