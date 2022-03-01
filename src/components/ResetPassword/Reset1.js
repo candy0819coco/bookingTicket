@@ -26,6 +26,8 @@ const Reset1 = () => {
             }).catch((err)=>{
                 alert(err.response.data.message);
             })
+        }else{
+            alert("請輸入帳號");
         }
     }
 
@@ -43,7 +45,7 @@ const Reset1 = () => {
                 <div className="reset_all">
 
                     <div className={"reset_password"}>
-                        <h1>重置密碼</h1>
+                        <h2>重置密碼</h2>
                         <div className="reset_step">
                             <div className="reset_circle">1</div>
                             <div className="reset_line"></div>
@@ -54,7 +56,7 @@ const Reset1 = () => {
 
                         <div className="reset_insert">
                             <div>Email</div>
-                            <input type="text" onChange={(e) => { setAccount(e.target.value) }} />
+                            <input id="insert_email" type="text" onChange={(e) => { setAccount(e.target.value) }} />
                             {/* <input type="button" value="Send Verification Code" /> */}
                             <button onClick={sendEmail}>寄送驗證碼</button>
                         </div>

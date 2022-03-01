@@ -32,11 +32,45 @@ $colorGreen: #81c268;
 
                 .my_img {
                     width: 40%;
-                    cursor: pointer;
+                    // margin: 1%;
+                    position: relative;
                     border-radius: 50%;
+                    cursor: pointer;
                     :hover {
-                        opacity: 0.7;
+                        .wrap_img {
+                            display: block;
+                        }
                     }
+
+                    img {
+                        float: left;
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .wrap_img {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        border-radius: 50%;
+                        background-color: rgba(0, 0, 0, 0.2);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        display: none;
+                    }
+
+                    // &:before{
+                    //     content: " ";
+                    //     position: absolute;
+                    //     z-index: 1;
+                    //     background-color: rgba(128, 128, 128, 0.596);
+                    //     width: 100%;
+                    //     height:100%;
+                    //     border-radius: 50%;
+
+                    // }
                 }
 
                 /* 左導覽列start */
@@ -56,14 +90,13 @@ $colorGreen: #81c268;
                     text-align: center;
                     margin: 30px auto;
 
-                    :nth-child(4) {
+                    :nth-child(3) {
                         background-color: #81c268;
                         border-right: 3px solid #2b9635;
                     }
                     a {
                         color: #000;
                         text-decoration: none;
-
                     }
                     div {
                         margin: 0 auto;
@@ -148,6 +181,7 @@ $colorGreen: #81c268;
         }
     }
 
+    //更改密碼頁面開始
     .change_window {
         position: fixed;
         height: 100%;
@@ -158,7 +192,7 @@ $colorGreen: #81c268;
         display: none;
         .change_content {
             width: 40%;
-            height: 50%;
+            // height: 50%;
             background-color: #fff;
             border-radius: 15px;
             padding: 20px;
@@ -177,15 +211,17 @@ $colorGreen: #81c268;
 
                     label {
                         display: inline-block;
-                        height: 30px;
+                        height: 28px;
                         margin-top: 10px;
+                        line-height: 28px;
                     }
                 }
 
                 .pass_data {
                     width: 50%;
+
                     input {
-                        height: 24px;
+                        height: 28px;
                         width: 250px;
                         margin-top: 10px;
                         margin-left: 10px;
@@ -194,16 +230,17 @@ $colorGreen: #81c268;
             }
 
             .change_chk {
-                width: 15%;
+                width: 20%;
                 background-color: $colorGreen;
                 margin: 50px auto 10px auto;
                 height: 30px;
                 color: #fff;
-                line-height: 30px;
+                line-height: 20px;
                 text-align: center;
                 border-radius: 5px;
                 cursor: pointer;
-                padding: 5px;
+                padding-top: 5px;
+                padding-bottom: 5px;
             }
             .leave {
                 width: 100%;
@@ -212,4 +249,63 @@ $colorGreen: #81c268;
             }
         }
     }
+    //更改密碼頁面結束
+
+    //選擇大頭貼頁面開始
+    .change_img {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(128, 128, 128, 0.596);
+        top: 0;
+        padding-top: 100px;
+        // vertical-align:middle
+        display: none;
+
+        .change_img_content {
+            width: 40%;
+            // height: 50%;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin: auto;
+
+            .close_change_img {
+                text-align: right;
+                cursor: pointer;
+            }
+
+            .icon_imgs {
+                margin: 30px;
+                display: flex;
+                justify-content: space-around;
+
+                img {
+                    width: 28%;
+                    margin-left: 15px;
+                    margin-right: 15px;
+                    border-radius: 50%;
+                    border: 2px solid transparent;
+                    cursor: pointer;
+                }
+
+            }
+
+            .icon_check {
+                width: 90px;
+                border-radius: 10px;
+                background-color: $colorGreen;
+                color: #fff;
+                margin: 40px auto 20px auto;
+                padding: 10px;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    //選擇大頭貼頁面結束
 }

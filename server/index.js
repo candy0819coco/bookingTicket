@@ -9,26 +9,17 @@ const jwt = require("jsonwebtoken");
 const mail = require("./mail");
 const { Navigate } = require("react-router-dom");
 const authRoute = require("./routes/auth-route");
+// const passport = require("passport");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 require('dotenv').config();
-// const passportSetup = require("./config/passport");
-// const db = require("./config/db");
-// const config = require("./config/token");
-// const nodemailer = require("nodemailer");
-// const passportSetup = require("./passport");
-// const { min } = require("ramda");
-
-app.use(cookieSession({
-
-    keys: ["process.env.COOKIE_SECRET"]
-}))//研究一下
+const passportSetup = require("./config/passport");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use("/auth", authRoute);
 
 const db = mysql.createConnection({
@@ -52,13 +43,18 @@ const authController = (req, res) => {
     const passwordRegA = bcrypt.hashSync(passwordReg, 10);
     const passwordCheckA = bcrypt.hashSync(passwordCheck, 10);
 
-    db.query("insert into test01 (mName,mMail,mPwd,mPwd_check,mPhone,mBirthday,mAddress,mActive,mCode) values(?,?,?,?,?,?,?,0,'')"
+    db.query("insert into test01 (mName,mMail,mPwd,mPwd_check,mPhone,mBirthday,mAddress,mActive,mCode,mPhoto) values(?,?,?,?,?,?,?,0,'',0)"
         , [usernameReg, accountReg, passwordRegA, passwordCheckA, phoneNumber, birth, address]
         , function (err, result) {
             //如果失敗，有error，result為undefined
             //如果成功，有result(物件)，error為null
             if (result) {
                 // console.log(result);
+                
+                const buff = Buffer.from(accountReg, 'utf-8');
+                const account64 = buff.toString('base64');
+                // console.log("測試base64",account64);
+                mail.sendMail(accountReg, account64);//發送信件
                 return res.send({ massage: "註冊成功" });
 
             }
@@ -70,10 +66,8 @@ const authController = (req, res) => {
         }
     )
 
-    const buff = Buffer.from(accountReg, 'utf-8');
-    const account64 = buff.toString('base64');
-    // console.log("測試base64",account64);
-    mail.sendMail(accountReg, account64);//發送信件
+
+    
 }
 
 //重置密碼驗證
@@ -146,7 +140,8 @@ app.post("/signIn", function (req, res) {
                 mName: result[0].mName,
                 mPhone: result[0].mPhone,
                 mBirthday: result[0].mBirthday,
-                mAddress: result[0].mAddress
+                mAddress: result[0].mAddress,
+                mPhoto: result[0].mPhoto
             };
 
             const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '24h' });
@@ -261,7 +256,7 @@ app.post("/register/reset3", [
 
 app.get("/check/signin", function (req, res) {
     const token = req.header("Authorization");
-    console.log("我是token:", token);
+    // console.log("我是token:", token);
     if (token) {
         try {
             // const decodeCheck = jwt.verify(token, config.jwtKey);
@@ -327,6 +322,22 @@ app.post("/member/setting/change", (req, res) => {
     }
 })
 
+//修改照片
+app.put("/member/setting/photo", (req, res) => {
+    console.log(req.body);
+    db.query("update test01 set mPhoto=? where mMail=? "
+        , [req.body.mPhoto, req.body.mMail]
+        , (err, result) => {
+            if (err) {
+                res.status(500).send({ message: "更新失敗" });
+            };
+            if (result) {
+                console.log(result);
+                res.send({ message: "更新成功" });
+
+            }
+        })
+})
 
 //拿取使用者資料
 app.post("/user/data", function (req, res) {
@@ -335,7 +346,7 @@ app.post("/user/data", function (req, res) {
     // const { currentUser } = req.body;
     // console.log("測試:", req.body, "測試");
 
-    // db.query("select * from test01 where id=?")
+    // db.query("select * from test01 where mNo=?")
 })
 //存localstorage
 // app.get("/signIn/:token",function(req,res){

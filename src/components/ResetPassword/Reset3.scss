@@ -26,7 +26,7 @@ $colorBack: rgba(255, 255, 255, 0.95);
         }
     }
     .reset_all {
-        width: 350px;
+        width: 380px;
         height: 400px;
         margin: 30px auto;
         text-align: center;
@@ -37,6 +37,7 @@ $colorBack: rgba(255, 255, 255, 0.95);
             display: flex;
             justify-content: center;
             flex-direction: column;
+            width: 100%;
 
             .reset_step {
                 display: flex;
@@ -74,7 +75,7 @@ $colorBack: rgba(255, 255, 255, 0.95);
                 }
                 input {
                     margin-top: 5px;
-                    height: 20px;
+                    height: 30px;
                 }
                 button {
                     color: #fff;
