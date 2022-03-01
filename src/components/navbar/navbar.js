@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import "./Navbar.scss";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import context, { Provider } from "./../context";
+import context, { Provider } from "../context";
 
 const Navbar = () => {
   const contextValue = useContext(context);

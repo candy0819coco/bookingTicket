@@ -9,7 +9,7 @@ import Axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./MusicFestivalIndex.scss";
 import { Provider } from "./components/context.js";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import ModalTool from "./components/ModalTool/ModalTool";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
