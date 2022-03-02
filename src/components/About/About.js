@@ -6,13 +6,15 @@ import context from "./../context";
 
 const About = () => {
     const contextValue = useContext(context);
-    const { } = contextValue;
+    const {isDarkMode} = contextValue;
 
     return (
         <div className={`about_container`}>
-                <div className="____">
-                        About Content
+            <Provider value={contextValue}>
+                    <div className={`home_background ${isDarkMode ? "home_background_dark" : ""}`}>
+                    <div className={`about ${isDarkMode ? "about_dark" : ""}`} />
                 </div>
+            </Provider>
         </div>
     );
 };

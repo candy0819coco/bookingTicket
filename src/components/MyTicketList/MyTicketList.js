@@ -135,7 +135,7 @@ const MyTicketList = () => {
   };
 
   return (
-    <div className={`ticket_order_container`}>
+    <div className={`my_ticket_list_container`}>
       {/* {!currentUser && ""} */}
       {/* {currentUser && */}
 
@@ -221,7 +221,7 @@ const MyTicketList = () => {
                       <div className={`tb_area`}>{item.orderNo}</div>
                       {/* <div className="tb_area">{item.orderStatus === 1 ? "訂單成立":"尚未成立"}</div> */}
                       <div className={`tb_area `}>{item.orderPrice}</div>
-                      <div className={`tb_area`}>{item.paymentMethod}</div>
+                      <div className={`tb_area`}>{item.paymentMethod==="creditCard"?"信用卡":"超商"}</div>
                       <div className={`tb_area `}>
                         {item.paymentStatus === 1 ? "付款完成" : "未付款"}
                       </div>

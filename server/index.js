@@ -640,9 +640,10 @@ app.post("/ticketOrder/credit_card/send_code", function (req, res) {
       mail.sendVisaMail(mailOptions);
 
       return res.send({
-        message: "已發送驗證碼至郵件",
-        paymentToken: paymentToken,
-        orderNo: orderNo,
+        message: `已發送驗證碼至"${mName}之信箱`,
+        // paymentToken: paymentToken,
+        // orderNo: orderNo,
+        to:mMail
       });
       // return res.send({ message: "已發送驗證碼至郵件", "token": token });先註解
 

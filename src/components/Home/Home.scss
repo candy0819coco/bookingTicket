@@ -3,9 +3,6 @@
   // min-height: calc(100vh - 100px);
   transition: 0.5s;
   background-color: #fffbd0;
-  &.home_container_dark {
-    background-color: #333;
-  }
   .home_background {
     width: 100%;
     // height: 1080px;
@@ -13,26 +10,35 @@
     background-repeat: no-repeat;
     background-size: 60%;
     background-position: center;
-    // background-image: url("./../../image/vs_morning.svg");
     background-color: #fffbd0;
     z-index: 1;
     top: 15px;
     transition: 0.3s;
     position: relative;
     &.home_background_dark {
-      // background-image: url("./../../image/vs_night.svg");
       background-color: #4a4577;
     }
+
     .grass {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
+      opacity: 0.8;
       &.grass_1 {
         background-image: url(./../../image/grass_1.svg);
         width: 40%;
         height: 34%;
         position: absolute;
         bottom: 90px;
+        transition: 0.1s;
+        left: -22px;
+        &.grass_1_dark {
+          width: 10%;
+          left: -500px;
+          bottom: 60px;
+          animation-timing-function: ease-out;
+          transform: rotate(-1deg);
+        }
       }
       &.grass_2 {
         background-image: url(./../../image/grass_2.svg);
@@ -41,6 +47,11 @@
         position: absolute;
         bottom: 90px;
         left: 350px;
+        transition: 0.2s;
+        &.grass_2_dark {
+          height: 1%;
+          animation-timing-function: ease-out;
+        }
       }
       &.grass_3 {
         background-image: url(./../../image/grass_3.svg);
@@ -49,18 +60,89 @@
         position: absolute;
         bottom: 105px;
         left: 790px;
+        transition: 0.2s;
+        &.grass_3_dark {
+          width: 10%;
+          left: 1700px;
+          bottom: 80px;
+          animation-timing-function: ease-out;
+          transform: rotate(1deg);
+        }
+      }
+      &.grass_4 {
+        width: 20%;
+        position: absolute;
+        bottom: 90px;
+        background-image: url(./../../image/grass_4.svg);
+        left: -450px;
+        height: 28%;
+        transition: 0.2s;
+        &.grass_4_dark {
+          width: 40%;
+          position: absolute;
+          bottom: 90px;
+          background-image: url(./../../image/grass_4.svg);
+          left: -45px;
+          height: 28%;
+          animation-timing-function: ease-out;
+          transform: rotate(-1deg);
+        }
+      }
+      &.grass_5 {
+        background-image: url(./../../image/grass_5.svg);
+        position: absolute;
+        height: 1%;
+        width: 42%;
+        left: 290px;
+        bottom: 100px;
+        transition: 0.2s;
+
+        &.grass_5_dark {
+          position: absolute;
+          background-image: url(./../../image/grass_5.svg);
+          height: 50%;
+          left: 310px;
+          width: 45%;
+          bottom: 80px;
+          animation-timing-function: ease-out;
+        }
+      }
+      &.grass_6 {
+        background-image: url(./../../image/grass_6.svg);
+        bottom: 103px;
+        left: 1400px;
+        height: 10%;
+        width: 42%;
+        position: absolute;
+        transition: 0.2s;
+
+        &.grass_6_dark {
+          background-image: url(./../../image/grass_6.svg);
+          bottom: 103px;
+          left: 825px;
+          height: 30%;
+          width: 42%;
+          position: absolute;
+          animation-timing-function: ease-out;
+          transform: rotate(1deg);
+        }
       }
     }
     .logo {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
+      opacity: 0.8;
       background-image: url(./../../image/logo_background.svg);
       width: 37%;
       height: 32%;
       position: absolute;
       bottom: 505px;
       left: 810px;
+      &.logo_dark {
+        background-image: url(./../../image/logo_background_1.svg);
+        opacity: 0.8;
+      }
     }
     .effect {
       background-repeat: no-repeat;
@@ -72,18 +154,98 @@
       position: absolute;
       bottom: 300px;
       left: 16.5%;
+      transition: 0.2s;
+      &.effect_dark {
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        background-image: url(./../../image/effect.svg);
+        width: 80%;
+        height: 60%;
+        position: absolute;
+        bottom: 400px;
+        left: 10%;
+        opacity: 0;
+        animation-timing-function: ease-out;
+        transform: rotate(2deg);
+      }
+    }
+    .effect2 {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-image: url(./../../image/effect_1.svg);
+      width: 62%;
+      height: 40%;
+      position: absolute;
+      bottom: 300px;
+      left: 16.5%;
+      transition: 0.2s;
+      opacity: 0;
+      transform: rotate(7deg);
+      &.effect2_dark {
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        background-image: url(./../../image/effect_1.svg);
+        width: 62%;
+        left: 100px;
+        bottom: 290px;
+        height: 45%;
+        animation-timing-function: ease-out;
+        opacity: 1;
+      }
     }
     .showTheme {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
+      opacity: 1;
       background-image: url(./../../image/vs_morning.svg);
       width: 60%;
       height: 80%;
       position: absolute;
       bottom: 5px;
       left: 20%;
+      transition: 0.06s;
+      &.showTheme_dark {
+        background-image: url(./../../image/vs_night.svg);
+        opacity: 1;
+      }
     }
+    .showTheme:hover {
+      position: absolute;
+      bottom: 1px;
+    }
+
+    .showTH {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      opacity: 1;
+      background-image: url(./../../image/showTH.svg);
+      width: 212%;
+      height: 212%;
+      position: absolute;
+      bottom: -1142px;
+      left: -795px;
+      // transition: 0.04s;
+      transition: 0.04s;
+      opacity: 1;
+      &.showTH_dark {
+        background-image: url(./../../image/showTH.svg);
+        opacity: 1;
+        transform: rotate(180deg);
+        animation-timing-function: ease-out;
+      }
+    }
+    .showTH:hover {
+      position: absolute;
+      bottom: -1138px;
+      animation-iteration-count: 2;
+      transition: 0.05s;
+    }
+
     .hand {
       background-repeat: no-repeat;
       background-size: contain;
@@ -95,6 +257,14 @@
         position: absolute;
         bottom: -90px;
         left: 50px;
+        transition: 0.5s;
+        &.hand_1_dark {
+          // background-image: url(./../../image/);
+          // animation-delay: 2s;
+          bottom: -280px;
+          left: -400px;
+          animation-timing-function: ease-out;
+        }
       }
       &.hand_2 {
         background-image: url(./../../image/hand_right.svg);
@@ -103,19 +273,19 @@
         position: absolute;
         bottom: -90px;
         right: 100px;
+        transition: 0.3s;
+        &.hand_2_dark {
+          // background-image: url(./../../image/);
+          // animation-delay: 2s;
+          bottom: -400px;
+          right: -400px;
+          animation-timing-function: ease-out;
+        }
       }
     }
-    .solidIndex {
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-      background-image: url(./../../image/solid_index.svg);
-      width: 140%;
-      height: 120%;
-      position: absolute;
-      // bottom: -20px;
-      left: -100px;
-    }
+  }
+  &.home_container_dark {
+    background-color: #333;
   }
 
   .home_background2 {
@@ -130,21 +300,17 @@
     &.home_background_dark2 {
       background-color: #b4bff4;
     }
-    .home_background_box{
-      
-    
-      .solidButton {
-        background-color: #555555;
-        color: #fff;
-        width: 350px;
-        height: 50px;
-        // border:#555555;
-      }
-      .c19 {
-        position: relative;
-        left: 658px;//原527px
-        top: 50px;
-      }
+    .solidButton {
+      background-color: #555555;
+      color: #fff;
+      width: 350px;
+      height: 50px;
+      // border:#555555;
+    }
+    .c19 {
+      position: relative;
+      left: 527px;
+      top: 50px;
     }
   }
   .home_background3 {
@@ -153,7 +319,7 @@
     background-repeat: no-repeat;
     background-size: 100%;
     background-color: #f7f7f7;
-    z-index: 0;
+    z-index: 1;
     position: relative;
     &.home_background_dark3 {
       background-color: #474747;
@@ -162,46 +328,178 @@
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
+      opacity: 0.8;
       background-image: url(./../../image/News.png);
       width: 9%;
-      height: 100%;
+      height: 100px;
       position: absolute;
-      bottom: 260px;
+      bottom: 545px;
       left: 90px;
+      &.newsImage_dark {
+        background-image: url(./../../image/News_1.png);
+      }
     }
 
     .camp {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
-      background-image: url(./../../image/camp.svg);
+      // background-image: url(./../../image/camp.svg);
       width: 22%;
-      height: 100%;
+      height: 30%;
       position: absolute;
-      bottom: -30px;
-      right: 90px;
+      bottom: 155px;
+      right: 150px;
+      transition: 0.5s;
+      z-index: -1;
+    }
+    .camp:hover {
+      position: absolute;
+      bottom: 158px;
+      transform: rotate(7deg);
     }
     .fire {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
-      background-image: url(./../../image/fire.svg);
+      // background-image: url(./../../image/fire.svg);
       width: 25%;
-      height: 100%;
+      height: 40%;
       position: absolute;
-      bottom: 240px;
+      bottom: 400px;
       right: 90px;
+      transition: 0.55s;
+    }
+    .fire:hover {
+      position: absolute;
+      bottom: 403px;
+      transform: rotate(18deg);
     }
     .news {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
+      opacity: 0.9;
       background-image: url(./../../image/news1.png);
-      width: 44%;
-      height: 100%;
+      width: 640px;
+      height: 750px;
+      left: 150px;
       position: absolute;
-      bottom: 30px;
-      left: 155px;
+
+      &.news_dark {
+        background-image: url(./../../image/news3.png);
+        opacity: 0.9;
+      }
+
+      .news:hover {
+        opacity: 1;
+      }
+
+    }
+    .myHover {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-color: #dadada;
+      width: 480px;
+      height: 60px;
+      position: absolute;
+      bottom: 300px;
+      left: 290px;
+      opacity: 0;
+      
+      &.myHover_dark {
+        background-color: #2F2F2F;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        width: 480px;
+        height: 60px;
+        position: absolute;
+        bottom: 300px;
+        left: 290px;
+        opacity: 0;
+      }
+    }
+    .myHover:hover {
+      position: absolute;
+      opacity: 0.13;
+      cursor: pointer;
+
+    }
+
+    .myHover2 {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-color: #dadada;
+      width: 480px;
+      height: 60px;
+      position: absolute;
+      bottom: 365px;
+      left: 290px;
+      opacity: 0;
+      &.myHover2_dark {
+        background-color: #2F2F2F;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        width: 480px;
+        height: 60px;
+        position: absolute;
+        bottom: 365px;
+        left: 290px;
+        opacity: 0;
+      }
+    }
+    .myHover2:hover {
+      position: absolute;
+      opacity: 0.13;
+      cursor: pointer;
+
+    }
+
+    .myHover3 {
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-color: #dadada;
+      width: 480px;
+      height: 60px;
+      position: absolute;
+      bottom: 433px;
+      left: 290px;
+      opacity: 0;
+      &.myHover3_dark {
+        background-color: #2F2F2F;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        width: 480px;
+        height: 60px;
+        position: absolute;
+        bottom: 433px;
+        left: 290px;
+        opacity: 0;
+      }
+    }
+    .myHover3:hover {
+      position: absolute;
+      opacity: 0.13;
+      cursor: pointer;
+    }
+    .readMore{
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      position: absolute;
+      background-color: #555555;
+      opacity: 0;
+      width: 70px;
+      height: 22px;
+      bottom:257px;
+      left:690px;
+      cursor: pointer;
     }
   }
 }

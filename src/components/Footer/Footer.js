@@ -12,11 +12,22 @@ import context from "./../context";
   
   const Footer = () => {
     const contextValue = useContext(context);
-  const { isDarkMode } = contextValue;
+    const [footerStyle,setFooterStyle]= useState("");
+    const { isDarkMode,pathName} = contextValue;
+
+  useEffect(() => {
+    if(pathName==="home"||pathName==="about"){
+      setFooterStyle('footerAnother')
+    }else{
+      setFooterStyle('')
+    }
+  }, [pathName]);
+  
+  
     return (
-    <div className="footer_container">
+    <div className={`footer_container ${footerStyle==='footerAnother'? "footer_container_two":""}`}>
       <div className={`footer_area ${isDarkMode ? "footer_area_dark":""}`}>
-        <div className="copy_right_area">
+        <div className={`copy_right_area `}>
             <div className="copy_right_text_a">Copyright&nbsp;&nbsp;2022&nbsp;&nbsp;Love&Peace&nbsp;&nbsp;Rock&nbsp;&nbsp;Festival.&nbsp;&nbsp;All&nbsp;&nbsp;rights&nbsp;&nbsp;reserved.
             </div>
             <div className="copy_right_text_b">The website is developed and designed by me, powered by react.js
@@ -30,5 +41,4 @@ import context from "./../context";
     </div>
     );
   };
-  
   export default Footer;

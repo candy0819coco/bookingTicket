@@ -15,7 +15,6 @@ const Navigator = () => {
   const contextValue = useContext(context);
   const { pathName, setPathName, isDarkMode, setIsDarkMode, currentUser, setUserPanelShow } = contextValue;
 
-
   return (
     <div className="navbar_container">
       <div className={`navbar_inner ${isDarkMode ? "navbar_inner_dark" : ""}`}>

@@ -1,0 +1,52 @@
+* {
+    font-family: "Noto Sans TC", sans-serif;
+}
+.outsideCon{
+    // height: 80vh;
+    // background-color: chartreuse;
+}
+.myHeight {
+    // margin-top: -0.5vh;
+    width: 100%;
+    height: 53vh;
+    border-radius: 10px;
+    margin-top: -28vh;
+    transition: 0.5s;
+}
+.myHeight:hover{
+    margin-top: -27.5vh;
+}
+
+
+
+.title {
+    position: relative;
+    width: 10%;
+    margin-right: 10vh;
+    left: -30vh;
+    // background-color: cadetblue;
+}
+.traffic {
+    margin-left: -5vh;
+    margin-top: -5vh;
+}
+
+.toEvent{
+    position: relative;
+    width: 60%;
+    margin-top: 20vh;
+    margin-left: -5vh;
+    transition: 0.1s ;
+    // background-color: chartreuse;
+}
+
+.toEvent:hover{
+    margin-top: 19.5vh;
+    border: 0.5px solid rgb(117, 117, 117);
+    border-radius: 10px;
+    
+}
+
+.popUp {
+    padding-bottom: 3vh;
+}

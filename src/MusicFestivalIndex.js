@@ -35,6 +35,7 @@ import TicketPicker from "./components/TicketPicker/TicketPicker";
 import Others from "./components/Others/Others";
 import UserPanel from "./components/UserPanel/UserPanel";
 import UserPanelContent from "./components/UserPanelContent/UserPanelContent";
+import ItemPage from "./components/ItemPage/ItemPage";
 import axios from "axios";
 
 const MusicFestivalIndex = () => {
@@ -44,6 +45,7 @@ const MusicFestivalIndex = () => {
   const [isDarkMode, setIsDarkMode] = useState(false); //預設值是白天
   const [userPanelShow, setUserPanelShow] = useState(false);
 
+  
   const isLogin = async () => {
     var userToken = localStorage.getItem("user")
       ? localStorage.getItem("user")
@@ -117,9 +119,17 @@ const MusicFestivalIndex = () => {
     setCurrentUser,
     userToken,
     setUserToken,
-    userPanelShow, setUserPanelShow
-  }; //把會用到的值 裝在contextValue，傳給下面的組件使用
+    userPanelShow, setUserPanelShow,
+    }; //把會用到的值 裝在contextValue，傳給下面的組件使用
   console.log('currentUser', currentUser)
+
+  
+  // const changeFooterStyle=()=>{
+  //   if(pathName==="home"||pathName==="about"){
+  //     setFooterStyle('footerAnother') 
+  //   }
+  // }
+
   return (
     <Router>
       <div
@@ -131,11 +141,12 @@ const MusicFestivalIndex = () => {
           <Fragment>
             <Navigator />
             <Routes>
-              <Route exact path="/" element={<Home />} />
+              <Route className="aaa" exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/lineUp" element={<LineUp />} />
-              <Route exact path="/map" element={<Map />} />
+              {/* <Route exact path="/map" element={<Map />} /> */}
               <Route exact path="/shop" element={<Shop />} />
+              <Route exact path="/shop/itemPage" element={<ItemPage/>}/>
               <Route exact path="/rental" element={<Rental />} />
               <Route exact path="/messageBoard" element={<MessageBoard />} />
               <Route exact path="/ticketOrder" element={<TicketOrder />} />
@@ -161,7 +172,8 @@ const MusicFestivalIndex = () => {
               {/* <Route exact path="/user" element={<User />} /> */}
               {/* <Route path="/signIn/:token" element={<Home />} /> */}
             </Routes>
-            <Footer />
+            <Footer
+            />
             {currentUser ? handleRenderUserPanel() : null}
           </Fragment>
         </Provider>

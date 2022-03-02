@@ -18,8 +18,9 @@ $colorGreen: #81c268;
         background-image: url("../../image/vs_morning.svg");
         background-repeat: no-repeat;
         // background-position: 0 40px;
+        background-size: contain;
         display: flex;
-        height: 500px;
+        height: 800px;
         width: 100%;
 
         .con_both {

@@ -8,6 +8,10 @@
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
+  &.ticket_order_container_step_one{
+  height: 93vh;
+
+  }
   .test_area {
     position: absolute;
     bottom: 30px;
@@ -22,9 +26,9 @@
     width: 15%;
     height: 75px;
     position: absolute;
-    top: 10%;
-    left: 10%;
-    background-image: url("./../../image/ticket_title_black.svg");
+    top: 8%;
+    left: 5%;
+    background-image: url("./../../image/ticket.png");
     background-repeat: no-repeat;
     background-size: contain;
     //   margin-top: 90px;
