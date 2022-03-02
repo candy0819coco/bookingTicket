@@ -144,7 +144,7 @@ const MusicFestivalIndex = () => {
               <Route className="aaa" exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/lineUp" element={<LineUp />} />
-              {/* <Route exact path="/map" element={<Map />} /> */}
+              <Route exact path="/map" element={<Map />} />
               <Route exact path="/shop" element={<Shop />} />
               <Route exact path="/shop/itemPage" element={<ItemPage/>}/>
               <Route exact path="/rental" element={<Rental />} />
