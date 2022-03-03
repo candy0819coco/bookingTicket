@@ -10,12 +10,44 @@ import UserPanel from "./../UserPanel/UserPanel";
 import UserPanelContent from "./../UserPanelContent/UserPanelContent";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import context, { Provider } from "./../context";
-
+import icon00 from '../../image/membership_black.svg';
+import icon01 from '../../image/icon01.png';
+import icon02 from '../../image/icon02.png';
+import icon03 from '../../image/icon03.png';
 const Navigator = () => {
   const contextValue = useContext(context);
   const { pathName, setPathName, isDarkMode, setIsDarkMode, currentUser, setUserPanelShow } = contextValue;
+  const [avatarImage, setAvatarImage] = useState();
+  // const count =1;
+
+  //   window.addEventListener('storage', () => {
+  //     count +=1;
+  //   })
+
+  const whichP = () => {
+    let mPhoto = localStorage.getItem("mPhoto");
+    if (mPhoto == "1") {
+      setAvatarImage(icon01);
+    } else if (mPhoto == "2") {
+      setAvatarImage(icon02);
+    } else if (mPhoto == "3") {
+      setAvatarImage(icon03);
+    } else {
+      setAvatarImage(icon00);
+    }
+
+    
+  }
+  useEffect(() => {
+    whichP();
+  }, [localStorage.getItem("mPhoto")])
+
+  // window.addEventListener('storage', whichP);
 
 
+  // window.addEventListener('storage', () => {
+  //   console.log("hello");
+  // })
   return (
     <div className="navbar_container">
       <div className={`navbar_inner ${isDarkMode ? "navbar_inner_dark" : ""}`}>
@@ -28,9 +60,8 @@ const Navigator = () => {
         </div>
         <div className="container_right">
           <div
-            className={`menu_item_area ${
-              isDarkMode ? "menu_item_area_dark" : ""
-            }`}
+            className={`menu_item_area ${isDarkMode ? "menu_item_area_dark" : ""
+              }`}
           >
             <Link
               className={`nav_item ${pathName === "about" ? "current" : ""}`}
@@ -47,9 +78,8 @@ const Navigator = () => {
               Line up
             </Link>
             <Link
-              className={`nav_item ${
-                pathName === "ticketOrder" ? "current" : ""
-              }`}
+              className={`nav_item ${pathName === "ticketOrder" ? "current" : ""
+                }`}
               to="/ticketOrder"
               onClick={() => setPathName("ticketOrder")}
             >
@@ -73,18 +103,16 @@ const Navigator = () => {
               Others
               <div className="navbar_list">
                 <Link
-                  className={`nav_list_text ${
-                    pathName === "rental" ? "current" : ""
-                  }`}
+                  className={`nav_list_text ${pathName === "rental" ? "current" : ""
+                    }`}
                   to="/rental"
                   onClick={() => setPathName("rental")}
                 >
                   Market rental
                 </Link>
                 <Link
-                  className={`nav_list_text ${
-                    pathName === "messageBoard" ? "current" : ""
-                  }`}
+                  className={`nav_list_text ${pathName === "messageBoard" ? "current" : ""
+                    }`}
                   to="/messageBoard"
                   onClick={() => setPathName("messageBoard")}
                 >
@@ -112,15 +140,15 @@ const Navigator = () => {
             {currentUser ? (
               <div
                 onClick={() => setUserPanelShow(true)}
-                className={`icon icon_user ${
-                  isDarkMode ? "icon_user_dark" : ""
-                }`}
+                className={`icon icon_user ${isDarkMode ? "icon_user_dark" : ""
+                  }`}
+
+                style={{ backgroundImage: `url(${avatarImage})` }}
               ></div>
             ) : (
               <div
-                className={`icon icon_user ${
-                  isDarkMode ? "icon_user_dark" : ""
-                }`}
+                className={`icon icon_user ${isDarkMode ? "icon_user_dark" : ""
+                  }`}
               >
                 <Link
                   className={`nav_item`}
