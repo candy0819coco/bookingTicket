@@ -14,6 +14,8 @@ $color1: #767676;
     background-color: #f8f8f8;
     color: $color1;
     top: 0px;
+    z-index: 4;
+
 
     transition: 0.3s;
     &.navbar_inner_dark {
@@ -30,14 +32,14 @@ $color1: #767676;
         width: 200px;
         height: 55px;
         position: relative;
-        background-image: url("./../../image/logo_black.svg");
+        background-image: url("./../../image/logo_background_morning.png");
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center center;
         transition: 0.3s;
         &.main_logo_dark {
           transition: 0.3s;
-          background-image: url("./../../image/logo_white.svg");
+          background-image: url("./../../image/logo_background_night.png");
         }
       }
     }
@@ -101,6 +103,8 @@ $color1: #767676;
                 width: 109px;
                 height: 71px;
                 .nav_list_text {
+                  width:100px;
+                  height: 10px;
                   margin-bottom: 5px;
                   margin-bottom: 10px;
                   color: #8b8b8b;

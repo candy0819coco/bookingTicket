@@ -31,10 +31,12 @@
         position: absolute;
         bottom: 90px;
         transition: 0.1s;
-        left: -22px;
+        // left: -22px;
+        left: -1vw;
         &.grass_1_dark {
           width: 10%;
-          left: -500px;
+          // left: -500px;
+          left: -15vw;
           bottom: 60px;
           animation-timing-function: ease-out;
           transform: rotate(-1deg);
@@ -46,10 +48,11 @@
         height: 41%;
         position: absolute;
         bottom: 90px;
-        left: 350px;
+        // left: 350px;
+        left: 26vw;
         transition: 0.2s;
         &.grass_2_dark {
-          height: 1%;
+          height: 1vh;
           animation-timing-function: ease-out;
         }
       }
@@ -59,11 +62,13 @@
         height: 28%;
         position: absolute;
         bottom: 105px;
-        left: 790px;
+        // left: 790px;
+        left: 58vw;
         transition: 0.2s;
         &.grass_3_dark {
           width: 10%;
-          left: 1700px;
+          // left: 1700px;
+          left: 100vw;
           bottom: 80px;
           animation-timing-function: ease-out;
           transform: rotate(1deg);
@@ -74,7 +79,8 @@
         position: absolute;
         bottom: 90px;
         background-image: url(./../../image/grass_4.svg);
-        left: -450px;
+        // left: -450px;
+        left: -30vw;
         height: 28%;
         transition: 0.2s;
         &.grass_4_dark {
@@ -82,7 +88,8 @@
           position: absolute;
           bottom: 90px;
           background-image: url(./../../image/grass_4.svg);
-          left: -45px;
+          // left: -45px;
+          left: -1.7vw;
           height: 28%;
           animation-timing-function: ease-out;
           transform: rotate(-1deg);
@@ -93,7 +100,8 @@
         position: absolute;
         height: 1%;
         width: 42%;
-        left: 290px;
+        // left: 290px;
+        left: 22vw;
         bottom: 100px;
         transition: 0.2s;
 
@@ -101,7 +109,8 @@
           position: absolute;
           background-image: url(./../../image/grass_5.svg);
           height: 50%;
-          left: 310px;
+          // left: 310px;
+          left: 23vw;
           width: 45%;
           bottom: 80px;
           animation-timing-function: ease-out;
@@ -110,7 +119,8 @@
       &.grass_6 {
         background-image: url(./../../image/grass_6.svg);
         bottom: 103px;
-        left: 1400px;
+        // left: 1400px;
+        left: 90vw;
         height: 10%;
         width: 42%;
         position: absolute;
@@ -119,7 +129,8 @@
         &.grass_6_dark {
           background-image: url(./../../image/grass_6.svg);
           bottom: 103px;
-          left: 825px;
+          // left: 825px;
+          left: 57.5vw;
           height: 30%;
           width: 42%;
           position: absolute;
@@ -138,7 +149,8 @@
       height: 32%;
       position: absolute;
       bottom: 505px;
-      left: 810px;
+      // left: 810px;
+      left: 55vw;
       &.logo_dark {
         background-image: url(./../../image/logo_background_1.svg);
         opacity: 0.8;
@@ -153,7 +165,8 @@
       height: 40%;
       position: absolute;
       bottom: 300px;
-      left: 16.5%;
+      // left: 16.5%;
+      left: 16.4vw;
       transition: 0.2s;
       &.effect_dark {
         background-repeat: no-repeat;
@@ -164,7 +177,7 @@
         height: 60%;
         position: absolute;
         bottom: 400px;
-        left: 10%;
+        left: 11vw;
         opacity: 0;
         animation-timing-function: ease-out;
         transform: rotate(2deg);
@@ -179,7 +192,8 @@
       height: 40%;
       position: absolute;
       bottom: 300px;
-      left: 16.5%;
+      // left: 16.5%;
+      left: 16.4vw;
       transition: 0.2s;
       opacity: 0;
       transform: rotate(7deg);
@@ -189,7 +203,8 @@
         background-position: center;
         background-image: url(./../../image/effect_1.svg);
         width: 62%;
-        left: 100px;
+        left: 6vw;
+        // left: 100px;
         bottom: 290px;
         height: 45%;
         animation-timing-function: ease-out;
@@ -228,7 +243,9 @@
       height: 212%;
       position: absolute;
       bottom: -1142px;
-      left: -795px;
+      // bottom:-144vh;
+      // left: -795px;
+      left: -57vw;
       // transition: 0.04s;
       transition: 0.04s;
       opacity: 1;
@@ -237,6 +254,64 @@
         opacity: 1;
         transform: rotate(180deg);
         animation-timing-function: ease-out;
+      }
+    }
+    @media (max-width: 1100px) {
+      .showTH {
+        width: 200%;
+        left: -49vw;
+        bottom: -1120px;
+      }
+    }
+    @media (max-width: 1000px) {
+      .showTH {
+        width: 165%;
+        left: -32vw;
+        bottom: -1110px;
+      }
+    }
+
+    @media (max-width: 850px) {
+      .showTH {
+        width: 160%;
+        left: -30vw;
+        bottom: -1080px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .showTH {
+        width: 160%;
+        left: -30vw;
+        bottom: -1050px;
+      }
+    }
+    @media (max-width: 650px) {
+      .showTH {
+        width: 160%;
+        left: -30vw;
+        bottom: -1050px;
+      }
+    }
+    @media (max-width: 600px) {
+      .showTH {
+        width: 130%;
+        left: -15vw;
+        bottom: -920px;
+      }
+    }
+    @media (max-width: 500px) {
+      .showTH {
+        width: 120%;
+        left: -10vw;
+        bottom: -860px;
+      }
+    }
+    @media (max-width: 400px) {
+      .showTH {
+        width: 120%;
+        left: -10vw;
+        bottom: -820px;
       }
     }
     .showTH:hover {
@@ -308,9 +383,35 @@
       // border:#555555;
     }
     .c19 {
-      position: relative;
-      left: 527px;
+      position: absolute;
+      // left: 527px;
+      left: 35.8vw;
       top: 50px;
+    }
+    @media (max-width: 1000px) {
+      .c19 {
+        left: 32vw;
+      }
+    }
+    @media (max-width: 900px) {
+      .c19 {
+        left: 28vw;
+      }
+    }
+    @media (max-width: 700px) {
+      .c19 {
+        left: 20vw;
+      }
+    }
+    @media (max-width: 550px) {
+      .c19 {
+        left: 13vw;
+      }
+    }
+    @media (max-width: 450px) {
+      .c19 {
+        left: 7vw;
+      }
     }
   }
   .home_background3 {
@@ -394,7 +495,6 @@
       .news:hover {
         opacity: 1;
       }
-
     }
     .myHover {
       background-repeat: no-repeat;
@@ -407,9 +507,9 @@
       bottom: 300px;
       left: 290px;
       opacity: 0;
-      
+
       &.myHover_dark {
-        background-color: #2F2F2F;
+        background-color: #2f2f2f;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -425,7 +525,6 @@
       position: absolute;
       opacity: 0.13;
       cursor: pointer;
-
     }
 
     .myHover2 {
@@ -440,7 +539,7 @@
       left: 290px;
       opacity: 0;
       &.myHover2_dark {
-        background-color: #2F2F2F;
+        background-color: #2f2f2f;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -456,7 +555,6 @@
       position: absolute;
       opacity: 0.13;
       cursor: pointer;
-
     }
 
     .myHover3 {
@@ -471,7 +569,7 @@
       left: 290px;
       opacity: 0;
       &.myHover3_dark {
-        background-color: #2F2F2F;
+        background-color: #2f2f2f;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -488,7 +586,7 @@
       opacity: 0.13;
       cursor: pointer;
     }
-    .readMore{
+    .readMore {
       background-repeat: no-repeat;
       background-size: contain;
       background-position: center;
@@ -497,9 +595,62 @@
       opacity: 0;
       width: 70px;
       height: 22px;
-      bottom:257px;
-      left:690px;
+      bottom: 257px;
+      left: 690px;
       cursor: pointer;
+    }
+    @media (max-width: 1200px) {
+      .camp {
+        display: none;
+      }
+      .fire {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .news {
+        width: 640px;
+        height: 750px;
+        left: 110px;
+      }
+    }
+    @media (max-width: 800px) {
+      .news {
+        width: 640px;
+        height: 750px;
+        left: 80px;
+      }
+    }
+    @media (max-width: 750px) {
+      .news {
+        width: 640px;
+        height: 750px;
+        left: 70px;
+      }
+    }
+    @media (max-width: 700px) {
+      .news {
+        width: 640px;
+        height: 750px;
+        left: 35px;
+      }
+    }
+    @media (max-width: 650px) {
+      .news {
+        width: 480px;
+        height: 580px;
+        bottom:100px;
+        left:60px;
+      }
+    }
+    @media (max-width: 550px) {
+      .news {
+        width: 400px;
+        height: 500px;
+        bottom:150px;
+        left:60px;
+      }
     }
   }
 }

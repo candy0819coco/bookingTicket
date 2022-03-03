@@ -268,8 +268,8 @@ const TicketPicker = (props) => {
               ></div>
               <div className="ticket_desc">
                 <div>露營票</div>
-                <div>音樂祭 2 日活動</div>
-                <div>露營營位</div>
+                <div>音樂祭 2 日活動(含露營)</div>
+                {/* <div>露營營位</div> */}
               </div>
             </div>
           </div>
@@ -379,8 +379,8 @@ const TicketPicker = (props) => {
 
         {pickedTicket.length ? handleRenderPaymentButton() : null}
         {ticketOrderStep === 1 ? (
-          <div className="next_btn_area">
-            <div className="btn cancel_btn" onClick={handleResetTicketOrder}>
+          <div className={`next_btn_area `}>
+            <div className={`btn cancel_btn`}onClick={handleResetTicketOrder}>
               取消訂票
             </div>
             {/* <div className="btn next_btn" onClick={handleRequiredFieldValidate}> */}

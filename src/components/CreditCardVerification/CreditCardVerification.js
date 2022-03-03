@@ -64,6 +64,7 @@ const CreditCardVerification = (props) => {
         {/* <div className={`verification_title`}></div> */}
 
         <div className={`verification_content_container`}>
+          <div className="verification_type">網路刷卡驗證服務</div>
           <div className={`verification_content_top`}>
             <div className={`visa_logo`}></div>
             <div className={`bank_logo`}></div>
@@ -119,10 +120,10 @@ const CreditCardVerification = (props) => {
               <br />
               1.請點選「取得信箱傳送交易密碼」按鍵，本行將於1-2分鐘內以E-mail傳送動態交易碼。
               <br />
-              2.請檢視E-mail已取得動態交易認證密碼並輸入送出
+              2.請檢視E-mail已取得動態交易認證密碼並輸入送出。
               <br />
               3.若你無法完成交易或是並未收到驗證碼，請與Love & Peace Rock
-              Festival客服中心聯絡
+              Festival客服中心聯絡。
             </div>
           </div>
 {/* 

@@ -80,15 +80,10 @@ const Navigator = () => {
                 >
                   Market rental
                 </Link>
-                <Link
-                  className={`nav_list_text ${
-                    pathName === "messageBoard" ? "current" : ""
-                  }`}
-                  to="/messageBoard"
-                  onClick={() => setPathName("messageBoard")}
-                >
-                  Message board
-                </Link>
+                <Link className={`nav_list_text`} to="#">Message board</Link>
+                
+              
+                  
               </div>
             </div>
           </div>

@@ -12,6 +12,7 @@ const About = () => {
         <div className={`about_container`}>
             <Provider value={contextValue}>
                     <div className={`home_background ${isDarkMode ? "home_background_dark" : ""}`}>
+                    <div className={`about_title  ${isDarkMode ? "about_title_dark":""}`}></div>
                     <div className={`about ${isDarkMode ? "about_dark" : ""}`} />
                 </div>
             </Provider>

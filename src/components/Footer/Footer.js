@@ -30,7 +30,7 @@ import context from "./../context";
         <div className={`copy_right_area `}>
             <div className="copy_right_text_a">Copyright&nbsp;&nbsp;2022&nbsp;&nbsp;Love&Peace&nbsp;&nbsp;Rock&nbsp;&nbsp;Festival.&nbsp;&nbsp;All&nbsp;&nbsp;rights&nbsp;&nbsp;reserved.
             </div>
-            <div className="copy_right_text_b">The website is developed and designed by me, powered by react.js
+            <div className="copy_right_text_b">The website is developed & designed by Group 8, powered by react.js
           </div>
         </div>
         <div className="icon_area">

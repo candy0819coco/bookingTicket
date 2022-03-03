@@ -18,7 +18,6 @@ import './card.scss';
 import TableDayOne from './LineUppp'
 import TableDayTwo from "./LinUpDay2";
 import { props } from "ramda";
-import MyMask from "./Mask";
 
 
 const LineUp = () => {

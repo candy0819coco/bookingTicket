@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Component } from 'react';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import LineUpTilte from './../../image/lineUp_morning.png'
 
 
 
@@ -34,7 +35,7 @@ class TableDayTwo extends Component {
         return (
             <div className={`${this.state.showTable?'':'whyTest'}`}>
                 <div >
-                    <img className="designLineUp" src="https://media.discordapp.net/attachments/677538517949218820/943698034536099870/Line_up.png" />
+                    <img className="designLineUp" src={LineUpTilte}/>
                 </div>
                 <div className="dayTwoTable allTable" >
 
@@ -75,10 +76,9 @@ class TableDayTwo extends Component {
 
 
                                 <tbody className="giveMeSpace">
-
                                     <tr className="d-flex flex-wrap myBox ">
                                         <th className="col-0 inTableTime">13:00 <br></br>13:50</th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='ZZ_TOP12' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".ZZ_TOP12">ZZ TOP
                                             </a>
@@ -99,7 +99,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://s.hdnux.com/photos/01/16/13/03/20492480/3/rawImage.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -120,7 +119,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/5LMGAYhn2ywaxGZdtmXGpw" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -136,7 +134,7 @@ class TableDayTwo extends Component {
 
                                         </th>
                                         <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='Trash2' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".Trash2">Trash
                                             </a>
@@ -157,7 +155,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://img.shoplineapp.com/media/image_clips/60e263d22849b600176dbddc/original.jpg?1625449426"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -178,7 +175,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/4xI5LoEWLxoTm4DNa4fSUn" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -197,7 +193,7 @@ class TableDayTwo extends Component {
                                     <tr className="d-flex flex-wrap myBox bgc">
                                         <th className="col-0 inTableTime ">13:50 <br></br>14:40</th>
                                         <th className="col-3" > </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='OneRepublic1' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".OneRepublic1">OneRepublic
                                             </a>
@@ -218,7 +214,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://images3.kingautos.net/2017/07/22/87TjOAhBpWzrAFf.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -239,7 +234,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/20lOt6G8MHv8ZO7ViOmiP7" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -258,7 +252,7 @@ class TableDayTwo extends Component {
                                     </tr>
                                     <tr className="d-flex flex-wrap myBox">
                                         <th className="col-0 inTableTime">14:40 <br></br>15:30</th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='BonJovi1' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".BonJovi1">BonJovi
                                             </a>
@@ -279,7 +273,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://i.iheart.com/v3/re/new_assets/5a90701b96f64dd64b193742"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -300,7 +293,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/0kBfgEilUFCMIQY5IOjG4t" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -315,8 +307,8 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}                                    <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3"> </th>
+                                        <th className="col-3" >  
                                             <a id='MayShow' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".MayShow2">AmazingShow
                                             </a>
@@ -337,7 +329,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='MayShow' src="https://www.mirrormedia.com.tw/assets/images/20210512161304-47eb43889c970bd8e8511beed4a25dfd-tablet.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -359,7 +350,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/2M55kmmq0xR32RKDtBIeHT" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -379,7 +369,7 @@ class TableDayTwo extends Component {
                                     <tr className="d-flex flex-wrap myBox bgc">
                                         <th className="col-0 inTableTime">15:30 <br></br>16:20</th>
                                         <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='Back-On1' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".Back-On1">Back-On
                                             </a>
@@ -421,7 +411,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/3TpgBK0jom391y7SdJF1iO" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -436,12 +425,11 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}
-                                        <th className="col-3"> </th>
+                                        <th className="col-3"></th>
                                     </tr>
                                     <tr className="d-flex flex-wrap myBox">
                                         <th className="col-0 inTableTime">16:20 <br></br>17:10</th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='Journey1' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".Journey1">Journey
                                             </a>
@@ -462,7 +450,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://www.morrisonhotelgallery.com/images/medium/Journey_BarrySchultz19.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -483,7 +470,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/2OyVtIEp7O7a6o82DF4Ba5" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -498,9 +484,8 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}
-                                        <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3"></th>
+                                        <th className="col-3" >  
                                             <a id='WonFu' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".WonFu">Won Fu
                                             </a>
@@ -521,7 +506,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://www.niusnews.com/upload/posts/po3_58876_1508472576.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -542,7 +526,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/2PjCxy7d085P2vQ3Nt3Vg3" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -557,12 +540,11 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}
                                     </tr>
                                     <tr className="d-flex flex-wrap myBox bgc">
                                         <th className="col-0 inTableTime">17:10 <br></br>18:00</th>
                                         <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='VH' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".VH">Vast&Hazy
                                             </a>
@@ -583,7 +565,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://i0.wp.com/partystar.media/wp-content/uploads/2018/05/cc_2429_ii-e1592197703221.jpg?resize=1068%2C712&ssl=1"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -606,7 +587,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/3qsMWfRX0HPfhUBRm9uRJh" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -623,12 +603,11 @@ class TableDayTwo extends Component {
 
 
                                         </th>
-                                        {/* Modal Over */}
                                         <th className="col-3"> </th>
                                     </tr>
                                     <tr className="d-flex flex-wrap myBox">
                                         <th className="col-0 inTableTime">18:00 <br></br>18:50</th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='Sum41' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".Sum41_1">Sum 41
                                             </a>
@@ -649,7 +628,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLSQF-bFnws_uht0mulezKxNs7YgjUsMzyXA&usqp=CAU"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -673,7 +651,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/2UCWsnmZEVg9HhnMeKTsim" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -688,9 +665,8 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}
                                         <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='PapaRoach1' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".PapaRoach1">Papa Roach
                                             </a>
@@ -711,7 +687,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://www.rollingstone.com/wp-content/uploads/2018/06/rs-6778-20120821-papa-roach-624x-1345754461.jpg?resize=1800,1200&w=1800"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -731,7 +706,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/7A65ASxK8FMdNEFMQvRKG5" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -746,7 +720,6 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}
                                     </tr>
                                 </tbody>
                             </table>
@@ -758,9 +731,6 @@ class TableDayTwo extends Component {
 
 
                     </div>
-                    {/* ---------------------------------Day2Night----------------------------------- */}
-                    {/* ---------------------------------Day2Night----------------------------------- */}
-                    {/* ---------------------------------Day2Night----------------------------------- */}
                     <div className="dayTwoNight nightTable " style={{ display: this.state.showTable == true ? 'none' : 'block' }}>
                         <div className="container lineTableSettingNight" >
                             <table className="table border-0 ">
@@ -777,7 +747,7 @@ class TableDayTwo extends Component {
                                     <tr className="d-flex flex-wrap myBox">
                                         <th className="col-0 inTableTime">18:00 <br></br>18:50</th>
 
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='Sum41' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".Sum41">Sum 41
                                             </a>
@@ -798,7 +768,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLSQF-bFnws_uht0mulezKxNs7YgjUsMzyXA&usqp=CAU"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -822,7 +791,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/2UCWsnmZEVg9HhnMeKTsim" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -838,7 +806,7 @@ class TableDayTwo extends Component {
 
                                         </th>
                                         <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='PapaRoach' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".PapaRoach">Papa Roach
                                             </a>
@@ -859,7 +827,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://www.rollingstone.com/wp-content/uploads/2018/06/rs-6778-20120821-papa-roach-624x-1345754461.jpg?resize=1800,1200&w=1800"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -879,7 +846,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/7A65ASxK8FMdNEFMQvRKG5" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -898,7 +864,7 @@ class TableDayTwo extends Component {
                                     <tr className="d-flex flex-wrap myBox bgc">
                                         <th className="col-0 inTableTime">18:50 <br></br>19:40</th>
                                         <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='Three_Days_Grace' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".Three_Days_Grace">Three Days Grace
                                             </a>
@@ -919,7 +885,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://pbs.twimg.com/media/ERPlp9dXUAAWZg8.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -940,7 +905,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/13topfW33NjnACjnRiZBX7" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -955,12 +919,11 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}
                                         <th className="col-3"> </th>
                                     </tr>
                                     <tr className="d-flex flex-wrap myBox ">
                                         <th className="col-0 inTableTime">19:40 <br></br>20:30</th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='Fall_Out_Boy' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".Fall_Out_Boy">Fall Out Boy
                                             </a>
@@ -981,7 +944,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://www.raveituptv.com/wp-content/uploads/2017/07/falloutboy_thumb.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -1002,7 +964,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/022DrG7Wp2PSCwzuD0bSzT" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1017,9 +978,8 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}
                                         <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='LinkinPark' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".LinkinPark">Linkin Park
                                             </a>
@@ -1040,7 +1000,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://cdn.hk01.com/di/media/images/882946/org/037d10039984264085112416e99a1043.jpg/OrmuhECd36ZZcKP2NBrpRuclyNXVNX8hd7wSFne8EhY?v=w1920"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -1061,7 +1020,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/4Gfnly5CzMJQqkUFfoHaP3" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1076,12 +1034,11 @@ class TableDayTwo extends Component {
                                             </div>
 
                                         </th>
-                                        {/* Modal Over */}
                                     </tr>
                                     <tr className="d-flex flex-wrap myBox spec2">
                                         <th className="col-0 inTableTime">20:30 <br></br>21:20</th>
                                         <th className="col-3"> </th>
-                                        <th className="col-3 " > {/*Trigger*/}
+                                        <th className="col-3 forChilli" >  
                                             <a id='RedHotChilliPepper' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".RedHotChilliPeppers">Red Hot Chilli <br />Peppers
                                             </a>
@@ -1102,7 +1059,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://cms.kerrang.com/images/RHCP-with-John-Frusciante.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -1110,7 +1066,6 @@ class TableDayTwo extends Component {
                                                                     <div className="row mainArticle" >
                                                                         <div className="col-12-lg">
                                                                             &emsp;Red Hot Chili Peppers<br />(RHCP)，是1983年成立於加州洛杉磯的美國另類搖滾樂團。<br />&emsp;現由主唱Anthony Kiedis、John Frusciante、貝斯手Michael "Flea" Balzary及Chad Smith組成。
-                                                                            {/* <br />&emsp;樂團音樂風格多變，主要由傳統放克融合另類搖滾、龐克搖滾、迷幻搖滾等元素。 */}
                                                                         </div>
                                                                     </div>
 
@@ -1123,7 +1078,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/7xl50xr9NDkd3i2kBbzsNZ" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1143,7 +1097,7 @@ class TableDayTwo extends Component {
                                     <tr className="d-flex flex-wrap ">
                                         <th className="col-0 inTableTime">21:20<br></br>22:10</th>
                                         <th className="col-3"> </th>
-                                        <th className="col-3" > {/*Trigger*/}
+                                        <th className="col-3" >  
                                             <a id='TheBeatles' type="button" className='hrefColor' data-toggle="modal"
                                                 data-target=".TheBeatles">The Beatles
                                             </a>
@@ -1164,7 +1118,6 @@ class TableDayTwo extends Component {
                                                                 <div className="row d-flex">
                                                                     <div className="col-11 imgBox" >
                                                                         <img className='adjust' src="https://yaoyao.com.tw/v2/wp-content/uploads/2010/05/the-beatles.jpg"></img>
-                                                                        {/* ! ! HERE IS FOR IMG ! !*/}
                                                                     </div>
 
 
@@ -1173,7 +1126,6 @@ class TableDayTwo extends Component {
                                                                         <div className="col-12-lg">
                                                                             &emsp;The Beatles是1960年在利物浦組建的一支英國搖滾樂團，
                                                                             被廣泛承認為史上最偉大、最有影響力的搖滾樂團，根植於噪音爵士樂和50年搖滾，披頭四探索了各種音樂類型，從流行謠曲到迷幻搖滾，經常創新地運用經典元素。
-                                                                            {/* 他們的極度流行產生了Beatlemania現象。隨著日後創作的成熟，他們被視為當時反文化運動理想的化身。 */}
                                                                         </div>
                                                                     </div>
 
@@ -1186,7 +1138,6 @@ class TableDayTwo extends Component {
                                                                         </div>
                                                                         <div className=" spotify">
                                                                             <iframe src="https://open.spotify.com/embed/album/2OyVtIEp7O7a6o82DF4Ba5" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                                                            {/*!!!! ALBUM HERE  !!!*/}
                                                                         </div>
                                                                     </div>
                                                                 </div>

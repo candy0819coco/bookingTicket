@@ -218,8 +218,12 @@
             transition: 0.3s;
             margin-top: 20px;
             // outline: 2px solid #999;
+            box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+
             &:hover {
-              background-color: #ccc;
+              background-color: #E8e8e8;
+              box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+
             }
           }
           .next_step {
@@ -234,9 +238,14 @@
             cursor: pointer;
             transition: 0.3s;
             margin-top: 20px;
+            background-color:#96c782;
+            color: white;
             // outline: 2px solid #999;
+            letter-spacing: 6px;
+            box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
             &:hover {
-              background-color: #ccc;
+              background-color:#81c268;//#ccc;
+              box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
             }
           }
         }

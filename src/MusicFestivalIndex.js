@@ -15,9 +15,9 @@ import About from "./components/About/About";
 import TicketOrder from "./components/TicketOrder/TicketOrder";
 import Shop from "./components/Shop/Shop";
 import LineUp from "./components/LineUp/LineUp";
-import Map from "./components/Map/Map";
+// import Map from "./components/Map/Map";
 import Rental from './components/Rental/Rental';
-import MessageBoard from './components/MessageBoard/MessageBoard'
+// import MessageBoard from './components/MessageBoard/MessageBoard'
 import Footer from "./components/Footer/Footer";
 import MemberOrder from "./components/MemberOrder/MemberOrder";
 import SignIn from "./components/signIn/signIn";
@@ -148,7 +148,7 @@ const MusicFestivalIndex = () => {
               <Route exact path="/shop" element={<Shop />} />
               <Route exact path="/shop/itemPage" element={<ItemPage/>}/>
               <Route exact path="/rental" element={<Rental />} />
-              <Route exact path="/messageBoard" element={<MessageBoard />} />
+              {/* <Route exact path="/messageBoard" element={<MessageBoard />} /> */}
               <Route exact path="/ticketOrder" element={<TicketOrder />} />
               {/* <Route exact path="/myTicketList" element={<MyTicketList />} /> */}
               <Route

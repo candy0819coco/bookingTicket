@@ -42,7 +42,7 @@ const Home = () => {
                 {/* select2 covid19 warning*/}
                 <div className={`home_background2 ${isDarkMode ? "home_background_dark2" : ""}`}>
                     <div className="c19">
-                        <div style={{ fontSize: "32px", color: "#555555", left: "33px", position: "relative", margin: "5px" }}>Covid-19 warning!</div>
+                        <div style={{ fontSize: "32px", color: "#555555", left: "4.2vh", position: "relative", margin: "5px" }}>Covid-19 warning!</div>
                         <MyModal/>
                     </div>
 

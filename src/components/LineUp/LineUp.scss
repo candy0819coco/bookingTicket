@@ -56,7 +56,7 @@
   .sun {
     position: relative;
     height: 15vh;
-    right: 73px;
+    right: 160px;
     float: left;
     transition: 1s;
     // background-color: lawngreen;
@@ -72,7 +72,7 @@
     // visibility: visible;
     position: relative;
     height: 15vh;
-    right: 23vh;
+    right: 31vh;
     top: 5vh;
     transition:1s ;
     opacity: 0%;
@@ -84,7 +84,7 @@
     top: 5vh;
     // float: left;
     opacity: 100%;
-    transform: translate(-60px, -40px);
+    transform: translate(-152px, -40px);
     // z-index: -1;
     // background-color: aqua; //will show to right
     transition:1s ;
@@ -109,6 +109,7 @@
   .hrefColor{
     color:#FFFFFF;
     border: 1px solid ;
+
   }
   .hereBtn{
     // background-color: #f0f0f0;
@@ -150,7 +151,7 @@
 
 .btnG {
   position: relative;
-  left: 73vh;
+  left: 64vh;
   top: -1vh;
   border-left: 2vh;
 
@@ -232,15 +233,16 @@ b {
 }
 
 .hrefColor {
-  color: black;
+color: black;
   font-size: 0.9em;
   // box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 5px;
   border: 1px solid black;
+  // background-color: #555454;
   padding: 5px;
+  margin-top: 0.6vh;
   width: 15vh;
-  font-weight: 600;
- 
+  font-weight: 600; 
 }
 
 // .switchDN{
@@ -392,4 +394,10 @@ tr {
   cursor: pointer;
   visibility: hidden;
   position: relative;
+}
+
+.forChilli{
+  .hrefColor{
+    margin-top: -0.5vh;
+  }
 }
