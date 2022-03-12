@@ -1,58 +1,91 @@
-import React, { useCallback, useState, useEffect, Fragment, useContext, createContext, useImperativeHandle } from "react";
-import "./Shop.css";
-import { Provider } from "../context";
+import React, { useCallback, useState, useEffect, Fragment, useImperativeHandle, useContext } from "react";
+import "./Shop.scss";
 import * as R from "ramda";
-import context from "./../context";
-import  product_card  from './productdata';
+import context, { Provider } from "./../context";
+import product_card from './productdata';
 import { Button } from "react-bootstrap";
-import  AddCart  from "./Cart/AddCart";
-import  DeleteItem from "./Cart/DeleteItem";
+import AddCart from "./Cart/AddCart";
+import DeleteItem from "./Cart/DeleteItem";
 import ItemPage from "../ItemPage/ItemPage";
-
-
+import axios from 'axios';
+// import '../ItemPage/ItemPage.css';
 
 
 
 
 const Shop = () => {
-    const [productImg, setproductImg] = useState(0);
+    const [shopItemList,setShopItemList]=useState([]);
+    const [shopSingleItemList,setShopSingleItemList]=useState([]);
     const [currentHoverButtonType, setCurrentHoverButtonType] = useState("");
     const contextValue = useContext(context);
     const { } = contextValue;
-    const [cart,setCart]= useState([]);
-  
-    
-    const addToCart = ({ product_card }) =>{
-        const addToCart = () =>
-        setCart([...cart,product_card]);
-    }
-    
-    
-    return (
+    const [cart, setCart] = useState([]);
+    const handleGetItem = () => {
+        let results;
+        axios.get("http://localhost:3400/shop/product_display")
+          .then(function (response) {
+            results = response.data;
+            console.log("reults1",results);
+            setShopSingleItemList(results);
+
+            console.log('shopSingleItemList', shopSingleItemList)
+            var newResults = results.filter((item)=>{
+                return item.pColor==="Black" && item.pSize =="S"||item.pSize ==null;
+            });
+            console.log('newResults', newResults)
+
+            setShopItemList(newResults);
+            console.log()
+            })
+            .catch((error) => {
+            console.log("shop_display_error", error);
+            });
+
+            console.log("hello");
+        };
+        useEffect(()=>{
+            console.log("hello2");
+            handleGetItem();
+          },[])
+
+        return (
         <>
-        <div className={`shop_container`}>
-            <Provider value={contextValue}> 
+            <div className={`shop_container shopScss`}>
+                <Provider value={contextValue}> 
 
                 <button className="nav_cart" >{cart.length}</button>
-                {cart.map(item => <DeleteItem setCart={setCart} cart={cart} itemId={item.id} itemName={item.name} itemPrice={item.price} itemImage={item.image} />)}
-                <div class="product-all">
+                <div className="shopping-cart" style={{ display: cart.length === 0 ? 'none' : 'block' }}>
+                    {cart.map(item => <DeleteItem
+                        setCart={setCart}
+                        item={item}
+                        cart={cart} />)}
+                    <div className="shopping-cart-footer">
+                        <div className="shopping-cart-total">Total:
+                        </div>
+                        <div className="check-out">
+                        <Button className="check-out-button" variant="success">Check out</Button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-all" >
                     <div className="product_header">
                     </div>
-                        <div class="hamburger-menu">
+
+                    {/* <div className="hamburger-menu">
                         <input id="menu__toggle" type="checkbox" />
-                        <label class="menu__btn" for="menu__toggle">
+                        <label className="menu__btn" htmlfor="menu__toggle">
                             <span></span>
                         </label>
 
-                        <ul class="menu__box">
-                            <li><a class="menu__item" href="#">Clothes</a></li>
-                            <li><a class="menu__item" href="#">Accessoreies</a></li>
-                            <li><a class="menu__item" href="#">Groceries</a></li>
+                        <ul className="menu__box">
+                            <li><a className="menu__item" href="#">Clothes</a></li>
+                            <li><a className="menu__item" href="#">Accessoreies</a></li>
+                            <li><a className="menu__item" href="#">Groceries</a></li>
                         </ul>
-                        </div>
-                
-                    <div class="product-container">
-                        <div class="sort-by">
+                        </div> */}
+
+                    <div className="product-container">
+                        {/* <div class="sort-by">
                             <select name="sort-by">
                                 <option value="Featured">Featured</option>
                                 <option value="Bestselling">Bestselling</option>
@@ -61,24 +94,29 @@ const Shop = () => {
                                 <option value="Price high to low">price high to low</option>
                             </select>
 
-                        </div>
-                       
-                        
+                        </div> */}
+
                         <Fragment>
-                            {product_card.map(item => <AddCart item={item} cart={cart} setCart={setCart}/>)}
+                            {shopItemList.map(item => <AddCart
+                                item={item}
+                                cart={cart}
+                                setCart={setCart} 
+                                itemImage={item.pImage}/>)}
                         </Fragment>
-                         
-                         
+
+
                     </div>
-                   
-                </div>  
-            </Provider>
-                
-      </div>
-      </>
+
+                </div>
+                {/* </Provider> */}
+                </Provider>
+            </div>
+        
+        </>
     );
-   
- };
+
+
+};
 
 export default Shop;
 

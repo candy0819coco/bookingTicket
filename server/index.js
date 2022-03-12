@@ -14,6 +14,9 @@ const passport = require("passport");
 const cookieSession = require("cookie-session");
 const moment = require("moment");
 require("dotenv").config();
+const passportSetup = require("./config/passport");
+const { faDiagramSuccessor } = require("@fortawesome/free-solid-svg-icons");
+// const session = require('express-session');
 // const passportSetup = require("./config/passport");
 // const db = require("./config/db");
 // const config = require("./config/token");
@@ -21,33 +24,40 @@ require("dotenv").config();
 // const passportSetup = require("./passport");
 // const { min } = require("ramda");
 
+
+
+
+
+
+
 const server = app.listen(3400, () => {
   console.log("Server Listening on port 3400");
 });
 const wss = new SocketServer({ server });
 
-app.use(
-  cookieSession({
-    keys: ["process.env.COOKIE_SECRET"],
-  })
-); //研究一下
 
+// app.use(
+//   cookieSession({
+//     maxAge:60*60*1000,
+//     keys: ["process.env.COOKIE_SECRET"],
+//   })
+// ); //研究一下
+
+// app.use(require('cookie-parser'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use("/auth", authRoute);
 const JWT_KEY = "wedvbgfhnfj1w";
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123456",
+  host:"localhost",
+  user:"root",
+  password:"123456",
   database: "music_festival",
   // database: "music_festival_merged",
-  // password: 'root',
-  // database: 'testwen'
 });
 
 db.connect((err) => {
@@ -117,7 +127,7 @@ const authController = (req, res) => {
       //如果成功，有result(物件)，error為null
       if (result) {
         // console.log(result);
-        return res.send({ massage: "註冊成功" });
+        return res.send({ massage: "註冊成功!請至信箱驗證後方可登入" });
       }
       if (err.code === "ER_DUP_ENTRY") {
         // console.log(err);
@@ -401,26 +411,25 @@ app.post("/member/setting/change", (req, res) => {
   }
 });
 
-//拿取使用者資料
-app.post("/user/data", function (req, res) {
-  // const { currentUser } = req.body;
-  // console.log("測試:", req.body, "測試");
-  // db.query("select * from member_info where id=?")
-});
-//存localstorage
-// app.get("/signIn/:token",function(req,res){
-//     console.log(req.params);
-// })
+//修改照片
+app.put("/member/setting/photo", (req, res) => {
+  console.log(req.body);
+  db.query("update member_info set mPhoto=? where mMail=? "
+      , [req.body.mPhoto, req.body.mMail]
+      , (err, result) => {
+          if (err) {
+              res.status(500).send({ message: "更新失敗" });
+          };
+          if (result) {
+              console.log(result);
+              res.send({ message: "更新成功" });
 
-//第三方登入
-//點下google圖示後到google授權頁面
-// app.get("google", passport.authenticate("google", { scope: ["porfile"] }));
+          }
+      })
+})
 
-//跳轉到google頁面後導回的頁面
-// app.get("auth/google/callback", passport.authenticate("google",{
-//     successRedirect:"http://localhost:3000/",//授權成功回首頁
-//     failureRedirect:"http://localhost:3000/signIn"//授權失敗回登入頁
-// }))
+
+
 //--------------------------會員部分-------------------------------------------
 
 //--------------------------票券部分-------------------------------------------
@@ -718,3 +727,35 @@ app.post("/ticketOrder/credit_card2", function (req, res) {
 //--------------------------票券部分-------------------------------------------
 
 module.exports = app;
+
+//--------------------------Shop----------------------------------------------
+app.get("/shop/product_display", (req, res) => {
+  // console.log(req.body.m); //req.body=data
+  // const { mNo } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data
+  const getShopItemSQL = `SELECT * FROM shop_item order by pIndex `;
+  db.query(getShopItemSQL,(err,result)=>{
+      if (err) throw err;
+      if(result.length!== 0){
+        console.log(result);
+        return res.send(result);
+        
+      } 
+  })
+});
+
+//商品單項
+app.post("/shop/:pName", (req, res) => {
+  console.log('item_pName:', req.params.pName);
+
+  db.query("select * from shop_item where pName=?"
+      , [req.params.pName]
+      , (err, result) => {
+          if (err) {
+              console.log('error:', err);
+          } 
+          if(result){
+              console.log('result1:', result);
+              return res.status(200).send({message:'success',result:result});
+          }
+      })
+})

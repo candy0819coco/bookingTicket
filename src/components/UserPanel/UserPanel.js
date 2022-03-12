@@ -33,3 +33,6 @@ const UserPanel = (props) => {
     );
 };
 export default UserPanel;
+
+//width: 177px;
+// height: 180px;

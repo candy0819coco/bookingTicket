@@ -17,6 +17,10 @@ const UserPanelContent = (props) => {
   const { isDarkMode, currentUser } = contextValue;
   const { closeModal } = props;
 
+  const logOut=()=>{
+    localStorage.removeItem("user");
+    window.location="/signIn";
+  }
   return (
     <div className={`user_panel_content_container`}>
         <div
@@ -46,7 +50,7 @@ const UserPanelContent = (props) => {
                 isDarkMode ? "panel_item_dark" : ""
               }`}
             >
-              <div className="item_logout">登出</div>
+              <div className="item_logout"  onClick={logOut}>登出</div>
           </div>
           {/* 之後要拿來判斷登入登出的狀態 */}
           {/* {currentUser ? (

@@ -115,10 +115,10 @@
               background-image: url("./../../image/cc_jcb_brands.svg");
             }
             &.scale_up_this_card {
-              width: 200px;
-              height: 160px;
+              width: 57px;
+              height: 47px;
               order: 0;
-              margin: 0;
+              // margin: 0;
               &.master_icon {
                 filter: invert(22%) sepia(7%) saturate(5939%) hue-rotate(200deg)
                   brightness(98%) contrast(83%);

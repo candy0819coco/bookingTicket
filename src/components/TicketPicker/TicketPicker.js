@@ -283,6 +283,12 @@ const TicketPicker = (props) => {
             pickedTicket.length <= 2 ? "half_width" : ""
           }
           ${
+            pickedTicket.length === 3 ? "show_list_three" : ""
+          }
+          ${
+            pickedTicket.length === 4 ? "show_list_four" : ""
+          }
+          ${
             pickedTicket.length === 3 ? "three_tickets" : ""
           }
           `}

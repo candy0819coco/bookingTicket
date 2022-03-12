@@ -144,7 +144,7 @@
       background-size: contain;
       background-position: center;
       opacity: 0.8;
-      background-image: url(./../../image/logo_background.svg);
+      background-image: url(./../../image/logo_background_morning.png);
       width: 37%;
       height: 32%;
       position: absolute;
@@ -152,7 +152,7 @@
       // left: 810px;
       left: 55vw;
       &.logo_dark {
-        background-image: url(./../../image/logo_background_1.svg);
+        background-image: url(./../../image/logo_background_night.png);
         opacity: 0.8;
       }
     }
@@ -607,7 +607,7 @@
         display: none;
       }
     }
-    
+
     @media (max-width: 900px) {
       .news {
         width: 640px;
@@ -640,16 +640,16 @@
       .news {
         width: 480px;
         height: 580px;
-        bottom:100px;
-        left:60px;
+        bottom: 100px;
+        left: 60px;
       }
     }
     @media (max-width: 550px) {
       .news {
         width: 400px;
         height: 500px;
-        bottom:150px;
-        left:60px;
+        bottom: 150px;
+        left: 60px;
       }
     }
   }

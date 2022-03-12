@@ -4,19 +4,23 @@ $colorBack: rgba(255, 255, 255, 0.95);
 .reset2_container {
     max-width: 1920px;
     width: 100%;
-    height: 600px;
+    height: 500px;
     min-height: calc(100vh - 200px);
     background-image: url("./../../image/vs_morning.svg");
-    background-position: 0 100px;
+    // background-position: 0 100px;
     background-repeat: no-repeat;
     padding-bottom: 40px;
     display: flex;
     // justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-position-y: 40px;
+    font-size: 20px;
+
 
     .now_location {
         margin-top: 30px;
+        padding-top: 50px;
         text-align: center;
 
         span {
@@ -25,9 +29,10 @@ $colorBack: rgba(255, 255, 255, 0.95);
         }
     }
     .reset_all {
-        width: 350px;
-        height: 400px;
+        width: 500px;
+        height: 480px;
         margin: 30px auto;
+        margin-top: 70px;
         text-align: center;
         padding: 20px;
         background-color: $colorBack;
@@ -43,11 +48,12 @@ $colorBack: rgba(255, 255, 255, 0.95);
                 align-items: flex-start;
 
                 .reset_circle {
-                    width: 30px;
-                    height: 30px;
+                    width: 32px;
+                    height: 32px;
                     border-radius: 50%;
                     border: 1px solid #000000;
                     margin: 10px;
+                    margin-top: 20px;
                     line-height: 30px;
                 }
                 & .reset_circle:nth-child(3) {
@@ -58,6 +64,8 @@ $colorBack: rgba(255, 255, 255, 0.95);
                     height: 15px;
                     border-bottom: 1px solid black;
                     margin: 10px;
+                    margin-top: 20px;
+
                 }
             }
 
@@ -83,6 +91,7 @@ $colorBack: rgba(255, 255, 255, 0.95);
                         height: 30px;
                         background-color: transparent;
                         text-align: center;
+                        font-size: larger;
                     }
                 }
 
@@ -90,8 +99,8 @@ $colorBack: rgba(255, 255, 255, 0.95);
                     margin-top: 40px;
                     background-color: $color;
                     color: #fff;
-                    height: 30px;
-                    line-height: 30px;
+                    height: 35px;
+                    line-height: 35px;
                     cursor: pointer;
                 }
             }

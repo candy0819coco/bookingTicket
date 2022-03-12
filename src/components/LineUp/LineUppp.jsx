@@ -33,7 +33,8 @@ class TableDayOne extends Component {
 
     render() {
         return (
-            <div className={`${this.state.showTable?'':'whyTest'}`}>
+          
+            <div className={` ${this.state.showTable?'normalType':'whyTest'}`}>
                 <div >
                     <img className="designLineUp" src={LineUpTilte} />
                 </div>
@@ -107,7 +108,8 @@ class TableDayOne extends Component {
 
                                                                         <div className="row mainArticle" >
                                                                             <div className="col-12-lg">
-                                                                                &emsp;&emsp;Rise Against是一支來自芝加哥的美國龐克搖滾樂隊。<br />&emsp;&emsp;該樂隊目前的陣容包括主唱/節奏吉他手Tim McIlrath，主唱吉他手Zach Blair，貝斯手Joe Principe和鼓手Brandon Barnes。
+                                                                                &emsp;&emsp;Rise Against是一支來自芝加哥的美國龐克搖滾樂隊，成立於1999年。
+                                                                                <br/> &emsp;&emsp;該樂隊目前的陣容包括主唱/節奏吉他手Tim McIlrath，主唱吉他手Zach Blair，貝斯手Joe Principe和鼓手Brandon Barnes。
                                                                             </div>
                                                                         </div>
 
@@ -118,8 +120,8 @@ class TableDayOne extends Component {
                                                                                 <a className='twitter pl-3 pt-2' href="https://www.twitter.com/" ><img src='https://media.discordapp.net/attachments/677538517949218820/945885300385792070/twitter.png' /></a>
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
-                                                                            <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/2Gq0ERke26yxdGuRvrqFTD" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                            <div className="spotify4Rise">
+                                                                                <iframe src="https://open.spotify.com/embed/album/2Gq0ERke26yxdGuRvrqFTD" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -176,7 +178,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/45z2ntx53Y0d42S9IpN6OH" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/45z2ntx53Y0d42S9IpN6OH" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -197,7 +199,7 @@ class TableDayOne extends Component {
                                             <th className="col-0 inTableTime ">13:50 <br></br>14:40</th>
                                             <th className="col-3" > </th>
                                             <th className="col-3 " >  
-                                                <a id='ManWithAMission' className='mr-1' type="button" className='hrefColor' data-toggle="modal"
+                                                <a id='ManWithAMission' className='mr-1 hrefColor' type="button" data-toggle="modal"
                                                     data-target=".ManWithAMission">MWAM
                                                 </a>
                                                 <div className="modal fade ManWithAMission" tabIndex="-1" aria-hidden="true">
@@ -237,7 +239,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/4y9CcT0uoNVxUhjq2ku0bX" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/4y9CcT0uoNVxUhjq2ku0bX" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -300,7 +302,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/13H9LxFZVQVfRMUxKQvejv" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/13H9LxFZVQVfRMUxKQvejv" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -359,7 +361,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/2M55kmmq0xR32RKDtBIeHT" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/2M55kmmq0xR32RKDtBIeHT" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -422,7 +424,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/3TpgBK0jom391y7SdJF1iO" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/3TpgBK0jom391y7SdJF1iO" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -484,7 +486,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/1KwwS07TEbKS8r1rU4UUe4" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/1KwwS07TEbKS8r1rU4UUe4" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -544,7 +546,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/0a69ul4zJx8c6ZBy2carWF" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/0a69ul4zJx8c6ZBy2carWF" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -606,7 +608,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/3id4t9IqRoB1f1smOERtrY" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/3id4t9IqRoB1f1smOERtrY" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -668,7 +670,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/5LMGAYhn2ywaxGZdtmXGpw" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/5LMGAYhn2ywaxGZdtmXGpw" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -726,7 +728,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/4xI5LoEWLxoTm4DNa4fSUn" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/4xI5LoEWLxoTm4DNa4fSUn" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -812,7 +814,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/5LMGAYhn2ywaxGZdtmXGpw" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/5LMGAYhn2ywaxGZdtmXGpw" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -870,7 +872,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/4xI5LoEWLxoTm4DNa4fSUn" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/4xI5LoEWLxoTm4DNa4fSUn" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -930,7 +932,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/6ijGiBcBfUwkoyHn5VUHU2" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/6ijGiBcBfUwkoyHn5VUHU2" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -993,7 +995,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/1vhib5WLHRVdOpRjiTHk15" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/1vhib5WLHRVdOpRjiTHk15" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -1052,7 +1054,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/56xQzwz8VKC3LOtvrI4g04" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/56xQzwz8VKC3LOtvrI4g04" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -1114,7 +1116,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/20lOt6G8MHv8ZO7ViOmiP7" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/20lOt6G8MHv8ZO7ViOmiP7" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -1176,7 +1178,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/6OlCoydaNFUU7v1Xo5ZJPx" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/6OlCoydaNFUU7v1Xo5ZJPx" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -1235,7 +1237,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/2OyVtIEp7O7a6o82DF4Ba5" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/2OyVtIEp7O7a6o82DF4Ba5" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -1297,7 +1299,7 @@ class TableDayOne extends Component {
                                                                                 <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                             </div>
                                                                             <div className=" spotify">
-                                                                                <iframe src="https://open.spotify.com/embed/album/0kBfgEilUFCMIQY5IOjG4t" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                                <iframe src="https://open.spotify.com/embed/album/0kBfgEilUFCMIQY5IOjG4t" width="240" height="300" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                                 
                                                                             </div>
                                                                         </div>
@@ -1333,6 +1335,7 @@ class TableDayOne extends Component {
                     </div>
                 </div>
             </div>
+           
         );
     }
 }

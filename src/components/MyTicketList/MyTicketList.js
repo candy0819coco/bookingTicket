@@ -15,6 +15,13 @@ import TicketQrcode from "../TicketQrcode/TicketQrcode";
 import TicketQrcodeContent from "../TicketQrcodeContent/TicketQrcodeContent";
 import QRCode from "react-qr-code";
 import moment from "moment";
+import icon00 from '../../image/membership_black.svg';
+import icon01 from '../../image/icon01.png';
+import icon02 from '../../image/icon02.png';
+import icon03 from '../../image/icon03.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera } from "@fortawesome/free-solid-svg-icons";
+
 
 const MyTicketList = () => {
   const contextValue = useContext(context);
@@ -36,6 +43,26 @@ const MyTicketList = () => {
   const [currentTicketOrder, setCurrentTicketOrder] = useState([]);
   const [userPathName, setUserPathName] = useState("memberOrder");
   const [showDetailList, setShowDetailList] = useState([]);
+  const [myPhoto,setMyPhoto] = useState();
+  const [photo, setPhoto] = useState((localStorage.getItem("mPhoto")) || (currentUser.mPhoto) ||"0");
+
+  const whichPhoto = () => { 
+      let photo = localStorage.getItem("mPhoto")||"0";
+      if (photo == "1") {   
+          setMyPhoto(icon01);     
+      } else if (photo == "2") {  
+          setMyPhoto(icon02);
+      } else if (photo == "3") {
+          setMyPhoto(icon03);
+      } else {
+          setMyPhoto(icon00);
+      }
+
+  }
+  useEffect(() => {
+      whichPhoto();
+  }, [localStorage.getItem("mPhoto"),myPhoto])
+
 
   const handleCloseTicketQrCode = (e) => {
     setTicketQrCodeShow(false);
@@ -140,48 +167,45 @@ const MyTicketList = () => {
       {/* {currentUser && */}
 
       <div id={"member_container"}>
-        <div className={"con_both con_left"}>
-          <div id={"member_hi"}>
-            <span>
-              歡迎
-              <br />
-              <span>Guest</span>
-            </span>
-            <img src={face} />
-          </div>
+      <div className={"con_both con_left"}>
+                            <div className={"member_hi"}>
+                                <span>歡迎<br /><span>{currentUser.mName}</span></span>
+                                {/* <img src={face} /> */}
+                                <div className={"my_img"}
+                                    // onMouseOver={addOn}
+                                    // onMouseLeave={getOfCamera}
+                                    // onClick={openImg}
+                                    style={{ backgroundImage: `url(${myPhoto})` }}
 
-          <div id={"member_list"}>
-            {/* <!-- 這裡看怎麼改 --> */}
+                                    >
+                                    {/* <img src={face} /> */}
+                                    {/* <img src={`icon0${currentUser.mPhoto}`} /> */}
+                                    <div className={"wrap_img"}>
+                                        <FontAwesomeIcon icon={faCamera} />
+                                    </div>
 
-            <div id={"member_list01"}>我的行程</div>
-            <div>
-              <Link
-                id={`member_list02 ${
-                  userPathName === "MyTicketList" ? "current" : ""
-                }`}
-                to="/member/ticketOrder"
-                onClick={() => handleUserPathName("MyTicketList")}
-              >
-                我的票券
-              </Link>
-            </div>
-            <div>
-              <Link
-                id={`member_list03 ${
-                  userPathName === "memberOrder" ? "current" : ""
-                }`}
-                to="/member/productOrder"
-                onClick={() => handleUserPathName("memberOrder")}
-              >
-                我的訂單
-              </Link>
-            </div>
+                                </div>
+                            </div>
 
-            <div id={"member_list04"}>帳號設定</div>
-          </div>
+                            <div id={"member_list"}>
+                                {/* <!-- 這裡看怎麼改 --> */}
 
-          <button id={"member_logout"}>登出</button>
-        </div>
+                                {/* <a href="http://localhost:3000/member/schedule"><div id={"member_list01"}>我的行程</div></a> */}
+                                <div id={"member_list02"}>我的票券</div>
+                                <Link to="/member/productOrder"><div id={"member_list03"}>我的訂單</div></Link>
+                                <Link to="/member/setting">
+                                    <div id={"member_list04"}>帳號設定</div>
+                                </Link>
+                                {/* <a href="http://localhost:3000/member/setting"><div id={"member_list04"}>帳號設定</div></a> */}
+
+                            </div>
+
+                            {/* <div id={"member_logout"}>
+                                <div onClick={logOut}>登出</div>
+                            </div> */}
+
+                        </div>
+
 
         <div className={"con_both con_right"}>
           <div id={"now_location"}>
@@ -189,7 +213,7 @@ const MyTicketList = () => {
             <span>/</span>
             <span>會員</span>
             <span>/</span>
-            <span>登入</span>
+            <span>我的票券</span>
           </div>
           <div className={`order_list`}>
             <div className={`thead_area`}>

@@ -83,11 +83,9 @@ const TicketQrcodeContent = (props) => {
             </div>
             {/* <button onClick={handleGetTicketQrcode}>測試API打通</button> */}
           </div>
-
           <div className="ticket_background">
             <div className="ticket_container">
               <div className="lightbox_change">
-               
               <div
                   className={`ticket ${
                     currentTicketItem.ticketType == "one"
@@ -105,8 +103,6 @@ const TicketQrcodeContent = (props) => {
                 </div>
 
               </div>
-             
-
               <div className="text_area">
                 <div className="text_A">
                   Copyright 2022 Love&Peace Rock Festival.

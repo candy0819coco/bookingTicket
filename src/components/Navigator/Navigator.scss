@@ -8,7 +8,7 @@ $color1: #767676;
   .navbar_inner {
     width: 100%;
     height: 80px;
-    position: fixed;
+    position: relative;
     display: flex;
     align-items: center;
     background-color: #f8f8f8;
@@ -88,6 +88,7 @@ $color1: #767676;
           }
           &.nav_others {
             position: relative;
+            z-index: 99;
             .navbar_list {
               display: none;
             }

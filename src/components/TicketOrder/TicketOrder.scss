@@ -1,6 +1,7 @@
 .ticket_order_container {
   max-width: 100%;
   height: calc(100vh - 170px);
+  // height: 70vw;
   overflow-x: hidden;
   overflow-y: hidden;
   font-family: "Noto Sans TC", sans-serif;
@@ -9,7 +10,7 @@
   justify-content: flex-start;
   position: relative;
   &.ticket_order_container_step_one{
-  height: 93vh;
+  height: 108vh;
 
   }
   .test_area {
@@ -26,7 +27,7 @@
     width: 15%;
     height: 75px;
     position: absolute;
-    top: 8%;
+    top: 7%;
     left: 5%;
     background-image: url("./../../image/ticket_morning.png");
     background-repeat: no-repeat;

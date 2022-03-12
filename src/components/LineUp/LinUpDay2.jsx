@@ -20,20 +20,20 @@ class TableDayTwo extends Component {
     state = { showTable: true, isDayTwo: false };
 
     changeTime = () => {
-        
         this.setState({ showTable: !this.state.showTable });
     }
 
     changeDay1 = () => {
-        // this.setState({isDayOne : !this.state.isDayOne})
+       
         $('.dayTwo').hide();
         $('.dayOne').show();
 
     }
-    // style={{display: this.state.isDayTwo?'block':'none'}}
+    
     render() {
         return (
-            <div className={`${this.state.showTable?'':'whyTest'}`}>
+     
+            <div className={` ${this.state.showTable?'normalType':'whyTest'}`}>
                 <div >
                     <img className="designLineUp" src={LineUpTilte}/>
                 </div>
@@ -41,10 +41,10 @@ class TableDayTwo extends Component {
 
                     <div className="d-flex justify-content-start daySunBox " >
                         <img src="https://media.discordapp.net/attachments/677538517949218820/942958807909273610/sun.png"
-                            className='sun2'
+                            // className='sun2'
                             className={`sun ${this.state.showTable?'':'sun-Clicked'}`}></img>
                         <img src="https://media.discordapp.net/attachments/677538517949218820/942958807724732487/Mask_Group_1498.png"
-                            className='moon2'
+                            // className='moon2'
                             className={`moon ${this.state.showTable?'':'moon-Clicked'}`}>
 
                         </img>
@@ -54,14 +54,13 @@ class TableDayTwo extends Component {
                         <button type="button" className="btn btn-outline-secondary  campDay1"
                             onClick={this.changeDay1}>
                             DAY 1
-                        </button>{/*this  is the choosen one*/}
+                        </button>
                         <button type="button" className="btn  btn-secondary campDay2">
                             DAY 2
                         </button>
                     </div>
                     <div className='dayTable ' >
-                        {/*id='dayTableContant'*/}
-                        {/* table-striped */}
+                        
                         <div className="container lineTableSetting"
                             style={{ display: this.state.showTable ? 'block' : 'none' }}>
                             <table className="table"  >
@@ -1137,7 +1136,7 @@ class TableDayTwo extends Component {
                                                                             <a className='pl-3 pt-2 line' href="https://www.line.com/"><img src='https://media.discordapp.net/attachments/677538517949218820/945885300792627283/lineIcon.png' /></a> <br />
                                                                         </div>
                                                                         <div className=" spotify">
-                                                                            <iframe src="https://open.spotify.com/embed/album/2OyVtIEp7O7a6o82DF4Ba5" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                                                            <iframe src="https://open.spotify.com/embed/album/0ETFjACtuP2ADo6LFhL6HN" width="240" height="270" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1175,7 +1174,8 @@ class TableDayTwo extends Component {
 
                     </div>
                 </div>
-            </div>);
+            </div>
+            );
     }
 }
 

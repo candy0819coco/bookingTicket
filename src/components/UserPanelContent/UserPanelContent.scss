@@ -34,7 +34,7 @@
     }
     .panel_item {
       width: 100%;
-      height: 33%;
+      height: 24%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -46,6 +46,8 @@
 
         .text {
           color: #e7e7e7;
+          height: 100%;
+          width: 100%;
         }
         &:hover {
           background-color: #777;

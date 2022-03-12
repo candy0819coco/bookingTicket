@@ -274,9 +274,7 @@ const TicketOrder = () => {
 
   return (
     <div
-      className={`ticket_order_container ${
-        isDarkMode ? "ticket_order_container_dark" : ""
-      } ${ticketOrderStep ===1? 'ticket_order_container_step_one':''}`}
+      className={`ticket_order_container ${ticketOrderStep ===1? 'ticket_order_container_step_one':''}`}
     >
       <div
         className={`ticket_order_title  ${

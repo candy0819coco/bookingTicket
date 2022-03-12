@@ -15,13 +15,14 @@ import About from "./components/About/About";
 import TicketOrder from "./components/TicketOrder/TicketOrder";
 import Shop from "./components/Shop/Shop";
 import LineUp from "./components/LineUp/LineUp";
-// import Map from "./components/Map/Map";
+import Map from "./components/Map/Map";
 import Rental from './components/Rental/Rental';
 // import MessageBoard from './components/MessageBoard/MessageBoard'
 import Footer from "./components/Footer/Footer";
 import MemberOrder from "./components/MemberOrder/MemberOrder";
 import SignIn from "./components/signIn/signIn";
 import Register from "./components/Register/Register";
+import Success from "./components/Register/Success";
 import Reset1 from "./components/ResetPassword/Reset1";
 import Reset2 from "./components/ResetPassword/Reset2";
 import Reset3 from "./components/ResetPassword/Reset3";
@@ -36,7 +37,11 @@ import Others from "./components/Others/Others";
 import UserPanel from "./components/UserPanel/UserPanel";
 import UserPanelContent from "./components/UserPanelContent/UserPanelContent";
 import ItemPage from "./components/ItemPage/ItemPage";
+import ShopPayment from "./components/ShopPayment/ShopPayment";
+import CheckOut from "./components/CheckOut/CheckOut";
 import axios from "axios";
+import Google from "./components/Google/Google";
+
 
 const MusicFestivalIndex = () => {
   const [currentUser, setCurrentUser] = useState();
@@ -91,7 +96,7 @@ const MusicFestivalIndex = () => {
       <UserPanel
         modalShow={userPanelShow}
         modalCloseFunction={handleCloseUserPanel}
-        modalWidth={200}
+        modalWidth={177}
         modalHeight={180}
         backgroundOpacity={0.6}
         modalInnerBackground={`#fff`}
@@ -144,13 +149,15 @@ const MusicFestivalIndex = () => {
               <Route className="aaa" exact path="/" element={<Home />} />
               <Route exact path="/about" element={<About />} />
               <Route exact path="/lineUp" element={<LineUp />} />
-              {/* <Route exact path="/map" element={<Map />} /> */}
+              <Route exact path="/map" element={<Map />} />
               <Route exact path="/shop" element={<Shop />} />
-              <Route exact path="/shop/itemPage" element={<ItemPage/>}/>
+              {/* <Route exact path="/shop/itemPage" element={<ItemPage/>}/> */}
+              <Route exact path="/shop/LogoT-shirt" element={<ItemPage/>}/>
               <Route exact path="/rental" element={<Rental />} />
               {/* <Route exact path="/messageBoard" element={<MessageBoard />} /> */}
               <Route exact path="/ticketOrder" element={<TicketOrder />} />
-              {/* <Route exact path="/myTicketList" element={<MyTicketList />} /> */}
+              <Route exact path="/shopPayment" element={<ShopPayment />} />
+              <Route exact path="/shop/ItemPage/CheckOut" element={<CheckOut/>} />
               <Route
                 exact
                 path="/member/ticketOrder"
@@ -168,6 +175,9 @@ const MusicFestivalIndex = () => {
               <Route exact path="/register/reset2" element={<Reset2 />} />
               <Route exact path="/register/reset3" element={<Reset3 />} />
               <Route path="/register/active/:mMail" element={<Jump />} />
+              <Route exact path="/register/success" element={<Success />} />
+              <Route path="/google/token/:token" element={<Google />} />
+              <Route path="/shop/:pName" element={<ItemPage/>}/>
               
               {/* <Route exact path="/user" element={<User />} /> */}
               {/* <Route path="/signIn/:token" element={<Home />} /> */}

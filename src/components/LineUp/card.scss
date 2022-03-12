@@ -15,6 +15,7 @@
     top: -1vh;
     padding-top: 1vh;
     padding-left: 2vh;
+    font-weight: 700;
     font-family: Noto Sans Kannada;
 }
 .modal-body{
@@ -24,7 +25,7 @@
     background-color: #080304;
 
 }
-//imgBox col-11
+
 .imgBox{
     position: relative;
     height: 12.5em;
@@ -58,29 +59,28 @@
         position: relative;
         height: 200px;
         padding-top: 2px;
-        // left: ;
         border-radius: 7px;
-       
     }
   
 }
 
 .mainArticle{
     position: relative;
-    top: 6vh;
+    top: 7vh;
     margin-top: 3.5em;
     font-weight: 200;
+    left: 1.7vh;
+    // background-color: steelblue;
     div{
+        // background-color: aqua;
+        margin-left: 1.5vh;
         font-family: Noto Sans Kannada;
-        padding-left: 2.5vh;
-        width:11vw; 
+        width:13.5vw;
         height: 290px ;
-        font-size: 16px;
+        font-size: 17px;
         text-align: start;
         color: #ffffff; 
-        padding-top: 1em;
-        
-
+        padding-top: 4vh;
     }
 }
 
@@ -88,6 +88,7 @@
 .socialMedia{
     position: relative;
     top: 2vh;
+    // background-color: #525252;
    
     .mediaIcons{
         position: relative;
@@ -95,6 +96,7 @@
         bottom: 32vh;
         margin-left: -2vw;
         padding-bottom: 1vh;
+        top: -25vh;
         margin-top: -2vh;
         .fbIcon{
             margin-left: -2vh;
@@ -111,11 +113,22 @@
             top: -0.2vh;
         }
     }
+    .spotify4Rise{
+        position: relative;
+        margin-top: -15.6vw;
+        margin-left: 10.5vw;
+        padding-bottom: 5vh;
+        left: 4vh;
+        top: -4vh;
+        // background-color: red;
+    }
     .spotify{
         position: relative;
         margin-top: -15.6vw;
         margin-left: 10.5vw;
         padding-bottom: 5vh;
+        left: 8vh;
+        // top:vh;
         // bottom: 35vh;
         // height: 1em;
         // left: 21vh;
@@ -127,7 +140,7 @@
 }
 
 .modal-footer{
-    height: 1vh;
+    height: 2vh;
     position: relative;
     top: -2vh;
     background-color: #ffffff;
