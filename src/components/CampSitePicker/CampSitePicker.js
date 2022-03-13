@@ -12,7 +12,9 @@ import axios from "axios";
 
 const CampSitePicker = (props) => {
   const contextValue = useContext(context);
-  const {} = contextValue;
+  const {currentUser} = contextValue;
+  const {mNo} = currentUser;
+  console.log('currentUser', currentUser)
   const {
     pickedTicket,
     setPickedTicket,
@@ -21,11 +23,16 @@ const CampSitePicker = (props) => {
     wsState,
     toDoSelectCamp,
     closeModal,
+    campListFromDB, setCampListFromDB,
+    wsData, setWsData
   } = props;
   console.log("pickedTicket", pickedTicket);
   console.log("campSelectedList", campSelectedList);
+  const [campSelectedListWithoutMember, setCampSelectedListWithoutMember] = useState([]);
+  const [wsCurrentWithoutMember, setWsCurrentWithoutMember] = useState([]);
 
-  const [campListFromDB, setCampListFromDB] = useState([]);
+  // const [campListFromDB, setCampListFromDB] = useState([]);
+  console.log('campListFromDB', campListFromDB)
   const [currentCampArea, setCurrentCampArea] = useState("");
 
   const reportWindowSize = () => {
@@ -36,58 +43,110 @@ const CampSitePicker = (props) => {
 
   const pickCamp = (campItem) => {
     let tempCampList = [...campSelectedList];
+    // console.log('wsData', wsData)
     console.log("campItem", campItem);
 
-    if (R.includes(campItem, tempCampList)) {
-      tempCampList = R.without([campItem], tempCampList);
+
+    // if (R.includes(campItem, tempCampList)) {
+    if (R.includes({...campItem, mNo: mNo}, tempCampList)) {
+      // console.log("符合，拿掉")
+      // tempCampList = R.without([campItem], tempCampList);
+      tempCampList = R.without([{...campItem, mNo: mNo}], tempCampList);
+      // console.log('without_結果_tempCampList', tempCampList)
     } else {
-      tempCampList.push(campItem);
+      // console.log("不符合，加入")
+      tempCampList.push({...campItem, mNo});
     }
+
+    //----------------------------------------------------------------------------
+    const a = campSelectedList;
+    const b = wsData.current;
+    const isSameUser = (a, b) => a.campId == b.campId;
+
+    const onlyInLeft = (left, right, compareFunction) =>
+      left.filter(
+        (leftValue) =>
+          !right.some((rightValue) => compareFunction(leftValue, rightValue))
+      );
+    
+    const onlyInA = onlyInLeft(a, b, isSameUser);
+    const onlyInB = onlyInLeft(b, a, isSameUser);
+    // console.log("onlyInA", onlyInA);
+    // console.log("onlyInB", onlyInB);
+    const onlyResult = [...onlyInA, ...onlyInB];
+    
+    // console.log("only_result", onlyResult);
+    //----------------------------------------------------------------------------
+
     console.log("tempCampList", tempCampList);
     setCampSelectedList(tempCampList);
-    wsState.send(JSON.stringify(tempCampList));
-  };
-
-  const handleGetCamp = async (e) => {
-    let result;
-    await axios({
-      method: "get",
-      url: `http://localhost:3400/ticket_order/get_camp`,
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then(function (response) {
-        console.log("camp_response", response);
-        let campResult = response.data;
-        console.log("camp_result", campResult);
-
-        const byGrade = R.groupBy(function (campResult) {
-          const campArea = campResult.campArea;
-          return campArea === "A"
-            ? "A"
-            : campArea === "B"
-            ? "B"
-            : campArea === "C"
-            ? "C"
-            : null;
-        });
-        let tempCampObject = byGrade(campResult);
-        console.log("tempCampObject", tempCampObject);
-        let tempCampList = Object.entries(tempCampObject);
-        setCampListFromDB(tempCampList);
-      })
-      .catch((error) => {
-        console.log("camp_error", error);
-        result = error;
-      });
+    let tempObject = {...wsData}
+    tempObject.current = onlyResult.concat(tempCampList);
+    // console.log('tempObject', tempObject)
+    wsState.send(JSON.stringify(tempObject));
   };
 
   useEffect(() => {
-    handleGetCamp();
+    let temp = campSelectedList.map((item, index)=>{
+      return (
+        R.pick(['campId', 'campArea','campStatus'],item)
+        )
+      })
+      // console.log('____________temp', temp)
+      setCampSelectedListWithoutMember(temp);
+  }, [campSelectedList]);
+
+  useEffect(() => {
+    if(!wsData) return;
+    let temp = wsData.current.map((item, index)=>{
+      return (
+        R.pick(['campId', 'campArea','campStatus'],item)
+        )
+      })
+      // console.log('____________temp', temp)
+      setWsCurrentWithoutMember(temp);
+  }, [wsData]);
+
+
+  // const handleGetCamp = async (e) => {
+  //   let websocketData = {
+  //     origin:[],
+  //     current:[]
+  //   };
+  //   await axios({
+  //     method: "get",
+  //     url: `http://localhost:3400/ticket_order/get_camp`,
+  //     credentials: "same-origin",
+  //     headers: {
+  //       "Content-Type": "application/json;charset=UTF-8",
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //   })
+  //     .then(function (response) {
+  //       console.log("camp_response", response);
+  //       let campResult = response.data;
+  //       console.log("campResult", campResult);
+  //       // client.send(getCampResult);
+  //       if(wsData.current.length) {
+  //         websocketData.current = wsData.current;
+  //       }
+  //       if(wsData.origin.length) {
+  //         websocketData.origin = wsData.origin;
+  //       } else {
+  //         websocketData.origin = campResult;
+  //       }
+
+  //       wsState.send(JSON.stringify(websocketData));
+  //     })
+  //     .catch((error) => {
+  //       console.log("camp_error", error);
+  //     });
+  // };
+
+  useEffect(() => {
+    // handleGetCamp();
   }, []);
+
 
   return (
     <div className={`camp_site_picker_container`}>
@@ -260,14 +319,19 @@ const CampSitePicker = (props) => {
                               campItem.campStatus === 0 ? "disabled" : ""
                             }
                             ${
-                              R.includes(campItem, campSelectedList)
-                                ? "selected"
+                              R.includes({...campItem, mNo:mNo}, wsData.current)
+                                ? "selected_by_me"
                                 : ""
                             }
                             ${
+                              R.includes(campItem, wsCurrentWithoutMember) && !R.includes({...campItem, mNo:mNo}, wsData.current)
+                                ? "selected_by_others"
+                                : ""
+                            }
+
+                            ${
                               campSelectedList.length ===
-                                toDoSelectCamp.length &&
-                              !R.includes(campItem, campSelectedList)
+                                toDoSelectCamp.length 
                                 ? "finished"
                                 : ""
                             }

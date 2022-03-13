@@ -135,10 +135,10 @@ const ItemPage = () => {
                   <div className="second_div">
                     <div className="product_carousel">
                       <Carousel>
-                        {singleItem.map((item) => {
+                        {singleItem.map((item, key) => {
                           console.log('item', item)
                           return (
-                            <Carousel.Item interval={155500}>
+                            <Carousel.Item interval={155500} key={key}>
                               <Image
                                 key={item.pId}
                                 className="carousel_img"

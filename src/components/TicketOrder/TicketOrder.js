@@ -34,16 +34,43 @@ const TicketOrder = () => {
   const [toDoSelectCamp, setToDoSelectCamp] = useState([]);
   const [verifyCode, setVerifyCode] = useState("");
   const [creditNumber, setCreditNumber] = useState("");
+  const [campListFromDB, setCampListFromDB] = useState([]);
+  const [wsData, setWsData] = useState();
 
   const contextValue = useContext(context);
   const { isDarkMode, currentUser } = contextValue;
 
-  useEffect(() => {
+  // const isWsAlive = async () => {
+  //   let wsResult;
+  //     await axios.get("http://localhost:3400/check/websocket", {
+  //       headers: {
+  //       },
+  //     })
+  //       .then(function (res) {
+  //         console.log(res);
+  //         if (res.data.statusCode === 200) {
+  //           console.log('isWsAlive_res.data', res.data)
+  //           wsResult = res.data.websocketInstance;
+  //         } else {
+  //           wsResult = new WebSocket("ws://localhost:3400");
+  //         }
+  //       })
+  //       .catch(function (err) {
+  //         console.log(err);
+  //       });
+  //       setWsState(wsResult);
+  //       return wsResult;
+  // };
+
+  useEffect(async() => {
+
     let ws = new WebSocket("ws://localhost:3400");
-    console.log("ws", ws);
+    // let ws = await isWsAlive();
+    // console.log("___________ws", ws);
     setWsState(ws);
-    ws.onopen = () => {
+    ws.onopen = (event) => {
       console.log("open connection");
+      // console.log("onopen_event", event);
     };
 
     ws.onclose = () => {
@@ -53,7 +80,26 @@ const TicketOrder = () => {
     ws.onmessage = (event) => {
       console.log("event", event);
       console.log("event.data", JSON.parse(event.data));
-      setCampSelectedList(JSON.parse(event.data));
+      // setCampSelectedList(JSON.parse(event.data));
+      // setCampListFromDB(JSON.parse(event.data));
+
+      let campResult = JSON.parse(event.data).origin;
+      console.log('campResult', campResult)
+      const byGrade = R.groupBy(function (campResult) {
+        const campArea = campResult.campArea;
+        return campArea === "A"
+          ? "A"
+          : campArea === "B"
+          ? "B"
+          : campArea === "C"
+          ? "C"
+          : null;
+      });
+      let tempCampObject = byGrade(campResult);
+      console.log("tempCampObject", tempCampObject);
+      let tempCampList = Object.entries(tempCampObject);
+      setCampListFromDB(tempCampList);
+      setWsData(JSON.parse(event.data));
     };
   }, []);
 
@@ -267,6 +313,8 @@ const TicketOrder = () => {
           setCampSelectedList={setCampSelectedList}
           wsState={wsState}
           toDoSelectCamp={toDoSelectCamp}
+          campListFromDB={campListFromDB} setCampListFromDB={setCampListFromDB}
+          wsData={wsData} setWsData={setWsData}
         />
       </ModalTool>
     );

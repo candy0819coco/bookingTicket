@@ -370,7 +370,14 @@
                 padding: 10px;
                 background-color: #e7e4cb;
                 position: relative;
-                &.selected {
+                &.selected_by_others {
+                  background-color: #bb9136;
+                  pointer-events: none;
+                  &:hover {
+                    background-color: #bb9136;
+                  }
+                }
+                &.selected_by_me {
                   background-color: #ffca56;
                   // pointer-events: none;
                   &:hover {
@@ -384,6 +391,13 @@
                 &.finished {
                   filter: brightness(0.5);
                   pointer-events: none;
+                }
+                &.finished.selected_by_me {
+                  pointer-events: auto;
+                  filter: brightness(1);
+                  &:hover {
+                    filter: brightness(1.2);
+                  }
                 }
                 &:hover {
                   background-color: #e2e2e2;

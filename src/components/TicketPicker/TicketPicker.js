@@ -75,12 +75,12 @@ const TicketPicker = (props) => {
 
   useEffect(() => {
     // if (campSelectedList.length === toDoSelectCamp.length) {
-    if (campSelectedList.length) {
+    // if (campSelectedList.length) {
       const mergeArrayObjects = (arr1, arr2) => {
         let arr3 = arr1.filter((item) => item.ticketType === "camp");
-        console.log("arr1", arr1);
-        console.log("arr3", arr3);
-        console.log("arr2", arr2);
+        // console.log("arr1", arr1);
+        // console.log("arr3", arr3);
+        // console.log("arr2", arr2);
         let index = 0;
         while (index < arr3.length) {
           if (arr2[index]) {
@@ -92,7 +92,9 @@ const TicketPicker = (props) => {
         }
       };
       mergeArrayObjects(pickedTicket, campSelectedList);
-    }
+      // console.log('95campSelectedList', campSelectedList)
+      // console.log('95pickedTicket', pickedTicket)
+    // }
   }, [campSelectedList]);
 
   const handlePickTicket = (ticketType) => {

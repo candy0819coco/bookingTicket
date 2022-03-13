@@ -24,7 +24,7 @@ const { faDiagramSuccessor } = require("@fortawesome/free-solid-svg-icons");
 // const passportSetup = require("./passport");
 // const { min } = require("ramda");
 
-
+let websocketInstance;
 
 
 
@@ -67,21 +67,61 @@ db.connect((err) => {
 });
 
 wss.on("connection", (ws) => {
+  // console.log('ws', ws)
   console.log("Client connected");
+  let websocketData = {
+    origin:[],
+    current:[]
+  };
+  const wsInsertSQL = `INSERT INTO websocket (wsInstance) VALUES("${ws}")`;
+  console.log("wsInsertSQL", wsInsertSQL);
+  db.query(
+    wsInsertSQL,
+    (wsError, wsResults) => {
+      if(wsError){
+        console.log('wsInsertError', wsError)
+
+      }else {
+        console.log('wsInsertResults', wsResults)
+      }
+     })
+      const getCampSQL = `SELECT * FROM camp`;
+      db.query(getCampSQL, (getCampError, getCampResult) => {
+      if (getCampError) {
+        console.log("getCampError", getCampError);
+      } else {
+        // console.log("getCampResult", getCampResult);
+        if (getCampResult) {
+          // campResult = getCampResult.toString("utf8");
+          campResult = JSON.stringify(getCampResult);
+          console.log('campResult', campResult)
+          // client.send(getCampResult);
+          websocketData.origin = getCampResult;
+          ws.send( JSON.stringify(websocketData));
+        }
+      }
+    // });
+      })
 
   ws.on("message", (data) => {
-    // console.log('data', data)
+    // console.log('_____________data', data)
+    // console.log('JSON.parse________data', JSON.parse(data))
+    // console.log('JSON.parse________data.current', JSON.parse(data).current)
+    // console.log('_____________data.origin', data.origin)
 
-    let bufferToString = data.toString("utf8");
-
-    console.log("bufferToString", bufferToString);
+    // let bufferToString = data.toString("utf8");
+    websocketData = JSON.parse(data);
+    // console.log("bufferToString", bufferToString);
     // ws.send(data);
     let clients = wss.clients;
 
     clients.forEach((client) => {
       // client.send(String(data));
-      client.send(bufferToString);
+      websocketData.current = JSON.parse(data).current;
+      client.send( JSON.stringify(websocketData));
     });
+
+
   });
 
   ws.on("close", () => {
@@ -90,6 +130,28 @@ wss.on("connection", (ws) => {
   });
 });
 
+
+
+// app.get("/check/websocket", function (req, res) {
+//   const wsSelectSQL = `SELECT * FROM websocket`;
+//   console.log("wsSelectSQL", wsSelectSQL);
+//   db.query(
+//     wsSelectSQL,
+//     (wsError, wsResults) => {
+//       if(wsError){
+//         console.log('wsError', wsError)
+//         res.send({ message: websocketError, statusCode: 400 });
+//       }else {
+//         console.log('wsResults', wsResults)
+//         res.send({
+//           message: "ws存在",
+//           statusCode: 200,
+//           websocketInstance: wsResults,
+//         });
+//       }
+//      })
+
+// });
 //--------------------------會員部分-------------------------------------------
 //註冊驗證
 const authController = (req, res) => {
@@ -567,7 +629,7 @@ app.get("/ticket_order/get_camp", function (req, res) {
       console.log("getCampError", getCampError);
       res.status(getCampError.code).end();
     } else {
-      console.log("getCampResult", getCampResult);
+      // console.log("getCampResult", getCampResult);
       if (getCampResult) {
         res.send(getCampResult);
       }
