@@ -169,7 +169,7 @@ const MyTicketList = () => {
       <div id={"member_container"}>
       <div className={"con_both con_left"}>
                             <div className={"member_hi"}>
-                                <span>歡迎<br /><span>{currentUser.mName}</span></span>
+                                <span>歡迎<br /><span>{currentUser ? currentUser.mName:null}</span></span>
                                 {/* <img src={face} /> */}
                                 <div className={"my_img"}
                                     // onMouseOver={addOn}
@@ -276,7 +276,8 @@ const MyTicketList = () => {
                         <div className="ticket_title">{`活動日期`}</div>
                         <div className="ticket_title">{`票券種類`}</div>
                         <div className="ticket_title">{`票券金額`}</div>
-                        <div className="ticket_title e_vocher">{`電子票券憑證`}</div>
+                        <div className="ticket_title 
+                        ">{`電子票券憑證`}</div>
                       </div>
                       {item.tickets.map((ticketsItem, key) => {
                         return (

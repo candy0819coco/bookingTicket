@@ -39,6 +39,7 @@ const CreditCardVerification = (props) => {
     "sixthInput",
   ];
 
+  //抓使用者輸入驗證碼內容，傳到驗證的api，進到後端比對跟資料庫的差別
   const handleChangeVerifyCode = (inputValue, currentIndex) => {
     let tempVerifyCodeArray = verifyCode.split("");
     tempVerifyCodeArray[currentIndex] = inputValue;
@@ -103,7 +104,7 @@ const CreditCardVerification = (props) => {
                     maxLength="1"
                     key={index}
                     onChange={(e) =>
-                      handleChangeVerifyCode(e.target.value.toString(), index)
+                      handleChangeVerifyCode(e.target.value.toString(), index)//第一個是輸入框實際輸入的東西，第二個參數判斷輸入框的第幾格
                     }
                   ></input>
                 );

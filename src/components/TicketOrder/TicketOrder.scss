@@ -10,7 +10,7 @@
   justify-content: flex-start;
   position: relative;
   &.ticket_order_container_step_one{
-  height: 108vh;
+  // height: 108vh;
 
   }
   .test_area {
@@ -33,5 +33,13 @@
     background-repeat: no-repeat;
     background-size: contain;
     //   margin-top: 90px;
+  }
+
+  @media (max-width: 1050px) {
+    .modal_container.component_show  {
+      .modal_inner.modal_show {
+        transform: scale(0.65);
+      }
+    }
   }
 }

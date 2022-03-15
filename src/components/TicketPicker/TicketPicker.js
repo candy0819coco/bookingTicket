@@ -73,6 +73,9 @@ const TicketPicker = (props) => {
   //   reportWindowSize();
   // }, []);
 
+
+
+  //??
   useEffect(() => {
     // if (campSelectedList.length === toDoSelectCamp.length) {
     // if (campSelectedList.length) {
@@ -160,6 +163,8 @@ const TicketPicker = (props) => {
     let tempCampSelectedList = campSelectedList.filter((item) => {
       return item.campId !== ticketItem.campId;
     });
+    //???
+
     console.log("tempCampSelectedList____", tempCampSelectedList);
 
     setCampSelectedList(tempCampSelectedList);
@@ -168,9 +173,9 @@ const TicketPicker = (props) => {
     setPickedTicket(tempTicketList);
   };
 
-  const handlePickSingleDay = (index, day) => {
+  const handlePickSingleDay = (index, day) => {//?
     let tempList = [...pickedTicket];
-    tempList[index].singleTicketDay = day;
+    tempList[index].singleTicketDay = day; //?
     setPickedTicket(tempList);
     setValidatorNoticeShow(false);
   };
@@ -270,8 +275,9 @@ const TicketPicker = (props) => {
               ></div>
               <div className="ticket_desc">
                 <div>露營票</div>
-                <div>音樂祭 2 日活動(含露營)</div>
-                {/* <div>露營營位</div> */}
+                <div>音樂祭 2 日活動</div>
+                  {/* <br/>(含露營)</div> */}
+                <div>(含露營)</div>
               </div>
             </div>
           </div>

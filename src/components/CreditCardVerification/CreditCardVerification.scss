@@ -236,4 +236,8 @@
       }
     }
   }
+  @media screen and (max-width: 1050px) {
+    transform: scale(0.9);
+    margin-top: 70px;
+  }
 }

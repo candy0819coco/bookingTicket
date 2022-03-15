@@ -492,10 +492,16 @@
     }
   }
 
-  @media screen and (min-width: 640px) and (max-width: 1920px) {
+  // @media screen and (min-width: 640px) and (max-width: 1920px) {
+  //   &.camp_site_picker_container {
+  //     transform: scale(calc(var(--main-width) / 1920));
+  //     transform-origin: top;
+  //   }
+  // }
+  @media screen and (max-width: 1050px) {
     &.camp_site_picker_container {
-      transform: scale(calc(var(--main-width) / 1920));
-      transform-origin: top;
+      // transform: scale(0.7);
+      // transform-origin: top;
     }
   }
 

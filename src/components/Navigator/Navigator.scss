@@ -103,6 +103,7 @@ $color1: #767676;
                 left: 21px;
                 width: 109px;
                 height: 71px;
+                display: none;
                 .nav_list_text {
                   width:100px;
                   height: 10px;
@@ -221,4 +222,26 @@ $color1: #767676;
       }
     }
   }
+  @media (max-width: 1050px) {
+    // .navbar_container {
+      .navbar_inner {
+        .container_right  {
+          .menu_item_area {
+            // margin-right: 30px;
+            width: 65%;
+            .nav_item {
+              width: 50px;
+              font-size: 15px;
+            }
+          }
+          .func_area {
+            .icon.icon_user  {
+              margin-right:10px;
+            }
+          }
+        }
+      }
+    }
+
+  // }
 }

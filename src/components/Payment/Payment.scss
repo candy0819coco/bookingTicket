@@ -115,8 +115,8 @@
               background-image: url("./../../image/cc_jcb_brands.svg");
             }
             &.scale_up_this_card {
-              width: 57px;
-              height: 47px;
+              width: 80px;
+              height: 70px;
               order: 0;
               // margin: 0;
               &.master_icon {
@@ -251,5 +251,9 @@
         }
       }
     }
+  }
+  @media screen and (max-width: 1050px) {
+    transform: scale(0.9);
+    margin-top: 70px;
   }
 }

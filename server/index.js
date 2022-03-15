@@ -70,9 +70,9 @@ wss.on("connection", (ws) => {
   // console.log('ws', ws)
   console.log("Client connected");
   let websocketData = {
-    origin:[],
+    origin:[],//塞營位的原始資料
     current:[]
-  };
+  };//websocketData的初始結構
   const wsInsertSQL = `INSERT INTO websocket (wsInstance) VALUES("${ws}")`;
   console.log("wsInsertSQL", wsInsertSQL);
   db.query(
@@ -96,8 +96,8 @@ wss.on("connection", (ws) => {
           campResult = JSON.stringify(getCampResult);
           console.log('campResult', campResult)
           // client.send(getCampResult);
-          websocketData.origin = getCampResult;
-          ws.send( JSON.stringify(websocketData));
+          websocketData.origin = getCampResult; //orgin=原始的營位資料，這是自定義的key
+          ws.send( JSON.stringify(websocketData));//傳到Client端的wS裡面畫面
         }
       }
     // });

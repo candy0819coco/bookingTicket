@@ -77,13 +77,13 @@ const TicketOrder = () => {
       console.log("close connection");
     };
 
-    ws.onmessage = (event) => {
+    ws.onmessage = (event) => { //event = index.js ws.send裡面的東西
       console.log("event", event);
       console.log("event.data", JSON.parse(event.data));
       // setCampSelectedList(JSON.parse(event.data));
       // setCampListFromDB(JSON.parse(event.data));
 
-      let campResult = JSON.parse(event.data).origin;
+      let campResult = JSON.parse(event.data).origin; //ws從後端傳到前端的資料要用JSON包起來，會比較好處理，不然會變二進位檔
       console.log('campResult', campResult)
       const byGrade = R.groupBy(function (campResult) {
         const campArea = campResult.campArea;
@@ -112,43 +112,45 @@ const TicketOrder = () => {
   useEffect(() => {
     let toDoSelectCampTicket = pickedTicket.filter((item) => {
       return item.ticketType === "camp";
-    });
+    });//比較露營票到底有幾張，露營票到底是不是已經被選擇
     console.log("toDoSelectCampTicket", toDoSelectCampTicket);
 
     setToDoSelectCamp(toDoSelectCampTicket);
   }, [pickedTicket]);
+  //pickedTicket一點選，filter符合camp存取露營票
 
   // let orderTimeTest = moment(new Date().getTime()).locale("zh-tw").format(
   //   "YYYY-MM-DD HH:mm:ss"
   //   )
   //   console.log('orderTimeTest', orderTimeTest)
 
+  //????
   const handleOrderTicket = async () => {
     // let orderTime = new Date().toLocaleString("zh-Tw", { hour12: false });
     let orderTime = moment(new Date().getTime())
       .locale("zh-tw")
-      .format("YYYY-MM-DD HH:mm:ss");
+      .format("YYYY-MM-DD HH:mm:ss");//紀錄按下確認的時間點，moment符合datetime格式
     console.log("orderTime", orderTime);
-    let totalTickets = [
-      {
-        ticketType: "one",
-        ticketName: "單日票",
-        campId: null,
-        singleTicketDay: 1,
-        ticketPrice: 1500,
-        isActive: 0,
-        enterTime: null,
-      },
-      {
-        ticketType: "camp",
-        ticketName: "露營票",
-        campId: "B03",
-        singleTicketDay: null,
-        ticketPrice: 2500,
-        isActive: 0,
-        enterTime: null,
-      },
-    ];
+    // let totalTickets = [
+    //   {
+    //     ticketType: "one",
+    //     ticketName: "單日票",
+    //     campId: null,
+    //     singleTicketDay: 1,
+    //     ticketPrice: 1500,
+    //     isActive: 0,
+    //     enterTime: null,
+    //   },
+    //   {
+    //     ticketType: "camp",
+    //     ticketName: "露營票",
+    //     campId: "B03",
+    //     singleTicketDay: null,
+    //     ticketPrice: 2500,
+    //     isActive: 0,
+    //     enterTime: null,
+    //   },
+    // ];
     let result;
     let cardVerification = null;
     console.log("cardVerification", cardVerification);
@@ -165,7 +167,7 @@ const TicketOrder = () => {
         paymentStatus,
         paymentMethod,
         cardVerification,
-      },
+      },//狀態跟變數都可以傳，到後端就是key和value
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -174,8 +176,8 @@ const TicketOrder = () => {
     })
       .then(function (response) {
         console.log("create_ticket_order_response", response);
-        result = response.data;
-        setCurrentOrderNo(result.insertTicketOrderResults.insertId);
+        result = response.data;//可以拿index.js的res.send的資料
+        setCurrentOrderNo(result.insertTicketOrderResults.insertId);//拿到insert into的訂單號碼
         setOrderTimeFromResponse(result.insertTicketOrderResults.orderTime);
       })
       .catch((error) => {
@@ -184,7 +186,8 @@ const TicketOrder = () => {
       });
     return result;
   };
-
+ 
+  //產生驗證 存驗證碼 寄給使用者
   const handleSendCode = async () => {
     let result;
     await axios({
@@ -209,6 +212,7 @@ const TicketOrder = () => {
     return result;
   };
 
+  //比對驗證碼
   const handleVerifyCode = async () => {
     let result;
     await axios({
@@ -227,6 +231,8 @@ const TicketOrder = () => {
         result = response.data;
         console.log("result", result);
         if (result.statusCode === 200) {
+          //後端傳回前端的過程有通就會顯示response.statusCode === 200，
+          // 可是這樣不準確，所以要另外定義一個statusCode
           alert("交易完成，將為您跳轉至訂單內容");
           setTimeout(() => {
             window.location.href = "/member/ticketOrder";

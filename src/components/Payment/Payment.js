@@ -67,6 +67,7 @@ const Payment = (props) => {
     console.log("creditValid", creditValid);
   }, [creditMonth, creditYear]);
 
+  //useRef用來綁定element
   const firstRef = useRef();
   const SecondRef = useRef();
   const thirdRef = useRef();
@@ -95,8 +96,10 @@ const Payment = (props) => {
           setCreditNoFirst("");
         }
         setCreditNoFirst(inputValue.substr(0, 4));
+        //substr擷取字串，直接去切割輸入的結果
 
         if (inputValue.length === 4) SecondRef.current.focus();
+        //ref.current 是固定的寫法，表示取得此element
         break;
       case 1:
         setCreditNoSecond(inputValue.substr(0, 4));
@@ -244,9 +247,9 @@ const Payment = (props) => {
                         }
                         `}
                       placeholder="4155"
-                      size="4"
+                      size="4"//只對輸入限制，如果是貼上就會無效
                       type="number"
-                      maxLength="4"
+                      maxLength="4"//type如果是number的話，maxLength只針對text有效
                       ref={firstRef}
                       value={creditNoFirst}
                       onChange={(e) =>

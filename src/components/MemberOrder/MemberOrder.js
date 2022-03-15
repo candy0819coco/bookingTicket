@@ -144,25 +144,32 @@ const MemberOrder = () => {
     }
 
     const order = [{
-        orderNo: "1234567", orderTime: "2022/02/22", paymentMethod: "信用卡", amount: "$2000", paymentStatus: "已付款",
+        orderNo: "000064", orderTime: "2022/03/18", paymentMethod: "信用卡", amount: "$1200", paymentStatus: "已付款",
         orderDetails: [
-            { id: 1, orderProduct: "T-shirt", pColor: "黑色", pSize: "M", orderQuantity: 2, orderPrice: "$100" },
-            { id: 2, orderProduct: "帽子", pColor: "黑色", pSize: "F", orderQuantity: 1, orderPrice: "$200" },
-        ]
-    }, {
-        orderNo: "2234567", orderTime: "2022/01/22", paymentMethod: "信用卡", amount: "$1000", paymentStatus: "已付款",
-        orderDetails: [
-            { id: 1, orderProduct: "T-shirt", pColor: "黑色", pSize: "M", orderQuantity: 2, orderPrice: "$250" },
-            { id: 2, orderProduct: "帽子", pColor: "黑色", pSize: "F", orderQuantity: 1, orderPrice: "$300" },
-            { id: 3, orderProduct: "帽子", pColor: "黑色", pSize: "F", orderQuantity: 1, orderPrice: "$300" },
-        ]
-    }, {
-        orderNo: "3234567", orderTime: "2022/01/22", paymentMethod: "信用卡", amount: "$1000", paymentStatus: "已付款",
-        orderDetails: [
-            { id: 1, orderProduct: "T-shirt", pColor: "黑色", pSize: "M", orderQuantity: 2, orderPrice: "$250" },
-            { id: 2, orderProduct: "帽子", pColor: "黑色", pSize: "F", orderQuantity: 1, orderPrice: "$300" },
+            { id: 1, orderProduct: "T-shirt", pColor: "Red", pSize: "M", orderQuantity: 1, orderPrice: "$550" },
+            { id: 2, orderProduct: "Cap", pColor: "Black", pSize: "F", orderQuantity: 1, orderPrice: "$650" },
         ]
     }]
+    // const order = [{
+    //     orderNo: "1234567", orderTime: "2022/02/22", paymentMethod: "信用卡", amount: "$2000", paymentStatus: "已付款",
+    //     orderDetails: [
+    //         { id: 1, orderProduct: "T-shirt", pColor: "黑色", pSize: "M", orderQuantity: 2, orderPrice: "$100" },
+    //         { id: 2, orderProduct: "帽子", pColor: "黑色", pSize: "F", orderQuantity: 1, orderPrice: "$200" },
+    //     ]
+    // }, {
+    //     orderNo: "2234567", orderTime: "2022/01/22", paymentMethod: "信用卡", amount: "$1000", paymentStatus: "已付款",
+    //     orderDetails: [
+    //         { id: 1, orderProduct: "T-shirt", pColor: "黑色", pSize: "M", orderQuantity: 2, orderPrice: "$250" },
+    //         { id: 2, orderProduct: "帽子", pColor: "黑色", pSize: "F", orderQuantity: 1, orderPrice: "$300" },
+    //         { id: 3, orderProduct: "帽子", pColor: "黑色", pSize: "F", orderQuantity: 1, orderPrice: "$300" },
+    //     ]
+    // }, {
+    //     orderNo: "3234567", orderTime: "2022/01/22", paymentMethod: "信用卡", amount: "$1000", paymentStatus: "已付款",
+    //     orderDetails: [
+    //         { id: 1, orderProduct: "T-shirt", pColor: "黑色", pSize: "M", orderQuantity: 2, orderPrice: "$250" },
+    //         { id: 2, orderProduct: "帽子", pColor: "黑色", pSize: "F", orderQuantity: 1, orderPrice: "$300" },
+    //     ]
+    // }]
 
 
     return (

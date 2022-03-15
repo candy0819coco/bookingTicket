@@ -194,8 +194,10 @@
           background-color: #eee;
           .th_area {
             width: 153px;
+            font-size: 18px;
             &.order_time {
               width: 180px;
+              font-size: 18px;
             }
           }
         }
@@ -276,7 +278,8 @@
                 color: #666;
                 justify-content: center;
                 &.e_vocher {
-                  width: 465px;
+                  width: 350px;
+                  padding-left: 116px;
                 }
                 &:first-child {
                   width: 180px;
@@ -289,9 +292,10 @@
               .order_detail_area {
                 display: flex;
                 align-items: center;
+                font-size: 18px;
                 // justify-content: space-evenly;
                 width: 100%;
-                height: 50px;
+                height: 60px;
                 .type_color {
                   display: flex;
                   justify-content: flex-start;
@@ -335,7 +339,7 @@
                   //   width: 200px;
                   // }
                   &.e_vocher {
-                    width: 465px;
+                    // width: 465px;
                   }
                   .view_area {
                     color: black;
