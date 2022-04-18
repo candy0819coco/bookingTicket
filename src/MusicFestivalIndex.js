@@ -157,7 +157,7 @@ const MusicFestivalIndex = () => {
               {/* <Route exact path="/messageBoard" element={<MessageBoard />} /> */}
               <Route exact path="/ticketOrder" element={<TicketOrder />} />
               <Route exact path="/shopPayment" element={<ShopPayment />} />
-              <Route exact path="/shop/ItemPage/CheckOut" element={<CheckOut/>} />
+              <Route exact path="/shop/:pName/CheckOut" element={<CheckOut/>} />
               <Route
                 exact
                 path="/member/ticketOrder"

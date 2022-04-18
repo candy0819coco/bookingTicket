@@ -24,13 +24,8 @@ body {
 	margin: auto;
 	overflow:auto;
 	z-index: 0;
-	background-color: lightgray;
 	// background-color: #18a0fb;
-	div{
-	padding-top: 1vh;
-	z-index: 0;
-    margin: auto;
-    position: static;}
+	div{z-index: 0;}
 }
 
 
@@ -341,14 +336,9 @@ a:hover {
     height: 650px;
     width: 400px;
     position: absolute;
-    left: 75vw;
-    top: 85px;
+    left: 1100px;
+    top: 100px;
 	opacity: 80%;
 
-}
-.account{
-	display: flex;
-	flex-direction: column;
-	height: 100%;
 }
 }

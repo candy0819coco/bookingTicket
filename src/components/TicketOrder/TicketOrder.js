@@ -77,7 +77,7 @@ const TicketOrder = () => {
       console.log("close connection");
     };
 
-    ws.onmessage = (event) => { //event = index.js ws.send裡面的東西
+    ws.onmessage = (event) => { //event = index.js ws.send裡面的東西  //目的:接收sever傳回來的東西 (ws.send一開始傳回來的東西)
       console.log("event", event);
       console.log("event.data", JSON.parse(event.data));
       // setCampSelectedList(JSON.parse(event.data));
@@ -85,7 +85,8 @@ const TicketOrder = () => {
 
       let campResult = JSON.parse(event.data).origin; //ws從後端傳到前端的資料要用JSON包起來，會比較好處理，不然會變二進位檔
       console.log('campResult', campResult)
-      const byGrade = R.groupBy(function (campResult) {
+      const byGrade = R.groupBy(function (campResult) { //做資料的調整，
+        //R是提供運算的函式庫
         const campArea = campResult.campArea;
         return campArea === "A"
           ? "A"
@@ -97,8 +98,9 @@ const TicketOrder = () => {
       });
       let tempCampObject = byGrade(campResult);
       console.log("tempCampObject", tempCampObject);
-      let tempCampList = Object.entries(tempCampObject);
-      setCampListFromDB(tempCampList);
+      let tempCampList = Object.entries(tempCampObject);//物件轉陣列的方法  object.entries key跟value都會顯示
+      console.log('tempCampList', tempCampList);
+      setCampListFromDB(tempCampList);//拿來渲染成選營位的畫面
       setWsData(JSON.parse(event.data));
     };
   }, []);

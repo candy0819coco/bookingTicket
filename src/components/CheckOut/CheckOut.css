@@ -20,6 +20,8 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  
+
 }
 
 .formContainer {
@@ -81,6 +83,7 @@ body {
   text-align: inherit;
   left: 100px;
   top: 30px;
+  font-weight: bold;
 }
 
 #email-label,

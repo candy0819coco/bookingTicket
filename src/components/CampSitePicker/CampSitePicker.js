@@ -99,8 +99,9 @@ const CampSitePicker = (props) => {
   useEffect(() => {
     if(!wsData) return;
     let temp = wsData.current.map((item, index)=>{
+      console.log('101item', item)
       return (
-        R.pick(['campId', 'campArea','campStatus'],item)
+        R.pick(['campId', 'campArea','campStatus'],item) //針對物件 過濾想要的條件
         )
       })
       // console.log('____________temp', temp)

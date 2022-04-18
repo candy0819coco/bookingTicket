@@ -22,8 +22,6 @@ import context from "./../context";
       setFooterStyle('')
     }
   }, [pathName]);
-  
-  
     return (
     <div className={`footer_container ${footerStyle==='footerAnother'? "footer_container_two":""}`}>
       <div className={`footer_area ${isDarkMode ? "footer_area_dark":""}`}>

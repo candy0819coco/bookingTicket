@@ -71,21 +71,23 @@ wss.on("connection", (ws) => {
   console.log("Client connected");
   let websocketData = {
     origin:[],//塞營位的原始資料
-    current:[]
+    current:[]//當前被client選取的營位 (拿來作條件判斷)
   };//websocketData的初始結構
-  const wsInsertSQL = `INSERT INTO websocket (wsInstance) VALUES("${ws}")`;
-  console.log("wsInsertSQL", wsInsertSQL);
-  db.query(
-    wsInsertSQL,
-    (wsError, wsResults) => {
-      if(wsError){
-        console.log('wsInsertError', wsError)
 
-      }else {
-        console.log('wsInsertResults', wsResults)
-      }
-     })
+  // const wsInsertSQL = `INSERT INTO websocket (wsInstance) VALUES("${ws}")`;
+  // console.log("wsInsertSQL", wsInsertSQL);
+  // db.query(
+  //   wsInsertSQL,
+  //   (wsError, wsResults) => {
+  //     if(wsError){
+  //       console.log('wsInsertError', wsError)
+
+  //     }else {
+  //       console.log('wsInsertResults', wsResults)
+  //     }
+  //    })
       const getCampSQL = `SELECT * FROM camp`;
+      //要營位的資料  資料庫裡面的營位狀態是送出訂單才能改變，但是如果要即時選位，營位資訊必須從websocket來，而不是從資料庫來，這樣才能得到當前，傳到頁面。
       db.query(getCampSQL, (getCampError, getCampResult) => {
       if (getCampError) {
         console.log("getCampError", getCampError);
@@ -97,13 +99,14 @@ wss.on("connection", (ws) => {
           console.log('campResult', campResult)
           // client.send(getCampResult);
           websocketData.origin = getCampResult; //orgin=原始的營位資料，這是自定義的key
-          ws.send( JSON.stringify(websocketData));//傳到Client端的wS裡面畫面
+          ws.send( JSON.stringify(websocketData));//傳到Client端的wS裡面畫面  陣列或物件
+
         }
       }
     // });
       })
 
-  ws.on("message", (data) => {
+  ws.on("message", (data) => { //接受前端傳回來的東西
     // console.log('_____________data', data)
     // console.log('JSON.parse________data', JSON.parse(data))
     // console.log('JSON.parse________data.current', JSON.parse(data).current)
@@ -129,8 +132,6 @@ wss.on("connection", (ws) => {
     console.log("Close connected");
   });
 });
-
-
 
 // app.get("/check/websocket", function (req, res) {
 //   const wsSelectSQL = `SELECT * FROM websocket`;
@@ -378,7 +379,6 @@ app.post("/register/reset2", function (req, res) {
   } else if (code !== decode.code) {
     return res.status(500).send({ message: "驗證碼輸入錯誤請再試一次" });
   }
-
   // console.log(decode);
 });
 
@@ -494,7 +494,7 @@ app.put("/member/setting/photo", (req, res) => {
 
 //--------------------------會員部分-------------------------------------------
 
-//--------------------------票券部分-------------------------------------------
+//--------------------------票券部分--------------------S-----------------------
 app.post("/ticket_order/get_list", (req, res) => {
   console.log(req.body.mNo); //req.body=data
   const { mNo } = req.body; //把req.body解構出來，就是當初打AIXOS裡的data

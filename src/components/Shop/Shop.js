@@ -9,7 +9,7 @@ import React, {
 import "./Shop.scss";
 import {Link} from "react-router-dom";
 import * as R from "ramda";
-import context, { Provider } from "./../context";
+import context, { Provider } from "../context";
 import product_card from "./productdata";
 import { Button } from "react-bootstrap";
 import AddCart from "./Cart/AddCart";
@@ -19,43 +19,39 @@ import axios from "axios";
 // import '../ItemPage/ItemPage.css';
 
 const Shop = () => {
-  const [shopItemList, setShopItemList] = useState([]);
-  const [shopSingleItemList, setShopSingleItemList] = useState([]);
+  const [shopItemList, setShopItemList] = useState({});
+  const [shopSingleItemList, setShopSingleItemList] = useState({});
   const [currentHoverButtonType, setCurrentHoverButtonType] = useState("");
   const contextValue = useContext(context);
   const {} = contextValue;
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState({});
   const handleGetItem = () => {
     let results;
     axios
       .get("http://localhost:3400/shop/product_display")
       .then(function (response) {
+        console.log('responseAsnwer', response)
         results = response.data;
-        console.log("reults1", results);
-        setShopSingleItemList(results);
-
-        console.log("shopSingleItemList", shopSingleItemList);
+        // setShopSingleItemList(results);
+        // console.log("shopSingleItemList", shopSingleItemList);
         var newResults = results.filter((item) => {
           return (
             (item.pColor === "Black" && item.pSize == "S") || item.pSize == null
           );
         });
-        console.log(newResults);
-
+        console.log('newResultsTest',newResults);
         setShopItemList(newResults);
-        console.log();
       })
       .catch((error) => {
         console.log("shop_display_error", error);
       });
-
-    console.log("hello");
+    
   };
   useEffect(() => {
-    console.log("hello2");
     handleGetItem();
   }, []);
-
+ const toObj = Object.assign({},shopItemList)
+console.log('toObj',toObj)
   return (
     <Provider
       value={{
@@ -69,9 +65,9 @@ const Shop = () => {
           className="shopping-cart"
           style={{ display: cart.length === 0 ? "none" : "block" }}
         >
-          {cart.map((item) => (
+          {/* {cart.map((item) => (
             <DeleteItem setCart={setCart} item={item} cart={cart} />
-          ))}
+          ))} */}
         
         <div className="shopping-cart-footer">
           <div className="shopping-cart-total">Total:</div>
@@ -83,35 +79,9 @@ const Shop = () => {
           </div>
         </div>
         </div>
-        <div class="product-all">
-          <div className="product_header"></div>
-
-          {/* <div className="hamburger-menu">
-                        <input id="menu__toggle" type="checkbox" />
-                        <label className="menu__btn" htmlfor="menu__toggle">
-                            <span></span>
-                        </label>
-
-                        <ul className="menu__box">
-                            <li><a className="menu__item" href="#">Clothes</a></li>
-                            <li><a className="menu__item" href="#">Accessoreies</a></li>
-                            <li><a className="menu__item" href="#">Groceries</a></li>
-                        </ul>
-                        </div> */}
-
+        <div className="product-all">
           <div className="product-container">
-            {/* <div class="sort-by">
-                            <select name="sort-by">
-                                <option value="Featured">Featured</option>
-                                <option value="Bestselling">Bestselling</option>
-                                <option value="A-Z alphabet">A-Z Alphabet</option>
-                                <option value="Price low to high">price low to high</option>
-                                <option value="Price high to low">price high to low</option>
-                            </select>
-
-                        </div> */}
-
-            <Fragment>
+            {/* <Fragment>
               {shopItemList.map((item) => (
                 <AddCart
                   item={item}
@@ -120,7 +90,7 @@ const Shop = () => {
                   itemImage={item.pImage}
                 />
               ))}
-            </Fragment>
+            </Fragment> */}
           </div>
         </div>
         {/* </Provider> */}

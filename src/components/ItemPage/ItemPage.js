@@ -41,6 +41,8 @@ const ItemPage = () => {
   const [singleItem, setSingleItem] = useState([]);
   const [myName, setMyName] = useState("");
   const [hasColor, setHasColor] = useState(true);
+  const [itemCount, setItemCount] = useState(1);
+
   // const buttons = ['']
   // console.log(cart)
 
@@ -171,6 +173,7 @@ const ItemPage = () => {
                 ) : (
                   <div className="second_div">
                     <div className="product_carousel">
+                      {/* 多選項商品 */}
                       <Carousel>
                         {singleItem.map((item) => {
                           console.log("item", item);
@@ -268,6 +271,31 @@ const ItemPage = () => {
                         </div>
                       </div>
                       <div className="cart_btn_color">
+                        <div className="item_amount_counter">
+                          <input
+                            name="preferance"
+                            value="-"
+                            type="submit"
+                            className="border-0 minus"
+                            disabled={itemCount == 1 ? "disable" : ""}
+                            onClick={() => {
+                              setItemCount(Math.max(itemCount - 1, 1));
+                            }}
+                          />
+                          <span className="qty-no">{itemCount}</span>
+
+                          <input
+                            name="preferance"
+                            value="+"
+                            type="submit"
+                            className="border-0 plus"
+                            
+                            onClick={() => {
+                              setItemCount(itemCount + 1, 25);
+                            }}
+                          />
+                          {/* <div className='qty-no'>{cart.length}</div> */}
+                        </div>
                         <Button
                           className="go_Buy_cart_btn"
                           variant={`secondary`}
@@ -318,7 +346,7 @@ const ItemPage = () => {
               <Button className="item-check-out-button" variant="success">
                 Check out
                 <Link
-                  to={`/shop/ItemPage/CheckOut`}
+                  to={`/shop/:pName/CheckOut`}
                   className="linkName"
                 ></Link>
               </Button>
